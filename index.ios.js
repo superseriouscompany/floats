@@ -11,9 +11,15 @@ import {
   Text,
   View,
   requireNativeComponent,
+  NativeAppEventEmitter,
 } from 'react-native';
 
 const LoginButton = requireNativeComponent('RCTFBLogin', null);
+
+var subscription = NativeAppEventEmitter.addListener(
+  'cool',
+  (nice) => console.log('got event', nice)
+);
 
 export default class batsignal extends Component {
   render() {
