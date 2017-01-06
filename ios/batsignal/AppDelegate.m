@@ -15,6 +15,9 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "ViewController.h"
 
+#import "Firebase.h"
+#import "RNFIRMessaging.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
