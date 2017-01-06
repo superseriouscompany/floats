@@ -49,6 +49,15 @@ export default class batsignal extends Component {
     FCM.on('refreshToken', (token) => {
       console.log(token.substring(0, 5));
     })
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        var initialPosition = JSON.stringify(position);
+        console.log('got location', initialPosition);
+      },
+      (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
   }
 
   componentWillUnmount() {
