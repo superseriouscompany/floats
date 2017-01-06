@@ -9,23 +9,21 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  requireNativeComponent,
 } from 'react-native';
+
+const LoginButton = requireNativeComponent('RCTFBLogin', null);
 
 export default class batsignal extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Nope
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+
+        <LoginButton style={{width: 100, height: 100}}></LoginButton>
       </View>
     );
   }
