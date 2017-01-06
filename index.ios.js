@@ -16,9 +16,14 @@ import {
 
 const LoginButton = requireNativeComponent('RCTFBLogin', null);
 
-var subscription = NativeAppEventEmitter.addListener(
-  'cool',
-  (nice) => console.log('got event', nice)
+var successSubscription = NativeAppEventEmitter.addListener(
+  'FBLoginSuccess',
+  (nice) => console.log('got login success', nice)
+);
+
+var failureSubscription = NativeAppEventEmitter.addListener(
+  'FBLoginFailure',
+  (nice) => console.log('got login failure', nice)
 );
 
 export default class batsignal extends Component {
@@ -32,6 +37,10 @@ export default class batsignal extends Component {
         <LoginButton style={{width: 100, height: 100}}></LoginButton>
       </View>
     );
+  }
+
+  componentWillUnmount() {
+    subscription.remove();
   }
 }
 

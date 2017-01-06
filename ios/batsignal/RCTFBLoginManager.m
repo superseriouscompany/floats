@@ -1,5 +1,6 @@
 // RCTFBLoginManager.m
 #import <MapKit/MapKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "React/RCTViewManager.h"
 #import "React/RCTBridge.h"
@@ -18,13 +19,21 @@ RCT_EXPORT_MODULE()
 {
   FBSDKLoginButton *button = [[FBSDKLoginButton alloc] init];
   [button setDelegate:self];
-  [self.bridge.eventDispatcher sendAppEventWithName:@"cool" body:@"nice"];
   return button;
 }
 
 - (void)  loginButton:  (FBSDKLoginButton *)loginButton
 didCompleteWithResult:  (FBSDKLoginManagerLoginResult *)result
                 error:  (NSError *)error{
+  
+
+  if( error != nil ) {
+    [self.bridge.eventDispatcher sendAppEventWithName:@"FBLoginFailure" body:@"TODO: pass along error"];
+    return;
+  }
+
+  [self.bridge.eventDispatcher sendAppEventWithName:@"FBLoginSuccess" body:[[result token] tokenString]];
+  
   
   NSLog(@"facebook login button test");
   
