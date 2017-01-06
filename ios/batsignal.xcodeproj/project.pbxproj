@@ -30,6 +30,8 @@
 		3F034CCF1E2037A10090F0E1 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F034CC91E2037A10090F0E1 /* GoogleToolboxForMac.framework */; };
 		3F034CEA1E2037B20090F0E1 /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F034CE91E2037B20090F0E1 /* FirebaseMessaging.framework */; };
 		3F096BA41E203CF300804325 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F096BA31E203CF300804325 /* libsqlite3.tbd */; };
+		3F096BD01E20465D00804325 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F096BCF1E20465C00804325 /* GoogleService-Info.plist */; };
+		3F096BD11E20465D00804325 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F096BCF1E20465C00804325 /* GoogleService-Info.plist */; };
 		3F87EE121E2018F200139C69 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F87EE0E1E2018F200139C69 /* FBSDKShareKit.framework */; };
 		3F87EE131E2018F200139C69 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F87EE0F1E2018F200139C69 /* FBSDKCoreKit.framework */; };
 		3F87EE141E2018F200139C69 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F87EE101E2018F200139C69 /* FBSDKLoginKit.framework */; };
@@ -263,6 +265,8 @@
 		3F034CE91E2037B20090F0E1 /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseMessaging.framework; sourceTree = "<group>"; };
 		3F034CEB1E2038460090F0E1 /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		3F096BA31E203CF300804325 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		3F096BCE1E2044CC00804325 /* batsignal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = batsignal.entitlements; path = batsignal/batsignal.entitlements; sourceTree = "<group>"; };
+		3F096BCF1E20465C00804325 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F87EE0E1E2018F200139C69 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		3F87EE0F1E2018F200139C69 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		3F87EE101E2018F200139C69 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -399,6 +403,7 @@
 		13B07FAE1A68108700A75B9A /* batsignal */ = {
 			isa = PBXGroup;
 			children = (
+				3F096BCE1E2044CC00804325 /* batsignal.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -410,6 +415,7 @@
 				3F87EE161E20198C00139C69 /* ViewController.h */,
 				3F87EE171E2019B700139C69 /* ViewController.m */,
 				3F87EE191E201F5C00139C69 /* RCTFBLoginManager.m */,
+				3F096BCF1E20465C00804325 /* GoogleService-Info.plist */,
 			);
 			name = batsignal;
 			sourceTree = "<group>";
@@ -579,6 +585,17 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = SL8THA84AW;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -841,6 +858,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F096BD11E20465D00804325 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,6 +868,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				3F096BD01E20465D00804325 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,6 +977,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = batsignal/batsignal.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = SL8THA84AW;
@@ -982,6 +1002,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = batsignal/batsignal.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SL8THA84AW;
 				FRAMEWORK_SEARCH_PATHS = (

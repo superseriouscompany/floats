@@ -16,6 +16,8 @@ import {
 
 const LoginButton = requireNativeComponent('RCTFBLogin', null);
 
+import FCM from 'react-native-fcm';
+
 var successSubscription = NativeAppEventEmitter.addListener(
   'FBLoginSuccess',
   (nice) => console.log('got login success', nice)
@@ -37,6 +39,16 @@ export default class batsignal extends Component {
         <LoginButton style={{width: 100, height: 100}}></LoginButton>
       </View>
     );
+  }
+
+  componentDidMount() {
+    FCM.requestPermissions();
+    FCM.getFCMToken().then(token => {
+      console.log(token.substring(0, 5));
+    });
+    FCM.on('refreshToken', (token) => {
+      console.log(token.substring(0, 5));
+    })
   }
 
   componentWillUnmount() {
