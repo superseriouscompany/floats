@@ -4,14 +4,23 @@ import React, {Component} from 'react';
 
 import {
   Text,
-  View
+  View,
+  StyleSheet,
 } from 'react-native';
+
+const base = require('../styles/base');
 
 export default class Logo extends Component {
   render() { return (
-    <View>
-      <Text>bubbles</Text>
-      <Text>all your closest friends</Text>
+    <View style={styles.container}>
+      <Text style={base.textLogo}>bubbles</Text>
+      <Text style={base.textTagline}>all your closest friends</Text>
     </View>
   )}
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center'
+  },
+})

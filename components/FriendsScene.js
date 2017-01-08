@@ -46,7 +46,9 @@ export default class FriendsScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <UnreadHeart style={styles.corner} />
+        <View style={base.leftNav}>
+          <UnreadHeart/>
+        </View>
         <Logo />
       </View>
 
