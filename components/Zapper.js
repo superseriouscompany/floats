@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import {
   TouchableOpacity,
   View,
+  Image,
 } from 'react-native';
 
 import AppText from './AppText';
@@ -21,9 +22,9 @@ export default class Zapper extends Component {
     <View>
       <TouchableOpacity onPress={this.toggle.bind(this)}>
         { this.state.active ?
-          <AppText>Going</AppText>
+          <Image source={require('../images/Zapped.png')} />
         :
-          <AppText>Not Going</AppText>
+          <Image source={require('../images/Unzapped.png')} />
         }
       </TouchableOpacity>
     </View>
