@@ -10,8 +10,8 @@ import AppText from './AppText';
 
 export default class FriendsCount extends Component {
   render() { return (
-    <View>
-      <AppText>Friends Count</AppText>
+    <View style={{paddingLeft: 7}}>
+      <AppText>4 friends are around</AppText>
     </View>
   )}
 }

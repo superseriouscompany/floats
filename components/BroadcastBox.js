@@ -14,10 +14,10 @@ import AppText from './AppText';
 
 export default class BroadcastBox extends Component {
   render() { return (
-    <View style={[base.padded, styles.container]}>
-      <TextInput style={[styles.input]} placeholder="Sup?"/>
+    <View style={[base.inputContainer, styles.container]}>
+      <TextInput style={[base.input]} placeholder="Whose up for..."/>
       <TouchableOpacity onPress={() => alert('Nope.')}>
-        <AppText style={[base.padded, styles.button]}>send</AppText>
+        <AppText style={base.inputButton}>send</AppText>
       </TouchableOpacity>
     </View>
   )}
@@ -27,18 +27,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  input: {
-    backgroundColor: 'whitesmoke',
-    flex: 1,
-    fontSize: 13,
-    padding: 4,
-    height: 26,
-  },
-  button: {
-    color: 'lawngreen',
-    paddingTop: 0,
-    paddingRight: 0,
-    paddingBottom: 0,
-  }
 })

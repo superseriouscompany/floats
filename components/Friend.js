@@ -19,14 +19,14 @@ export default class Friend extends Component {
   }
 
   render() { return (
-    <View style={[styles.box, base.padded]}>
-      <Image style={{width: 40, height: 40}} source={{uri: 'https://placehold.it/80x80.png'}}/>
-      <AppText style={[base.padded, styles.main]}>{this.props.friend.name}</AppText>
+    <View style={[styles.box, base.padFullHorizontal, base.padMainItem]}>
+      <Image style={[base.photoCircle]} source={{uri: 'https://placehold.it/80x80.png'}}/>
+      <AppText style={[styles.main]}>{this.props.friend.name}</AppText>
       <TouchableOpacity onPress={this.toggle.bind(this)} accessible={true} accessibilityLabel={`Select ${this.props.friend.name}`}>
         { this.state.selected ?
-          <AppText>Yep</AppText>
+          <Image source={require('../images/Checked.png')} />
         :
-          <AppText>Nope</AppText>
+          <Image source={require('../images/Unchecked.png')} />
         }
       </TouchableOpacity>
     </View>
