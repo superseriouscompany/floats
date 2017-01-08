@@ -5,13 +5,16 @@ import React, {Component} from 'react';
 import {
   Image,
   StyleSheet,
+  TouchableOpacity,
   View
 } from 'react-native';
 
 export default class UnreadHeart extends Component {
   render() { return (
     <View style={styles.heart}>
-      <Image source={require('../images/Heart.png')} />
+      <TouchableOpacity onPress={() => this.props.navigator.navigate('PlansScene')}>
+        <Image source={require('../images/Heart.png')} />
+      </TouchableOpacity>
     </View>
   )}
 }

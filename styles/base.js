@@ -18,18 +18,23 @@ module.exports = StyleSheet.create({
     paddingTop: 20,
   },
   header: {
-    height: 46,
+    height: 45,
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 0.5,
     borderBottomColor: colors.lightgrey,
-
   },
   leftNav: {
     position: 'absolute',
     left: 0,
+  },
+  rightNav: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    paddingBottom: 6,
   },
   mainWindow: {
     flex: 1,
@@ -39,12 +44,10 @@ module.exports = StyleSheet.create({
     height: 36,
     backgroundColor: colors.darkgrey,
   },
-
   padFullHorizontal: {
     paddingLeft: 18,
     paddingRight: 18,
   },
-
   padMainItem: {
     paddingTop: 18,
   },
@@ -55,7 +58,9 @@ module.exports = StyleSheet.create({
   padShort: {
 
   },
-
+  timestamp: {
+    fontSize: 8,
+  },
   textLogo: {
     fontSize: 14,
     color: colors.darkgrey,
@@ -67,7 +72,9 @@ module.exports = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
     marginTop: -5,
   },
-
+  textHeader: {
+    marginTop: -6,
+  },
   inputContainer: {
     paddingTop: 5,
     paddingRight: 22,
@@ -96,6 +103,12 @@ module.exports = StyleSheet.create({
     marginRight: 15,
     borderWidth: 0.5,
     borderColor: colors.lightgrey,
+  },
+  miniPhotoCircle: {
+    width: 15,
+    height: 15,
+    borderRadius: 7.5,
+    marginRight: 7.5,
   },
 
   bgBreakingSection: {

@@ -3,9 +3,11 @@
 import React, {Component} from 'react';
 
 import {
+  Text,
   View,
   requireNativeComponent,
   NativeAppEventEmitter,
+  TouchableOpacity,
 } from 'react-native';
 
 import AppText from './AppText';
@@ -23,14 +25,15 @@ var failureSubscription = NativeAppEventEmitter.addListener(
 
 export default class LoginScene extends Component {
   render() { return (
-    <View style={styles.container}>
-
-
-      <AppText style={styles.welcome}>
-        Nope
-      </AppText>
-
-      <LoginButton style={{width: 100, height: 100}}></LoginButton>
+    <View style={{flex: 1, alignItems: 'center'}}>
+      <View style={{justifyContent: 'center', flex: 0.8}}>
+        <TouchableOpacity onPress={() => this.props.navigator.navigate('FriendsScene')}>
+          <Text style={{color: 'red'}}>|U|</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={{justifyContent: 'center', flex: 0.2}}>
+        <LoginButton style={{width: 180, height: 40}}></LoginButton>
+      </View>
     </View>
   )}
 
