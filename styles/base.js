@@ -18,14 +18,13 @@ module.exports = StyleSheet.create({
     paddingTop: 20,
   },
   header: {
-    height: 46,
+    height: 65,
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 0.5,
     borderBottomColor: colors.lightgrey,
-
   },
   leftNav: {
     position: 'absolute',
@@ -34,8 +33,8 @@ module.exports = StyleSheet.create({
   rightNav: {
     position: 'absolute',
     right: 0,
-    top: 7,
-    backgroundColor: 'hotpink',
+    bottom: 0,
+    paddingBottom: 6,
   },
   mainWindow: {
     flex: 1,
@@ -72,6 +71,9 @@ module.exports = StyleSheet.create({
     color: colors.darkgrey,
     backgroundColor: 'rgba(0,0,0,0)',
     marginTop: -5,
+  },
+  textHeader: {
+    marginTop: 13,
   },
   inputContainer: {
     paddingTop: 5,
