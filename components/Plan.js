@@ -15,7 +15,7 @@ const moment = require('moment');
 
 export default class Plan extends Component {
   render() { return (
-    <View>
+    <View style={{flex: 1}}>
       <AppText>{this.props.plan.user.name || 'You'} "{this.props.plan.title}"</AppText>
       <AppText style={base.timestamp}>
         {moment(this.props.plan.created_at).fromNow()}
