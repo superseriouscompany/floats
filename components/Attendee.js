@@ -9,7 +9,7 @@ import {
 
 import AppText from './AppText';
 
-export default class Foo extends Component {
+export default class Attendee extends Component {
   render() { return (
     <View style={{flexDirection: 'row'}}>
       <Image source={{url: this.props.user.avatar_url}} style={{width: 20, height: 20}} />
