@@ -9,10 +9,12 @@ import {
 
 import AppText from './AppText';
 
+const base = require('../styles/base');
+
 export default class Attendee extends Component {
   render() { return (
     <View style={{flexDirection: 'row'}}>
-      <Image source={{url: this.props.user.avatar_url}} style={{width: 20, height: 20}} />
+      <Image style={base.miniPhotoCircle} source={{url: this.props.user.avatar_url}} />
       <AppText style={{flex: 1}}>{this.props.user.name}</AppText>
     </View>
   )}
