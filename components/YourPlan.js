@@ -28,7 +28,7 @@ export default class YourPlan extends Component {
             <AppText style={[base.timestamp, {color: base.colors.mediumgrey}]}>text them to coordinate</AppText>
             <View style={{flexDirection: 'row'}}>
               <AppText style={[base.timestamp, {color: base.colors.mediumgrey}]}>
-                no longer feeling it?
+                no longer feeling it? &nbsp;
               </AppText>
               <TouchableOpacity onPress={() => alert('Nope.')}>
                 <AppText style={[base.timestamp, {textDecorationLine: 'underline', color: base.colors.mediumgrey}]}>delete your post</AppText>
