@@ -35,7 +35,7 @@ export default class FriendsScene extends Component {
       </View>
 
       <View style={base.mainWindow}>
-        <View style={base.padded}>
+        <View style={base.padded, base.bgBreakingSection}>
           <FriendsCount />
         </View>
         <ScrollView>

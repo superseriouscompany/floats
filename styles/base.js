@@ -3,18 +3,23 @@ import {
 } from 'react-native'
 
 const colors = {
-  poop: 'cornflowerblue',
-  foo: 'hotpink',
+  white: '#FFFFFF',
+  offwhite: '#FEFDFF',
+  lightgrey: '#EFEEF0',
+  mediumgrey: '#898989',
+  darkgrey: '#443B3B',
+  color1: '#E88868',
+  color2: '#34B7B5',
 }
 module.exports = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: 'whitesmoke',
+    backgroundColor: colors.white,
     paddingTop: 20,
   },
   header: {
     height: 40,
-    backgroundColor: 'slateblue',
+    backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -22,16 +27,15 @@ module.exports = StyleSheet.create({
   leftNav: {
     position: 'absolute',
     left: 0,
-    top: 7,
     backgroundColor: 'hotpink',
   },
   mainWindow: {
     flex: 1,
-    backgroundColor: colors.poop,
+    backgroundColor: colors.white,
   },
   bottomBar: {
     height: 50,
-    backgroundColor: 'navy',
+    backgroundColor: colors.darkgrey,
   },
 
   padded: {
@@ -44,6 +48,10 @@ module.exports = StyleSheet.create({
   textTagline: {
     fontSize: 10,
     fontStyle: 'italic',
+  },
+
+  bgBreakingSection: {
+    backgroundColor: colors.offwhite,
   },
 });
 

@@ -3,6 +3,8 @@
 import React, {Component} from 'react';
 
 import {
+  Image,
+  StyleSheet,
   Text,
   View
 } from 'react-native';
@@ -10,7 +12,12 @@ import {
 export default class UnreadHeart extends Component {
   render() { return (
     <View>
-      <Text>&lt;3</Text>
+      <Image style={styles.heart} source={require('../images/Heart.png')} />
     </View>
   )}
 }
+
+const styles = StyleSheet.create({
+  heart: {
+  }
+});
