@@ -8,13 +8,14 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import AppText from './AppText';
 const base = require('../styles/base');
 
 export default class Logo extends Component {
   render() { return (
     <View style={styles.container}>
       <Text style={base.textLogo}>bubbles</Text>
-      <Text style={base.textTagline}>all your closest friends</Text>
+      <AppText style={base.textTagline}>all your closest friends</AppText>
     </View>
   )}
 }

@@ -3,14 +3,15 @@
 import React, {Component} from 'react';
 
 import {
-  Text,
   View
 } from 'react-native';
+
+import AppText from './AppText';
 
 export default class FriendsCount extends Component {
   render() { return (
     <View>
-      <Text>Friends Count</Text>
+      <AppText>Friends Count</AppText>
     </View>
   )}
 }

@@ -3,7 +3,6 @@
 import React, {Component} from 'react';
 
 import {
-  Text,
   View,
   Image,
   StyleSheet,
@@ -11,6 +10,7 @@ import {
 } from 'react-native';
 
 const base = require('../styles/base');
+import AppText from './AppText';
 
 export default class Friend extends Component {
   constructor(props) {
@@ -21,12 +21,12 @@ export default class Friend extends Component {
   render() { return (
     <View style={[styles.box, base.padded]}>
       <Image style={{width: 40, height: 40}} source={{uri: 'https://placehold.it/80x80.png'}}/>
-      <Text style={[base.padded, styles.main]}>{this.props.friend.name}</Text>
+      <AppText style={[base.padded, styles.main]}>{this.props.friend.name}</AppText>
       <TouchableOpacity onPress={this.toggle.bind(this)} accessible={true} accessibilityLabel={`Select ${this.props.friend.name}`}>
         { this.state.selected ?
-          <Text>Yep</Text>
+          <AppText>Yep</AppText>
         :
-          <Text>Nope</Text>
+          <AppText>Nope</AppText>
         }
       </TouchableOpacity>
     </View>

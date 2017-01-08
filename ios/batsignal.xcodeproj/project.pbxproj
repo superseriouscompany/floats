@@ -39,6 +39,11 @@
 		3F87EE181E2019B700139C69 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F87EE171E2019B700139C69 /* ViewController.m */; };
 		3F87EE1A1E201F5C00139C69 /* RCTFBLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F87EE191E201F5C00139C69 /* RCTFBLoginManager.m */; };
 		3FE6726F1E22B8F6009C4C31 /* Lobster-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6726E1E22B8F6009C4C31 /* Lobster-Regular.ttf */; };
+		3FE672901E22BA73009C4C31 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */; };
+		3FE672911E22BA73009C4C31 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728C1E22BA73009C4C31 /* Poppins-Light.ttf */; };
+		3FE672921E22BA73009C4C31 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728D1E22BA73009C4C31 /* Poppins-Medium.ttf */; };
+		3FE672931E22BA73009C4C31 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728E1E22BA73009C4C31 /* Poppins-Regular.ttf */; };
+		3FE672941E22BA73009C4C31 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728F1E22BA73009C4C31 /* Poppins-SemiBold.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6ABD53735A1A4B85B3E8ABF4 /* libRNFIRMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 540D1F51344F4F1EA636FB34 /* libRNFIRMessaging.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -276,6 +281,11 @@
 		3F87EE171E2019B700139C69 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = batsignal/ViewController.m; sourceTree = "<group>"; };
 		3F87EE191E201F5C00139C69 /* RCTFBLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBLoginManager.m; path = batsignal/RCTFBLoginManager.m; sourceTree = "<group>"; };
 		3FE6726E1E22B8F6009C4C31 /* Lobster-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lobster-Regular.ttf"; sourceTree = "<group>"; };
+		3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		3FE6728C1E22BA73009C4C31 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
+		3FE6728D1E22BA73009C4C31 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		3FE6728E1E22BA73009C4C31 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		3FE6728F1E22BA73009C4C31 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		540D1F51344F4F1EA636FB34 /* libRNFIRMessaging.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFIRMessaging.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -405,7 +415,6 @@
 		13B07FAE1A68108700A75B9A /* batsignal */ = {
 			isa = PBXGroup;
 			children = (
-				3FE6726E1E22B8F6009C4C31 /* Lobster-Regular.ttf */,
 				3F096BCE1E2044CC00804325 /* batsignal.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -465,6 +474,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3FE6728A1E22BA29009C4C31 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */,
+				3FE6728C1E22BA73009C4C31 /* Poppins-Light.ttf */,
+				3FE6728D1E22BA73009C4C31 /* Poppins-Medium.ttf */,
+				3FE6728E1E22BA73009C4C31 /* Poppins-Regular.ttf */,
+				3FE6728F1E22BA73009C4C31 /* Poppins-SemiBold.ttf */,
+				3FE6726E1E22B8F6009C4C31 /* Lobster-Regular.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,6 +536,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				3FE6728A1E22BA29009C4C31 /* Fonts */,
 				3F87EDF41E2018D900139C69 /* Frameworks */,
 				13B07FAE1A68108700A75B9A /* batsignal */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -870,9 +893,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				3FE672921E22BA73009C4C31 /* Poppins-Medium.ttf in Resources */,
+				3FE672911E22BA73009C4C31 /* Poppins-Light.ttf in Resources */,
 				3FE6726F1E22B8F6009C4C31 /* Lobster-Regular.ttf in Resources */,
+				3FE672901E22BA73009C4C31 /* Poppins-Bold.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				3FE672941E22BA73009C4C31 /* Poppins-SemiBold.ttf in Resources */,
 				3F096BD01E20465D00804325 /* GoogleService-Info.plist in Resources */,
+				3FE672931E22BA73009C4C31 /* Poppins-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
