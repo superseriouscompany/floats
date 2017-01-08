@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   Image,
+  Alert,
 } from 'react-native';
 
 import AppText from './AppText';
@@ -31,6 +32,9 @@ export default class Zapper extends Component {
   )}
 
   toggle() {
+    if( !this.state.active ) {
+      Alert.alert("Boom", `We let them know that you're down. Text to coordinate.`);
+    }
     this.setState({active: !this.state.active})
   }
 }
