@@ -18,9 +18,9 @@ export default class YourPlan extends Component {
     const plan = this.props.plan;
     return (
     <View>
-      <View style={[{flexDirection: 'row', alignItems: 'flex-start'}, base.padFullHorizontal, base.padMainItem]}>
+      <View style={[{flexDirection: 'row'}, base.padFullHorizontal, base.padMainItem]}>
         <Image source={{url: this.props.plan.user.avatar_url}} style={base.photoCircle} />
-        <View>
+        <View style={{flex: 1}}>
           <Plan plan={plan} attendees={plan.attendees}/>
           <AppText style={[base.timestamp]}>text them to coordinate</AppText>
           <View style={{flexDirection: 'row'}}>
