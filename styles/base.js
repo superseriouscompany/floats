@@ -45,12 +45,10 @@ module.exports = StyleSheet.create({
     height: 34,
     backgroundColor: colors.darkgrey,
   },
-
   padFullHorizontal: {
     paddingLeft: 18,
     paddingRight: 18,
   },
-
   padMainItem: {
     paddingTop: 18,
   },
@@ -61,7 +59,9 @@ module.exports = StyleSheet.create({
   padShort: {
 
   },
-
+  timestamp: {
+    fontSize: 8,
+  },
   textLogo: {
     fontSize: 14,
     color: colors.darkgrey,
@@ -73,7 +73,6 @@ module.exports = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
     marginTop: -5,
   },
-
   inputContainer: {
     paddingTop: 5,
     paddingRight: 22,

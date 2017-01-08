@@ -8,12 +8,33 @@ import {
 } from 'react-native';
 
 import AppText from './AppText';
+import Attendee from './Attendee';
+
+const base   = require('../styles/base');
+const moment = require('moment');
 
 export default class Plan extends Component {
   render() { return (
-    <View style={{flexDirection: 'row'}}>
-      <Image source={{url: this.props.plan.user.avatar_url}} style={{width: 40, height: 40}} />
-      <AppText style={{flex: 1}}>{this.props.plan.user.name || 'You'} "{this.props.plan.title}"</AppText>
+    <View>
+      <AppText style={{flex: 1, paddingRight: 20}}>{this.props.plan.user.name || 'You'} "{this.props.plan.title}"</AppText>
+      <AppText style={base.timestamp}>
+        {moment(this.props.plan.created_at).fromNow()}
+        { this.props.attendees ?
+          <AppText> | {this.props.attendees.length} interested</AppText>
+        :
+          null
+        }
+      </AppText>
+
+      { this.props.attendees ?
+        <View>
+          {this.props.attendees.map((u, i) => (
+            <Attendee key={i} user={u} />
+          ))}
+        </View>
+      :
+        null
+      }
     </View>
   )}
 }
