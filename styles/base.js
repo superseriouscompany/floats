@@ -36,7 +36,7 @@ module.exports = StyleSheet.create({
     backgroundColor: colors.white,
   },
   bottomBar: {
-    height: 34,
+    height: 36,
     backgroundColor: colors.darkgrey,
   },
 
@@ -77,7 +77,7 @@ module.exports = StyleSheet.create({
     backgroundColor: colors.white,
     flex: 1,
     fontSize: 12,
-    height: 24,
+    height: 26,
     fontFamily: 'Poppins',
     paddingTop: 1.5,
     paddingLeft: 8,
