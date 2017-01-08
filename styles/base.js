@@ -18,7 +18,7 @@ module.exports = StyleSheet.create({
     paddingTop: 20,
   },
   header: {
-    height: 65,
+    height: 45,
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',
@@ -73,7 +73,7 @@ module.exports = StyleSheet.create({
     marginTop: -5,
   },
   textHeader: {
-    marginTop: 13,
+    marginTop: -6,
   },
   inputContainer: {
     paddingTop: 5,

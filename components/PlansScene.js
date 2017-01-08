@@ -60,7 +60,7 @@ const invitations = [
 
 export default class PlansScene extends Component {
   render() { return (
-    <View>
+    <View style={base.screen}>
       <View style={base.header}>
         <Heading>happenings</Heading>
         <View style={base.rightNav}>
