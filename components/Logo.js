@@ -14,14 +14,15 @@ const base = require('../styles/base');
 export default class Logo extends Component {
   render() { return (
     <View style={styles.container}>
-      <Text style={base.textLogo}>bubbles</Text>
-      <AppText style={base.textTagline}>all your closest friends</AppText>
+      <AppText style={base.textLogo}>bubbles</AppText>
+      <Text style={base.textTagline}>all your closest friends</Text>
     </View>
   )}
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 9,
   },
 })
