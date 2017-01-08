@@ -11,6 +11,7 @@ import AppText  from './AppText';
 import Plan     from './Plan';
 import Attendee from './Attendee';
 const base = require('../styles/base');
+const moment = require('moment');
 
 export default class YourPlan extends Component {
   render() {
@@ -19,7 +20,7 @@ export default class YourPlan extends Component {
     <View>
       <View style={base.feedItem}>
         <Plan plan={plan} />
-        <AppText style={base.timestamp}>{plan.created_at} | {plan.attendees.length} interested</AppText>
+        <AppText style={base.timestamp}>{moment(plan.created_at).fromNow()} | {plan.attendees.length} interested</AppText>
       </View>
       <View>
         {plan.attendees.map((u, i) => (
