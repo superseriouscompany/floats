@@ -102,6 +102,12 @@ module.exports = StyleSheet.create({
     borderRadius: 15,
     marginRight: 15,
   },
+  miniPhotoCircle: {
+    width: 15,
+    height: 15,
+    borderRadius: 7.5,
+    marginRight: 7.5,
+  },
 
   bgBreakingSection: {
     backgroundColor: colors.offwhite,
