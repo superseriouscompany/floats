@@ -8,10 +8,10 @@ import {
 
 import AppText from './AppText';
 
-export default class OldPlans extends Component {
+export default class Plan extends Component {
   render() { return (
     <View>
-      <AppText>Old Plans</AppText>
+      <AppText>Plan</AppText>
     </View>
   )}
 }
