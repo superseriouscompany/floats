@@ -40,6 +40,7 @@ module.exports = StyleSheet.create({
 
   textLogo: {
     fontSize: 20,
+    fontFamily: 'Lobster',
   },
   textTagline: {
     fontSize: 10,
