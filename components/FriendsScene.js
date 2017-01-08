@@ -18,12 +18,28 @@ import BroadcastBox from './BroadcastBox';
 const base = require('../styles/base');
 
 let friends = [
-  {
-    cool: 'nice',
-  },
-  {
-    cool: 'great',
-  }
+  { cool: 'nice' },
+  { cool: 'great' },
+  { cool: 'nice' },
+  { cool: 'great' },
+  { cool: 'nice' },
+  { cool: 'great' },
+  { cool: 'nice' },
+  { cool: 'great' },
+  { cool: 'nice' },
+  { cool: 'great' },
+  { cool: 'nice' },
+  { cool: 'great' },
+  { cool: 'nice' },
+  { cool: 'great' },
+  { cool: 'nice' },
+  { cool: 'great' },
+  { cool: 'nice' },
+  { cool: 'great' },
+  { cool: 'nice' },
+  { cool: 'great' },
+  { cool: 'nice' },
+  { cool: 'great' },
 ]
 
 export default class FriendsScene extends Component {
@@ -34,7 +50,7 @@ export default class FriendsScene extends Component {
         <Logo />
       </View>
 
-      <View style={styles.mainWindow}>
+      <View style={base.mainWindow}>
         <FriendsCount />
         <ScrollView>
           {friends.map((f, i) => (
@@ -43,7 +59,7 @@ export default class FriendsScene extends Component {
         </ScrollView>
       </View>
 
-      <View style={styles.bottomBar}>
+      <View style={base.bottomBar}>
         <BroadcastBox />
       </View>
     </View>
