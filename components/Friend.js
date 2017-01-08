@@ -39,7 +39,7 @@ export default class Friend extends Component {
 
 const styles = StyleSheet.create({
   box: {
-    backgroundColor: 'grey',
+    backgroundColor: base.colors.foo,
     flexDirection: 'row',
     alignItems: 'center',
   },

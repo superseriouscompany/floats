@@ -3,7 +3,7 @@
 ## Requirements
 
 1. React Native https://facebook.github.io/react-native/docs/getting-started.html
-1. Facebook SDK https://developers.facebook.com/quickstarts/?platform=ios
+1. Facebook SDK https://developers.facebook.com/docs/ios/getting-started/
 
 ## Installation
 

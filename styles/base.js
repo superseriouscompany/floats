@@ -2,6 +2,10 @@ import {
   StyleSheet,
 } from 'react-native'
 
+const colors = {
+  poop: 'cornflowerblue',
+  foo: 'hotpink',
+}
 module.exports = StyleSheet.create({
   screen: {
     flex: 1,
@@ -23,7 +27,7 @@ module.exports = StyleSheet.create({
   },
   mainWindow: {
     flex: 1,
-    backgroundColor: 'firebrick',
+    backgroundColor: colors.poop,
   },
   bottomBar: {
     height: 50,
@@ -42,3 +46,5 @@ module.exports = StyleSheet.create({
     fontStyle: 'italic',
   },
 });
+
+module.exports.colors = colors;
