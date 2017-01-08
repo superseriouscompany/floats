@@ -28,7 +28,7 @@ export default class FriendsScene extends Component {
     <View style={base.screen}>
       <View style={base.header}>
         <View style={base.leftNav}>
-          <UnreadHeart/>
+          <UnreadHeart navigator={this.props.navigator}/>
         </View>
         <Logo />
       </View>
