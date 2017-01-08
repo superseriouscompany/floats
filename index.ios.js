@@ -10,35 +10,39 @@ import {
   StyleSheet,
   Text,
   View,
-  requireNativeComponent,
-  NativeAppEventEmitter,
 } from 'react-native';
-
-const LoginButton = requireNativeComponent('RCTFBLogin', null);
 
 import FCM from 'react-native-fcm';
 
-var successSubscription = NativeAppEventEmitter.addListener(
-  'FBLoginSuccess',
-  (nice) => console.log('got login success', nice)
-);
-
-var failureSubscription = NativeAppEventEmitter.addListener(
-  'FBLoginFailure',
-  (nice) => console.log('got login failure', nice)
-);
+import FriendsScene from './components/FriendsScene';
+import LoginScene from './components/LoginScene';
 
 export default class batsignal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { props: {}};
+    this.state.scene = 'FriendsScene';
+
+    this.navigator = {
+      navigate: (component, props) => {
+        let stateChange = { scene: component, props: props || {} };
+        this.setState(stateChange);
+      }
+    }
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Nope
-        </Text>
-
-        <LoginButton style={{width: 100, height: 100}}></LoginButton>
+      <View style={{flex: 1}}>
+        { this.state.scene == 'LoginScene' ?
+          <LoginScene navigator={this.navigator} />
+        : this.state.scene == 'FriendsScene' ?
+          <FriendsScene navigator={this.navigator} />
+        :
+          <Text>404</Text>
+        }
       </View>
-    );
+    )
   }
 
   componentDidMount() {
@@ -58,10 +62,6 @@ export default class batsignal extends Component {
       (error) => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     );
-  }
-
-  componentWillUnmount() {
-    subscription.remove();
   }
 }
 
