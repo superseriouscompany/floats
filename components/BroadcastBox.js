@@ -15,7 +15,7 @@ import AppText from './AppText';
 export default class BroadcastBox extends Component {
   render() { return (
     <View style={[base.inputContainer, styles.container]}>
-      <TextInput editable={!this.props.active} style={[base.input]} placeholder="Who's up for..."/>
+      <TextInput style={[base.input]} placeholder="Who's up for..."/>
       <TouchableOpacity onPress={() => alert('Nope.')}>
         <AppText style={base.inputButton}>send</AppText>
       </TouchableOpacity>
