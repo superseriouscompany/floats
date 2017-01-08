@@ -18,16 +18,16 @@ export default class YourPlan extends Component {
     const plan = this.props.plan;
     return (
     <View>
-      <View style={base.feedItem}>
+      <View style={[base.feedItem, base.padded]}>
         <Plan plan={plan} />
         <AppText style={base.timestamp}>{moment(plan.created_at).fromNow()} | {plan.attendees.length} interested</AppText>
       </View>
-      <View>
+      <View style={[base.padded]}>
         {plan.attendees.map((u, i) => (
           <Attendee key={i} user={u} />
         ))}
       </View>
-      <View>
+      <View style={base.padded}>
         <AppText>text them to coordinate</AppText>
         <View style={{flexDirection: 'row'}}>
           <AppText>
