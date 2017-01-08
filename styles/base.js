@@ -25,6 +25,12 @@ module.exports = StyleSheet.create({
     top: 7,
     backgroundColor: 'hotpink',
   },
+  rightNav: {
+    position: 'absolute',
+    right: 0,
+    top: 7,
+    backgroundColor: 'hotpink',
+  },
   mainWindow: {
     flex: 1,
     backgroundColor: colors.poop,

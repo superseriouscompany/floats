@@ -16,12 +16,13 @@ import FCM from 'react-native-fcm';
 
 import FriendsScene from './components/FriendsScene';
 import LoginScene from './components/LoginScene';
+import PlansScene from './components/PlansScene';
 
 export default class batsignal extends Component {
   constructor(props) {
     super(props);
     this.state = { props: {}};
-    this.state.scene = 'FriendsScene';
+    this.state.scene = 'PlansScene';
 
     this.navigator = {
       navigate: (component, props) => {
@@ -38,6 +39,8 @@ export default class batsignal extends Component {
           <LoginScene navigator={this.navigator} />
         : this.state.scene == 'FriendsScene' ?
           <FriendsScene navigator={this.navigator} />
+        : this.state.scene == 'PlansScene' ?
+          <PlansScene navigator={this.navigator} />
         :
           <Text>404</Text>
         }
