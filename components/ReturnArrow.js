@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import {
   Image,
   StyleSheet,
+  TouchableOpacity,
   View
 } from 'react-native';
 
@@ -12,9 +13,9 @@ import AppText from './AppText';
 
 export default class ReturnArrow extends Component {
   render() { return (
-    <View style={styles.rightArrow}>
-      <Image source={require('../images/RightArrow.png')} />
-    </View>
+      <TouchableOpacity style={styles.rightArrow} onPress={() => this.props.navigator.navigate('FriendsScene')}>
+        <Image source={require('../images/RightArrow.png')} />
+      </TouchableOpacity>
   )}
 }
 

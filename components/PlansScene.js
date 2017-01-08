@@ -64,7 +64,7 @@ export default class PlansScene extends Component {
       <View style={base.header}>
         <Heading>happenings</Heading>
         <View style={base.rightNav}>
-          <ReturnArrow />
+          <ReturnArrow navigator={this.props.navigator}/>
         </View>
       </View>
 

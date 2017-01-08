@@ -17,10 +17,10 @@ import BroadcastBox from './BroadcastBox';
 const base = require('../styles/base');
 
 let friends = [
-  { name: 'Neil Sarkar' },
-  { name: 'Andrew Sauer' },
-  { name: 'John Malqvist' },
-  { name: 'Annie Graham' },
+  { name: 'Neil Sarkar', avatar_url:   'https://placehold.it/80x80.png'},
+  { name: 'Andrew Sauer', avatar_url:  'https://placehold.it/80x80.png'},
+  { name: 'John Malqvist', avatar_url: 'https://placehold.it/80x80.png'},
+  { name: 'Annie Graham', avatar_url:  'https://placehold.it/80x80.png'},
 ]
 
 export default class FriendsScene extends Component {
@@ -28,7 +28,7 @@ export default class FriendsScene extends Component {
     <View style={base.screen}>
       <View style={base.header}>
         <View style={base.leftNav}>
-          <UnreadHeart/>
+          <UnreadHeart navigator={this.props.navigator}/>
         </View>
         <Logo />
       </View>
