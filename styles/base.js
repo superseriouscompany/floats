@@ -27,7 +27,6 @@ module.exports = StyleSheet.create({
   leftNav: {
     position: 'absolute',
     left: 0,
-    backgroundColor: 'hotpink',
   },
   mainWindow: {
     flex: 1,

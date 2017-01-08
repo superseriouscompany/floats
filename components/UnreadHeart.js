@@ -10,13 +10,17 @@ import {
 
 export default class UnreadHeart extends Component {
   render() { return (
-    <View>
-      <Image style={styles.heart} source={require('../images/Heart.png')} />
+    <View style={styles.heart}>
+      <Image source={require('../images/Heart.png')} />
     </View>
   )}
 }
 
 const styles = StyleSheet.create({
   heart: {
+    paddingTop: 10,
+    paddingLeft: 14,
+    paddingBottom: 10,
+    paddingRight: 10,
   }
 });
