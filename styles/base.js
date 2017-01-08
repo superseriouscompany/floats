@@ -30,6 +30,10 @@ module.exports = StyleSheet.create({
     backgroundColor: 'navy',
   },
 
+  padded: {
+    padding: 10,
+  },
+
   textLogo: {
     fontSize: 20,
   },

@@ -5,20 +5,42 @@ import React, {Component} from 'react';
 import {
   Text,
   View,
+  Image,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 
+const base = require('../styles/base');
+
 export default class Friend extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { selected: true }
+  }
+
   render() { return (
-    <View style={styles.box}>
-      <Text>Friend</Text>
+    <View style={[styles.box, base.padded]}>
+      <Image />
+      <Text style={{flex: 1}}>{this.props.friend.name}</Text>
+      <TouchableOpacity onPress={this.toggle.bind(this)} accessible={true} accessibilityLabel={`Select ${this.props.friend.name}`}>
+        { this.state.selected ?
+          <Text>Yep</Text>
+        :
+          <Text>Nope</Text>
+        }
+      </TouchableOpacity>
     </View>
   )}
+
+  toggle() {
+    this.setState({selected: !this.state.selected})
+  }
 }
 
 const styles = StyleSheet.create({
   box: {
-    height: 50,
-    backgroundColor: 'grey'
-  }
+    backgroundColor: 'grey',
+    flexDirection: 'row',
+  },
+
 });
