@@ -4,20 +4,20 @@ import React, {Component} from 'react';
 
 import {
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 
 const base = require('../styles/base');
+import AppText from './AppText';
 
 export default class BroadcastBox extends Component {
   render() { return (
     <View style={[base.padded, styles.container]}>
       <TextInput style={[styles.input]} placeholder="Sup?"/>
       <TouchableOpacity onPress={() => alert('Nope.')}>
-        <Text style={[base.padded, styles.button]}>send</Text>
+        <AppText style={[base.padded, styles.button]}>send</AppText>
       </TouchableOpacity>
     </View>
   )}

@@ -3,12 +3,12 @@
 import React, {Component} from 'react';
 
 import {
-  Text,
   View,
   requireNativeComponent,
   NativeAppEventEmitter,
 } from 'react-native';
 
+import AppText from './AppText';
 const LoginButton = requireNativeComponent('RCTFBLogin', null);
 
 var successSubscription = NativeAppEventEmitter.addListener(
@@ -26,9 +26,9 @@ export default class LoginScene extends Component {
     <View style={styles.container}>
 
 
-      <Text style={styles.welcome}>
+      <AppText style={styles.welcome}>
         Nope
-      </Text>
+      </AppText>
 
       <LoginButton style={{width: 100, height: 100}}></LoginButton>
     </View>
