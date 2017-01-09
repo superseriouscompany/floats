@@ -16,8 +16,8 @@ import Friend from './Friend';
 import BroadcastBox from './BroadcastBox';
 import AppText from './AppText';
 
-const base = require('../styles/base');
-const api  = require('../services/api');
+import base from '../styles/base';
+import api  from '../services/api';
 
 export default class FriendsScene extends Component {
   constructor(props) {

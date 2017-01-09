@@ -11,7 +11,7 @@ import {
 import AppText  from './AppText';
 import Plan     from './Plan';
 import Attendee from './Attendee';
-const base = require('../styles/base');
+import base from '../styles/base';
 
 export default class YourPlan extends Component {
   render() {

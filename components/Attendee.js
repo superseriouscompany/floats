@@ -9,7 +9,7 @@ import {
 
 import AppText from './AppText';
 
-const base = require('../styles/base');
+import base from '../styles/base';
 
 export default class Attendee extends Component {
   render() { return (

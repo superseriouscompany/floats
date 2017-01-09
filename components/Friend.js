@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const base = require('../styles/base');
+import base from '../styles/base';
 import AppText from './AppText';
 
 export default class Friend extends Component {

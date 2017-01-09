@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native';
 
-const base = require('../styles/base');
+import base from '../styles/base';
 const api  = require('../services/api');
 
 import Heading from './Heading';

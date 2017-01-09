@@ -7,8 +7,7 @@ import {
 } from 'react-native';
 
 import AppText from './AppText';
-
-const base = require('../styles/base');
+import base from '../styles/base';
 
 export default class Heading extends Component {
   render() { return (

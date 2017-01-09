@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import AppText from './AppText';
-const base = require('../styles/base');
+import base from '../styles/base';
 
 export default class Logo extends Component {
   render() { return (
