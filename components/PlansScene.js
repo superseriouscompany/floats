@@ -61,7 +61,13 @@ export default class PlansScene extends Component {
           }
         </View>
         <View>
-          <Invitations invitations={this.state.invitations}></Invitations>
+          { !this.state.loadedInvitations ?
+            <ActivityIndicator size="small" color="hotpink" />
+          : this.state.invitationsError ?
+            <AppText style={{color: 'indianred'}}>{this.state.invitationsError}</AppText>
+          :
+            <Invitations invitations={this.state.invitations}></Invitations>
+          }
         </View>
       </ScrollView>
     </View>
