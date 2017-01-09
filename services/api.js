@@ -1,8 +1,8 @@
 'use strict';
 
 const baseUrl = __DEV__ ?
-  'https://superserious.ngrok.io' :
-  'https://bubbles.superserious.co';
+  'https://superserious.ngrok.io/v1' :
+  'https://bubbles.superserious.co/v1';
 
 module.exports = {
   sessions: {
