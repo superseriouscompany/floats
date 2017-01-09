@@ -5,6 +5,18 @@ const baseUrl = __DEV__ ?
   'https://bubbles.superserious.co';
 
 module.exports = {
+  sessions: {
+    create: function(facebookAccessToken) {
+      return fetch(`${baseUrl}/users`, {
+        method: 'POST',
+        body: JSON.stringify({facebook_access_token: facebookAccessToken})
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error(response.status); }
+        return response.json();
+      })
+    },
+  },
+
   friends: {
     nearby: function(accessToken) {
       return fetch(`${baseUrl}/friends/nearby`, {
