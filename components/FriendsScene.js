@@ -73,11 +73,11 @@ export default class FriendsScene extends Component {
         }
       </View>
 
-      { !this.state.friends.length ?
+      { this.state.loaded && !this.state.friends.length ?
         null
       :
         <View style={base.bottomBar}>
-          <BroadcastBox active={!this.state.friends.length}/>
+          <BroadcastBox friends={this.state.friends} active={!this.state.friends.length}/>
         </View>
       }
     </View>

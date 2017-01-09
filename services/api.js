@@ -16,6 +16,22 @@ module.exports = {
         return json.friends;
       })
     },
+  },
+
+  bubbles: {
+    create: function(accessToken, text, excludeIds) {
+      return fetch(`${baseUrl}/bubbles`, {
+        method: 'POST',
+        body: JSON.stringify({
+          text: text,
+          exclude_ids: excludeIds
+        }),
+        headers: headers(accessToken),
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error(response.status); }
+        return true;
+      })
+    }
   }
 }
 
