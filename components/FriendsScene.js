@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 
 import {
+  ActivityIndicator,
   View,
   ScrollView,
   StyleSheet,
@@ -16,15 +17,25 @@ import BroadcastBox from './BroadcastBox';
 import AppText from './AppText';
 
 const base = require('../styles/base');
-
-let friends = [
-  { name: 'Neil Sarkar', avatar_url:   'https://placehold.it/80x80.png'},
-  { name: 'Andrew Sauer', avatar_url:  'https://placehold.it/80x80.png'},
-  { name: 'John Malqvist', avatar_url: 'https://placehold.it/80x80.png'},
-  { name: 'Annie Graham', avatar_url:  'https://placehold.it/80x80.png'},
-]
+const api  = require('../services/api');
 
 export default class FriendsScene extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loaded: false,
+      friends: []
+    }
+  }
+
+  componentDidMount() {
+    api.friends.nearby().then((friends) => {
+      this.setState({friends: friends, loaded: true});
+    }).catch(function(err) {
+      this.setState({error: err, loaded: true});
+    })
+  }
+
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
@@ -35,7 +46,14 @@ export default class FriendsScene extends Component {
       </View>
 
       <View style={base.mainWindow}>
-        { !friends.length ?
+        { !this.state.loaded ?
+          <ActivityIndicator
+                      size="small"
+                      color="hotpink"
+                    />
+        : this.state.error ?
+          <AppText style={{color: 'indianred', textAlign: 'center'}}>{this.state.error}</AppText>
+        : !this.state.friends.length ?
           <View style={{alignItems: 'center'}}>
             <AppText style={[base.timestamp, {backgroundColor: base.colors.offwhite, paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]}>
               nobody is nearby.
@@ -44,10 +62,10 @@ export default class FriendsScene extends Component {
         :
           <View>
             <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection]}>
-              <FriendsCount />
+              <FriendsCount count={this.state.friends.length} />
             </View>
             <ScrollView>
-              {friends.map((f, i) => (
+              {this.state.friends.map((f, i) => (
                 <Friend key={i} friend={f} />
               ))}
             </ScrollView>
@@ -55,11 +73,11 @@ export default class FriendsScene extends Component {
         }
       </View>
 
-      { !friends.length ?
+      { !this.state.friends.length ?
         null
       :
         <View style={base.bottomBar}>
-          <BroadcastBox active={!friends.length}/>
+          <BroadcastBox active={!this.state.friends.length}/>
         </View>
       }
     </View>
