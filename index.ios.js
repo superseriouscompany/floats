@@ -17,6 +17,8 @@ import FriendsScene from './components/FriendsScene';
 import LoginScene from './components/LoginScene';
 import PlansScene from './components/PlansScene';
 
+const api = require('./services/api');
+
 export default class batsignal extends Component {
   constructor(props) {
     super(props);
@@ -50,16 +52,21 @@ export default class batsignal extends Component {
   componentDidMount() {
     FCM.requestPermissions();
     FCM.getFCMToken().then(token => {
-      console.log(token.substring(0, 5));
+      // TODO: retry
+      api.sessions.updateFirebaseToken(null, token);
     });
     FCM.on('refreshToken', (token) => {
-      console.log(token.substring(0, 5));
+      // TODO: retry
+      api.sessions.updateFirebaseToken(null, token);
     })
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
         var initialPosition = JSON.stringify(position);
-        console.log('got location', initialPosition);
+        api.sightings.create(null, {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
       },
       (error) => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}

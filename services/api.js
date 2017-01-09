@@ -15,7 +15,36 @@ module.exports = {
         return response.json();
       })
     },
+
+    updateFirebaseToken: function(accessToken, firebaseToken) {
+      return fetch(`${baseUrl}/users/me`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          firebase_token: firebaseToken
+        })
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error(response.status); }
+        return true;
+      })
+    },
   },
+
+  sightings: {
+    create: function(accessToken, lat, lng) {
+      return fetch(`${baseUrl}/sightings`, {
+        method: 'POST',
+        body: JSON.stringify({
+          lat: lat,
+          lng: lng,
+        })
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error(response.status); }
+        return true;
+      })
+    },
+  },
+
+
 
   friends: {
     nearby: function(accessToken) {
