@@ -31,7 +31,7 @@ export default class FriendsScene extends Component {
   componentDidMount() {
     api.friends.nearby().then((friends) => {
       this.setState({friends: friends, loaded: true});
-    }).catch(function(err) {
+    }).catch((err) => {
       this.setState({error: err, loaded: true});
     })
   }
@@ -83,6 +83,3 @@ export default class FriendsScene extends Component {
     </View>
   )}
 }
-
-const styles = StyleSheet.create({
-});

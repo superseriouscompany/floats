@@ -11,7 +11,8 @@ import AppText from './AppText';
 import Plan from './Plan';
 import Zapper from './Zapper';
 
-const base = require('../styles/base');
+const base   = require('../styles/base');
+const moment = require('moment');
 
 export default class Invitations extends Component {
   render() { return (
@@ -25,7 +26,12 @@ export default class Invitations extends Component {
           {this.props.invitations.map((p, i) => (
             <View key={i} style={{flexDirection: 'row', paddingBottom: 18 }}>
               <Image source={{url: p.user.avatar_url}} style={base.photoCircle}/>
-              <Plan plan={p}></Plan>
+              <View style={{flex: 1}}>
+                <AppText style={{fontSize: 12}}>{p.user.name} "{p.title}"</AppText>
+                <AppText style={base.timestamp}>
+                  {moment(p.created_at).fromNow()}
+                </AppText>
+              </View>
               <Zapper active={!!p.attending}></Zapper>
             </View>
           ))}

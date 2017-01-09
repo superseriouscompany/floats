@@ -3,62 +3,42 @@
 import React, {Component} from 'react';
 
 import {
+  ActivityIndicator,
   ScrollView,
   StyleSheet,
-  Text,
   View
 } from 'react-native';
 
 const base = require('../styles/base');
+const api  = require('../services/api');
 
 import Heading from './Heading';
 import ReturnArrow from './ReturnArrow';
 import YourPlan from './YourPlan';
 import Invitations from './Invitations';
-
-const yourPlan = {
-  title: "thinking of surfing supertubos at 10. it's 3-4 ft and offshore. who's downskis?",
-  created_at: +new Date - 1000 * 60 * 60,
-  // TODO: pull this from logged in user
-  user: {
-    avatar_url: 'https://placehold.it/80x80.png',
-  },
-  attendees: [
-    {
-      avatar_url: 'https://placehold.it/80x80.png',
-      name: 'Andrew Sauer',
-      joined_at: +new Date,
-    },
-    {
-      avatar_url: 'https://placehold.it/80x80.png',
-      name: 'Neil Sarkar',
-      joined_at: +new Date,
-    },
-  ]
-}
-
-const invitations = [
-  {
-    title: 'Who here wants to play Catan after dinner?',
-    created_at: +new Date - 1000 * 60 * 35,
-    user: {
-      name: 'John Malqvist',
-      avatar_url: 'https://placehold.it/80x80.png',
-    },
-    attending: false,
-  },
-  {
-    title: 'surf?',
-    created_at: +new Date - 1000 * 60 * 120,
-    user: {
-      name: 'Annie Graham',
-      avatar_url: 'https://placehold.it/80x80.png',
-    },
-    attending: true,
-  },
-]
+import AppText from './AppText';
 
 export default class PlansScene extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { loadedPlan: false, loadedInvitations: false, }
+  }
+
+  componentDidMount() {
+    api.bubbles.mine().then((plan) => {
+      this.setState({loadedPlan: true, plan: plan});
+    }).catch((err) => {
+      this.setState({loadedPlan: true, planError: err});
+    })
+
+    api.bubbles.invites().then((invitations) => {
+      this.setState({loadedInvitations: true, invitations: invitations});
+    }).catch((err) => {
+      this.setState({loadedInvitations: true, invitationsError: err});
+    })
+  }
+
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
@@ -69,8 +49,20 @@ export default class PlansScene extends Component {
       </View>
 
       <ScrollView>
-        <YourPlan plan={yourPlan}></YourPlan>
-        <Invitations invitations={invitations}></Invitations>
+        <View style={{alignItems: 'center'}}>
+          { !this.state.loadedPlan ?
+            <ActivityIndicator size="small" color="hotpink" />
+          : this.state.planError ?
+            <AppText style={{color: 'indianred'}}>{this.state.planError}</AppText>
+          : this.state.plan ?
+            <YourPlan plan={this.state.plan}></YourPlan>
+          :
+            null
+          }
+        </View>
+        <View>
+          <Invitations invitations={this.state.invitations}></Invitations>
+        </View>
       </ScrollView>
     </View>
   )}
