@@ -15,7 +15,6 @@ import FriendsCount from './FriendsCount';
 import Friend from './Friend';
 import BroadcastBox from './BroadcastBox';
 import AppText from './AppText';
-
 import base from '../styles/base';
 import api  from '../services/api';
 

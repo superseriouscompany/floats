@@ -12,12 +12,10 @@ import {
 } from 'react-native';
 
 import FCM from 'react-native-fcm';
-
 import FriendsScene from './components/FriendsScene';
 import LoginScene from './components/LoginScene';
 import PlansScene from './components/PlansScene';
-
-const api = require('./services/api');
+import api from './services/api';
 
 export default class batsignal extends Component {
   constructor(props) {

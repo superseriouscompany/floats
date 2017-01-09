@@ -12,8 +12,8 @@ import {
 } from 'react-native';
 
 import AppText from './AppText';
+import api from '../services/api';
 const LoginButton = requireNativeComponent('RCTFBLogin', null);
-const api = require('../services/api');
 
 export default class LoginScene extends Component {
   constructor(props) {

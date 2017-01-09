@@ -9,9 +9,9 @@ import {
 
 import AppText from './AppText';
 import Attendee from './Attendee';
+import base from '../styles/base';
+import moment from 'moment';
 
-const base   = require('../styles/base');
-const moment = require('moment');
 
 export default class Plan extends Component {
   render() { return (

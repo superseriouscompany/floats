@@ -10,9 +10,9 @@ import {
 import AppText from './AppText';
 import Plan from './Plan';
 import Zapper from './Zapper';
+import base from '../styles/base';
+import moment from 'moment';
 
-const base   = require('../styles/base');
-const moment = require('moment');
 
 export default class Invitations extends Component {
   render() { return (

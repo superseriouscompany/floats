@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import base from '../styles/base';
-const api  = require('../services/api');
+import api from '../services/api';
 import AppText from './AppText';
 
 export default class BroadcastBox extends Component {

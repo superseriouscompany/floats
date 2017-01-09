@@ -10,13 +10,13 @@ import {
 } from 'react-native';
 
 import base from '../styles/base';
-const api  = require('../services/api');
-
+import api from '../services/api';
 import Heading from './Heading';
 import ReturnArrow from './ReturnArrow';
 import YourPlan from './YourPlan';
 import Invitations from './Invitations';
 import AppText from './AppText';
+
 
 export default class PlansScene extends Component {
   constructor(props) {
