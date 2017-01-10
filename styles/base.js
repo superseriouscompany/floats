@@ -47,7 +47,7 @@ module.exports = StyleSheet.create({
     backgroundColor: colors.white,
   },
   bottomBar: {
-    height: 42,
+    height: 42.1,
     backgroundColor: colors.darkgrey,
     borderTopWidth: 0.5,
     borderTopColor: colors.lightgrey,
