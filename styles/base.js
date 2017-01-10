@@ -17,11 +17,14 @@ module.exports = StyleSheet.create({
     backgroundColor: colors.white,
     paddingTop: 20,
   },
-  loading: {
+  loadingCenter: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: -20,
+  },
+  loadingTop: {
+    marginTop: 25,
   },
   header: {
     height: 45,
