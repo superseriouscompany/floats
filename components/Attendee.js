@@ -13,7 +13,7 @@ export default class Attendee extends Component {
   render() { return (
     <View style={{flexDirection: 'row', paddingBottom: 6 }}>
       <Image style={base.miniPhotoCircle} source={{url: this.props.user.avatar_url}} />
-      <Text style={[{flex: 1}, base.timestamp]}>{this.props.user.name}</Text>
+      <Text style={[{flex: 1, paddingTop: 1}, base.timestamp]}>{this.props.user.name}</Text>
     </View>
   )}
 }

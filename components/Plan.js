@@ -14,11 +14,11 @@ import {
 export default class Plan extends Component {
   render() { return (
     <View style={{flex: 1}}>
-      <Text style={{fontSize: 14}}>{this.props.plan.user.name || 'You'} "{this.props.plan.title}"</Text>
+      <Text style={{fontSize: 16}}>{this.props.plan.user.name || 'You'} "{this.props.plan.title}"</Text>
       <Text style={base.timestamp}>
         {moment(this.props.plan.created_at).fromNow()}
         { this.props.attendees ?
-          <Text> | {this.props.attendees.length} interested</Text>
+          <Text style={base.timestamp}> | {this.props.attendees.length} interested</Text>
         :
           null
         }

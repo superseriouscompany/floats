@@ -115,10 +115,10 @@ module.exports = StyleSheet.create({
     borderColor: colors.lightgrey,
   },
   miniPhotoCircle: {
-    width: 15,
-    height: 15,
-    borderRadius: 7.5,
-    marginRight: 7.5,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    marginRight: 10,
   },
 
   bgBreakingSection: {
