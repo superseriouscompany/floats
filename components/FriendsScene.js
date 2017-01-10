@@ -53,7 +53,7 @@ export default class FriendsScene extends Component {
           <Text style={{color: 'indianred', textAlign: 'center'}}>{this.state.error}</Text>
         : !this.state.friends.length ?
           <View style={{alignItems: 'center'}}>
-            <Text style={[base.timestamp, {backgroundColor: base.colors.offwhite, paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]}>
+            <Text style={[base.timestamp, base.bgBreakingSection, {paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]}>
               nobody is nearby.
             </Text>
           </View>

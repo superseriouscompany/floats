@@ -62,11 +62,11 @@ module.exports = StyleSheet.create({
     fontSize: 8,
   },
   textLogo: {
-    fontSize: 14,
+    fontSize: 16,
     color: colors.darkgrey,
   },
   textTagline: {
-    fontSize: 10,
+    fontSize: 12,
     fontFamily: 'Lobster',
     color: colors.darkgrey,
     backgroundColor: 'rgba(0,0,0,0)',
@@ -113,6 +113,8 @@ module.exports = StyleSheet.create({
 
   bgBreakingSection: {
     backgroundColor: colors.offwhite,
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.lightgrey,
   },
 });
 
