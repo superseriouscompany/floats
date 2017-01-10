@@ -41,11 +41,13 @@ module.exports = StyleSheet.create({
     backgroundColor: colors.white,
   },
   bottomBar: {
-    height: 36,
+    height: 42,
     backgroundColor: colors.darkgrey,
+    borderTopWidth: 0.5,
+    borderTopColor: colors.lightgrey,
   },
   padFullHorizontal: {
-    paddingLeft: 18,
+    paddingLeft: 16,
     paddingRight: 18,
   },
   padMainItem: {
@@ -78,17 +80,19 @@ module.exports = StyleSheet.create({
   inputContainer: {
     paddingTop: 5,
     paddingRight: 22,
-    paddingLeft: 14,
+    paddingLeft: 6,
   },
   input: {
     backgroundColor: colors.white,
     flex: 1,
     fontSize: 16,
-    height: 26,
+    height: 32,
     fontFamily: 'Poppins',
     paddingTop: 1.5,
-    paddingLeft: 8,
+    paddingLeft: 10,
     borderRadius: 3,
+    borderWidth: 0.5,
+    borderColor: colors.lightgrey,
   },
   inputButton: {
     color: colors.white,
@@ -97,9 +101,9 @@ module.exports = StyleSheet.create({
   },
 
   photoCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 46,
+    height: 46,
+    borderRadius: 23,
     marginRight: 15,
     borderWidth: 0.5,
     borderColor: colors.lightgrey,

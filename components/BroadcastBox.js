@@ -31,7 +31,7 @@ export default class BroadcastBox extends Component {
 
   render() { return (
     <View style={[base.inputContainer, styles.container]}>
-      <TextInput style={[base.input]} placeholder="Who's up for..." onChangeText={(text) => this.setState({text})}/>
+      <TextInput style={[base.input]} placeholder="Who here's up for..." onChangeText={(text) => this.setState({text})}/>
       <TouchableOpacity onPress={this.broadcast.bind(this)}>
         <Text style={base.inputButton}>send</Text>
       </TouchableOpacity>
