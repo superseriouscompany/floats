@@ -46,7 +46,7 @@ export default class FriendsScene extends Component {
       <View style={base.mainWindow}>
         { !this.state.loaded ?
           <ActivityIndicator
-            style={[base.loading, {transform: [{scale: 1.5}]}]}
+            style={[base.loadingCenter, {transform: [{scale: 1.5}]}]}
             size="small"
             color='#E88868'
           />

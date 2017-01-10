@@ -11,6 +11,7 @@ import Invitations from './Invitations';
 import Text from './Text';
 import {
   ActivityIndicator,
+  Dimensions,
   ScrollView,
   StyleSheet,
   View
@@ -47,9 +48,15 @@ export default class PlansScene extends Component {
       </View>
 
       <ScrollView>
-        <View style={{alignItems: 'center'}}>
+        <View style={[{alignItems: 'center', justifyContent: 'center'}, base.mainWindow]}>
           { !this.state.loadedPlan ?
-            <ActivityIndicator size="small" color="hotpink" />
+            <View style={{height: 50}}>
+              <ActivityIndicator
+                style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
+                size="small"
+                color='#E88868'
+              />
+            </View>
           : this.state.planError ?
             <Text style={{color: 'indianred'}}>{this.state.planError}</Text>
           : this.state.plan ?
@@ -58,9 +65,15 @@ export default class PlansScene extends Component {
             null
           }
         </View>
-        <View>
+        <View style={base.mainWindow}>
           { !this.state.loadedInvitations ?
-            <ActivityIndicator size="small" color="hotpink" />
+            <View style={{height: 50}}>
+              <ActivityIndicator
+                style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
+                size="small"
+                color='#E88868'
+              />
+            </View>
           : this.state.invitationsError ?
             <Text style={{color: 'indianred'}}>{this.state.invitationsError}</Text>
           :
