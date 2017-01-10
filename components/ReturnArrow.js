@@ -1,6 +1,8 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React from 'react';
+import Component from './Component';
+import AppText from './AppText';
 
 import {
   Image,
@@ -8,8 +10,6 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-
-import AppText from './AppText';
 
 export default class ReturnArrow extends Component {
   render() { return (

@@ -1,15 +1,13 @@
 'use strict';
 
-import React, {Component} from 'react';
-
+import React from 'react';
+import AppText from './AppText';
+import Component from './Component';
+import base from '../styles/base';
 import {
   Image,
   View
 } from 'react-native';
-
-import AppText from './AppText';
-
-import base from '../styles/base';
 
 export default class Attendee extends Component {
   render() { return (

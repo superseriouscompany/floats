@@ -1,14 +1,7 @@
 'use strict';
 
-import React, {Component} from 'react';
-
-import {
-  ActivityIndicator,
-  View,
-  ScrollView,
-  StyleSheet,
-} from 'react-native';
-
+import React from 'react';
+import Component from './Component';
 import UnreadHeart from './UnreadHeart';
 import Logo from './Logo';
 import FriendsCount from './FriendsCount';
@@ -17,6 +10,12 @@ import BroadcastBox from './BroadcastBox';
 import AppText from './AppText';
 import base from '../styles/base';
 import api  from '../services/api';
+import {
+  ActivityIndicator,
+  View,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
 
 export default class FriendsScene extends Component {
   constructor(props) {

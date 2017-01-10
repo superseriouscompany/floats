@@ -1,7 +1,10 @@
 'use strict';
 
-import React, {Component} from 'react';
-
+import React from 'react';
+import Component from './Component';
+import base from '../styles/base';
+import api from '../services/api';
+import AppText from './AppText';
 import {
   Alert,
   StyleSheet,
@@ -9,10 +12,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
-import base from '../styles/base';
-import api from '../services/api';
-import AppText from './AppText';
 
 export default class BroadcastBox extends Component {
   constructor(props) {

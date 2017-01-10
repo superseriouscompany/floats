@@ -1,16 +1,15 @@
 'use strict';
 
-import React, {Component} from 'react';
-
+import React from 'react';
+import Component from './Component';
+import base from '../styles/base';
+import AppText from './AppText';
 import {
   View,
   Image,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-
-import base from '../styles/base';
-import AppText from './AppText';
 
 export default class Friend extends Component {
   constructor(props) {

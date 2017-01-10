@@ -1,14 +1,7 @@
 'use strict';
 
-import React, {Component} from 'react';
-
-import {
-  ActivityIndicator,
-  ScrollView,
-  StyleSheet,
-  View
-} from 'react-native';
-
+import React from 'react';
+import Component from './Component';
 import base from '../styles/base';
 import api from '../services/api';
 import Heading from './Heading';
@@ -16,7 +9,12 @@ import ReturnArrow from './ReturnArrow';
 import YourPlan from './YourPlan';
 import Invitations from './Invitations';
 import AppText from './AppText';
-
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  View
+} from 'react-native';
 
 export default class PlansScene extends Component {
   constructor(props) {

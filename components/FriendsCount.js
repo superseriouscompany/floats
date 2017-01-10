@@ -1,12 +1,11 @@
 'use strict';
 
-import React, {Component} from 'react';
-
+import React from 'react';
+import Component from './Component';
+import AppText from './AppText';
 import {
   View
 } from 'react-native';
-
-import AppText from './AppText';
 
 export default class FriendsCount extends Component {
   render() { return (

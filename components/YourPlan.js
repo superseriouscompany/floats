@@ -1,19 +1,23 @@
 'use strict';
 
-import React, {Component} from 'react';
-
+import React from 'react';
+import AppText  from './AppText';
+import Plan     from './Plan';
+import Attendee from './Attendee';
+import Component from './Component';
+import base from '../styles/base';
 import {
   Image,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-import AppText  from './AppText';
-import Plan     from './Plan';
-import Attendee from './Attendee';
-import base from '../styles/base';
-
 export default class YourPlan extends Component {
+  constructor(props) {
+    super(props);
+    console.log(this.cool);
+  }
+
   render() {
     const plan = this.props.plan;
     if( !plan ) { return null; }

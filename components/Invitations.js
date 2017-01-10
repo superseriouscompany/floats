@@ -1,18 +1,16 @@
 'use strict';
 
-import React, {Component} from 'react';
-
-import {
-  Image,
-  View
-} from 'react-native';
-
+import React from 'react';
+import Component from './Component';
 import AppText from './AppText';
 import Plan from './Plan';
 import Zapper from './Zapper';
 import base from '../styles/base';
 import moment from 'moment';
-
+import {
+  Image,
+  View
+} from 'react-native';
 
 export default class Invitations extends Component {
   render() { return (
