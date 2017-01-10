@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Component from './Component';
-import AppText from './AppText';
+import Text from './Text';
 import Attendee from './Attendee';
 import base from '../styles/base';
 import moment from 'moment';
@@ -14,15 +14,15 @@ import {
 export default class Plan extends Component {
   render() { return (
     <View style={{flex: 1}}>
-      <AppText style={{fontSize: 12}}>{this.props.plan.user.name || 'You'} "{this.props.plan.title}"</AppText>
-      <AppText style={base.timestamp}>
+      <Text style={{fontSize: 12}}>{this.props.plan.user.name || 'You'} "{this.props.plan.title}"</Text>
+      <Text style={base.timestamp}>
         {moment(this.props.plan.created_at).fromNow()}
         { this.props.attendees ?
-          <AppText> | {this.props.attendees.length} interested</AppText>
+          <Text> | {this.props.attendees.length} interested</Text>
         :
           null
         }
-      </AppText>
+      </Text>
 
       { this.props.attendees ?
         <View style={{paddingTop: 11, paddingBottom: 5}}>

@@ -7,7 +7,7 @@ import Logo from './Logo';
 import FriendsCount from './FriendsCount';
 import Friend from './Friend';
 import BroadcastBox from './BroadcastBox';
-import AppText from './AppText';
+import Text from './Text';
 import base from '../styles/base';
 import api  from '../services/api';
 import {
@@ -50,12 +50,12 @@ export default class FriendsScene extends Component {
                       color="hotpink"
                     />
         : this.state.error ?
-          <AppText style={{color: 'indianred', textAlign: 'center'}}>{this.state.error}</AppText>
+          <Text style={{color: 'indianred', textAlign: 'center'}}>{this.state.error}</Text>
         : !this.state.friends.length ?
           <View style={{alignItems: 'center'}}>
-            <AppText style={[base.timestamp, {backgroundColor: base.colors.offwhite, paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]}>
+            <Text style={[base.timestamp, {backgroundColor: base.colors.offwhite, paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]}>
               nobody is nearby.
-            </AppText>
+            </Text>
           </View>
         :
           <View>

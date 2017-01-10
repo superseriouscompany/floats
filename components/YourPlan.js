@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import AppText  from './AppText';
+import Text  from './Text';
 import Plan     from './Plan';
 import Attendee from './Attendee';
 import Component from './Component';
@@ -26,13 +26,13 @@ export default class YourPlan extends Component {
       <Image source={{url: this.props.plan.user.avatar_url}} style={base.photoCircle} />
       <View style={{flex: 1}}>
         <Plan plan={plan} attendees={plan.attendees}/>
-        <AppText style={[base.timestamp, {color: base.colors.mediumgrey}]}>text them to coordinate</AppText>
+        <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>text them to coordinate</Text>
         <View style={{flexDirection: 'row'}}>
-          <AppText style={[base.timestamp, {color: base.colors.mediumgrey}]}>
+          <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
             no longer feeling it? &nbsp;
-          </AppText>
+          </Text>
           <TouchableOpacity onPress={() => alert('Nope.')}>
-            <AppText style={[base.timestamp, {textDecorationLine: 'underline', color: base.colors.mediumgrey}]}>delete your post</AppText>
+            <Text style={[base.timestamp, {textDecorationLine: 'underline', color: base.colors.mediumgrey}]}>delete your post</Text>
           </TouchableOpacity>
         </View>
       </View>

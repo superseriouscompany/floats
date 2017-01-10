@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Component from './Component';
-import AppText from './AppText';
+import Text from './Text';
 import Plan from './Plan';
 import Zapper from './Zapper';
 import base from '../styles/base';
@@ -17,7 +17,7 @@ export default class Invitations extends Component {
     <View style={{backgroundColor: base.colors.offwhite, borderBottomWidth: 1, borderBottomColor: base.colors.lightgrey}}>
       { !this.props.invitations || !this.props.invitations.length ?
         <View style={{alignItems: 'center', paddingTop: 9, paddingBottom: 10 }}>
-          <AppText style={[base.timestamp, {color: base.colors.mediumgrey}]}>no pending invitations</AppText>
+          <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>no pending invitations</Text>
         </View>
       :
         <View style={[base.padFullHorizontal, base.padMainItem]}>
@@ -25,10 +25,10 @@ export default class Invitations extends Component {
             <View key={i} style={{flexDirection: 'row', paddingBottom: 18 }}>
               <Image source={{url: p.user.avatar_url}} style={base.photoCircle}/>
               <View style={{flex: 1}}>
-                <AppText style={{fontSize: 12}}>{p.user.name} "{p.title}"</AppText>
-                <AppText style={base.timestamp}>
+                <Text style={{fontSize: 12}}>{p.user.name} "{p.title}"</Text>
+                <Text style={base.timestamp}>
                   {moment(p.created_at).fromNow()}
-                </AppText>
+                </Text>
               </View>
               <Zapper active={!!p.attending}></Zapper>
             </View>

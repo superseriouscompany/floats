@@ -2,10 +2,9 @@
 
 import React from 'react';
 import Component from './Component';
-import AppText from './AppText';
+import Text from './Text';
 import base from '../styles/base';
 import {
-  Text,
   View,
   StyleSheet,
 } from 'react-native';
@@ -13,7 +12,7 @@ import {
 export default class Logo extends Component {
   render() { return (
     <View style={styles.container}>
-      <AppText style={base.textLogo}>bubbles</AppText>
+      <Text style={base.textLogo}>bubbles</Text>
       <Text style={base.textTagline}>all your closest friends</Text>
     </View>
   )}

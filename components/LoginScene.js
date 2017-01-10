@@ -2,10 +2,9 @@
 
 import React from 'react';
 import Component from './Component';
-import AppText from './AppText';
+import Text from './Text';
 import api from '../services/api';
 import {
-  Text,
   View,
   requireNativeComponent,
   NativeAppEventEmitter,

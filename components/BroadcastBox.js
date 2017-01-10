@@ -4,7 +4,7 @@ import React from 'react';
 import Component from './Component';
 import base from '../styles/base';
 import api from '../services/api';
-import AppText from './AppText';
+import Text from './Text';
 import {
   Alert,
   StyleSheet,
@@ -33,7 +33,7 @@ export default class BroadcastBox extends Component {
     <View style={[base.inputContainer, styles.container]}>
       <TextInput style={[base.input]} placeholder="Who's up for..." onChangeText={(text) => this.setState({text})}/>
       <TouchableOpacity onPress={this.broadcast.bind(this)}>
-        <AppText style={base.inputButton}>send</AppText>
+        <Text style={base.inputButton}>send</Text>
       </TouchableOpacity>
     </View>
   )}

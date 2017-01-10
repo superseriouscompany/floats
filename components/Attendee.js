@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import AppText from './AppText';
+import Text from './Text';
 import Component from './Component';
 import base from '../styles/base';
 import {
@@ -13,7 +13,7 @@ export default class Attendee extends Component {
   render() { return (
     <View style={{flexDirection: 'row', paddingBottom: 6 }}>
       <Image style={base.miniPhotoCircle} source={{url: this.props.user.avatar_url}} />
-      <AppText style={[{flex: 1}, base.timestamp]}>{this.props.user.name}</AppText>
+      <Text style={[{flex: 1}, base.timestamp]}>{this.props.user.name}</Text>
     </View>
   )}
 }

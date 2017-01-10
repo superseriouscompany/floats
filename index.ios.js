@@ -7,7 +7,6 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  Text,
   View,
 } from 'react-native';
 
@@ -15,6 +14,7 @@ import FCM from 'react-native-fcm';
 import FriendsScene from './components/FriendsScene';
 import LoginScene from './components/LoginScene';
 import PlansScene from './components/PlansScene';
+import Text from './components/Text';
 import api from './services/api';
 
 export default class batsignal extends Component {

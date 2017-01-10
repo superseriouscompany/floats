@@ -3,7 +3,7 @@
 import React from 'react';
 import Component from './Component';
 import base from '../styles/base';
-import AppText from './AppText';
+import Text from './Text';
 import {
   View,
   Image,
@@ -20,7 +20,7 @@ export default class Friend extends Component {
   render() { return (
     <View style={[styles.box, base.padFullHorizontal, base.padMainItem]}>
       <Image style={[base.photoCircle]} source={{uri: this.props.friend.avatar_url}}/>
-      <AppText style={[styles.main]}>{this.props.friend.name}</AppText>
+      <Text style={[styles.main]}>{this.props.friend.name}</Text>
       <TouchableOpacity onPress={this.toggle.bind(this)} accessible={true} accessibilityLabel={`Select ${this.props.friend.name}`}>
         { this.state.selected ?
           <Image source={require('../images/Checked.png')} />

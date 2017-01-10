@@ -8,7 +8,7 @@ import Heading from './Heading';
 import ReturnArrow from './ReturnArrow';
 import YourPlan from './YourPlan';
 import Invitations from './Invitations';
-import AppText from './AppText';
+import Text from './Text';
 import {
   ActivityIndicator,
   ScrollView,
@@ -51,7 +51,7 @@ export default class PlansScene extends Component {
           { !this.state.loadedPlan ?
             <ActivityIndicator size="small" color="hotpink" />
           : this.state.planError ?
-            <AppText style={{color: 'indianred'}}>{this.state.planError}</AppText>
+            <Text style={{color: 'indianred'}}>{this.state.planError}</Text>
           : this.state.plan ?
             <YourPlan plan={this.state.plan}></YourPlan>
           :
@@ -62,7 +62,7 @@ export default class PlansScene extends Component {
           { !this.state.loadedInvitations ?
             <ActivityIndicator size="small" color="hotpink" />
           : this.state.invitationsError ?
-            <AppText style={{color: 'indianred'}}>{this.state.invitationsError}</AppText>
+            <Text style={{color: 'indianred'}}>{this.state.invitationsError}</Text>
           :
             <Invitations invitations={this.state.invitations}></Invitations>
           }
