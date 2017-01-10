@@ -17,6 +17,12 @@ module.exports = StyleSheet.create({
     backgroundColor: colors.white,
     paddingTop: 20,
   },
+  loading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: -20,
+  },
   header: {
     height: 45,
     backgroundColor: colors.white,

@@ -46,9 +46,10 @@ export default class FriendsScene extends Component {
       <View style={base.mainWindow}>
         { !this.state.loaded ?
           <ActivityIndicator
-                      size="small"
-                      color="hotpink"
-                    />
+            style={[base.loading, {transform: [{scale: 1.5}]}]}
+            size="small"
+            color='#E88868'
+          />
         : this.state.error ?
           <Text style={{color: 'indianred', textAlign: 'center'}}>{this.state.error}</Text>
         : !this.state.friends.length ?
