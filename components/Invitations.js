@@ -25,7 +25,7 @@ export default class Invitations extends Component {
             <View key={i} style={{flexDirection: 'row', paddingBottom: 18 }}>
               <Image source={{url: p.user.avatar_url}} style={base.photoCircle}/>
               <View style={{flex: 1}}>
-                <Text style={{fontSize: 14}}>{p.user.name} "{p.title}"</Text>
+                <Text style={{fontSize: 16}}>{p.user.name} "{p.title}"</Text>
                 <Text style={base.timestamp}>
                   {moment(p.created_at).fromNow()}
                 </Text>
