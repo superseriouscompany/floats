@@ -40,7 +40,7 @@ module.exports = StyleSheet.create({
     position: 'absolute',
     right: 0,
     bottom: 0,
-    paddingBottom: 6,
+    paddingBottom: 5,
   },
   mainWindow: {
     flex: 1,
@@ -81,7 +81,7 @@ module.exports = StyleSheet.create({
     marginTop: -7,
   },
   textHeader: {
-    marginTop: -6,
+    marginTop: -3,
   },
   inputContainer: {
     paddingTop: 5,
