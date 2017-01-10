@@ -27,14 +27,9 @@ export default class YourPlan extends Component {
       <View style={{flex: 1}}>
         <Plan plan={plan} attendees={plan.attendees}/>
         <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>text them to coordinate</Text>
-        <View style={{flexDirection: 'row'}}>
-          <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
-            no longer feeling it? &nbsp;
-          </Text>
-          <TouchableOpacity onPress={() => alert('Nope.')}>
-            <Text style={[base.timestamp, {textDecorationLine: 'underline', color: base.colors.mediumgrey}]}>delete your post</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={() => alert('Nope.')}>
+          <Text style={[base.timestamp, {textDecorationLine: 'underline', color: base.colors.mediumgrey}]}>or delete your plan</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )}
