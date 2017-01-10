@@ -21,6 +21,6 @@ export default class Logo extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginBottom: 8.5,
+    marginBottom: 8.25,
   },
 })

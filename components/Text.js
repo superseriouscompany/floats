@@ -3,6 +3,7 @@
 // https://facebook.github.io/react-native/docs/text.html#limited-style-inheritance
 import React from 'react';
 import Component from './Component';
+import base from '../styles/base';
 import {
   Text,
 } from 'react-native';
@@ -10,7 +11,7 @@ import {
 export default class AppText extends Component {
   constructor(props) {
     super(props)
-    this.style = [{fontFamily: 'Poppins'}];
+    this.style = [{fontFamily: 'Poppins', fontSize: 16, color: base.colors.darkgrey}];
     if( props.style ) {
       if( Array.isArray(props.style) ) {
         this.style = this.style.concat(props.style)

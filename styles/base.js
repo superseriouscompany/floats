@@ -59,7 +59,7 @@ module.exports = StyleSheet.create({
 
   },
   timestamp: {
-    fontSize: 8,
+    fontSize: 10,
   },
   textLogo: {
     fontSize: 16,
@@ -70,7 +70,7 @@ module.exports = StyleSheet.create({
     fontFamily: 'Lobster',
     color: colors.darkgrey,
     backgroundColor: 'rgba(0,0,0,0)',
-    marginTop: -5,
+    marginTop: -7,
   },
   textHeader: {
     marginTop: -6,
@@ -83,7 +83,7 @@ module.exports = StyleSheet.create({
   input: {
     backgroundColor: colors.white,
     flex: 1,
-    fontSize: 12,
+    fontSize: 16,
     height: 26,
     fontFamily: 'Poppins',
     paddingTop: 1.5,
@@ -93,13 +93,13 @@ module.exports = StyleSheet.create({
   inputButton: {
     color: colors.white,
     paddingLeft: 22,
-    fontSize: 12,
+    fontSize: 16,
   },
 
   photoCircle: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     marginRight: 15,
     borderWidth: 0.5,
     borderColor: colors.lightgrey,
