@@ -16,6 +16,7 @@ import LoginScene from './components/LoginScene';
 import PlansScene from './components/PlansScene';
 import Text from './components/Text';
 import api from './services/api';
+import store from './services/store';
 
 export default class batsignal extends Component {
   constructor(props) {
@@ -33,11 +34,7 @@ export default class batsignal extends Component {
 
   getChildContext() {
     return {
-      store: {
-        dispatch: function(cool) {
-          alert(cool)
-        }
-      }
+      store: store
     }
   }
 

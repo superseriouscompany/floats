@@ -32,8 +32,9 @@ export default class Friend extends Component {
   )}
 
   toggle() {
-    this.setState({selected: !this.state.selected})
-    this.context.store.dispatch("Do something kewl here");
+    const selected = !this.state.selected;
+    this.context.store.dispatch({type: 'toggleFriend', on: selected, id: this.props.friend.id});
+    this.setState({selected: selected});
   }
 }
 Friend.contextTypes = {
