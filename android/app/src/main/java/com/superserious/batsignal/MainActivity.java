@@ -1,4 +1,4 @@
-package com.batsignal;
+package com.superserious.batsignal;
 
 import com.facebook.react.ReactActivity;
 
