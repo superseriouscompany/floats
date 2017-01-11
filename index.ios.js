@@ -31,6 +31,16 @@ export default class batsignal extends Component {
     }
   }
 
+  getChildContext() {
+    return {
+      store: {
+        dispatch: function(cool) {
+          alert(cool)
+        }
+      }
+    }
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -70,6 +80,9 @@ export default class batsignal extends Component {
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     );
   }
+}
+batsignal.childContextTypes = {
+  store: React.PropTypes.object
 }
 
 AppRegistry.registerComponent('batsignal', () => batsignal);
