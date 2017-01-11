@@ -7,47 +7,70 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View
+  View,
 } from 'react-native';
 
+import FCM from 'react-native-fcm';
+import FriendsScene from './components/FriendsScene';
+import LoginScene from './components/LoginScene';
+import PlansScene from './components/PlansScene';
+import Text from './components/Text';
+import api from './services/api';
+
 export default class batsignal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { props: {}};
+    this.state.scene = 'FriendsScene';
+
+    this.navigator = {
+      navigate: (component, props) => {
+        let stateChange = { scene: component, props: props || {} };
+        this.setState(stateChange);
+      }
+    }
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+      <View style={{flex: 1}}>
+        { this.state.scene == 'LoginScene' ?
+          <LoginScene navigator={this.navigator} />
+        : this.state.scene == 'FriendsScene' ?
+          <FriendsScene navigator={this.navigator} />
+        : this.state.scene == 'PlansScene' ?
+          <PlansScene navigator={this.navigator} />
+        :
+          <Text>404</Text>
+        }
       </View>
+    )
+  }
+
+  componentDidMount() {
+    FCM.requestPermissions();
+    FCM.getFCMToken().then(token => {
+      // TODO: retry
+      alert(token);
+      api.sessions.updateFirebaseToken(null, token);
+    });
+    FCM.on('refreshToken', (token) => {
+      // TODO: retry
+      api.sessions.updateFirebaseToken(null, token);
+    })
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        var initialPosition = JSON.stringify(position);
+        api.sightings.create(null, {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
+      },
+      (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('batsignal', () => batsignal);
