@@ -43,7 +43,7 @@ module.exports = StyleSheet.create({
     position: 'absolute',
     right: 0,
     bottom: 0,
-    paddingBottom: 5,
+    paddingBottom: 4,
   },
   mainWindow: {
     flex: 1,
@@ -75,16 +75,17 @@ module.exports = StyleSheet.create({
   textLogo: {
     fontSize: 16,
     color: colors.darkgrey,
+    marginTop: 1,
   },
   textTagline: {
     fontSize: 12,
     fontFamily: 'Lobster',
     color: colors.darkgrey,
     backgroundColor: 'rgba(0,0,0,0)',
-    marginTop: -7,
+    marginTop: -6,
   },
   textHeader: {
-    marginTop: -3,
+    marginTop: -2,
   },
   inputContainer: {
     paddingTop: 5,
