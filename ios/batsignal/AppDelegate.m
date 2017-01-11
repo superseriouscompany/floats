@@ -51,7 +51,6 @@
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
-//  self.window.rootViewController = [ViewController new];
   [self.window makeKeyAndVisible];
 
   [[FBSDKApplicationDelegate sharedInstance] application:application
