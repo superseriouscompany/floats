@@ -21,9 +21,9 @@ export default class UnreadHeart extends Component {
 
 const styles = StyleSheet.create({
   heart: {
-    paddingTop: 8,
+    paddingTop: 9,
     paddingLeft: 14,
-    paddingBottom: 12,
+    paddingBottom: 11,
     paddingRight: 14,
   }
 });
