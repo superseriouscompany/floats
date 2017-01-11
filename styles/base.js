@@ -89,7 +89,7 @@ module.exports = StyleSheet.create({
   inputContainer: {
     paddingTop: 5,
     paddingRight: 22,
-    paddingLeft: 6,
+    paddingLeft: 5,
   },
   input: {
     backgroundColor: colors.white,
