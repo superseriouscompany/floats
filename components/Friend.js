@@ -33,7 +33,11 @@ export default class Friend extends Component {
 
   toggle() {
     this.setState({selected: !this.state.selected})
+    this.context.store.dispatch("Do something kewl here");
   }
+}
+Friend.contextTypes = {
+  store: React.PropTypes.object
 }
 
 const styles = StyleSheet.create({
