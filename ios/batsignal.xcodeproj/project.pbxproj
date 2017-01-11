@@ -32,12 +32,12 @@
 		3F096BA41E203CF300804325 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F096BA31E203CF300804325 /* libsqlite3.tbd */; };
 		3F096BD01E20465D00804325 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F096BCF1E20465C00804325 /* GoogleService-Info.plist */; };
 		3F096BD11E20465D00804325 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F096BCF1E20465C00804325 /* GoogleService-Info.plist */; };
-		3F87EE121E2018F200139C69 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F87EE0E1E2018F200139C69 /* FBSDKShareKit.framework */; };
-		3F87EE131E2018F200139C69 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F87EE0F1E2018F200139C69 /* FBSDKCoreKit.framework */; };
-		3F87EE141E2018F200139C69 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F87EE101E2018F200139C69 /* FBSDKLoginKit.framework */; };
-		3F87EE151E2018F200139C69 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F87EE111E2018F200139C69 /* Bolts.framework */; };
+		3F6CC3F81E26ACC90096F05B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6CC3F41E26ACC90096F05B /* Bolts.framework */; };
+		3F6CC3F91E26ACC90096F05B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6CC3F51E26ACC90096F05B /* FBSDKCoreKit.framework */; };
+		3F6CC3FA1E26ACC90096F05B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6CC3F61E26ACC90096F05B /* FBSDKLoginKit.framework */; };
+		3F6CC3FB1E26ACC90096F05B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6CC3F71E26ACC90096F05B /* FBSDKShareKit.framework */; };
+		3F6CC4081E26AD2D0096F05B /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6CC4071E26AD220096F05B /* libRCTFBSDK.a */; };
 		3F87EE181E2019B700139C69 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F87EE171E2019B700139C69 /* ViewController.m */; };
-		3F87EE1A1E201F5C00139C69 /* RCTFBLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F87EE191E201F5C00139C69 /* RCTFBLoginManager.m */; };
 		3FE6726F1E22B8F6009C4C31 /* Lobster-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6726E1E22B8F6009C4C31 /* Lobster-Regular.ttf */; };
 		3FE672901E22BA73009C4C31 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */; };
 		3FE672911E22BA73009C4C31 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728C1E22BA73009C4C31 /* Poppins-Light.ttf */; };
@@ -211,6 +211,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNFIRMessaging;
 		};
+		3F6CC4061E26AD220096F05B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F6CC4021E26AD220096F05B /* RCTFBSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
+			remoteInfo = RCTFBSDK;
+		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -273,13 +280,13 @@
 		3F096BA31E203CF300804325 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		3F096BCE1E2044CC00804325 /* batsignal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = batsignal.entitlements; path = batsignal/batsignal.entitlements; sourceTree = "<group>"; };
 		3F096BCF1E20465C00804325 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3F87EE0E1E2018F200139C69 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
-		3F87EE0F1E2018F200139C69 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		3F87EE101E2018F200139C69 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		3F87EE111E2018F200139C69 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
+		3F6CC3F41E26ACC90096F05B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
+		3F6CC3F51E26ACC90096F05B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		3F6CC3F61E26ACC90096F05B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		3F6CC3F71E26ACC90096F05B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		3F6CC4021E26AD220096F05B /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "/Users/neilsarkar/workspace/superserious/batsignal/node_modules/react-native/Libraries/ActionSheetIOS/../../../react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<absolute>"; };
 		3F87EE161E20198C00139C69 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = batsignal/ViewController.h; sourceTree = "<group>"; };
 		3F87EE171E2019B700139C69 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = batsignal/ViewController.m; sourceTree = "<group>"; };
-		3F87EE191E201F5C00139C69 /* RCTFBLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBLoginManager.m; path = batsignal/RCTFBLoginManager.m; sourceTree = "<group>"; };
 		3FE6726E1E22B8F6009C4C31 /* Lobster-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lobster-Regular.ttf"; sourceTree = "<group>"; };
 		3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		3FE6728C1E22BA73009C4C31 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
@@ -308,10 +315,10 @@
 				3F096BA41E203CF300804325 /* libsqlite3.tbd in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
+				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
-				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
@@ -324,11 +331,12 @@
 				3F034CCC1E2037A10090F0E1 /* FirebaseInstanceID.framework in Frameworks */,
 				3F034CEA1E2037B20090F0E1 /* FirebaseMessaging.framework in Frameworks */,
 				3F034CCF1E2037A10090F0E1 /* GoogleToolboxForMac.framework in Frameworks */,
-				3F87EE151E2018F200139C69 /* Bolts.framework in Frameworks */,
-				3F87EE131E2018F200139C69 /* FBSDKCoreKit.framework in Frameworks */,
-				3F87EE121E2018F200139C69 /* FBSDKShareKit.framework in Frameworks */,
-				3F87EE141E2018F200139C69 /* FBSDKLoginKit.framework in Frameworks */,
 				6ABD53735A1A4B85B3E8ABF4 /* libRNFIRMessaging.a in Frameworks */,
+				3F6CC3F81E26ACC90096F05B /* Bolts.framework in Frameworks */,
+				3F6CC3F91E26ACC90096F05B /* FBSDKCoreKit.framework in Frameworks */,
+				3F6CC3FB1E26ACC90096F05B /* FBSDKShareKit.framework in Frameworks */,
+				3F6CC3FA1E26ACC90096F05B /* FBSDKLoginKit.framework in Frameworks */,
+				3F6CC4081E26AD2D0096F05B /* libRCTFBSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +434,6 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				3F87EE161E20198C00139C69 /* ViewController.h */,
 				3F87EE171E2019B700139C69 /* ViewController.m */,
-				3F87EE191E201F5C00139C69 /* RCTFBLoginManager.m */,
 				3F096BCF1E20465C00804325 /* GoogleService-Info.plist */,
 			);
 			name = batsignal;
@@ -455,9 +462,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3F6CC4031E26AD220096F05B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F6CC4071E26AD220096F05B /* libRCTFBSDK.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3F87EDF41E2018D900139C69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F6CC3F41E26ACC90096F05B /* Bolts.framework */,
+				3F6CC3F51E26ACC90096F05B /* FBSDKCoreKit.framework */,
+				3F6CC3F61E26ACC90096F05B /* FBSDKLoginKit.framework */,
+				3F6CC3F71E26ACC90096F05B /* FBSDKShareKit.framework */,
 				3F096BA31E203CF300804325 /* libsqlite3.tbd */,
 				3F034CE91E2037B20090F0E1 /* FirebaseMessaging.framework */,
 				3F034CC41E2037A10090F0E1 /* FirebaseAnalytics.framework */,
@@ -466,10 +485,6 @@
 				3F034CC71E2037A10090F0E1 /* GoogleInterchangeUtilities.framework */,
 				3F034CC81E2037A10090F0E1 /* GoogleSymbolUtilities.framework */,
 				3F034CC91E2037A10090F0E1 /* GoogleToolboxForMac.framework */,
-				3F87EE0E1E2018F200139C69 /* FBSDKShareKit.framework */,
-				3F87EE0F1E2018F200139C69 /* FBSDKCoreKit.framework */,
-				3F87EE101E2018F200139C69 /* FBSDKLoginKit.framework */,
-				3F87EE111E2018F200139C69 /* Bolts.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -508,6 +523,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3F6CC4021E26AD220096F05B /* RCTFBSDK.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -644,6 +660,10 @@
 				{
 					ProductGroup = 5E91572E1DD0AC6500FF2AA8 /* Products */;
 					ProjectRef = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
+				},
+				{
+					ProductGroup = 3F6CC4031E26AD220096F05B /* Products */;
+					ProjectRef = 3F6CC4021E26AD220096F05B /* RCTFBSDK.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -849,6 +869,13 @@
 			remoteRef = 3F096BCC1E203E5300804325 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		3F6CC4071E26AD220096F05B /* libRCTFBSDK.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTFBSDK.a;
+			remoteRef = 3F6CC4061E26AD220096F05B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -939,7 +966,6 @@
 				3F87EE181E2019B700139C69 /* ViewController.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				3F87EE1A1E201F5C00139C69 /* RCTFBLoginManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1019,6 +1045,10 @@
 				);
 				INFOPLIST_FILE = batsignal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1043,6 +1073,10 @@
 				);
 				INFOPLIST_FILE = batsignal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
