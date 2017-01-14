@@ -7,6 +7,7 @@ import api from '../services/api';
 import Text from './Text';
 import {
   Alert,
+  AsyncStorage,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -21,12 +22,14 @@ export default class BroadcastBox extends Component {
 
   broadcast() {
     if( !this.state.text ) { return; }
-    return api.floats.create(null, this.state.text, 'nope').then(function() {
-      Alert.alert("We told your friends!");
+    AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
+      return api.floats.create(accessToken, this.props.friends.map(function(f) { return f.id}), this.state.text).then(function() {
+        Alert.alert("We told your friends!");
+      });
     }).catch(function(err) {
       Alert.alert(err);
       console.error(err);
-    });
+    })
   }
 
   render() { return (
