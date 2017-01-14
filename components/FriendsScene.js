@@ -12,11 +12,11 @@ import Text from './Text';
 import base from '../styles/base';
 import api  from '../services/api';
 import {
+  AsyncStorage,
   ActivityIndicator,
   View,
   ScrollView,
   StyleSheet,
-  AsyncStorage,
 } from 'react-native';
 
 export default class FriendsScene extends Component {
@@ -100,11 +100,11 @@ export default class FriendsScene extends Component {
         }
       </View>
 
-      { this.state.loaded && !this.state.friends.length ?
+      { !this.state.friends.length ?
         null
       :
         <View style={base.bottomBar}>
-          <BroadcastBox friends={this.state.friends} active={!this.state.friends.length}/>
+          <BroadcastBox friends={this.state.friends} cool="nice"/>
         </View>
       }
     </View>

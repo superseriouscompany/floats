@@ -61,12 +61,12 @@ module.exports = {
   },
 
   floats: {
-    create: function(accessToken, text, excludeIds) {
+    create: function(accessToken, userIds, text) {
       return fetch(`${baseUrl}/floats`, {
         method: 'POST',
         body: JSON.stringify({
           text: text,
-          exclude_ids: excludeIds
+          invitees: userIds
         }),
         headers: headers(accessToken),
       }).then(function(response) {
@@ -94,6 +94,17 @@ module.exports = {
         return response.json();
       }).then(function(json) {
         return json.floats;
+      })
+    },
+
+    join: function(accessToken, floatId, silent) {
+      return fetch(`${baseUrl}/floats/${floatId}/join`, {
+        headers: headers(accessToken),
+        body: JSON.stringify({silent: !!silent}),
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error(response.status); }
+
+        return true;
       })
     },
   }
