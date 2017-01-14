@@ -68,7 +68,7 @@ export default class batsignal extends Component {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         var initialPosition = JSON.stringify(position);
-        api.sightings.create(null, {
+        api.pins.create(null, {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         })

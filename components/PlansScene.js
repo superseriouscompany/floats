@@ -25,13 +25,13 @@ export default class PlansScene extends Component {
   }
 
   componentDidMount() {
-    api.bubbles.mine().then((plan) => {
+    api.floats.mine().then((plan) => {
       this.setState({loadedPlan: true, plan: plan});
     }).catch((err) => {
       this.setState({loadedPlan: true, planError: err});
     })
 
-    api.bubbles.invites().then((invitations) => {
+    api.floats.invites().then((invitations) => {
       this.setState({loadedInvitations: true, invitations: invitations});
     }).catch((err) => {
       this.setState({loadedInvitations: true, invitationsError: err});
