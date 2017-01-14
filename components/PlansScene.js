@@ -11,6 +11,7 @@ import Invitations from './Invitations';
 import Text from './Text';
 import {
   ActivityIndicator,
+  AsyncStorage,
   Dimensions,
   ScrollView,
   StyleSheet,
@@ -25,16 +26,18 @@ export default class PlansScene extends Component {
   }
 
   componentDidMount() {
-    api.floats.mine().then((plan) => {
-      this.setState({loadedPlan: true, plan: plan});
-    }).catch((err) => {
-      this.setState({loadedPlan: true, planError: err});
-    })
+    AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
+      api.floats.mine(accessToken).then((floats) => {
+        this.setState({loadedPlan: true, plan: floats[0]});
+      }).catch((err) => {
+        this.setState({loadedPlan: true, planError: err});
+      })
 
-    api.floats.invites().then((invitations) => {
-      this.setState({loadedInvitations: true, invitations: invitations});
-    }).catch((err) => {
-      this.setState({loadedInvitations: true, invitationsError: err});
+      api.floats.invites(accessToken).then((floats) => {
+        this.setState({loadedInvitations: true, invitations: floats});
+      }).catch((err) => {
+        this.setState({loadedInvitations: true, invitationsError: err});
+      })
     })
   }
 

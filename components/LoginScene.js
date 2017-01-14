@@ -10,6 +10,7 @@ import {
   NativeAppEventEmitter,
   TouchableOpacity,
   ActivityIndicator,
+  AsyncStorage,
 } from 'react-native';
 
 import {
@@ -21,23 +22,7 @@ export default class LoginScene extends Component {
   constructor(props) {
     super(props);
     this.state = {}
-
-    this.successSubscription = NativeAppEventEmitter.addListener('FBLoginSuccess', (accessToken) => {
-      this.setState({awaitingLogin: true})
-      api.sessions.create(accessToken).then((user) => {
-        console.log("Logged in. Access token: ", user.access_token);
-        this.props.navigator.navigate('FriendsScene');
-      }).catch(function(err) {
-        this.setState({awaitingLogin: false})
-        alert(err);
-        console.error(err);
-      })
-    });
-
-    this.failureSubscription = NativeAppEventEmitter.addListener('FBLoginFailure', (err) => {
-      alert(err);
-      console.error(err);
-    })
+    this.login();
   }
 
   render() { return (
@@ -50,33 +35,42 @@ export default class LoginScene extends Component {
           <ActivityIndicator color="hotpink" size="small" />
         :
           <LoginButton
-            onLoginFinished={
-              (error, result) => {
-                if (error) {
-                  alert("login has error: " + result.error);
-                } else if (result.isCancelled) {
-                  alert("login is cancelled.");
-                } else {
-                  AccessToken.getCurrentAccessToken().then(
-                    (data) => {
-                      alert(data.accessToken.toString())
-                    }
-                  )
-                }
-              }
-            }
+            onLoginFinished={this.onLoginFinished.bind(this)}
             onLogoutFinished={() => alert("logout.")}/>
         }
       </View>
     </View>
   )}
 
-  componentWillUnmount() {
-    this.successSubscription.remove();
-    this.failureSubscription.remove();
+  onLoginFinished(error, result) {
+    if (error) {
+      return alert("Login error: " + result.error);
+    } else if (result.isCancelled) {
+      console.warn("Login cancelled");
+    }
+
+    this.login();
+  }
+
+  login() {
+    AccessToken.getCurrentAccessToken().then((data) => {
+      if( !data ) { throw new Error('nope'); }
+      console.log("access token is", data);
+      return api.sessions.create(data.accessToken.toString())
+    }).then((user) => {
+      return AsyncStorage.setItem('@floats:accessToken', user.access_token);
+      this.context.store.dispatch({type: 'login', accessToken: user.access_token});
+    }).then(() => {
+      this.props.navigator.navigate('FriendsScene');
+    }).catch(function(err) {
+      console.error(err);
+    });
   }
 }
 
 LoginScene.propTypes = {
   navigator: React.PropTypes.object.isRequired,
+}
+LoginScene.contextTypes = {
+  store: React.PropTypes.object
 }

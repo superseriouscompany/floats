@@ -10,7 +10,6 @@ import {
   View,
 } from 'react-native';
 
-import FCM from 'react-native-fcm';
 import FriendsScene from './components/FriendsScene';
 import LoginScene from './components/LoginScene';
 import PlansScene from './components/PlansScene';
@@ -23,6 +22,7 @@ export default class batsignal extends Component {
     super(props);
     this.state = { props: {}};
     this.state.scene = 'LoginScene';
+    this.state.scene = 'PlansScene';
 
     this.navigator = {
       navigate: (component, props) => {
@@ -53,31 +53,8 @@ export default class batsignal extends Component {
       </View>
     )
   }
-
-  componentDidMount() {
-    FCM.requestPermissions();
-    FCM.getFCMToken().then(token => {
-      // TODO: retry
-      api.sessions.updateFirebaseToken(null, token);
-    });
-    FCM.on('refreshToken', (token) => {
-      // TODO: retry
-      api.sessions.updateFirebaseToken(null, token);
-    })
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var initialPosition = JSON.stringify(position);
-        api.pins.create(null, {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        })
-      },
-      (error) => alert(JSON.stringify(error)),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
-  }
 }
+
 batsignal.childContextTypes = {
   store: React.PropTypes.object
 }
