@@ -23,6 +23,7 @@ export default class batsignal extends Component {
     this.state = { props: {}};
     this.state.scene = 'LoginScene';
     this.state.scene = 'PlansScene';
+    this.state.scene = 'FriendsScene';
 
     this.navigator = {
       navigate: (component, props) => {
