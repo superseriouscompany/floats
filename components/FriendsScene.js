@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import FCM from 'react-native-fcm';
 import Component from './Component';
 import UnreadHeart from './UnreadHeart';
 import Logo from './Logo';
@@ -15,6 +16,7 @@ import {
   View,
   ScrollView,
   StyleSheet,
+  AsyncStorage,
 } from 'react-native';
 
 export default class FriendsScene extends Component {
@@ -27,8 +29,34 @@ export default class FriendsScene extends Component {
   }
 
   componentDidMount() {
-    api.friends.nearby().then((friends) => {
-      this.setState({friends: friends, loaded: true});
+    AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
+      FCM.requestPermissions();
+      FCM.getFCMToken().then(token => {
+        // TODO: retry
+        api.sessions.updateFirebaseToken(accessToken, token);
+      });
+      FCM.on('refreshToken', (token) => {
+        // TODO: retry
+        api.sessions.updateFirebaseToken(accessToken, token);
+      })
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          var initialPosition = JSON.stringify(position);
+          api.pins.create(accessToken, {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          }).then(function() {
+            return api.friends.nearby(accessToken);
+          }).then((friends) => {
+            this.setState({friends: friends, loaded: true});
+          }).catch(function(err) {
+            return console.error(err);
+          })
+        },
+        (error) => alert(JSON.stringify(error)),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      );
     }).catch((err) => {
       this.setState({error: err, loaded: true});
     })

@@ -4,7 +4,10 @@ function store(state, action) {
   console.log('Dispatched', state, action);
   state = state || {};
 
-  switch(action) {
+  switch(action.type) {
+    case 'login':
+      state.accessToken = action.accessToken;
+      return state;
     case '@@redux/INIT':
       return state;
     default:

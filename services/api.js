@@ -7,9 +7,13 @@ const baseUrl = __DEV__ ?
 module.exports = {
   sessions: {
     create: function(facebookAccessToken) {
+      console.log("sending", facebookAccessToken);
       return fetch(`${baseUrl}/users`, {
         method: 'POST',
-        body: JSON.stringify({facebook_access_token: facebookAccessToken})
+        body: JSON.stringify({facebook_access_token: facebookAccessToken}),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return response.json();
@@ -20,8 +24,9 @@ module.exports = {
       return fetch(`${baseUrl}/users/me`, {
         method: 'PATCH',
         body: JSON.stringify({
-          firebase_token: firebaseToken
-        })
+          firebase_token: firebaseToken,
+        }),
+        headers: headers(accessToken),
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return true;
@@ -30,21 +35,17 @@ module.exports = {
   },
 
   pins: {
-    create: function(accessToken, lat, lng) {
+    create: function(accessToken, location) {
       return fetch(`${baseUrl}/pins`, {
         method: 'POST',
-        body: JSON.stringify({
-          lat: lat,
-          lng: lng,
-        })
+        body: JSON.stringify(location),
+        headers: headers(accessToken),
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return true;
       })
     },
   },
-
-
 
   friends: {
     nearby: function(accessToken) {
@@ -80,6 +81,8 @@ module.exports = {
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return response.json();
+      }).then(function(json) {
+        return json.floats;
       })
     },
 
@@ -90,7 +93,7 @@ module.exports = {
         if( !response.ok ) { throw new Error(response.status); }
         return response.json();
       }).then(function(json) {
-        return json.bubbles;
+        return json.floats;
       })
     },
   }
