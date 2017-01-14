@@ -21,7 +21,7 @@ export default class BroadcastBox extends Component {
 
   broadcast() {
     if( !this.state.text ) { return; }
-    return api.bubbles.create(null, this.state.text, 'nope').then(function() {
+    return api.floats.create(null, this.state.text, 'nope').then(function() {
       Alert.alert("We told your friends!");
     }).catch(function(err) {
       Alert.alert(err);

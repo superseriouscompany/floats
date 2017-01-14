@@ -2,7 +2,7 @@
 
 const baseUrl = __DEV__ ?
   'https://superserious.ngrok.io/v1' :
-  'https://bubbles.superserious.co/v1';
+  'https://floats.superserious.co/v1';
 
 module.exports = {
   sessions: {
@@ -29,9 +29,9 @@ module.exports = {
     },
   },
 
-  sightings: {
+  pins: {
     create: function(accessToken, lat, lng) {
-      return fetch(`${baseUrl}/sightings`, {
+      return fetch(`${baseUrl}/pins`, {
         method: 'POST',
         body: JSON.stringify({
           lat: lat,
@@ -59,9 +59,9 @@ module.exports = {
     },
   },
 
-  bubbles: {
+  floats: {
     create: function(accessToken, text, excludeIds) {
-      return fetch(`${baseUrl}/bubbles`, {
+      return fetch(`${baseUrl}/floats`, {
         method: 'POST',
         body: JSON.stringify({
           text: text,
@@ -75,7 +75,7 @@ module.exports = {
     },
 
     mine: function(accessToken) {
-      return fetch(`${baseUrl}/bubbles/mine`, {
+      return fetch(`${baseUrl}/floats/mine`, {
         headers: headers(accessToken),
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
@@ -84,7 +84,7 @@ module.exports = {
     },
 
     invites: function(accessToken) {
-      return fetch(`${baseUrl}/bubbles`, {
+      return fetch(`${baseUrl}/floats`, {
         headers: headers(accessToken),
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
