@@ -12,8 +12,8 @@ import {
 export default class Logo extends Component {
   render() { return (
     <View style={styles.container}>
-      <Text style={base.textLogo}>bubbles</Text>
-      <Text style={base.textTagline}>all your closest friends</Text>
+      <Text style={base.textLogo}>floats</Text>
+      <Text style={base.textTagline}>find your close friends</Text>
     </View>
   )}
 }
