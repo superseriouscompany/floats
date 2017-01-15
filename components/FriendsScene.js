@@ -58,7 +58,13 @@ export default class FriendsScene extends Component {
       </View>
       <ScrollView>
         { this.state.loadingRequests ?
-          <ActivityIndicator color="hotpink" />
+          <View style={{height: 50}}>
+            <ActivityIndicator
+              style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
+              size="small"
+              color='#E88868'
+            />
+          </View>
         : this.state.friendRequests.length ?
           <View style={[base.bgBreakingSection, {paddingBottom: 16}]}>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -73,7 +79,13 @@ export default class FriendsScene extends Component {
         : null
         }
         { this.state.loadingFriends ?
-          <ActivityIndicator color="hotpink" />
+          <View style={{height: 50}}>
+            <ActivityIndicator
+              style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
+              size="small"
+              color='#E88868'
+            />
+          </View>
         : !this.state.friends.length ?
           <Text>You are alone.</Text>
         :
