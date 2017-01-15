@@ -470,13 +470,13 @@
 				3F056CBE1E2700C90061D791 /* FBSDKLoginKit.framework */,
 				3F056CBF1E2700C90061D791 /* FBSDKShareKit.framework */,
 				3F096BA31E203CF300804325 /* libsqlite3.tbd */,
-				3F034CE91E2037B20090F0E1 /* FirebaseMessaging.framework */,
 				3F034CC41E2037A10090F0E1 /* FirebaseAnalytics.framework */,
 				3F034CC51E2037A10090F0E1 /* FirebaseCore.framework */,
 				3F034CC61E2037A10090F0E1 /* FirebaseInstanceID.framework */,
 				3F034CC71E2037A10090F0E1 /* GoogleInterchangeUtilities.framework */,
 				3F034CC81E2037A10090F0E1 /* GoogleSymbolUtilities.framework */,
 				3F034CC91E2037A10090F0E1 /* GoogleToolboxForMac.framework */,
+				3F034CE91E2037B20090F0E1 /* FirebaseMessaging.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

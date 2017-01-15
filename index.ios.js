@@ -62,6 +62,8 @@ export default class batsignal extends Component {
           <FriendsScene navigator={this.navigator} />
         : this.state.scene == 'RandosScene' ?
           <RandosScene navigator={this.navigator} />
+        : this.state.scene == 'Scratch' ?
+          <Scratch />
         : !!this.state.scene ?
           <Text style={{padding: 200}}>404</Text>
         :
