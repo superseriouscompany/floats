@@ -18,6 +18,7 @@ export default class Plan extends Component {
       <Text style={base.timestamp}>
         {moment(this.props.plan.created_at).fromNow()}
         { this.props.attendees ?
+
           <Text style={base.timestamp}> | {this.props.attendees.length} interested</Text>
         :
           null
