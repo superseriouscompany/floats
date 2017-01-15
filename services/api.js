@@ -1,6 +1,6 @@
 'use strict';
 
-const baseUrl = __DEV__ && false ?
+const baseUrl = __DEV__ ?
   'https://superserious.ngrok.io/v1' :
   'https://floats.superserious.co/v1';
 
