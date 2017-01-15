@@ -12,8 +12,12 @@ import {
 export default class Logo extends Component {
   render() { return (
     <View style={styles.container}>
-      <Text style={base.textLogo}>floats</Text>
-      <Text style={base.textTagline}>find your close friends</Text>
+      <Text style={base.textLogo}>{this.props.text || 'floats'}</Text>
+      { !this.props.hideTagline ?
+        <Text style={base.textTagline}>find your close friends</Text>
+      :
+        null
+      }
     </View>
   )}
 }
