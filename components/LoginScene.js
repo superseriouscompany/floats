@@ -22,13 +22,14 @@ export default class LoginScene extends Component {
   constructor(props) {
     super(props);
     this.state = {}
+
     this.login();
   }
 
   render() { return (
     <View style={{flex: 1, alignItems: 'center'}}>
       <View style={{justifyContent: 'center', flex: 0.8}}>
-        <Text style={{color: 'red'}} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>|U|</Text>
+        <Text style={{color: 'red'}}>|U|</Text>
       </View>
       <View style={{justifyContent: 'center', flex: 0.2}}>
         { this.state.awaitingLogin ?
