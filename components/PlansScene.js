@@ -45,7 +45,7 @@ export default class PlansScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <Heading>happenings</Heading>
+        <Heading>floats in action</Heading>
         <View style={base.rightNav}>
           <ReturnArrow navigator={this.props.navigator}/>
         </View>
