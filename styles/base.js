@@ -66,8 +66,8 @@ module.exports = StyleSheet.create({
     paddingTop: 18,
   },
   padTall: {
-    paddingTop: 19,
-    paddingBottom: 17,
+    paddingTop: 12,
+    paddingBottom: 12,
   },
   padShort: {
 

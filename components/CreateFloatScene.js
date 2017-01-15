@@ -94,14 +94,16 @@ export default class CreateFloatScene extends Component {
           <View>
             <FloatDialog friends={this.state.friends.filter(selected)} />
             <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
-              <Text style={{flex: 1}}>
+            <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
+              <Text>
                 Nearby Friends
               </Text>
+              </View>
               <TouchableOpacity onPress={this.toggleAll.bind(this)}>
                 { this.state.allSelected ?
                   <Image source={require('../images/Checked.png')} />
                   :
-                  <Image source={require('../images/Unchecked.png')} />
+                  <Image source={require('../images/EmptyCircle.png')} />
                 }
               </TouchableOpacity>
             </View>

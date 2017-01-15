@@ -24,7 +24,7 @@ export default class NearbyFriend extends Component {
         { this.props.friend.selected ?
           <Image source={require('../images/Checked.png')} />
         :
-          <Image source={require('../images/Unchecked.png')} />
+          <Image source={require('../images/EmptyCircle.png')} />
         }
       </TouchableOpacity>
     </View>

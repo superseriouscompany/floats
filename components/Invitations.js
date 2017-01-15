@@ -14,21 +14,28 @@ import {
 
 export default class Invitations extends Component {
   render() { return (
-    <View style={{backgroundColor: base.colors.offwhite, borderBottomWidth: 1, borderBottomColor: base.colors.lightgrey}}>
+    <View>
       { !this.props.invitations || !this.props.invitations.length ?
         <View style={{alignItems: 'center', paddingTop: 9, paddingBottom: 10 }}>
           <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>no pending invitations</Text>
         </View>
       :
-        <View style={[base.padFullHorizontal, base.padMainItem]}>
+        <View>
           {this.props.invitations.map((p, i) => (
-            <View key={i} style={{flexDirection: 'row', paddingBottom: 18 }}>
+            <View key={i} style={[base.padFullHorizontal, {flexDirection: 'row', paddingTop: 19, paddingBottom: 16, borderBottomWidth: 0.5, borderBottomColor: base.colors.lightgrey}]}>
               <Image source={{url: p.user.avatar_url}} style={base.photoCircle}/>
               <View style={{flex: 1}}>
                 <Text style={{fontSize: 16}}>{p.user.name} "{p.title}"</Text>
                 <Text style={base.timestamp}>
                   {moment(p.created_at).fromNow()}
                 </Text>
+                { !!p.attendending ?
+                  <View>
+                    <Text style={[base.timestamp, {color: base.colors.mediumgrey, paddingTop: 5}]}>{p.user.name}&#39;s been notified</Text>
+                    <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>text to coordinate</Text>
+                  </View>
+                : null
+                }
               </View>
               <Zapper floatId={p.id} active={!!p.attending}></Zapper>
             </View>
