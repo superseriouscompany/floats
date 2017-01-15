@@ -12,11 +12,11 @@ import {
 
 export default class FriendRequest extends Component {
   render() { return (
-    <View style={[{flexDirection: 'row'}, base.padFullHorizontal]}>
+    <View style={[base.padFullHorizontal, base.padMainItem, styles.box]}>
       <Image style={[styles.image]} source={{uri: this.props.friend.avatar_url}}/>
       <View style={styles.right}>
         <Text>{this.props.friend.name}</Text>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={[styles.button, styles.confirm]}>confirm</Text>
           <Text style={[styles.button, styles.nah]}>nah</Text>
         </View>
@@ -26,9 +26,13 @@ export default class FriendRequest extends Component {
 }
 
 const styles = StyleSheet.create({
+  box: {
+    flexDirection: 'row',
+  },
   image: {
-    width: 40,
-    height: 40,
+    width: 80,
+    height: 80,
+    marginRight: 20,
   },
 
   right: {
@@ -40,6 +44,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingTop: 5,
     paddingBottom: 5,
+    fontSize: base.fontSizes.small,
   },
 
   confirm: {
