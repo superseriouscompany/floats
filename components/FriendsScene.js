@@ -81,9 +81,11 @@ export default class FriendsScene extends Component {
         }
         { this.state.enemies.length ?
           <View>
-            <Text onPress={() => this.setState({showEnemies: !this.state.showEnemies})}>
-              {this.state.showEnemies ? 'hide' : 'show'} blocked
-            </Text>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{fontSize: base.fontSizes.small, color: base.colors.mediumgrey}} onPress={() => this.setState({showEnemies: !this.state.showEnemies})}>
+                {this.state.showEnemies ? 'hide' : 'show'} blocked
+              </Text>
+            </View>
             { this.state.showEnemies ?
               <View>
                 {this.state.enemies.map((e, i) => (
