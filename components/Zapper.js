@@ -4,6 +4,7 @@ import React from 'react';
 import Component from './Component';
 import Text from './Text';
 import api from '../services/api';
+import base from '../styles/base';
 import {
   TouchableOpacity,
   View,
@@ -24,9 +25,9 @@ export default class Zapper extends Component {
     <View>
       <TouchableOpacity onPress={this.toggle.bind(this)}>
         { this.state.active ?
-          <Image source={require('../images/Zapped.png')} />
+          <Image source={require('../images/Bumped.png')} />
         :
-          <Image source={require('../images/Unzapped.png')} />
+          <Image source={require('../images/Bump.png')} />
         }
       </TouchableOpacity>
     </View>

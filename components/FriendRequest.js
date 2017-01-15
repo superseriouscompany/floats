@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   box: {
     flexDirection: 'row',
   },
+
   image: {
     width: 63,
     height: 63,
