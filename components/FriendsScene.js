@@ -11,7 +11,9 @@ import api from '../services/api';
 import base from '../styles/base';
 import {
   ActivityIndicator,
+  Image,
   ScrollView,
+  StyleSheet,
   View,
 } from 'react-native';
 
@@ -45,23 +47,19 @@ export default class FriendsScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <View style={base.leftNav}>
-          <Text style={{color: 'darksalmon'}} onPress={() => this.props.navigator.navigate('NearbyFriendsScene')}>
-            ...
-          </Text>
+        <View style={[base.leftNav, styles.leftNavButton]} onPress={() => this.props.navigator.navigate('NearbyFriendsScene')}>
+          <Image source={require('../images/Ellipses.png')} />
         </View>
         <Logo text="friends" hideTagline={true} />
-        <View style={base.rightNav}>
-          <Text style={{color: 'lightseagreen'}} onPress={() => this.props.navigator.navigate('RandosScene')}>
-            +
-          </Text>
+        <View style={[base.rightNav, styles.rightNavButton]} onPress={() => this.props.navigator.navigate('RandosScene')}>
+          <Image source={require('../images/Plus.png')} />
         </View>
       </View>
       <ScrollView>
         { this.state.loadingRequests ?
           <ActivityIndicator color="hotpink" />
         : this.state.friendRequests.length ?
-          <View>
+          <View style={[base.bgBreakingSection, {paddingBottom: 16}]}>
             {this.state.friendRequests.map((f, i) => (
               <FriendRequest key={i} friend={f} />
             ))}
@@ -101,3 +99,16 @@ export default class FriendsScene extends Component {
     </View>
   )}
 }
+
+const styles = StyleSheet.create({
+  leftNavButton: {
+    paddingTop: 22,
+    paddingBottom: 22,
+    paddingLeft: 19,
+    paddingRight: 14
+  },
+  rightNavButton: {
+    padding: 17,
+    paddingRight: 19,
+  },
+});
