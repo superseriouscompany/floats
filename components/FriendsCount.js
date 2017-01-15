@@ -10,7 +10,11 @@ import {
 export default class FriendsCount extends Component {
   render() { return (
     <View style={{paddingLeft: 7}}>
-      <Text>{this.props.count} friends are around</Text>
+      { this.props.count == 1 ?
+        <Text>1 friend is around</Text>
+      :
+        <Text>{this.props.count} friends are around</Text>
+      }
     </View>
   )}
 }

@@ -30,7 +30,7 @@ export default class Invitations extends Component {
                   {moment(p.created_at).fromNow()}
                 </Text>
               </View>
-              <Zapper active={!!p.attending}></Zapper>
+              <Zapper floatId={p.id} active={!!p.attending}></Zapper>
             </View>
           ))}
         </View>

@@ -61,11 +61,11 @@ module.exports = {
   },
 
   floats: {
-    create: function(accessToken, userIds, text) {
+    create: function(accessToken, userIds, title) {
       return fetch(`${baseUrl}/floats`, {
         method: 'POST',
         body: JSON.stringify({
-          text: text,
+          title: title,
           invitees: userIds
         }),
         headers: headers(accessToken),
@@ -99,8 +99,20 @@ module.exports = {
 
     join: function(accessToken, floatId, silent) {
       return fetch(`${baseUrl}/floats/${floatId}/join`, {
+        method: 'POST',
         headers: headers(accessToken),
         body: JSON.stringify({silent: !!silent}),
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error(response.status); }
+
+        return true;
+      })
+    },
+
+    destroy: function(accessToken, floatId) {
+      return fetch(`${baseUrl}/floats/${floatId}`, {
+        method: 'DELETE',
+        headers: headers(accessToken),
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
 

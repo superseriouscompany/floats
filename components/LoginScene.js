@@ -63,6 +63,7 @@ export default class LoginScene extends Component {
     }).then(() => {
       this.props.navigator.navigate('FriendsScene');
     }).catch(function(err) {
+      if( err.message == 'nope' ) { return; }
       console.error(err);
     });
   }
