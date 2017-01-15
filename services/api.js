@@ -71,6 +71,19 @@ module.exports = {
     }
   },
 
+  randos: {
+    all: function(accessToken) {
+      return fetch(`${baseUrl}/randos`, {
+        headers: headers(accessToken),
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error(response.status); }
+        return response.json();
+      }).then(function(json) {
+        return json.randos;
+      })
+    }
+  },
+
   floats: {
     create: function(accessToken, userIds, title) {
       return fetch(`${baseUrl}/floats`, {

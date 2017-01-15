@@ -6,7 +6,7 @@ import Component from './Component';
 import UnreadHeart from './UnreadHeart';
 import Logo from './Logo';
 import FriendsCount from './FriendsCount';
-import Friend from './Friend';
+import NearbyFriend from './NearbyFriend';
 import BroadcastBox from './BroadcastBox';
 import Text from './Text';
 import base from '../styles/base';
@@ -94,7 +94,7 @@ export default class NearbyFriendsScene extends Component {
             </View>
             <ScrollView>
               {this.state.friends.map((f, i) => (
-                <Friend key={i} friend={f} />
+                <NearbyFriend key={i} friend={f} />
               ))}
             </ScrollView>
           </View>
