@@ -8,8 +8,10 @@ import Zapper from './Zapper';
 import base from '../styles/base';
 import moment from 'moment';
 import {
+  ActionSheetIOS,
   Image,
-  View
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default class Invitations extends Component {
@@ -23,7 +25,9 @@ export default class Invitations extends Component {
         <View>
           {this.props.invitations.map((p, i) => (
             <View key={i} style={[base.padFullHorizontal, {flexDirection: 'row', paddingTop: 19, paddingBottom: 16, borderBottomWidth: 0.5, borderBottomColor: base.colors.lightgrey}]}>
-              <Image source={{url: p.user.avatar_url}} style={base.photoCircle}/>
+              <TouchableOpacity onPress={() => this.reportDialog(p)}>
+                <Image source={{url: p.user.avatar_url}} style={base.photoCircle}/>
+              </TouchableOpacity>
               <View style={{flex: 1}}>
                 <Text style={{fontSize: 16}}>{p.user.name} "{p.title}"</Text>
                 <Text style={base.timestamp}>
@@ -44,4 +48,16 @@ export default class Invitations extends Component {
       }
     </View>
   )}
+
+  reportDialog(p) {
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: [`Report ${p.user.name}`, 'Cancel'],
+      destructiveButtonIndex: 0,
+      cancelButtonIndex: 1,
+    }, (index) => {
+      if( index == 0 ) {
+        alert(`You have reported ${p.user.name} for floating ${p.title}`);
+      }
+    })
+  }
 }
