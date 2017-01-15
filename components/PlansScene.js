@@ -5,7 +5,6 @@ import Component from './Component';
 import base from '../styles/base';
 import api from '../services/api';
 import Heading from './Heading';
-import ReturnArrow from './ReturnArrow';
 import YourPlan from './YourPlan';
 import Invitations from './Invitations';
 import TabBar from './TabBar';
@@ -46,9 +45,6 @@ export default class PlansScene extends Component {
     <View style={base.screen}>
       <View style={base.header}>
         <Heading>floats in action</Heading>
-        <View style={base.rightNav}>
-          <ReturnArrow navigator={this.props.navigator}/>
-        </View>
       </View>
 
       <ScrollView>

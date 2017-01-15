@@ -2,10 +2,10 @@
 
 import React from 'react';
 import Component from './Component';
+import Heading from './Heading';
 import Text from './Text';
 import Rando from './Rando';
 import Logo from './Logo';
-import ReturnArrow from './ReturnArrow';
 import InviteButton from './InviteButton';
 import api from '../services/api';
 import base from '../styles/base';
@@ -34,7 +34,7 @@ export default class RandosScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <Logo text="find your friends" hideTagline={true}/>
+        <Heading>floats in action</Heading>
       </View>
 
       <View style={{flex: 1}}>
