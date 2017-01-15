@@ -18,9 +18,18 @@ export default class FriendsScene extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {loadingFriends: true, loadingRequests: true, friends: [], friendRequests: []};
-    api.friends.all().then((friends) => {
-      this.setState({friends: friends, loadingFriends: false});
+    this.state = {
+      loadingFriends: true,
+      loadingRequests: true,
+      friends: [],
+      friendRequests: [],
+      enemies: []
+    };
+    api.friends.all().then((allFriends) => {
+      const friends = allFriends.filter(function(f) { return !f.blocked });
+      const enemies = allFriends.filter(function(f) { return !!f.blocked });
+
+      this.setState({friends: friends, enemies: enemies, loadingFriends: false});
     }).catch((err) => {
       this.setState({error: err.message, loadingFriends: false});
     })
@@ -68,6 +77,16 @@ export default class FriendsScene extends Component {
               <Friend friend={f} key={i} />
             ))}
           </View>
+        }
+        { this.state.enemies.length ?
+          <View>
+            { this.state.showEnemies ?
+              <Text>Blocked</Text>
+            :
+              <Text onPress={() => this.setState({showEnemies: true})}>show blocked</Text>
+            }
+          </View>
+        : null
         }
       </ScrollView>
     </View>
