@@ -87,7 +87,7 @@ export default class FriendsScene extends Component {
               </Text>
             </View>
             { this.state.showEnemies ?
-              <View>
+              <View style={{paddingBottom: 15}}>
                 {this.state.enemies.map((e, i) => (
                   <Enemy enemy={e} key={i} />
                 ))}
