@@ -12,7 +12,9 @@ import api from '../services/api';
 import base from '../styles/base';
 import {
   ActivityIndicator,
+  Image,
   ScrollView,
+  StyleSheet,
   View,
 } from 'react-native';
 
@@ -46,26 +48,27 @@ export default class FriendsScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <View style={base.leftNav}>
-          <Text style={{color: 'darksalmon'}} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
-            ...
-          </Text>
+        <View style={[base.leftNav, styles.leftNavButton]} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
+          <Image source={require('../images/Ellipses.png')} />
         </View>
         <Logo text="friends" hideTagline={true} />
-        <View style={base.rightNav}>
-          <Text style={{color: 'lightseagreen'}} onPress={() => this.props.navigator.navigate('RandosScene')}>
-            +
-          </Text>
+        <View style={[base.rightNav, styles.rightNavButton]} onPress={() => this.props.navigator.navigate('RandosScene')}>
+          <Image source={require('../images/Plus.png')} />
         </View>
       </View>
       <ScrollView>
         { this.state.loadingRequests ?
           <ActivityIndicator color="hotpink" />
         : this.state.friendRequests.length ?
-          <View>
-            {this.state.friendRequests.map((f, i) => (
-              <FriendRequest key={i} friend={f} />
-            ))}
+          <View style={[base.bgBreakingSection, {paddingBottom: 16}]}>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.state.friendRequests.length} friend requests</Text>
+            </View>
+            <View style={{marginTop: -10}}>
+              {this.state.friendRequests.map((f, i) => (
+                <FriendRequest key={i} friend={f} />
+              ))}
+            </View>
           </View>
         : null
         }
@@ -74,21 +77,26 @@ export default class FriendsScene extends Component {
         : !this.state.friends.length ?
           <Text>You are alone.</Text>
         :
-          <View>
-            { this.state.friends.map((f, i) => (
-              <Friend friend={f} key={i} />
-            ))}
+          <View style={{paddingBottom: 15}}>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.state.friends.length} friends</Text>
+            </View>
+            <View style={{marginTop: -15}}>
+              { this.state.friends.map((f, i) => (
+                <Friend friend={f} key={i} />
+              ))}
+            </View>
           </View>
         }
         { this.state.enemies.length ?
           <View>
-            <View style={{alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{fontSize: base.fontSizes.small, color: base.colors.mediumgrey}} onPress={() => this.setState({showEnemies: !this.state.showEnemies})}>
+            <View style={[base.bgBreakingSection, {alignItems: 'center', justifyContent: 'center', borderTopWidth: 0.5, borderTopColor: base.colors.lightgrey}]}>
+              <Text style={[base.timestamp, {paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]} onPress={() => this.setState({showEnemies: !this.state.showEnemies})}>
                 {this.state.showEnemies ? 'hide' : 'show'} blocked
               </Text>
             </View>
             { this.state.showEnemies ?
-              <View>
+              <View style={{paddingBottom: 15}}>
                 {this.state.enemies.map((e, i) => (
                   <Enemy enemy={e} key={i} />
                 ))}
@@ -103,3 +111,16 @@ export default class FriendsScene extends Component {
     </View>
   )}
 }
+
+const styles = StyleSheet.create({
+  leftNavButton: {
+    paddingTop: 22,
+    paddingBottom: 22,
+    paddingLeft: 19,
+    paddingRight: 14
+  },
+  rightNavButton: {
+    padding: 17,
+    paddingRight: 19,
+  },
+});

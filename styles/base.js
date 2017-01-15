@@ -41,12 +41,12 @@ module.exports = StyleSheet.create({
   leftNav: {
     position: 'absolute',
     left: 0,
+    bottom: 0,
   },
   rightNav: {
     position: 'absolute',
     right: 0,
     bottom: 0,
-    paddingBottom: 4,
   },
   mainWindow: {
     flex: 1,
@@ -73,7 +73,7 @@ module.exports = StyleSheet.create({
 
   },
   timestamp: {
-    fontSize: 10,
+    fontSize: 12,
   },
   textLogo: {
     fontSize: 16,
