@@ -91,6 +91,31 @@ const api = {
   },
 
   friendRequests: {
+    all: function() {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/friend_requests`, {
+          headers: headers(accessToken),
+        }).then(function(response) {
+          if( !response.ok ) { throw new Error(response.status); }
+          return response.json();
+        }).then(function(json) {
+          return json.friend_requests;
+        })
+      })
+    },
+
+    accept: function(id) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/friend_requests/${id}`, {
+          method: 'PUT',
+          headers: headers(accessToken),
+        }).then(function(response) {
+          if( !response.ok ) { throw new Error(response.status); }
+          return true;
+        })
+      })
+    },
+
     send: function(id) {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
         return fetch(`${baseUrl}/friend_requests`, {

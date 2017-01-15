@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Component from './Component';
+import Text from './Text';
 import Rando from './Rando';
 import Logo from './Logo';
 import ReturnArrow from './ReturnArrow';
@@ -13,7 +14,6 @@ import {
   AsyncStorage,
   ScrollView,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 
