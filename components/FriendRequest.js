@@ -12,7 +12,7 @@ import {
 
 export default class FriendRequest extends Component {
   render() { return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={[{flexDirection: 'row'}, base.padFullHorizontal]}>
       <Image style={[styles.image]} source={{uri: this.props.friend.avatar_url}}/>
       <View style={styles.right}>
         <Text>{this.props.friend.name}</Text>
