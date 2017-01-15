@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default class Friend extends Component {
+export default class NearbyFriend extends Component {
   constructor(props) {
     super(props);
     this.state = { selected: true }
@@ -37,13 +37,12 @@ export default class Friend extends Component {
     this.setState({selected: selected});
   }
 }
-Friend.contextTypes = {
+NearbyFriend.contextTypes = {
   store: React.PropTypes.object
 }
 
 const styles = StyleSheet.create({
   box: {
-    backgroundColor: base.colors.foo,
     flexDirection: 'row',
     alignItems: 'center',
   },
