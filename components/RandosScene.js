@@ -3,7 +3,11 @@
 import React from 'react';
 import Component from './Component';
 import Rando from './Rando';
+import Logo from './Logo';
+import ReturnArrow from './ReturnArrow';
+import InviteButton from './InviteButton';
 import api from '../services/api';
+import base from '../styles/base';
 import {
   ActivityIndicator,
   AsyncStorage,
@@ -29,7 +33,14 @@ export default class RandosScene extends Component {
   }
 
   render() { return (
-    <View style={{flex: 1}}>
+    <View style={base.screen}>
+      <View style={base.header}>
+        <Logo text="find your friends" hideSubtitle={true}/>
+        <View style={base.rightNav}>
+          <ReturnArrow navigator={this.props.navigator}/>
+        </View>
+      </View>
+
       { !this.state.loaded ?
         <ActivityIndicator color="hotpink" />
       : this.state.randos.length ?
@@ -37,9 +48,10 @@ export default class RandosScene extends Component {
           {this.state.randos.map((f, i) => (
             <Rando key={i} friend={f} />
           ))}
+          <InviteButton />
         </ScrollView>
       :
-        null
+        <InviteButton />
       }
     </View>
   )}
