@@ -5,12 +5,11 @@ import Component from './Component';
 import Text from './Text';
 import api from '../services/api';
 import {
-  View,
-  requireNativeComponent,
-  NativeAppEventEmitter,
-  TouchableOpacity,
-  ActivityIndicator,
   AsyncStorage,
+  ActivityIndicator,
+  Image,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 import {
@@ -27,15 +26,14 @@ export default class LoginScene extends Component {
   }
 
   render() { return (
-    <View style={{flex: 1, alignItems: 'center'}}>
-      <View style={{justifyContent: 'center', flex: 0.8}}>
-        <Text style={{color: 'red'}}>|U|</Text>
-      </View>
-      <View style={{justifyContent: 'center', flex: 0.2}}>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Image source={require('../images/Floats.jpg')}/>
+      <View style={{alignItems: 'center', position: 'absolute', left: 0, right: 0, bottom: 40}}>
         { this.state.awaitingLogin ?
           <ActivityIndicator color="hotpink" size="small" />
         :
           <LoginButton
+            style={{height: 50, width: 200}}
             onLoginFinished={this.onLoginFinished.bind(this)}
             onLogoutFinished={() => alert("logout.")}/>
         }
