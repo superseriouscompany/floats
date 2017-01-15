@@ -29,7 +29,7 @@ export default class Invitations extends Component {
                 <Text style={base.timestamp}>
                   {moment(p.created_at).fromNow()}
                 </Text>
-                { !!p.attendending ?
+                { !!p.attending ?
                   <View>
                     <Text style={[base.timestamp, {color: base.colors.mediumgrey, paddingTop: 5}]}>{p.user.name}&#39;s been notified</Text>
                     <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>text to coordinate</Text>
