@@ -90,11 +90,6 @@ module.exports = StyleSheet.create({
   textHeader: {
     marginTop: -2,
   },
-  inputContainer: {
-    paddingTop: 5,
-    paddingRight: 22,
-    paddingLeft: 5,
-  },
   inputButton: {
     color: colors.white,
     paddingLeft: 22,

@@ -8,6 +8,7 @@ import Text from './Text';
 import {
   Alert,
   AsyncStorage,
+  Image,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -21,12 +22,12 @@ export default class FloatDialog extends Component {
   }
 
   render() { return (
-    <View style={[base.inputContainer, styles.container, base.bgBreakingSection]}>
+    <View style={styles.container}>
       <View style={[styles.inputContainer]}>
         <TextInput style={[styles.input]} placeholder="gauge interest" onChangeText={(text) => this.setState({text})}/>
       </View>
       <TouchableOpacity onPress={this.create.bind(this)}>
-        <Text>send</Text>
+        <Image source={require('../images/PaperAirplane.png')} />
       </TouchableOpacity>
     </View>
   )}
@@ -50,19 +51,24 @@ const styles = StyleSheet.create({
     backgroundColor: base.colors.white,
     flex: 1,
     borderBottomWidth: 1,
-    borderColor: base.colors.darkgrey,
+    borderColor: '#BEBEBE',
+    marginRight: 19,
   },
   input: {
     fontSize: 16,
     fontFamily: 'Poppins',
     height: 32,
     paddingTop: 1.5,
-    paddingLeft: 10,
+    paddingLeft: 4,
   },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 27,
+    paddingBottom: 30,
+    paddingLeft: 20,
+    paddingRight: 21,
+    borderBottomWidth: .5,
+    borderBottomColor: base.colors.lightgrey,
   },
 })
