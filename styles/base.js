@@ -95,18 +95,6 @@ module.exports = StyleSheet.create({
     paddingRight: 22,
     paddingLeft: 5,
   },
-  input: {
-    backgroundColor: colors.white,
-    flex: 1,
-    fontSize: 16,
-    height: 32,
-    fontFamily: 'Poppins',
-    paddingTop: 1.5,
-    paddingLeft: 10,
-    borderRadius: 3,
-    borderWidth: 0.5,
-    borderColor: colors.lightgrey,
-  },
   inputButton: {
     color: colors.white,
     paddingLeft: 22,

@@ -7,6 +7,7 @@ import Friend from './Friend';
 import FriendRequest from './FriendRequest';
 import Logo from './Logo';
 import Enemy from './Enemy';
+import TabBar from './TabBar';
 import api from '../services/api';
 import base from '../styles/base';
 import {
@@ -47,7 +48,7 @@ export default class FriendsScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <View style={[base.leftNav, styles.leftNavButton]} onPress={() => this.props.navigator.navigate('NearbyFriendsScene')}>
+        <View style={[base.leftNav, styles.leftNavButton]} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
           <Image source={require('../images/Ellipses.png')} />
         </View>
         <Logo text="friends" hideTagline={true} />
@@ -106,6 +107,7 @@ export default class FriendsScene extends Component {
         : null
         }
       </ScrollView>
+      <TabBar active="friends" navigator={this.props.navigator}/>
     </View>
   )}
 }
