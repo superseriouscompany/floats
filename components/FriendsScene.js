@@ -46,7 +46,7 @@ export default class FriendsScene extends Component {
     <View style={base.screen}>
       <View style={base.header}>
         <View style={base.leftNav}>
-          <Text style={{color: 'darksalmon'}} onPress={() => this.props.navigator.navigate('NearbyFriendsScene')}>
+          <Text style={{color: 'darksalmon'}} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
             ...
           </Text>
         </View>
