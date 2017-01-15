@@ -18,6 +18,7 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -100,11 +101,13 @@ export default class CreateFloatScene extends Component {
               <Text style={{flex: 1}}>
                 Nearby Friends
               </Text>
-              { this.state.allSelected ?
-                <Image source={require('../images/Checked.png')} />
-              :
-                <Image source={require('../images/Unchecked.png')} />
-              }
+              <TouchableOpacity onPress={this.toggleAll.bind(this)}>
+                { this.state.allSelected ?
+                  <Image source={require('../images/Checked.png')} />
+                  :
+                  <Image source={require('../images/Unchecked.png')} />
+                }
+              </TouchableOpacity>
             </View>
             <ScrollView>
               {this.state.friends.map((f, i) => (
@@ -116,6 +119,16 @@ export default class CreateFloatScene extends Component {
       </View>
     </View>
   )}
+
+  toggleAll() {
+    const on = !this.state.allSelected;
+    const friends = this.state.friends.map((function(f) {
+      f.selected = on;
+      return f;
+    }));
+
+    this.setState({friends: friends, allSelected: on});
+  }
 
   toggleFriend(id) {
     let friends = [].concat(this.state.friends);
