@@ -11,7 +11,6 @@ import {
 const api = {
   sessions: {
     create: function(facebookAccessToken) {
-      console.log("sending", facebookAccessToken);
       return fetch(`${baseUrl}/users`, {
         method: 'POST',
         body: JSON.stringify({facebook_access_token: facebookAccessToken}),
