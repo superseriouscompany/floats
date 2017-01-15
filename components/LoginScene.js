@@ -4,10 +4,12 @@ import React from 'react';
 import Component from './Component';
 import Text from './Text';
 import api from '../services/api';
+import base from '../styles/base';
 import {
   AsyncStorage,
   ActivityIndicator,
   Image,
+  Linking,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -28,7 +30,7 @@ export default class LoginScene extends Component {
   render() { return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Image source={require('../images/Floats.jpg')}/>
-      <View style={{alignItems: 'center', position: 'absolute', left: 0, right: 0, bottom: 40}}>
+      <View style={{alignItems: 'center', position: 'absolute', left: 0, right: 0, bottom: 25}}>
         { this.state.awaitingLogin ?
           <ActivityIndicator color="hotpink" size="small" />
         :
@@ -37,9 +39,18 @@ export default class LoginScene extends Component {
             onLoginFinished={this.onLoginFinished.bind(this)}
             onLogoutFinished={() => alert("logout.")}/>
         }
+        <Text style={{paddingTop: 15, paddingLeft: 25, paddingRight: 25, fontSize: base.fontSizes.small, color: base.colors.mediumgrey, textAlign: 'center'}}>
+          By signing in, you agree to our {"\n"}
+          <Text onPress={() => this.openUrl('https://superseriouscompany.com/terms')} style={{textDecorationLine: 'underline', fontSize: base.fontSizes.small, color: base.colors.mediumgrey}}> Terms of Service</Text> and
+          <Text onPress={() => this.openUrl('https://superseriouscompany.com/privacy')} style={{textDecorationLine: 'underline', fontSize: base.fontSizes.small, color: base.colors.mediumgrey}}> Privacy Policy</Text>
+        </Text>
       </View>
     </View>
   )}
+
+  openUrl(url) {
+    Linking.openURL(url)
+  }
 
   onLoginFinished(error, result) {
     if (error) {
