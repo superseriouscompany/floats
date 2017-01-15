@@ -15,6 +15,7 @@ export default class Enemy extends Component {
     <View style={[styles.box, base.padFullHorizontal, base.padMainItem]}>
       <Image style={[base.photoCircle]} source={{uri: this.props.enemy.avatar_url}}/>
       <Text style={[styles.main, {marginRight: 10}]}>{this.props.enemy.name}</Text>
+      <Text style={{color: 'cornflowerblue'}}>gear icon</Text>
     </View>
   )}
 }
