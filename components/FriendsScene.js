@@ -6,6 +6,7 @@ import Text from './Text';
 import Friend from './Friend';
 import FriendRequest from './FriendRequest';
 import Logo from './Logo';
+import Enemy from './Enemy';
 import api from '../services/api';
 import base from '../styles/base';
 import {
@@ -80,10 +81,16 @@ export default class FriendsScene extends Component {
         }
         { this.state.enemies.length ?
           <View>
+            <Text onPress={() => this.setState({showEnemies: !this.state.showEnemies})}>
+              {this.state.showEnemies ? 'hide' : 'show'} blocked
+            </Text>
             { this.state.showEnemies ?
-              <Text>Blocked</Text>
-            :
-              <Text onPress={() => this.setState({showEnemies: true})}>show blocked</Text>
+              <View>
+                {this.state.enemies.map((e, i) => (
+                  <Enemy enemy={e} key={i} />
+                ))}
+              </View>
+            : null
             }
           </View>
         : null
