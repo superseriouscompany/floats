@@ -21,8 +21,10 @@ export default class FloatDialog extends Component {
   }
 
   render() { return (
-    <View style={[base.inputContainer, styles.container]}>
-      <TextInput style={[styles.input]} placeholder="gauge interest" onChangeText={(text) => this.setState({text})}/>
+    <View style={[base.inputContainer, styles.container, base.bgBreakingSection]}>
+      <View style={[styles.inputContainer]}>
+        <TextInput style={[styles.input]} placeholder="gauge interest" onChangeText={(text) => this.setState({text})}/>
+      </View>
       <TouchableOpacity onPress={this.create.bind(this)}>
         <Text>send</Text>
       </TouchableOpacity>
@@ -44,19 +46,23 @@ export default class FloatDialog extends Component {
 }
 
 const styles = StyleSheet.create({
-  input: {
+  inputContainer: {
     backgroundColor: base.colors.white,
     flex: 1,
-    fontSize: 16,
-    height: 32,
-    fontFamily: 'Poppins',
-    paddingTop: 1.5,
-    paddingLeft: 10,
     borderBottomWidth: 1,
     borderColor: base.colors.darkgrey,
+  },
+  input: {
+    fontSize: 16,
+    fontFamily: 'Poppins',
+    height: 32,
+    paddingTop: 1.5,
+    paddingLeft: 10,
   },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
   },
 })
