@@ -5,7 +5,6 @@ import Component from './Component';
 import base from '../styles/base';
 import api from '../services/api';
 import Heading from './Heading';
-import ReturnArrow from './ReturnArrow';
 import YourPlan from './YourPlan';
 import Invitations from './Invitations';
 import TabBar from './TabBar';
@@ -45,10 +44,7 @@ export default class PlansScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <Heading>happenings</Heading>
-        <View style={base.rightNav}>
-          <ReturnArrow navigator={this.props.navigator}/>
-        </View>
+        <Heading>floats in action</Heading>
       </View>
 
       <ScrollView>
@@ -58,7 +54,7 @@ export default class PlansScene extends Component {
               <ActivityIndicator
                 style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
                 size="small"
-                color='#E88868'
+                color={base.colors.color1}
               />
             </View>
           : this.state.planError ?
@@ -75,7 +71,7 @@ export default class PlansScene extends Component {
               <ActivityIndicator
                 style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
                 size="small"
-                color='#E88868'
+                color={base.colors.color1}
               />
             </View>
           : this.state.invitationsError ?

@@ -3,6 +3,7 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
+import Heading from './Heading';
 import Friend from './Friend';
 import FriendRequest from './FriendRequest';
 import Logo from './Logo';
@@ -51,14 +52,22 @@ export default class FriendsScene extends Component {
         <View style={[base.leftNav, styles.leftNavButton]} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
           <Image source={require('../images/Ellipses.png')} />
         </View>
-        <Logo text="friends" hideTagline={true} />
+        <View style={base.header}>
+          <Heading>friends</Heading>
+        </View>
         <View style={[base.rightNav, styles.rightNavButton]} onPress={() => this.props.navigator.navigate('RandosScene')}>
           <Image source={require('../images/Plus.png')} />
         </View>
       </View>
       <ScrollView>
         { this.state.loadingRequests ?
-          <ActivityIndicator color="hotpink" />
+          <View style={{height: 50}}>
+            <ActivityIndicator
+              style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
+              size="small"
+              color={base.colors.color1}
+            />
+          </View>
         : this.state.friendRequests.length ?
           <View style={[base.bgBreakingSection, {paddingBottom: 16}]}>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -73,7 +82,13 @@ export default class FriendsScene extends Component {
         : null
         }
         { this.state.loadingFriends ?
-          <ActivityIndicator color="hotpink" />
+          <View style={{height: 50}}>
+            <ActivityIndicator
+              style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
+              size="small"
+              color={base.colors.color1}
+            />
+          </View>
         : !this.state.friends.length ?
           <Text>You are alone.</Text>
         :

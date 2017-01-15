@@ -66,8 +66,8 @@ module.exports = StyleSheet.create({
     paddingTop: 18,
   },
   padTall: {
-    paddingTop: 19,
-    paddingBottom: 17,
+    paddingTop: 12,
+    paddingBottom: 12,
   },
   padShort: {
 
@@ -89,11 +89,6 @@ module.exports = StyleSheet.create({
   },
   textHeader: {
     marginTop: -2,
-  },
-  inputContainer: {
-    paddingTop: 5,
-    paddingRight: 22,
-    paddingLeft: 5,
   },
   inputButton: {
     color: colors.white,

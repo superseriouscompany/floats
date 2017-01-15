@@ -2,8 +2,8 @@
 
 import React from 'react';
 import FCM from 'react-native-fcm';
+import Heading from './Heading';
 import Component from './Component';
-import UnreadHeart from './UnreadHeart';
 import Logo from './Logo';
 import FriendsCount from './FriendsCount';
 import NearbyFriend from './NearbyFriend';
@@ -73,10 +73,7 @@ export default class CreateFloatScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <View style={base.leftNav}>
-          <UnreadHeart navigator={this.props.navigator}/>
-        </View>
-        <Logo />
+        <Heading>float something fun</Heading>
       </View>
 
       <View style={base.mainWindow}>
@@ -84,7 +81,7 @@ export default class CreateFloatScene extends Component {
           <ActivityIndicator
             style={[base.loadingCenter, {transform: [{scale: 1.5}]}]}
             size="small"
-            color='#E88868'
+            color={base.colors.color1}
           />
         : this.state.error ?
           <Text style={{color: 'indianred', textAlign: 'center'}}>{this.state.error}</Text>
@@ -98,14 +95,16 @@ export default class CreateFloatScene extends Component {
           <View>
             <FloatDialog friends={this.state.friends.filter(selected)} />
             <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
-              <Text style={{flex: 1}}>
+            <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
+              <Text>
                 Nearby Friends
               </Text>
+              </View>
               <TouchableOpacity onPress={this.toggleAll.bind(this)}>
                 { this.state.allSelected ?
                   <Image source={require('../images/Checked.png')} />
                   :
-                  <Image source={require('../images/Unchecked.png')} />
+                  <Image source={require('../images/EmptyCircle.png')} />
                 }
               </TouchableOpacity>
             </View>
