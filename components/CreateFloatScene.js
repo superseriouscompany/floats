@@ -2,6 +2,7 @@
 
 import React from 'react';
 import FCM from 'react-native-fcm';
+import Heading from './Heading';
 import Component from './Component';
 import Logo from './Logo';
 import FriendsCount from './FriendsCount';
@@ -72,7 +73,7 @@ export default class CreateFloatScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <Logo />
+        <Heading>float something fun</Heading>
       </View>
 
       <View style={base.mainWindow}>

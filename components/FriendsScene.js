@@ -3,6 +3,7 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
+import Heading from './Heading';
 import Friend from './Friend';
 import FriendRequest from './FriendRequest';
 import Logo from './Logo';
@@ -51,7 +52,9 @@ export default class FriendsScene extends Component {
         <View style={[base.leftNav, styles.leftNavButton]} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
           <Image source={require('../images/Ellipses.png')} />
         </View>
-        <Logo text="friends" hideTagline={true} />
+        <View style={base.header}>
+          <Heading>friends</Heading>
+        </View>
         <View style={[base.rightNav, styles.rightNavButton]} onPress={() => this.props.navigator.navigate('RandosScene')}>
           <Image source={require('../images/Plus.png')} />
         </View>
