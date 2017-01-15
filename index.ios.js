@@ -13,6 +13,7 @@ import {
 import NearbyFriendsScene from './components/NearbyFriendsScene';
 import LoginScene from './components/LoginScene';
 import PlansScene from './components/PlansScene';
+import RandosScene from './components/RandosScene';
 import FriendsScene from './components/FriendsScene';
 import Text from './components/Text';
 import api from './services/api';
@@ -25,6 +26,7 @@ export default class batsignal extends Component {
     this.state.scene = 'PlansScene';
     this.state.scene = 'NearbyFriendsScene';
     this.state.scene = 'LoginScene';
+    this.state.scene = 'RandosScene';
     this.state.scene = 'FriendsScene';
 
     this.navigator = {
@@ -52,8 +54,10 @@ export default class batsignal extends Component {
           <PlansScene navigator={this.navigator} />
         : this.state.scene == 'FriendsScene' ?
           <FriendsScene navigator={this.navigator} />
+        : this.state.scene == 'RandosScene' ?
+          <RandosScene navigator={this.navigator} />
         :
-          <Text>404</Text>
+          <Text style={{padding: 200}}>404</Text>
         }
       </View>
     )

@@ -11,6 +11,9 @@ const colors = {
   color1: '#E88868',
   color2: '#34B7B5',
 }
+const fontSizes = {
+  small: 12,
+}
 module.exports = StyleSheet.create({
   screen: {
     flex: 1,
@@ -133,3 +136,4 @@ module.exports = StyleSheet.create({
 });
 
 module.exports.colors = colors;
+module.exports.fontSizes = fontSizes;
