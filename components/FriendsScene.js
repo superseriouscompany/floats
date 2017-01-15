@@ -73,7 +73,7 @@ export default class FriendsScene extends Component {
         : !this.state.friends.length ?
           <Text>You are alone.</Text>
         :
-          <View>
+          <View style={{paddingBottom: 15}}>
             { this.state.friends.map((f, i) => (
               <Friend friend={f} key={i} />
             ))}
@@ -81,8 +81,8 @@ export default class FriendsScene extends Component {
         }
         { this.state.enemies.length ?
           <View>
-            <View style={{alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{fontSize: base.fontSizes.small, color: base.colors.mediumgrey}} onPress={() => this.setState({showEnemies: !this.state.showEnemies})}>
+            <View style={[base.bgBreakingSection, {alignItems: 'center', justifyContent: 'center', borderTopWidth: 0.5, borderTopColor: base.colors.lightgrey}]}>
+              <Text style={[base.timestamp, {paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]} onPress={() => this.setState({showEnemies: !this.state.showEnemies})}>
                 {this.state.showEnemies ? 'hide' : 'show'} blocked
               </Text>
             </View>
