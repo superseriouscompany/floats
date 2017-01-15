@@ -31,12 +31,13 @@ export default class FriendsScene extends Component {
   componentDidMount() {
     AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
       FCM.requestPermissions();
-      FCM.getFCMToken().then(token => {
-        // TODO: retry
+      // FIXME: retry as long as it's not set
+      FCM.getFCMToken().then( (token) => {
+        if( !token ) { return console.warn("No firebase token available."); }
         api.sessions.updateFirebaseToken(accessToken, token);
       });
       FCM.on('refreshToken', (token) => {
-        // TODO: retry
+        if( !token ) { return console.warn("No firebase token on refresh."); }
         api.sessions.updateFirebaseToken(accessToken, token);
       })
 
