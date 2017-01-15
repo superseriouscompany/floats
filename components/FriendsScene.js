@@ -60,9 +60,14 @@ export default class FriendsScene extends Component {
           <ActivityIndicator color="hotpink" />
         : this.state.friendRequests.length ?
           <View style={[base.bgBreakingSection, {paddingBottom: 16}]}>
-            {this.state.friendRequests.map((f, i) => (
-              <FriendRequest key={i} friend={f} />
-            ))}
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.state.friendRequests.length} friend requests</Text>
+            </View>
+            <View style={{marginTop: -10}}>
+              {this.state.friendRequests.map((f, i) => (
+                <FriendRequest key={i} friend={f} />
+              ))}
+            </View>
           </View>
         : null
         }
@@ -72,9 +77,14 @@ export default class FriendsScene extends Component {
           <Text>You are alone.</Text>
         :
           <View style={{paddingBottom: 15}}>
-            { this.state.friends.map((f, i) => (
-              <Friend friend={f} key={i} />
-            ))}
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.state.friends.length} friends</Text>
+            </View>
+            <View style={{marginTop: -15}}>
+              { this.state.friends.map((f, i) => (
+                <Friend friend={f} key={i} />
+              ))}
+            </View>
           </View>
         }
         { this.state.enemies.length ?

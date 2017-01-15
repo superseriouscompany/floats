@@ -16,9 +16,13 @@ export default class FriendRequest extends Component {
       <Image style={[styles.image]} source={{uri: this.props.friend.avatar_url}}/>
       <View style={styles.right}>
         <Text>{this.props.friend.name}</Text>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={[styles.button, styles.confirm]}>confirm</Text>
-          <Text style={[styles.button, styles.nah]}>nah</Text>
+        <View style={{flexDirection: 'row'}}>
+            <View style={[styles.button, {backgroundColor: base.colors.color2}]}>
+              <Text style={styles.confirm}>confirm</Text>
+            </View>
+            <View style={[styles.button, {backgroundColor: base.colors.lightgrey}]}>
+              <Text style={styles.nah}>nah</Text>
+            </View>
         </View>
       </View>
     </View>
@@ -30,9 +34,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   image: {
-    width: 80,
-    height: 80,
-    marginRight: 20,
+    width: 63,
+    height: 63,
+    marginRight: 15,
+    borderColor: base.colors.lightgrey,
+    borderWidth: 0.5,
+    borderRadius: 2,
   },
 
   right: {
@@ -40,19 +47,23 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 5,
-    paddingBottom: 5,
-    fontSize: base.fontSizes.small,
+    width: 104,
+    height: 31,
+    marginRight: 4,
+    marginTop: 3,
+    marginBottom: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 2,
   },
 
   confirm: {
-    backgroundColor: 'mediumaquamarine',
     color: 'white',
+    fontSize: base.fontSizes.small,
   },
 
   nah: {
-    backgroundColor: base.colors.lightgrey
+    color: base.colors.mediumgrey,
+    fontSize: base.fontSizes.small
   },
 })
