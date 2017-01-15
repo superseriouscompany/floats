@@ -73,7 +73,7 @@ module.exports = StyleSheet.create({
 
   },
   timestamp: {
-    fontSize: 10,
+    fontSize: 12,
   },
   textLogo: {
     fontSize: 16,
