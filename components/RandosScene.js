@@ -35,7 +35,7 @@ export default class RandosScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <Logo text="find your friends" hideSubtitle={true}/>
+        <Logo text="find your friends" hideTagline={true}/>
         <View style={base.rightNav}>
           <ReturnArrow navigator={this.props.navigator}/>
         </View>
