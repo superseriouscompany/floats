@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import {
+  AsyncStorage,
   AppRegistry,
   View,
 } from 'react-native';
@@ -23,11 +24,6 @@ export default class batsignal extends Component {
   constructor(props) {
     super(props);
     this.state = { props: {}};
-    this.state.scene = 'PlansScene';
-    this.state.scene = 'LoginScene';
-    this.state.scene = 'RandosScene';
-    this.state.scene = 'FriendsScene';
-    this.state.scene = 'CreateFloatScene';
 
     this.navigator = {
       navigate: (component, props) => {
@@ -35,6 +31,16 @@ export default class batsignal extends Component {
         this.setState(stateChange);
       }
     }
+
+    AsyncStorage.getItem('@floats:accessToken').then((token) => {
+      if( token ) {
+        this.setState({scene: 'CreateFloatScene'});
+      } else {
+        this.setState({scene: 'LoginScene'});
+      }
+    }).catch(function(err) {
+      console.warn(err);
+    });
   }
 
   getChildContext() {
@@ -56,8 +62,10 @@ export default class batsignal extends Component {
           <FriendsScene navigator={this.navigator} />
         : this.state.scene == 'RandosScene' ?
           <RandosScene navigator={this.navigator} />
-        :
+        : !!this.state.scene ?
           <Text style={{padding: 200}}>404</Text>
+        :
+          null
         }
       </View>
     )
