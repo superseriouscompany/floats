@@ -28,7 +28,7 @@ export default class LoginScene extends Component {
   render() { return (
     <View style={{flex: 1, alignItems: 'center'}}>
       <View style={{justifyContent: 'center', flex: 0.8}}>
-        <Text style={{color: 'red'}} onPress={() => this.props.navigator.navigate('NearbyFriendsScene')}>|U|</Text>
+        <Text style={{color: 'red'}} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>|U|</Text>
       </View>
       <View style={{justifyContent: 'center', flex: 0.2}}>
         { this.state.awaitingLogin ?
@@ -61,7 +61,7 @@ export default class LoginScene extends Component {
       return AsyncStorage.setItem('@floats:accessToken', user.access_token);
       this.context.store.dispatch({type: 'login', accessToken: user.access_token});
     }).then(() => {
-      this.props.navigator.navigate('NearbyFriendsScene');
+      this.props.navigator.navigate('CreateFloatScene');
     }).catch(function(err) {
       if( err.message == 'nope' ) { return; }
       console.error(err);

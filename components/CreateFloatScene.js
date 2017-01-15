@@ -7,19 +7,21 @@ import UnreadHeart from './UnreadHeart';
 import Logo from './Logo';
 import FriendsCount from './FriendsCount';
 import NearbyFriend from './NearbyFriend';
-import BroadcastBox from './BroadcastBox';
+import FloatDialog from './FloatDialog';
+
 import Text from './Text';
 import base from '../styles/base';
 import api  from '../services/api';
 import {
   AsyncStorage,
   ActivityIndicator,
-  View,
+  Image,
   ScrollView,
   StyleSheet,
+  View,
 } from 'react-native';
 
-export default class NearbyFriendsScene extends Component {
+export default class CreateFloatScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +52,11 @@ export default class NearbyFriendsScene extends Component {
           }).then(function() {
             return api.friends.nearby(accessToken);
           }).then((friends) => {
-            this.setState({friends: friends, loaded: true});
+            friends = friends.map(function(f) {
+              f.selected = true;
+              return f;
+            })
+            this.setState({friends: friends, loaded: true, allSelected: true});
           }).catch(function(err) {
             return console.error(err);
           })
@@ -89,25 +95,41 @@ export default class NearbyFriendsScene extends Component {
           </View>
         :
           <View>
-            <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection]}>
-              <FriendsCount count={this.state.friends.length} />
+            <FloatDialog friends={this.state.friends.filter(selected)} />
+            <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
+              <Text style={{flex: 1}}>
+                Nearby Friends
+              </Text>
+              { this.state.allSelected ?
+                <Image source={require('../images/Checked.png')} />
+              :
+                <Image source={require('../images/Unchecked.png')} />
+              }
             </View>
             <ScrollView>
               {this.state.friends.map((f, i) => (
-                <NearbyFriend key={i} friend={f} />
+                <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
               ))}
             </ScrollView>
           </View>
         }
       </View>
-
-      { !this.state.friends.length ?
-        null
-      :
-        <View style={base.bottomBar}>
-          <BroadcastBox friends={this.state.friends} cool="nice"/>
-        </View>
-      }
     </View>
   )}
+
+  toggleFriend(id) {
+    let friends = [].concat(this.state.friends);
+    for( var i = 0; i < friends.length; i++ ) {
+      if( friends[i].id == id ) {
+        friends[i].selected = !friends[i].selected;
+      }
+    }
+    const allSelected = friends.filter(selected).length == friends.length;
+
+    this.setState({friends: friends, allSelected: allSelected});
+  }
+}
+
+function selected(f) {
+  return !!f.selected;
 }

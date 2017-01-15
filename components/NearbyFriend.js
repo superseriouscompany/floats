@@ -14,15 +14,14 @@ import {
 export default class NearbyFriend extends Component {
   constructor(props) {
     super(props);
-    this.state = { selected: true }
   }
 
   render() { return (
     <View style={[styles.box, base.padFullHorizontal, base.padMainItem]}>
       <Image style={[base.photoCircle]} source={{uri: this.props.friend.avatar_url}}/>
       <Text style={[styles.main, {marginRight: 10}]}>{this.props.friend.name}</Text>
-      <TouchableOpacity onPress={this.toggle.bind(this)} accessible={true} accessibilityLabel={`Select ${this.props.friend.name}`}>
-        { this.state.selected ?
+      <TouchableOpacity onPress={this.props.toggle} accessible={true} accessibilityLabel={`Select ${this.props.friend.name}`}>
+        { this.props.friend.selected ?
           <Image source={require('../images/Checked.png')} />
         :
           <Image source={require('../images/Unchecked.png')} />
@@ -30,15 +29,6 @@ export default class NearbyFriend extends Component {
       </TouchableOpacity>
     </View>
   )}
-
-  toggle() {
-    const selected = !this.state.selected;
-    this.context.store.dispatch({type: 'toggleFriend', on: selected, id: this.props.friend.id});
-    this.setState({selected: selected});
-  }
-}
-NearbyFriend.contextTypes = {
-  store: React.PropTypes.object
 }
 
 const styles = StyleSheet.create({
