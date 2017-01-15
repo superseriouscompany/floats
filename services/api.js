@@ -58,6 +58,17 @@ module.exports = {
         return json.friends;
       })
     },
+
+    all: function(accessToken) {
+      return fetch(`${baseUrl}/friends`, {
+        headers: headers(accessToken),
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error(response.status); }
+        return response.json();
+      }).then(function(json) {
+        return json.friends;
+      })
+    }
   },
 
   floats: {

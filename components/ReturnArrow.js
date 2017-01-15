@@ -13,7 +13,7 @@ import {
 
 export default class ReturnArrow extends Component {
   render() { return (
-      <TouchableOpacity style={styles.rightArrow} onPress={() => this.props.navigator.navigate('FriendsScene')}>
+      <TouchableOpacity style={styles.rightArrow} onPress={() => this.props.navigator.navigate('NearbyFriendsScene')}>
         <Image source={require('../images/RightArrow.png')} />
       </TouchableOpacity>
   )}
