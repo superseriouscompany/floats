@@ -54,7 +54,7 @@ export default class PlansScene extends Component {
               <ActivityIndicator
                 style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
                 size="small"
-                color='#E88868'
+                color={base.colors.color1}
               />
             </View>
           : this.state.planError ?
@@ -71,7 +71,7 @@ export default class PlansScene extends Component {
               <ActivityIndicator
                 style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
                 size="small"
-                color='#E88868'
+                color={base.colors.color1}
               />
             </View>
           : this.state.invitationsError ?

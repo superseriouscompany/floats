@@ -65,7 +65,7 @@ export default class FriendsScene extends Component {
             <ActivityIndicator
               style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
               size="small"
-              color='#E88868'
+              color={base.colors.color1}
             />
           </View>
         : this.state.friendRequests.length ?
@@ -86,7 +86,7 @@ export default class FriendsScene extends Component {
             <ActivityIndicator
               style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
               size="small"
-              color='#E88868'
+              color={base.colors.color1}
             />
           </View>
         : !this.state.friends.length ?
