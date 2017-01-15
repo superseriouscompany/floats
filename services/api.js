@@ -4,7 +4,11 @@ const baseUrl = __DEV__ ?
   'https://superserious.ngrok.io/v1' :
   'https://floats.superserious.co/v1';
 
-module.exports = {
+import {
+  AsyncStorage
+} from 'react-native'
+
+const api = {
   sessions: {
     create: function(facebookAccessToken) {
       console.log("sending", facebookAccessToken);
@@ -84,6 +88,34 @@ module.exports = {
     }
   },
 
+  friendRequests: {
+    send: function(id) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/friend_requests`, {
+          method: 'POST',
+          body: JSON.stringify({ user_id: id }),
+          headers: headers(accessToken),
+        }).then(function(response) {
+          if( !response.ok ) { throw new Error(response.status); }
+          return true;
+        })
+      })
+    },
+
+    destroy: function(id) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/friend_requests/${id}`, {
+          method: 'DELETE',
+          body: JSON.stringify({ user_id: id }),
+          headers: headers(accessToken),
+        }).then(function(response) {
+          if( !response.ok ) { throw new Error(response.status); }
+          return true;
+        })
+      })
+    }
+  },
+
   floats: {
     create: function(accessToken, userIds, title) {
       return fetch(`${baseUrl}/floats`, {
@@ -145,6 +177,7 @@ module.exports = {
     },
   }
 }
+module.exports = api;
 
 function headers(accessToken) {
   return {
