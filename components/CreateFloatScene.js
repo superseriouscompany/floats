@@ -26,8 +26,8 @@ export default class CreateFloatScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
-      friends: []
+      loaded: !false,
+      friends: [1]
     }
   }
 
