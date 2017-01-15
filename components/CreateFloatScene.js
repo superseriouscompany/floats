@@ -8,7 +8,7 @@ import Logo from './Logo';
 import FriendsCount from './FriendsCount';
 import NearbyFriend from './NearbyFriend';
 import FloatDialog from './FloatDialog';
-
+import TabBar from './TabBar';
 import Text from './Text';
 import base from '../styles/base';
 import api  from '../services/api';
@@ -26,8 +26,8 @@ export default class CreateFloatScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: !false,
-      friends: [1]
+      loaded: false,
+      friends: []
     }
   }
 
@@ -117,6 +117,7 @@ export default class CreateFloatScene extends Component {
           </View>
         }
       </View>
+      <TabBar active="createFloat" navigator={this.props.navigator}/>
     </View>
   )}
 

@@ -7,6 +7,7 @@ import Friend from './Friend';
 import FriendRequest from './FriendRequest';
 import Logo from './Logo';
 import Enemy from './Enemy';
+import TabBar from './TabBar';
 import api from '../services/api';
 import base from '../styles/base';
 import {
@@ -98,6 +99,7 @@ export default class FriendsScene extends Component {
         : null
         }
       </ScrollView>
+      <TabBar active="friends" navigator={this.props.navigator}/>
     </View>
   )}
 }
