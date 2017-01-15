@@ -3,7 +3,6 @@
 import React from 'react';
 import FCM from 'react-native-fcm';
 import Component from './Component';
-import UnreadHeart from './UnreadHeart';
 import Logo from './Logo';
 import FriendsCount from './FriendsCount';
 import NearbyFriend from './NearbyFriend';
@@ -73,9 +72,6 @@ export default class CreateFloatScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <View style={base.leftNav}>
-          <UnreadHeart navigator={this.props.navigator}/>
-        </View>
         <Logo />
       </View>
 

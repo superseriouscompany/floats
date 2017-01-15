@@ -5,6 +5,7 @@ import Component from './Component';
 import Text from './Text';
 import base from '../styles/base';
 import {
+  Image,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -14,35 +15,37 @@ export default class TabBar extends Component {
   render() { return (
     <View style={[styles.container]}>
       <TouchableOpacity onPress={() => this.props.navigator.navigate('PlansScene')}>
-        <Text style={this.props.active == 'floats' ? styles.active : null}>
-          Floats
-        </Text>
+        { this.props.active == 'floats' ?
+          <Image source={require('../images/HeartActive.png')} />
+        :
+          <Image source={require('../images/Heart.png')} />
+        }
       </TouchableOpacity>
       <TouchableOpacity onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
-        <Text style={this.props.active == 'createFloat' ? styles.active : null}>
-          Create Float
-        </Text>
+        { this.props.active == 'createFloat' ?
+          <Image source={require('../images/AirplaneActive.png')} />
+        :
+          <Image source={require('../images/Airplane.png')} />
+        }
       </TouchableOpacity>
       <TouchableOpacity onPress={() => this.props.navigator.navigate('FriendsScene')}>
-        <Text style={this.props.active == 'friends' ? styles.active : null}>
-          Friends
-        </Text>
+        { this.props.active == 'friends' ?
+          <Image source={require('../images/ProfileActive.png')} />
+        :
+          <Image source={require('../images/Profile.png')} />
+        }
       </TouchableOpacity>
     </View>
   )}
 }
 
 const styles = StyleSheet.create({
-  active: {
-    color: 'slateblue',
-  },
-
   container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingTop: 20,
-    paddingBottom: 20,
-    borderTopWidth: 1,
+    paddingTop: 12,
+    paddingBottom: 12,
+    borderTopWidth: 0.5,
     borderColor: base.colors.lightgrey,
   }
 })
