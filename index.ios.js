@@ -6,11 +6,12 @@
 
 import React, { Component } from 'react';
 import {
+  AsyncStorage,
   AppRegistry,
   View,
 } from 'react-native';
 
-import NearbyFriendsScene from './components/NearbyFriendsScene';
+import CreateFloatScene from './components/CreateFloatScene';
 import LoginScene from './components/LoginScene';
 import PlansScene from './components/PlansScene';
 import RandosScene from './components/RandosScene';
@@ -23,11 +24,6 @@ export default class batsignal extends Component {
   constructor(props) {
     super(props);
     this.state = { props: {}};
-    this.state.scene = 'PlansScene';
-    this.state.scene = 'NearbyFriendsScene';
-    this.state.scene = 'LoginScene';
-    this.state.scene = 'RandosScene';
-    this.state.scene = 'FriendsScene';
 
     this.navigator = {
       navigate: (component, props) => {
@@ -35,6 +31,16 @@ export default class batsignal extends Component {
         this.setState(stateChange);
       }
     }
+
+    AsyncStorage.getItem('@floats:accessToken').then((token) => {
+      if( token ) {
+        this.setState({scene: 'CreateFloatScene'});
+      } else {
+        this.setState({scene: 'LoginScene'});
+      }
+    }).catch(function(err) {
+      console.warn(err);
+    });
   }
 
   getChildContext() {
@@ -48,16 +54,18 @@ export default class batsignal extends Component {
       <View style={{flex: 1}}>
         { this.state.scene == 'LoginScene' ?
           <LoginScene navigator={this.navigator} />
-        : this.state.scene == 'NearbyFriendsScene' ?
-          <NearbyFriendsScene navigator={this.navigator} />
+        : this.state.scene == 'CreateFloatScene' ?
+          <CreateFloatScene navigator={this.navigator} />
         : this.state.scene == 'PlansScene' ?
           <PlansScene navigator={this.navigator} />
         : this.state.scene == 'FriendsScene' ?
           <FriendsScene navigator={this.navigator} />
         : this.state.scene == 'RandosScene' ?
           <RandosScene navigator={this.navigator} />
-        :
+        : !!this.state.scene ?
           <Text style={{padding: 200}}>404</Text>
+        :
+          null
         }
       </View>
     )

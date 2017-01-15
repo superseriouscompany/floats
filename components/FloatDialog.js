@@ -14,14 +14,26 @@ import {
   View,
 } from 'react-native';
 
-export default class BroadcastBox extends Component {
+export default class FloatDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {}
   }
 
-  broadcast() {
+  render() { return (
+    <View style={[base.inputContainer, styles.container, base.bgBreakingSection]}>
+      <View style={[styles.inputContainer]}>
+        <TextInput style={[styles.input]} placeholder="gauge interest" onChangeText={(text) => this.setState({text})}/>
+      </View>
+      <TouchableOpacity onPress={this.create.bind(this)}>
+        <Text>send</Text>
+      </TouchableOpacity>
+    </View>
+  )}
+
+  create() {
     if( !this.state.text ) { return; }
+
     AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
       return api.floats.create(accessToken, this.props.friends.map(function(f) { return f.id}), this.state.text).then(function() {
         Alert.alert("We told your friends!");
@@ -31,21 +43,26 @@ export default class BroadcastBox extends Component {
       console.error(err);
     })
   }
-
-  render() { return (
-    <View style={[base.inputContainer, styles.container]}>
-      <TextInput style={[base.input]} placeholder="Who here's up for..." onChangeText={(text) => this.setState({text})}/>
-      <TouchableOpacity onPress={this.broadcast.bind(this)}>
-        <Text style={base.inputButton}>send</Text>
-      </TouchableOpacity>
-    </View>
-  )}
 }
 
 const styles = StyleSheet.create({
+  inputContainer: {
+    backgroundColor: base.colors.white,
+    flex: 1,
+    borderBottomWidth: 1,
+    borderColor: base.colors.darkgrey,
+  },
+  input: {
+    fontSize: 16,
+    fontFamily: 'Poppins',
+    height: 32,
+    paddingTop: 1.5,
+    paddingLeft: 10,
+  },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
   },
 })

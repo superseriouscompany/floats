@@ -8,6 +8,7 @@ import Heading from './Heading';
 import ReturnArrow from './ReturnArrow';
 import YourPlan from './YourPlan';
 import Invitations from './Invitations';
+import TabBar from './TabBar';
 import Text from './Text';
 import {
   ActivityIndicator,
@@ -84,6 +85,7 @@ export default class PlansScene extends Component {
           }
         </View>
       </ScrollView>
+      <TabBar active="floats" navigator={this.props.navigator}/>
     </View>
   )}
 }
