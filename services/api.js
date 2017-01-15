@@ -77,8 +77,10 @@ const api = {
 
   randos: {
     all: function(accessToken) {
-      return fetch(`${baseUrl}/randos`, {
-        headers: headers(accessToken),
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/randos`, {
+          headers: headers(accessToken),
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return response.json();
