@@ -35,7 +35,7 @@ export default class Invitations extends Component {
                 </Text>
                 { !!p.attending ?
                   <View>
-                    <Text style={[base.timestamp, {color: base.colors.mediumgrey, paddingTop: 5}]}>{p.user.name}&#39;s been notified</Text>
+                    <Text style={[base.timestamp, {color: base.colors.mediumgrey, paddingTop: 5}]}>{p.user.name.split(' ')[0] + "'s"} been notified</Text>
                     <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>text to coordinate</Text>
                   </View>
                 : null
