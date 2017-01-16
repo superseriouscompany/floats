@@ -109,6 +109,7 @@ module.exports = StyleSheet.create({
     height: 20,
     borderRadius: 10,
     marginRight: 10,
+    borderColor: colors.lightgrey,
   },
 
   bgBreakingSection: {
