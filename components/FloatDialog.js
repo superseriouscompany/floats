@@ -24,7 +24,7 @@ export default class FloatDialog extends Component {
   render() { return (
     <View style={styles.container}>
       <View style={[styles.inputContainer]}>
-        <TextInput style={[styles.input]} placeholder="gauge interest" placeholderTextColor={base.colors.lightgrey} onChangeText={(text) => this.setState({text})}/>
+        <TextInput style={[styles.input]} placeholder="gauge interest" placeholderTextColor={base.colors.mediumgrey} onChangeText={(text) => this.setState({text})}/>
       </View>
       <TouchableOpacity onPress={this.create.bind(this)}>
         <Image source={require('../images/PaperAirplane.png')} />
