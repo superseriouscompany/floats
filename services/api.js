@@ -37,6 +37,20 @@ const api = {
     },
   },
 
+  users: {
+    deleteAccount: function() {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/users/me`, {
+          method: 'DELETE',
+          headers: headers(accessToken),
+        })
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error(response.status); }
+        return true;
+      })
+    }
+  },
+
   pins: {
     create: function(accessToken, location) {
       return fetch(`${baseUrl}/pins`, {

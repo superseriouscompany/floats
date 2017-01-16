@@ -23,8 +23,6 @@ export default class LoginScene extends Component {
   constructor(props) {
     super(props);
     this.state = {}
-
-    this.login();
   }
 
   render() { return (
@@ -37,7 +35,7 @@ export default class LoginScene extends Component {
           <LoginButton
             style={{height: 50, width: 200}}
             onLoginFinished={this.onLoginFinished.bind(this)}
-            onLogoutFinished={() => alert("logout.")}/>
+            />
         }
         <Text style={{paddingTop: 15, paddingLeft: 25, paddingRight: 25, fontSize: base.fontSizes.small, color: base.colors.mediumgrey, textAlign: 'center'}}>
           By signing in, you agree to our {"\n"}
