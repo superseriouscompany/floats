@@ -7,6 +7,7 @@
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)com.superserious.batsignal</string>
+		<string>$(AppIdentifierPrefix)com.superserious.floats</string>
 	</array>
 </dict>
 </plist>

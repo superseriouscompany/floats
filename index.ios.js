@@ -16,6 +16,7 @@ import LoginScene from './components/LoginScene';
 import PlansScene from './components/PlansScene';
 import RandosScene from './components/RandosScene';
 import FriendsScene from './components/FriendsScene';
+import Scratch from './components/Scratch';
 import Text from './components/Text';
 import api from './services/api';
 import store from './services/store';
