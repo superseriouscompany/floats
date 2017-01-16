@@ -35,9 +35,8 @@
 		3F056CC31E2700C90061D791 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F056CBF1E2700C90061D791 /* FBSDKShareKit.framework */; };
 		3F056CC41E2700EE0061D791 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F69625BB1E26F78300DAC3BC /* libRCTFBSDK.a */; };
 		3F096BA41E203CF300804325 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F096BA31E203CF300804325 /* libsqlite3.tbd */; };
-		3F096BD01E20465D00804325 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F096BCF1E20465C00804325 /* GoogleService-Info.plist */; };
-		3F096BD11E20465D00804325 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F096BCF1E20465C00804325 /* GoogleService-Info.plist */; };
 		3F87EE181E2019B700139C69 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F87EE171E2019B700139C69 /* ViewController.m */; };
+		3FBE01E31E2C46C800679C85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FBE01E21E2C46C800679C85 /* GoogleService-Info.plist */; };
 		3FE6726F1E22B8F6009C4C31 /* Lobster-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6726E1E22B8F6009C4C31 /* Lobster-Regular.ttf */; };
 		3FE672901E22BA73009C4C31 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */; };
 		3FE672911E22BA73009C4C31 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728C1E22BA73009C4C31 /* Poppins-Light.ttf */; };
@@ -283,10 +282,10 @@
 		3F056CBF1E2700C90061D791 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		3F096BA31E203CF300804325 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		3F096BCE1E2044CC00804325 /* batsignal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = batsignal.entitlements; path = batsignal/batsignal.entitlements; sourceTree = "<group>"; };
-		3F096BCF1E20465C00804325 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F6CC4021E26AD220096F05B /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
 		3F87EE161E20198C00139C69 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = batsignal/ViewController.h; sourceTree = "<group>"; };
 		3F87EE171E2019B700139C69 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = batsignal/ViewController.m; sourceTree = "<group>"; };
+		3FBE01E21E2C46C800679C85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3FE6726E1E22B8F6009C4C31 /* Lobster-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lobster-Regular.ttf"; sourceTree = "<group>"; };
 		3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		3FE6728C1E22BA73009C4C31 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
@@ -423,6 +422,7 @@
 		13B07FAE1A68108700A75B9A /* batsignal */ = {
 			isa = PBXGroup;
 			children = (
+				3FBE01E21E2C46C800679C85 /* GoogleService-Info.plist */,
 				3F096BCE1E2044CC00804325 /* batsignal.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -434,7 +434,6 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				3F87EE161E20198C00139C69 /* ViewController.h */,
 				3F87EE171E2019B700139C69 /* ViewController.m */,
-				3F096BCF1E20465C00804325 /* GoogleService-Info.plist */,
 			);
 			name = batsignal;
 			sourceTree = "<group>";
@@ -911,7 +910,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F096BD11E20465D00804325 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,12 +919,12 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3FE672921E22BA73009C4C31 /* Poppins-Medium.ttf in Resources */,
+				3FBE01E31E2C46C800679C85 /* GoogleService-Info.plist in Resources */,
 				3FE672911E22BA73009C4C31 /* Poppins-Light.ttf in Resources */,
 				3FE6726F1E22B8F6009C4C31 /* Lobster-Regular.ttf in Resources */,
 				3FE672901E22BA73009C4C31 /* Poppins-Bold.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				3FE672941E22BA73009C4C31 /* Poppins-SemiBold.ttf in Resources */,
-				3F096BD01E20465D00804325 /* GoogleService-Info.plist in Resources */,
 				3FE672931E22BA73009C4C31 /* Poppins-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1054,7 +1052,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.superserious.batsignal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.superserious.floats;
 				PRODUCT_NAME = batsignal;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1082,7 +1080,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.superserious.batsignal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.superserious.floats;
 				PRODUCT_NAME = batsignal;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
