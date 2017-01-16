@@ -37,7 +37,7 @@ export default class batsignal extends Component {
       if( token ) {
         this.setState({scene: 'CreateFloatScene'});
       } else {
-        this.setState({scene: 'CreateFloatScene'});
+        this.setState({scene: 'LoginScene'});
       }
     }).catch(function(err) {
       console.warn(err);
