@@ -20,6 +20,7 @@ export default class YourPlan extends Component {
   }
 
   render() {
+    this.props.plan.attendees = [];
     const plan = this.props.plan;
     if( !plan ) { return null; }
     return (
@@ -27,10 +28,20 @@ export default class YourPlan extends Component {
       <Image source={{url: plan.user.avatar_url}} style={base.photoCircle} />
       <View style={{flex: 1}}>
         <Plan plan={plan} attendees={plan.attendees}/>
-        <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>text them to coordinate</Text>
-        <TouchableOpacity onPress={this.deletePlan.bind(this)}>
-          <Text style={[base.timestamp, {textDecorationLine: 'underline', color: base.colors.mediumgrey}]}>or delete your float</Text>
-        </TouchableOpacity>
+        { plan.attendees && plan.attendees.length ?
+          <View>
+            <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>text them to coordinate</Text>
+            <TouchableOpacity onPress={this.deletePlan.bind(this)}>
+              <Text style={[base.timestamp, {textDecorationLine: 'underline', color: base.colors.mediumgrey}]}>or delete your float</Text>
+            </TouchableOpacity>
+          </View>
+        :
+          <View>
+            <TouchableOpacity onPress={this.deletePlan.bind(this)}>
+              <Text style={[base.timestamp, {textDecorationLine: 'underline', color: base.colors.mediumgrey}]}>delete your float</Text>
+            </TouchableOpacity>
+          </View>
+        }
       </View>
     </View>
   )}
