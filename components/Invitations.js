@@ -40,6 +40,9 @@ export default class Invitations extends Component {
                   </View>
                 : null
                 }
+                <TouchableOpacity>
+                  <Text style={[base.timestamp, {textDecorationLine: 'underline', color: base.colors.mediumgrey}]}>dismiss</Text>
+                </TouchableOpacity>
               </View>
               <Zapper floatId={p.id} active={!!p.attending}></Zapper>
             </View>
