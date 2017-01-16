@@ -17,9 +17,8 @@ export default class Plan extends Component {
       <Text style={{fontSize: 16}}>{this.props.plan.user.name || 'You'} "{this.props.plan.title}"</Text>
       <Text style={base.timestamp}>
         {moment(this.props.plan.created_at).fromNow()}
-        { this.props.attendees ?
-
-          <Text style={base.timestamp}> | {this.props.attendees.length} interested</Text>
+        { this.props.attendees && this.props.attendees.length ?
+          <Text style={base.timestamp}> | {this.props.attendees.length} bumps</Text>
         :
           null
         }
