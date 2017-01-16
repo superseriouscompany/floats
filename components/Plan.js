@@ -24,7 +24,7 @@ export default class Plan extends Component {
         }
       </Text>
 
-      { this.props.attendees ?
+      { this.props.attendees && this.props.attendees.length ?
         <View style={{paddingTop: 11, paddingBottom: 5}}>
           {this.props.attendees.map((u, i) => (
             <Attendee key={i} user={u} />
