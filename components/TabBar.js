@@ -18,21 +18,21 @@ import {
 export default class TabBar extends Component {
   render() { return (
     <View style={[styles.container]}>
-      <TouchableOpacity onPress={() => this.props.navigator.navigate('PlansScene')}>
+      <TouchableOpacity style={styles.tabItem} onPress={() => this.props.navigator.navigate('PlansScene')}>
         { this.props.active == 'floats' ?
           <Image source={require('../images/HeartActive.png')} />
         :
           <Image source={require('../images/Heart.png')} />
         }
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
+      <TouchableOpacity style={styles.tabItem} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
         { this.props.active == 'createFloat' ?
           <Image source={require('../images/AirplaneActive.png')} />
         :
           <Image source={require('../images/Airplane.png')} />
         }
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => this.showLogoutDialog()}>
+      <TouchableOpacity style={styles.tabItem} onPress={() => this.showLogoutDialog()}>
         { this.props.active == 'friends' ?
           <Image source={require('../images/ProfileActive.png')} />
         :
@@ -92,5 +92,9 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     borderTopWidth: 0.5,
     borderColor: base.colors.lightgrey,
+  },
+  tabItem: {
+    flex: .333,
+    alignItems: 'center',
   }
 })
