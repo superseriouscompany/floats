@@ -20,7 +20,6 @@ export default class YourPlan extends Component {
   }
 
   render() {
-    this.props.plan.attendees = [];
     const plan = this.props.plan;
     if( !plan ) { return null; }
     return (
