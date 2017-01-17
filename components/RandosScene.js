@@ -14,6 +14,7 @@ import {
   AsyncStorage,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -58,11 +59,11 @@ export default class RandosScene extends Component {
         }
       </View>
 
-      <View style={styles.bottom} onPress={() => this.props.navigator.navigate('FriendsScene')}>
+      <TouchableOpacity style={styles.bottom} onPress={() => this.props.navigator.navigate('FriendsScene')}>
         <Text style={{color: base.colors.mediumgrey}}>
           done
         </Text>
-      </View>
+      </TouchableOpacity>
     </View>
   )}
 }
