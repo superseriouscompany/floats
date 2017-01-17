@@ -35,9 +35,9 @@ export default class batsignal extends Component {
 
     AsyncStorage.getItem('@floats:accessToken').then((token) => {
       if( token ) {
-        this.setState({scene: 'CreateFloatScene'});
+        this.setState({scene: 'RandosScene'});
       } else {
-        this.setState({scene: 'LoginScene'});
+        this.setState({scene: 'RandosScene'});
       }
     }).catch(function(err) {
       console.warn(err);
