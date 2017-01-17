@@ -79,9 +79,9 @@ export default class CreateFloatScene extends Component {
       <View style={base.mainWindow}>
         { !this.state.loaded ?
           <ActivityIndicator
-            style={[base.loadingCenter, {transform: [{scale: 1.5}]}]}
+            style={[base.loadingCenter, {transform: [{scale: 1.25}]}]}
             size="small"
-            color={base.colors.color1}
+            color={base.colors.mediumgrey}
           />
         : this.state.error ?
           <Text style={{color: 'indianred', textAlign: 'center'}}>{this.state.error}</Text>
