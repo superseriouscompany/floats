@@ -39,12 +39,18 @@ export default class RandosScene extends Component {
 
       <View style={{flex: 1}}>
         { !this.state.loaded ?
-          <ActivityIndicator color="hotpink" />
+          <ActivityIndicator
+            style={[base.loadingCenter, {transform: [{scale: 1.5}]}]}
+            size="small"
+            color={base.colors.color1}
+          />
         : this.state.randos.length ?
           <ScrollView>
-            {this.state.randos.map((f, i) => (
-              <Rando key={i} friend={f} />
-            ))}
+            <View style={{paddingBottom: 16, borderBottomWidth: 0.5, borderBottomColor:base.colors.lightgrey}}>
+              {this.state.randos.map((f, i) => (
+                <Rando key={i} friend={f} />
+              ))}
+            </View>
             <InviteButton />
           </ScrollView>
         :
@@ -52,8 +58,10 @@ export default class RandosScene extends Component {
         }
       </View>
 
-      <View style={styles.bottom}>
-        <Text onPress={() => this.props.navigator.navigate('FriendsScene')}>done</Text>
+      <View style={styles.bottom} onPress={() => this.props.navigator.navigate('FriendsScene')}>
+        <Text style={{color: base.colors.mediumgrey}}>
+          done
+        </Text>
       </View>
     </View>
   )}
@@ -61,10 +69,10 @@ export default class RandosScene extends Component {
 
 const styles = StyleSheet.create({
   bottom: {
-    height: 42,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    borderTopWidth: 1,
-    borderTopColor: 'darkgoldenrod'
+    borderTopWidth: .5,
+    borderTopColor: base.colors.lightgrey,
   }
 })

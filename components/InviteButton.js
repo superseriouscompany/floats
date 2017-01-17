@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Component from './Component';
+import base from '../styles/base';
 import {
   StyleSheet,
   Text,
@@ -10,9 +11,9 @@ import {
 
 export default class InviteButton extends Component {
   render() { return (
-    <View style={{padding: 20, justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{padding: 19, justifyContent: 'center', alignItems: 'center'}}>
       <View style={styles.inviteButton}>
-        <Text style={{color: 'white'}}>invite others</Text>
+        <Text style={{fontSize: base.fontSizes.normal, color: 'white'}}>invite friends</Text>
       </View>
     </View>
   )}
@@ -20,11 +21,12 @@ export default class InviteButton extends Component {
 
 const styles = StyleSheet.create({
   inviteButton: {
-    backgroundColor: 'burntsienna',
-    borderRadius: 10,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 30,
-    paddingRight: 30,
+    backgroundColor: base.colors.color2,
+    height: 50,
+    width: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 100,
+    paddingBottom: 1,
   }
 })
