@@ -38,9 +38,9 @@ export default class LoginScene extends Component {
             />
         }
         <Text style={{paddingTop: 15, paddingLeft: 25, paddingRight: 25, fontSize: base.fontSizes.small, color: base.colors.mediumgrey, textAlign: 'center'}}>
-          By signing in, you agree to our {"\n"}
-          <Text onPress={() => this.openUrl('https://superseriouscompany.com/terms')} style={{textDecorationLine: 'underline', fontSize: base.fontSizes.small, color: base.colors.mediumgrey}}> Terms of Service</Text> and
-          <Text onPress={() => this.openUrl('https://superseriouscompany.com/privacy')} style={{textDecorationLine: 'underline', fontSize: base.fontSizes.small, color: base.colors.mediumgrey}}> Privacy Policy</Text>
+          Read our
+          <Text onPress={() => this.openUrl('https://superseriouscompany.com/terms')} style={{fontSize: base.fontSizes.small, color: base.colors.mediumgrey}}> Terms of Service</Text> and
+          <Text onPress={() => this.openUrl('https://superseriouscompany.com/privacy')} style={{fontSize: base.fontSizes.small, color: base.colors.mediumgrey}}> Privacy Policy</Text>
         </Text>
       </View>
     </View>
