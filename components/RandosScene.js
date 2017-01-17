@@ -34,7 +34,7 @@ export default class RandosScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <Heading>floats in action</Heading>
+        <Heading>find friends</Heading>
       </View>
 
       <View style={{flex: 1}}>
