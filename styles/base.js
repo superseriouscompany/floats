@@ -12,6 +12,7 @@ const colors = {
   color2: '#34B7B5',
 }
 const fontSizes = {
+  normal: 16,
   small: 12,
 }
 module.exports = StyleSheet.create({
@@ -28,6 +29,13 @@ module.exports = StyleSheet.create({
   },
   loadingTop: {
     marginTop: 25,
+  },
+  buttonLoader: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
+    transform: [{scale: 1.25}],
   },
   header: {
     height: 45,
