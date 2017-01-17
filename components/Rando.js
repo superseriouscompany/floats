@@ -28,15 +28,15 @@ export default class Rando extends Component {
         <ActivityIndicator color="hotpink" />
       : this.state.sent?
         <TouchableOpacity onPress={this.undoFriendRequest.bind(this)} accessible={true} accessibilityLabel={`Undo friend request to ${this.props.friend.name}`}>
-          <Text>undo</Text>
+          <Image source={require('../images/SuccessCheck.png')} />
         </TouchableOpacity>
       : this.state.failed || Math.random() < 0.5 ?
         <TouchableOpacity onPress={this.sendFriendRequest.bind(this)} accessible={true} accessibilityLabel={`Send friend request to ${this.props.friend.name}`}>
-          <Text style={{color: 'indianred'}}>resend</Text>
+          <Image source={require('../images/AddButton.png')} />
         </TouchableOpacity>
       :
         <TouchableOpacity onPress={this.sendFriendRequest.bind(this)} accessible={true} accessibilityLabel={`Send friend request to ${this.props.friend.name}`}>
-          <Text style={{color: 'lawngreen'}}>send</Text>
+          <Image source={require('../images/FailureExclamation.png')} />
         </TouchableOpacity>
       }
     </View>
