@@ -25,7 +25,11 @@ export default class Rando extends Component {
       <Text style={[styles.main, {marginRight: 10}]}>{this.props.friend.name}</Text>
 
       { this.state.sending ?
-        <ActivityIndicator color="hotpink" />
+        <ActivityIndicator
+          style={base.buttonLoader}
+          size="small"
+          color={base.colors.mediumgrey}
+        />
       : this.state.sent?
         <TouchableOpacity onPress={this.undoFriendRequest.bind(this)} accessible={true} accessibilityLabel={`Undo friend request to ${this.props.friend.name}`}>
           <Image source={require('../images/SuccessCheck.png')} />
