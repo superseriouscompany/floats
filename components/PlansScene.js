@@ -52,9 +52,9 @@ export default class PlansScene extends Component {
           { !this.state.loadedPlan ?
             <View style={{height: 50}}>
               <ActivityIndicator
-                style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
+                style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
                 size="small"
-                color={base.colors.color1}
+                color={base.colors.mediumgrey}
               />
             </View>
           : this.state.planError ?
@@ -69,9 +69,9 @@ export default class PlansScene extends Component {
           { !this.state.loadedInvitations ?
             <View style={{height: 50}}>
               <ActivityIndicator
-                style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
+                style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
                 size="small"
-                color={base.colors.color1}
+                color={base.colors.mediumgrey}
               />
             </View>
           : this.state.invitationsError ?

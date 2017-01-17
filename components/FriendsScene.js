@@ -12,10 +12,12 @@ import TabBar from './TabBar';
 import api from '../services/api';
 import base from '../styles/base';
 import {
+  ActionSheetIOS,
   ActivityIndicator,
   Image,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -49,23 +51,23 @@ export default class FriendsScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <View style={[base.leftNav, styles.leftNavButton]} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
+        <TouchableOpacity style={[base.leftNav, styles.leftNavButton]} onPress={() => this.showLogoutDialog()}>
           <Image source={require('../images/Ellipses.png')} />
-        </View>
+        </TouchableOpacity>
         <View style={base.header}>
           <Heading>friends</Heading>
         </View>
-        <View style={[base.rightNav, styles.rightNavButton]} onPress={() => this.props.navigator.navigate('RandosScene')}>
+        <TouchableOpacity style={[base.rightNav, styles.rightNavButton]} onPress={() => this.props.navigator.navigate('RandosScene')}>
           <Image source={require('../images/Plus.png')} />
-        </View>
+        </TouchableOpacity>
       </View>
       <ScrollView>
         { this.state.loadingRequests ?
           <View style={{height: 50}}>
             <ActivityIndicator
-              style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
+              style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
               size="small"
-              color={base.colors.color1}
+              color={base.colors.mediumgrey}
             />
           </View>
         : this.state.friendRequests.length ?
@@ -84,9 +86,9 @@ export default class FriendsScene extends Component {
         { this.state.loadingFriends ?
           <View style={{height: 50}}>
             <ActivityIndicator
-              style={[base.loadingTop, {transform: [{scale: 1.5}]}]}
+              style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
               size="small"
-              color={base.colors.color1}
+              color={base.colors.mediumgrey}
             />
           </View>
         : !this.state.friends.length ?
@@ -125,6 +127,29 @@ export default class FriendsScene extends Component {
       <TabBar active="friends" navigator={this.props.navigator}/>
     </View>
   )}
+
+  showLogoutDialog() {
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: [`Logout`, `Delete Account`, 'Cancel'],
+      destructiveButtonIndex: 1,
+      cancelButtonIndex: 2,
+    }, (index) => {
+      if( index == 2 ) { return; }
+      if( index == 0 ) {
+        this.logout();
+      }
+      if( index == 1 ) {
+        Alert.alert(
+          'Delete Account',
+          'Are you sure?',
+          [
+            {text: 'Yes, delete me.', onPress: () => this.deleteAccount()},
+            {text: 'No', style: 'cancel'},
+          ]
+        )
+      }
+    })
+  }
 }
 
 const styles = StyleSheet.create({

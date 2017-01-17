@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins',
     color: base.colors.darkgrey,
     height: 32,
-    paddingTop: 1.5,
+    paddingTop: 1.25,
     paddingLeft: 4,
   },
   container: {

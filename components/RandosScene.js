@@ -41,9 +41,9 @@ export default class RandosScene extends Component {
       <View style={{flex: 1}}>
         { !this.state.loaded ?
           <ActivityIndicator
-            style={[base.loadingCenter, {transform: [{scale: 1.5}]}]}
+            style={[base.loadingCenter, {transform: [{scale: 1.25}]}]}
             size="small"
-            color={base.colors.color1}
+            color={base.colors.mediumgrey}
           />
         : this.state.randos.length ?
           <ScrollView>
