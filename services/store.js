@@ -1,7 +1,6 @@
 const redux  = require('redux');
 
 function store(state, action) {
-  console.log('Dispatched', state, action);
   state = state || {};
 
   switch(action.type) {
