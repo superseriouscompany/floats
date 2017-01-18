@@ -4,13 +4,9 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AsyncStorage,
-  AppRegistry,
-  View,
-} from 'react-native';
-
+import React from 'react';
+import FCM from 'react-native-fcm'
+import Component from './components/Component';
 import CreateFloatScene from './components/CreateFloatScene';
 import LoginScene from './components/LoginScene';
 import PlansScene from './components/PlansScene';
@@ -20,6 +16,12 @@ import Scratch from './components/Scratch';
 import Text from './components/Text';
 import api from './services/api';
 import store from './services/store';
+import {
+  Alert,
+  AsyncStorage,
+  AppRegistry,
+  View,
+} from 'react-native';
 
 export default class batsignal extends Component {
   constructor(props) {
@@ -32,6 +34,13 @@ export default class batsignal extends Component {
         this.setState(stateChange);
       }
     }
+
+    FCM.on('notification', (notif) => {
+      Alert.alert(notif.aps.alert);
+      if(notif.opened_from_tray){
+        //app is open/resumed because user clicked banner
+      }
+    });
 
     AsyncStorage.getItem('@floats:accessToken').then((token) => {
       if( token ) {
