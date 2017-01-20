@@ -215,6 +215,18 @@ const api = {
         return true;
       })
     },
+  },
+
+  messages: {
+    create: function(text) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats/nope/convos/nope/messages`, {
+          method: 'POST',
+          headers: headers(accessToken),
+          body: JSON.stringify({text: text})
+        })
+      })
+    },
   }
 }
 module.exports = api;
