@@ -14,6 +14,7 @@ import RandosScene from './components/RandosScene';
 import FriendsScene from './components/FriendsScene';
 import Scratch from './components/Scratch';
 import Text from './components/Text';
+import MessagesScene from './components/MessagesScene';
 import api from './services/api';
 import store from './services/store';
 import {
@@ -44,7 +45,7 @@ export default class batsignal extends Component {
 
     AsyncStorage.getItem('@floats:accessToken').then((token) => {
       if( token ) {
-        this.setState({scene: 'CreateFloatScene'});
+        this.setState({scene: 'MessagesScene'})
       } else {
         this.setState({scene: 'LoginScene'});
       }
@@ -72,6 +73,8 @@ export default class batsignal extends Component {
           <FriendsScene navigator={this.navigator} />
         : this.state.scene == 'RandosScene' ?
           <RandosScene navigator={this.navigator} />
+        : this.state.scene == 'MessagesScene' ?
+          <MessagesScene navigator={this.navigator} />
         : this.state.scene == 'Scratch' ?
           <Scratch />
         : !!this.state.scene ?

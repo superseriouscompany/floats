@@ -12,6 +12,7 @@
     "react-native": "0.40.0",
     "react-native-fbsdk": "https://github.com/facebook/react-native-fbsdk.git#1827bc4f6a7b37d01979f0988bbca895c991f9f9",
     "react-native-fcm": "^3.0.0",
+    "react-native-gifted-chat": "https://github.com/FaridSafi/react-native-gifted-chat#f9fca62f0f7f3710ab974686844250e213f98116",
     "redux": "^3.6.0"
   },
   "devDependencies": {
