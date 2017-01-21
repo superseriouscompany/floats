@@ -11,7 +11,7 @@ import {
   View
 } from 'react-native';
 
-export default class Plan extends Component {
+export default class Float extends Component {
   render() { return (
     <View style={{flex: 1}}>
       <Text style={{fontSize: 16}}>{this.props.plan.user.name || 'You'} "{this.props.plan.title}"</Text>

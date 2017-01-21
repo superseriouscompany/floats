@@ -67,7 +67,6 @@ export default class LoginScene extends Component {
       return api.sessions.create(data.accessToken.toString())
     }).then((user) => {
       console.warn("got user", user);
-      global.user = user;
       return AsyncStorage.setItem('@floats:user', JSON.stringify(user)).then(function() {
         return AsyncStorage.setItem('@floats:accessToken', user.access_token);
       })
