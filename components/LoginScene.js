@@ -63,12 +63,12 @@ export default class LoginScene extends Component {
   login() {
     AccessToken.getCurrentAccessToken().then((data) => {
       if( !data ) { throw new Error('nope'); }
-      console.log("access token is", data);
       return api.sessions.create(data.accessToken.toString())
     }).then((user) => {
-      console.warn("got user", user);
       return AsyncStorage.setItem('@floats:user', JSON.stringify(user)).then(function() {
         return AsyncStorage.setItem('@floats:accessToken', user.access_token);
+      }).then(() => {
+        this.context.store.dispatch({type: 'login', user: user})
       })
     }).then(() => {
       this.props.navigator.navigate('CreateFloatScene');

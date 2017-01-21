@@ -13,7 +13,7 @@ import {
 import FCM from 'react-native-fcm';
 import CreateFloatScene from './components/CreateFloatScene';
 import LoginScene from './components/LoginScene';
-import FloatsScene from './components/PlansScene';
+import FloatsScene from './components/FloatsScene';
 import Text from './components/Text';
 import api from './services/api';
 
