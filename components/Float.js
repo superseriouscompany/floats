@@ -16,10 +16,10 @@ export default class Float extends Component {
   render() { const f = this.props.float; return (
     <View>
       <View style={styles.heading}>
-        <Image source={{url: f.user.avatar_url}} style={base.photoCircle} />
+        <Image source={{url: f.user.avatar_url}} style={[base.miniPhotoCircle]} />
         <Text style={styles.floatTitle}>"{f.title}"</Text>
         <TouchableOpacity onPress={this.showDialog.bind(this)}>
-          <Text>●●●</Text>
+          <Text style={styles.overflow}>●●●</Text>
         </TouchableOpacity>
       </View>
       { f.convos && f.convos.map((c, key) => (
@@ -36,8 +36,16 @@ export default class Float extends Component {
 const styles = StyleSheet.create({
   heading: {
     flexDirection: 'row',
+    alignItems: 'center',
+    paddingBottom: 5,
   },
   floatTitle: {
+    color: 'darkgrey',
+    fontSize: 12,
     flex: 1,
+  },
+  overflow: {
+    color: 'darkgrey',
+    fontSize: 12,
   }
 })
