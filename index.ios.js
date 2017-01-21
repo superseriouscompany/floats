@@ -17,6 +17,7 @@ import Text from './components/Text';
 import MessagesScene from './components/MessagesScene';
 import api from './services/api';
 import store from './services/store';
+import God from './services/god';
 import {
   Alert,
   AsyncStorage,
@@ -43,8 +44,9 @@ export default class batsignal extends Component {
       }
     });
 
-    AsyncStorage.getItem('@floats:accessToken').then((token) => {
-      if( token ) {
+    AsyncStorage.getItem('@floats:user').then((user) => {
+      if( user ) {
+        store.dispatch({type: 'login', user: JSON.parse(user)});
         this.setState({scene: 'FloatsScene'});
       } else {
         this.setState({scene: 'LoginScene'});
@@ -52,6 +54,8 @@ export default class batsignal extends Component {
     }).catch(function(err) {
       console.warn(err);
     });
+
+    God.work();
   }
 
   getChildContext() {

@@ -4,6 +4,12 @@ function store(state, action) {
   state = state || {};
 
   switch(action.type) {
+    case 'login':
+      return {
+        ...state,
+        user: action.user,
+      }
+
     case 'load:invitations':
       return {
         ...state,
