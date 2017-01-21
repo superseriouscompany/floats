@@ -3,7 +3,6 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
-import Float from './Float';
 import Zapper from './Zapper';
 import base from '../styles/base';
 import moment from 'moment';
