@@ -10,6 +10,7 @@ module.exports = {
 let waiting = {
   invitations: true,
   myFloats: true,
+  convos: true,
 }
 
 let queue = [];
@@ -25,6 +26,7 @@ function work() {
     // TODO: retry
     waiting.invitations && loadInvitations();
     waiting.myFloats && loadMyFloats();
+    waiting.convos && loadConvos();
   })
 }
 
@@ -59,6 +61,24 @@ function loadMyFloats() {
   }).catch(function(err) {
     store.dispatch({
       type: 'load:myFloats:error',
+      error: err.message,
+    })
+  })
+}
+
+function loadConvos() {
+  waiting.convos = false;
+  store.dispatch({
+    type: 'load:convos',
+  })
+  api.convos.all().then(function(convos) {
+    store.dispatch({
+      type: 'load:convos:success',
+      convos: convos,
+    })
+  }).catch(function(err) {
+    store.dispatch({
+      type: 'load:convos:error',
       error: err.message,
     })
   })
