@@ -9,11 +9,16 @@ import moment from 'moment';
 import {
   ActionSheetIOS,
   Image,
+  StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 
 export default class Invitations extends Component {
+  dismiss() {
+    alert('not implemented');
+  }
+
   render() { return (
     <View>
       { !this.props.invitations || !this.props.invitations.length ?
@@ -22,28 +27,29 @@ export default class Invitations extends Component {
         </View>
       :
         <View>
-          {this.props.invitations.map((p, i) => (
-            <View key={i} style={[base.padFullHorizontal, {flexDirection: 'row', paddingTop: 19, paddingBottom: 16, borderBottomWidth: 0.5, borderBottomColor: base.colors.lightgrey}]}>
-              <TouchableOpacity onPress={() => this.reportDialog(p)}>
-                <Image source={{url: p.user.avatar_url}} style={base.photoCircle}/>
-              </TouchableOpacity>
-              <View style={{flex: 1}}>
-                <Text style={{fontSize: 16}}>{p.user.name} "{p.title}"</Text>
-                <Text style={base.timestamp}>
-                  {moment(p.created_at).fromNow()}
-                </Text>
-                { !!p.attending ?
-                  <View>
-                    <Text style={[base.timestamp, {color: base.colors.mediumgrey, paddingTop: 5}]}>{p.user.name.split(' ')[0] + "'s"} been notified</Text>
-                    <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>text to coordinate</Text>
-                  </View>
-                : null
-                }
-                <TouchableOpacity>
-                  <Text style={[base.timestamp, {textDecorationLine: 'underline', color: base.colors.mediumgrey}]}>dismiss</Text>
+          {this.props.invitations.map((f, i) => (
+            <View key={i} style={[base.padFullHorizontal, styles.container]}>
+              <View style={styles.top}>
+                <TouchableOpacity onPress={this.dismiss.bind(this)} style={styles.dismiss}>
+                  <Text style={{color: base.colors.mediumgrey}}>
+                    &times;
+                  </Text>
                 </TouchableOpacity>
+                <Text style={[base.timestamp, styles.context]}>{f.user.name} sent you a float. Into it?</Text>
+                <View style={styles.unread}></View>
               </View>
-              <Zapper floatId={p.id} active={!!p.attending}></Zapper>
+              <View style={styles.main}>
+                <TouchableOpacity onPress={() => this.reportDialog(p)}>
+                  <Image source={{url: f.user.avatar_url}} style={base.photoCircle}/>
+                </TouchableOpacity>
+                <View style={{flex: 1}}>
+                  <Text style={{fontSize: 16}}>{f.user.name} "{f.title}"</Text>
+                  <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
+                    {moment(f.created_at).fromNow()}
+                  </Text>
+                </View>
+                <Zapper floatId={f.id} active={false}></Zapper>
+              </View>
             </View>
           ))}
         </View>
@@ -63,3 +69,34 @@ export default class Invitations extends Component {
     })
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 2,
+    paddingBottom: 4,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    marginBottom: 8,
+  },
+  top: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  context: {
+    color: base.colors.mediumgrey,
+  },
+  main: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  dismiss: {
+  },
+  unread: {
+    width: 10,
+    height: 10,
+    backgroundColor: 'indianred',
+    borderRadius: 10,
+  },
+
+})
