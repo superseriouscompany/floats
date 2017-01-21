@@ -53,7 +53,7 @@ export default class FloatsScene extends Component {
 
       <ScrollView style={{backgroundColor: 'whitesmoke', paddingLeft: 5, paddingRight: 5, paddingTop: 5}}>
         <View style={[base.mainWindow, {backgroundColor: 'whitesmoke'}]}>
-          { this.state.invitations.loading || this.state.convos.loading ?
+          { this.state.invitations.loading || this.state.myFloats.loading || this.state.convos.loading ?
             <View style={{height: 50}}>
               <ActivityIndicator
                 style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
@@ -61,8 +61,13 @@ export default class FloatsScene extends Component {
                 color={base.colors.mediumgrey}
               />
             </View>
-          : this.state.invitations.error ?
+          :
+            null
+          }
+          { this.state.invitations.error ?
             <Text style={{color: 'indianred'}}>{this.state.invitations.error}</Text>
+          : this.state.invitations.loading ?
+            null
           :
             <Invitations invitations={this.state.invitations.all.filter((i) => { return !i.attending;})} />
           }
@@ -70,8 +75,7 @@ export default class FloatsScene extends Component {
 
         { this.state.inbox ?
           <Inbox inbox={this.state.inbox} />
-        :
-          <Text>Inbox loading...</Text>
+        : null
         }
       </ScrollView>
       <TabBar active="floats" navigator={this.props.navigator}/>
