@@ -4,26 +4,32 @@ function store(state, action) {
   state = state || {};
 
   switch(action.type) {
-    case 'login':
-      state.accessToken = action.accessToken;
-      return state;
-    case 'loadNearbyFriends':
-      state.friends = action.friends;
-      return state;
-    case 'removeInvitee':
-      state.invitees = state.invitees.filter(function(i) {
-        return i.id != action.friend.id
-      })
-      return state;
-    case 'addInvitee':
-      state.invitees = state.invitees.concat([action.friend]);
-      return state;
-    case 'addAllInvitees':
-      state.invitees = [].concat(state.friends);
-      return state;
-    case 'removeAllInvitees':
-      state.invitees = [];
-      return state;
+    case 'load:invitations':
+      return {
+        ...state,
+        invitations: {
+          ...state.invitations,
+          loading: true,
+        },
+      }
+    case 'load:invitations:success':
+      return {
+        ...state,
+        invitations: {
+          ...state.invitations,
+          all: action.invitations,
+          loading: false,
+        }
+      }
+    case 'load:invitations:failure':
+      return {
+        ...state,
+        invitations: {
+          ...state.invitations,
+          loading: false,
+          error: action.error,
+        }
+      }
     case '@@redux/INIT':
       return state;
     default:
@@ -44,6 +50,25 @@ const example = {
     facebook_id: '',
     facebook_access_token: '',
   },
+  invitations: {
+    loading: false,
+    error: null,
+    all: [
+      {
+        id: 'abc123',
+        user: {
+          id: '',
+          name: '',
+          avatar_url: '',
+        },
+        created_at: +new Date,
+        bumped: {
+          loading: false,
+          error: false,
+        }
+      }
+    ]
+  },
   floats: {
     loading: false,
     error: null,
@@ -52,11 +77,6 @@ const example = {
         id: 'abc123',
         user_id: 'abc123',
         created_at: +new Date,
-        bumped: {
-          loading: false,
-          error: null,
-          yes: true,
-        },
         convos: {
           loading: false,
           error: null,

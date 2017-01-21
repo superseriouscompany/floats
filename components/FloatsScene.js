@@ -18,11 +18,36 @@ import {
   View
 } from 'react-native';
 
-export default class PlansScene extends Component {
+export default class FloatsScene extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { loadedPlan: false, loadedInvitations: false, }
+    this.state = { loadedPlan: false, invitations: {loading: true}, }
+  }
+
+  componentWillMount() {
+    this.context.store.subscribe(() => {
+      const state = this.context.store.getState();
+      this.setState({
+        invitations: state.invitations
+      });
+    })
+
+    this.context.store.dispatch({
+      type: 'load:invitations',
+    })
+    api.floats.invites().then((floats) => {
+      this.context.store.dispatch({
+        type: 'load:invitations:success',
+        invitations: floats,
+      })
+    }).catch(function(err) {
+      console.error(err);
+      this.context.store.dispatch({
+        type: 'load:invitations:failure',
+        error: err.message,
+      })
+    })
   }
 
   componentDidMount() {
@@ -31,12 +56,6 @@ export default class PlansScene extends Component {
         this.setState({loadedPlan: true, plan: floats[0]});
       }).catch((err) => {
         this.setState({loadedPlan: true, planError: err});
-      })
-
-      api.floats.invites(accessToken).then((floats) => {
-        this.setState({loadedInvitations: true, invitations: floats});
-      }).catch((err) => {
-        this.setState({loadedInvitations: true, invitationsError: err});
       })
     })
   }
@@ -66,7 +85,7 @@ export default class PlansScene extends Component {
           }
         </View>
         <View style={base.mainWindow}>
-          { !this.state.loadedInvitations ?
+          { this.state.invitations.loading ?
             <View style={{height: 50}}>
               <ActivityIndicator
                 style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
@@ -74,14 +93,18 @@ export default class PlansScene extends Component {
                 color={base.colors.mediumgrey}
               />
             </View>
-          : this.state.invitationsError ?
-            <Text style={{color: 'indianred'}}>{this.state.invitationsError}</Text>
+          : this.state.invitations.error ?
+            <Text style={{color: 'indianred'}}>{this.state.invitations.error}</Text>
           :
-            <Invitations invitations={this.state.invitations}></Invitations>
+            <Invitations invitations={this.state.invitations.all}></Invitations>
           }
         </View>
       </ScrollView>
       <TabBar active="floats" navigator={this.props.navigator}/>
     </View>
   )}
+}
+
+FloatsScene.contextTypes = {
+  store: React.PropTypes.object
 }

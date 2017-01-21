@@ -8,6 +8,8 @@ import {
   AsyncStorage
 } from 'react-native'
 
+import store from './store';
+
 const api = {
   sessions: {
     create: function(facebookAccessToken) {
