@@ -173,9 +173,11 @@ const api = {
       })
     },
 
-    mine: function(accessToken) {
-      return fetch(`${baseUrl}/floats/mine`, {
-        headers: headers(accessToken),
+    mine: function() {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats/mine`, {
+          headers: headers(accessToken),
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return response.json();

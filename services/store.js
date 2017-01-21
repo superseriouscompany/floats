@@ -4,12 +4,13 @@ function store(state, action) {
   state = state || {};
 
   switch(action.type) {
+    // login and logout
     case 'login':
       return {
         ...state,
         user: action.user,
       }
-
+    // invitations
     case 'load:invitations':
       return {
         ...state,
@@ -36,6 +37,34 @@ function store(state, action) {
           error: action.error,
         }
       }
+    // my floats
+    case 'load:myFloats':
+      return {
+        ...state,
+        myFloats: {
+          ...state.myFloats,
+          loading: true,
+        },
+      }
+    case 'load:myFloats:success':
+      return {
+        ...state,
+        myFloats: {
+          ...state.myFloats,
+          all: action.floats,
+          loading: false,
+        }
+      }
+    case 'load:myFloats:failure':
+      return {
+        ...state,
+        myFloats: {
+          ...state.myFloats,
+          loading: false,
+          error: action.error,
+        }
+      }
+
     case '@@redux/INIT':
       return state;
     default:
