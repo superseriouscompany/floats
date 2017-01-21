@@ -64,7 +64,33 @@ function store(state, action) {
           error: action.error,
         }
       }
-
+    // convos
+    case 'load:convos':
+      return {
+        ...state,
+        convos: {
+          ...state.convos,
+          loading: true,
+        },
+      }
+    case 'load:convos:success':
+      return {
+        ...state,
+        convos: {
+          ...state.convos,
+          all: action.convos,
+          loading: false,
+        }
+      }
+    case 'load:convos:failure':
+      return {
+        ...state,
+        convos: {
+          ...state.convos,
+          loading: false,
+          error: action.error,
+        }
+      }
     case '@@redux/INIT':
       return state;
     default:

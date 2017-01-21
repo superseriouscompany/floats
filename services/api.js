@@ -230,6 +230,20 @@ const api = {
     },
   },
 
+  convos: {
+    all: function() {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/convos`, {
+          headers: headers(accessToken)
+        }).then(function(response) {
+          return response.json()
+        }).then(function(json) {
+          return json.convos;
+        })
+      })
+    },
+  },
+
   messages: {
     create: function(text) {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {

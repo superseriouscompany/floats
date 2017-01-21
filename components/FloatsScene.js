@@ -23,8 +23,8 @@ export default class FloatsScene extends Component {
     super(props);
 
     this.state = {
-      myFloats:    {loading: true},
       invitations: {loading: true},
+      myFloats:    {loading: true},
     }
   }
 
@@ -33,7 +33,9 @@ export default class FloatsScene extends Component {
       const state = this.context.store.getState();
       this.setState({
         invitations: state.invitations,
-        myFloats: state.myFloats,
+        myFloats:    state.myFloats,
+        convos:      state.convos,
+        inbox:       combine(state.myFloats.all, state.convos.all),
       });
     })
   }
@@ -67,7 +69,7 @@ export default class FloatsScene extends Component {
           }
         </View>
         <View style={base.mainWindow}>
-          { this.state.invitations.loading ?
+          { this.state.invitations.loading || this.state.convos.loading ?
             <View style={{height: 50}}>
               <ActivityIndicator
                 style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
@@ -85,6 +87,22 @@ export default class FloatsScene extends Component {
       <TabBar active="floats" navigator={this.props.navigator}/>
     </View>
   )}
+}
+
+function combine(floats, convos) {
+  floats = (floats || []).map(function(f) {
+    f.time    = f.created_at;
+    f.isFloat = true;
+  })
+
+  convos = (convos || []).map(function(c) {
+    c.isConvo = true;
+    c.time    = c.message.created_at;
+  })
+
+  return floats.concat(convos).sort(function(a,b) {
+    return a.time < b.time;
+  })
 }
 
 FloatsScene.contextTypes = {
