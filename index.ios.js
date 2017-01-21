@@ -9,7 +9,7 @@ import FCM from 'react-native-fcm'
 import Component from './components/Component';
 import CreateFloatScene from './components/CreateFloatScene';
 import LoginScene from './components/LoginScene';
-import PlansScene from './components/PlansScene';
+import FloatsScene from './components/FloatsScene';
 import RandosScene from './components/RandosScene';
 import FriendsScene from './components/FriendsScene';
 import Scratch from './components/Scratch';
@@ -45,7 +45,7 @@ export default class batsignal extends Component {
 
     AsyncStorage.getItem('@floats:accessToken').then((token) => {
       if( token ) {
-        this.setState({scene: 'MessagesScene'})
+        this.setState({scene: 'FloatsScene'});
       } else {
         this.setState({scene: 'LoginScene'});
       }
@@ -67,8 +67,8 @@ export default class batsignal extends Component {
           <LoginScene navigator={this.navigator} />
         : this.state.scene == 'CreateFloatScene' ?
           <CreateFloatScene navigator={this.navigator} />
-        : this.state.scene == 'PlansScene' ?
-          <PlansScene navigator={this.navigator} />
+        : this.state.scene == 'FloatsScene' ?
+          <FloatsScene navigator={this.navigator} />
         : this.state.scene == 'FriendsScene' ?
           <FriendsScene navigator={this.navigator} />
         : this.state.scene == 'RandosScene' ?
