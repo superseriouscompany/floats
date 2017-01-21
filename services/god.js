@@ -9,6 +9,7 @@ module.exports = {
 
 let waiting = {
   invitations: true,
+  myFloats: true,
 }
 
 let queue = [];
@@ -23,6 +24,7 @@ function work() {
 
     // TODO: retry
     waiting.invitations && loadInvitations();
+    waiting.myFloats && loadMyFloats();
   })
 }
 
@@ -39,6 +41,24 @@ function loadInvitations() {
   }).catch(function(err) {
     store.dispatch({
       type: 'load:invitations:error',
+      error: err.message,
+    })
+  })
+}
+
+function loadMyFloats() {
+  waiting.myFloats = false;
+  store.dispatch({
+    type: 'load:myFloats',
+  })
+  api.floats.mine().then(function(floats) {
+    store.dispatch({
+      type: 'load:myFloats:success',
+      floats: floats,
+    })
+  }).catch(function(err) {
+    store.dispatch({
+      type: 'load:myFloats:error',
       error: err.message,
     })
   })

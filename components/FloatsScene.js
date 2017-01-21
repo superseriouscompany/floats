@@ -22,34 +22,24 @@ export default class FloatsScene extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { loadedPlan: false, invitations: {loading: true}, }
+    this.state = {
+      myFloats:    {loading: true},
+      invitations: {loading: true},
+    }
   }
 
   componentWillMount() {
     this.unsubscribe = this.context.store.subscribe(() => {
       const state = this.context.store.getState();
       this.setState({
-        invitations: state.invitations
+        invitations: state.invitations,
+        myFloats: state.myFloats,
       });
-    })
-
-    api.floats.invites().catch(function(err) {
-      console.error(err);
     })
   }
 
   componentWillUnmount() {
     this.unsubscribe();
-  }
-
-  componentDidMount() {
-    AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
-      api.floats.mine(accessToken).then((floats) => {
-        this.setState({loadedPlan: true, plan: floats[0]});
-      }).catch((err) => {
-        this.setState({loadedPlan: true, planError: err});
-      })
-    })
   }
 
   render() { return (
@@ -60,7 +50,7 @@ export default class FloatsScene extends Component {
 
       <ScrollView>
         <View style={[{alignItems: 'center', justifyContent: 'center'}, base.mainWindow]}>
-          { !this.state.loadedPlan ?
+          { this.state.myFloats.loading ?
             <View style={{height: 50}}>
               <ActivityIndicator
                 style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
@@ -68,10 +58,10 @@ export default class FloatsScene extends Component {
                 color={base.colors.mediumgrey}
               />
             </View>
-          : this.state.planError ?
-            <Text style={{color: 'indianred'}}>{this.state.planError}</Text>
-          : this.state.plan ?
-            <YourPlan plan={this.state.plan}></YourPlan>
+          : this.state.myFloats.error ?
+            <Text style={{color: 'indianred'}}>{this.state.myFloats.error}</Text>
+          : this.state.myFloats.all && this.state.myFloats.all.length ?
+            <YourPlan plan={this.state.myFloats.all[0]}></YourPlan>
           :
             null
           }
