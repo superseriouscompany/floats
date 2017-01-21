@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'lodash';
 import React from 'react';
 import Component from './Component';
 import base from '../styles/base';
@@ -9,6 +10,7 @@ import YourPlan from './YourPlan';
 import Invitations from './Invitations';
 import TabBar from './TabBar';
 import Text from './Text';
+import Inbox from './Inbox';
 import {
   ActivityIndicator,
   AsyncStorage,
@@ -35,7 +37,7 @@ export default class FloatsScene extends Component {
         invitations: state.invitations,
         myFloats:    state.myFloats,
         convos:      state.convos,
-        inbox:       combine(state.myFloats.all, state.convos.all),
+        inbox:       generateInbox(state.invitations, state.myFloats, state.convos),
       });
     })
   }
@@ -51,6 +53,11 @@ export default class FloatsScene extends Component {
       </View>
 
       <ScrollView>
+        { this.state.inbox ?
+          <Inbox inbox={this.state.inbox} />
+        : null
+        }
+
         <View style={[{alignItems: 'center', justifyContent: 'center'}, base.mainWindow]}>
           { this.state.myFloats.loading ?
             <View style={{height: 50}}>
@@ -89,18 +96,33 @@ export default class FloatsScene extends Component {
   )}
 }
 
-function combine(floats, convos) {
-  floats = (floats || []).map(function(f) {
-    f.time    = f.created_at;
-    f.isFloat = true;
+function generateInbox(invitations, myFloats, convos) {
+  if( !invitations.all || !myFloats.all || !convos.all ) { return null; }
+
+  let floats = [];
+
+  invitations.all.forEach(function(i) {
+    if( !i.attending ) { return; }
+    floats[i.id] = {
+      ...i,
+      time: i.created_at,
+    }
+  });
+
+  myFloats.all.forEach(function(f) {
+    floats[f.id] = {
+      ...f,
+      time: f.created_at,
+    }
   })
 
-  convos = (convos || []).map(function(c) {
-    c.isConvo = true;
-    c.time    = c.message.created_at;
+  convos.all.forEach(function(c) {
+    floats[c.float_id].convos = floats[c.float_id].convos || [];
+    floats[c.float_id].convos.push(c);
+    floats[c.float_id].time = Math.max(floats[c.float_id].time, c.message.created_at);
   })
 
-  return floats.concat(convos).sort(function(a,b) {
+  return _.values(floats).sort(function(a, b) {
     return a.time < b.time;
   })
 }
