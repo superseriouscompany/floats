@@ -8,46 +8,61 @@ import base from '../styles/base';
 import {
   Image,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
 export default class ConvoPreview extends Component {
   render() { const c = this.props.convo; return (
-    <View style={styles.container}>
-      <Image source={{url: c.message.user.avatar_url}} style={base.photoCircle}/>
-      <View style={styles.message}>
-        <Text style={styles.name}>
-          { c.members.length == 2 ?
-            c.message.user.name
-          : c.members.length == 3 ?
-            `${c.message.user.name.split(' ')[0]} and 1 other`
-          : c.members.length > 3 ?
-            `${c.message.user.name.split(' ')[0]} and ${c.members.length - 2} others`
-          : null
-          }
+    <TouchableOpacity onPress={this.showConvo.bind(this)}>
+      <View style={styles.container}>
+        <Image source={{url: c.message.user.avatar_url}} style={base.photoCircle}/>
+        <View style={styles.message}>
+          <Text style={styles.name}>
+            { c.members.length == 2 ?
+              c.message.user.name
+            : c.members.length == 3 ?
+              `${c.message.user.name.split(' ')[0]} and 1 other`
+            : c.members.length > 3 ?
+              `${c.message.user.name.split(' ')[0]} and ${c.members.length - 2} others`
+            : null
+            }
+          </Text>
+          <Text style={styles.text}>
+            { c.message.text }
+          </Text>
+        </View>
+        <Text>
+          &gt;
         </Text>
-        <Text style={styles.text}>
-          { c.message.text }
+        <Text style={[base.timestamp, styles.time]}>
+          { moment(c.message.created_at).format('h:mma') }
         </Text>
       </View>
-      <Text>
-        &gt;
-      </Text>
-      <Text style={[base.timestamp, styles.time]}>
-        { moment(c.message.created_at).format('h:mma') }
-      </Text>
-    </View>
+    </TouchableOpacity>
   )}
+
+  showConvo() {
+    alert('not implemented');
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    backgroundColor: 'white',
   },
   message: {
     flex: 1,
   },
   time: {
-    color: 'lightgrey',
+    color: base.colors.mediumgrey,
+    position: 'absolute',
+    right: 5,
+    bottom: 5,
+  },
+  text: {
+    color: base.colors.mediumgrey,
+    fontSize: base.fontSizes.small,
   }
 })
