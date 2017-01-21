@@ -185,13 +185,30 @@ const api = {
     },
 
     invites: function(accessToken) {
-      return fetch(`${baseUrl}/floats`, {
-        headers: headers(accessToken),
+      store.dispatch({
+        type: 'load:invitations',
+      })
+
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats`, {
+          headers: headers(accessToken),
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return response.json();
       }).then(function(json) {
+        store.dispatch({
+          type: 'load:invitations:success',
+          invitations: json.floats,
+        })
         return json.floats;
+      }).catch(function(err) {
+        console.error(err);
+        store.dispatch({
+          type: 'load:invitations:failure',
+          error: err.message,
+        })
+        throw err;
       })
     },
 
