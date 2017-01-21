@@ -6,7 +6,6 @@ import Component from './Component';
 import base from '../styles/base';
 import api from '../services/api';
 import Heading from './Heading';
-import YourPlan from './YourPlan';
 import Invitations from './Invitations';
 import TabBar from './TabBar';
 import Text from './Text';
@@ -53,28 +52,6 @@ export default class FloatsScene extends Component {
       </View>
 
       <ScrollView>
-        { this.state.inbox ?
-          <Inbox inbox={this.state.inbox} />
-        : null
-        }
-
-        <View style={[{alignItems: 'center', justifyContent: 'center'}, base.mainWindow]}>
-          { this.state.myFloats.loading ?
-            <View style={{height: 50}}>
-              <ActivityIndicator
-                style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
-                size="small"
-                color={base.colors.mediumgrey}
-              />
-            </View>
-          : this.state.myFloats.error ?
-            <Text style={{color: 'indianred'}}>{this.state.myFloats.error}</Text>
-          : this.state.myFloats.all && this.state.myFloats.all.length ?
-            <YourPlan plan={this.state.myFloats.all[0]}></YourPlan>
-          :
-            null
-          }
-        </View>
         <View style={base.mainWindow}>
           { this.state.invitations.loading || this.state.convos.loading ?
             <View style={{height: 50}}>
@@ -87,9 +64,15 @@ export default class FloatsScene extends Component {
           : this.state.invitations.error ?
             <Text style={{color: 'indianred'}}>{this.state.invitations.error}</Text>
           :
-            <Invitations invitations={this.state.invitations.all}></Invitations>
+            <Invitations invitations={this.state.invitations.all.filter((i) => { return !i.attending;})} />
           }
         </View>
+
+        { this.state.inbox ?
+          <Inbox inbox={this.state.inbox} />
+        :
+          <Text>Inbox loading...</Text>
+        }
       </ScrollView>
       <TabBar active="floats" navigator={this.props.navigator}/>
     </View>

@@ -3,6 +3,8 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
+import Float from './Float';
+
 import {
   View,
 } from 'react-native';
@@ -10,8 +12,8 @@ import {
 export default class Inbox extends Component {
   render() { return (
     <View>
-      { this.props.inbox.map((x, key) => (
-        <Text key={key}>{JSON.stringify(x)}</Text>
+      { this.props.inbox.map((float, key) => (
+        <Float key={key} float={float} />
       ))}
     </View>
   )}
