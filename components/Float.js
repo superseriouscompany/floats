@@ -22,9 +22,22 @@ export default class Float extends Component {
           <Text style={styles.overflow}>●●●</Text>
         </TouchableOpacity>
       </View>
-      { f.convos && f.convos.map((c, key) => (
-        <ConvoPreview convo={c} key={key} />
-      ))}
+      { f.convos && f.convos.length ?
+        <View>
+          { f.convos.map((c, key) => (
+            <ConvoPreview convo={c} key={key} />
+          ))}
+        </View>
+      : f.invitees && f.invitees.length ?
+        <View style={styles.unanswered}>
+          <Text style={styles.check}>✔</Text>
+          <Text>
+            delivered to {f.invitees.length}
+            { f.invitees.length == 1 ? ' friend' : ' friends' }
+          </Text>
+        </View>
+      : null
+      }
     </View>
   )}
 
@@ -47,5 +60,17 @@ const styles = StyleSheet.create({
   overflow: {
     color: 'darkgrey',
     fontSize: 12,
-  }
+  },
+  unanswered: {
+    backgroundColor: 'white',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
+    flexDirection: 'row',
+  },
+  check: {
+    color: 'lawngreen',
+    fontSize: 16,
+  },
 })
