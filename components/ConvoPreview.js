@@ -14,8 +14,8 @@ import {
 
 export default class ConvoPreview extends Component {
   render() { const c = this.props.convo; return (
-    <TouchableOpacity onPress={this.showConvo.bind(this)}>
-      <View style={styles.container}>
+    <TouchableOpacity onPress={this.showConvo.bind(this)} style={{flex: 1}}>
+      <View style={[styles.container, (this.props.doBottomBorder == 1) ? {paddingBottom: 0.5} : {paddingBottom: 0}]}>
         <Image source={{url: c.message.user.avatar_url}} style={styles.photoCircle}/>
         <View style={styles.message}>
           <Text style={styles.name} numberOfLines={1}>
@@ -37,6 +37,11 @@ export default class ConvoPreview extends Component {
           { moment(c.message.created_at).format('h:mma') }
         </Text>
       </View>
+      {
+        this.props.doBottomBorder == 1 ?
+          <View style={styles.bottomBorder}></View>
+        : null
+      }
     </TouchableOpacity>
   )}
 
@@ -53,6 +58,12 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  bottomBorder: {
+    flex: 1,
+    borderBottomWidth: 0.5,
+    borderColor: base.colors.lightgrey,
+    marginLeft: 16,
   },
   message: {
     flex: 1,
@@ -81,6 +92,7 @@ const styles = StyleSheet.create({
   rightArrow: {
     marginLeft: 14,
     marginRight: 12,
+    marginTop: -1
   }
 })
 

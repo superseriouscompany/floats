@@ -21,14 +21,14 @@ export default class Float extends Component {
           <Text style={styles.floatTitle}>{f.title}”</Text>
           <Text style={styles.rightQuote}>“</Text>
         </View>
-        <TouchableOpacity onPress={this.showDialog.bind(this)} style={{paddingRight: 8, paddingTop: 7, paddingBottom: 7, paddingLeft: 8}}>
+        <TouchableOpacity onPress={this.showDialog.bind(this)} style={{paddingRight: 8, paddingTop: 6.5, paddingBottom: 7.5, paddingLeft: 8}}>
           <Image source={require('../images/ThreeDotsLight.png')} />
         </TouchableOpacity>
       </View>
       { f.convos && f.convos.length ?
         <View style={{backgroundColor: 'white', borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor: base.colors.lightgrey, marginBottom: 10}}>
           { f.convos.map((c, key) => (
-            <ConvoPreview convo={c} key={key} />
+            <ConvoPreview convo={c} key={key} doBottomBorder={(key == f.convos.length - 1) ? 0 : 1}/>
           ))}
         </View>
       : f.invitees && f.invitees.length ?
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     paddingTop: 2,
-    paddingBottom: 4,
+    paddingBottom: 5,
   },
   rightQuote: {
     color: base.colors.mediumgrey,

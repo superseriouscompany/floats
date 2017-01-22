@@ -29,7 +29,7 @@ export default class Invitations extends Component {
                 <TouchableOpacity onPress={this.dismiss.bind(this)} style={styles.dismiss}>
                   <Image source={require('../images/XLight.png')} />
                 </TouchableOpacity>
-                <Text style={[base.timestamp, styles.context, {fontSize: 12}]}>{f.user.name} sent you a float. Into it?</Text>
+                <Text style={[base.timestamp, styles.context, {fontSize: 12}]}>{f.user.name} sent you a float</Text>
                 <View style={styles.unread}></View>
               </View>
               <View style={styles.main}>
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   context: {
+    paddingTop: 1.25,
     color: base.colors.mediumgrey,
   },
   main: {
@@ -98,6 +99,7 @@ const styles = StyleSheet.create({
     height: 8,
     backgroundColor: base.colors.color1,
     borderRadius: 4,
+    marginTop: -.25,
   },
   photoCircle: {
     width: 45,
