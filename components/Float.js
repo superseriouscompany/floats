@@ -52,7 +52,7 @@ export default class Float extends Component {
 const styles = StyleSheet.create({
   heading: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     paddingTop: 2,
     paddingBottom: 4,
   },
