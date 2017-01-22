@@ -84,6 +84,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 11,
     marginRight: 11,
+    borderColor: base.colors.lightgrey,
+    borderWidth: 0.5,
   },
   top: {
     alignItems: 'center',
