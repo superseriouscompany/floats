@@ -24,7 +24,7 @@ export default class Float extends Component {
           <Text style={styles.floatTitle}>{f.title}”</Text>
           <Text style={styles.rightQuote}>“</Text>
         </View>
-        <TouchableOpacity onPress={this.showDialog.bind(this)} style={{paddingRight: 8, paddingTop: 6.5, paddingBottom: 7.5, paddingLeft: 8}}>
+        <TouchableOpacity onPress={this.showDialog.bind(this)} style={{paddingRight: 10, paddingTop: 6.5, paddingBottom: 7.5, paddingLeft: 8}}>
           <Image source={require('../images/ThreeDotsLight.png')} />
         </TouchableOpacity>
       </View>
