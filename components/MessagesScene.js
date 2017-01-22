@@ -18,6 +18,22 @@ export default class MessagesScene extends Component {
     this.onSend = this.onSend.bind(this);
   }
 
+  componentWillMount() {
+    this.unsubscribe = this.context.store.subscribe(this.render.bind(this));
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    const state = this.context.store.getState();
+
+    this.setState({
+      messages: state.messages[state.activeConvoId],
+    })
+  }
+
   appendMessage(message) {
     try {
       message = JSON.parse(message);
@@ -46,9 +62,17 @@ export default class MessagesScene extends Component {
   }
 
   onSend(messages = []) {
+    const state = this.context.store.getState();
+    const convo = state.convos.all && state.convos.all.find(function(c) {
+      return c.id == state.activeConvoId;
+    });
+    console.log("Looking for active convo", state);
+    if( !convo ) { return console.error("Active convo doesn't exist"); }
+
     messages.forEach(function(m) {
       console.log("gonna create", m.text);
-      api.messages.create(m.text).catch(function(err) {
+
+      api.messages.create(convo.float_id, convo.id, m.text).catch(function(err) {
         console.error(err);
         // FIXME: show message as failed
       });
@@ -74,4 +98,8 @@ export default class MessagesScene extends Component {
       </View>
     );
   }
+}
+
+MessagesScene.contextTypes = {
+  store: React.PropTypes.object,
 }
