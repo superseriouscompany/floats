@@ -40,11 +40,15 @@ export default class FloatsScene extends Component {
 
   refreshState() {
     const state = this.context.store.getState();
+    const inbox = generateInbox(state.invitations, state.myFloats, state.convos);
+    const isEmpty = inbox && !inbox.length && state.invitations.all && !state.invitations.all.length;
+
     this.setState({
       invitations: state.invitations,
       myFloats:    state.myFloats,
       convos:      state.convos,
-      inbox:       generateInbox(state.invitations, state.myFloats, state.convos),
+      inbox:       inbox,
+      empty:       isEmpty,
     });
   }
 
@@ -75,8 +79,9 @@ export default class FloatsScene extends Component {
             <Invitations invitations={this.state.invitations.all.filter((i) => { return !i.attending;})} />
           }
         </View>
-
-        { this.state.inbox ?
+        { this.state.empty ?
+          <Text style={{color: 'hotpink'}}>Empty State</Text>
+        : this.state.inbox ?
           <Inbox inbox={this.state.inbox} />
         : null
         }
