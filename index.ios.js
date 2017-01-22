@@ -38,7 +38,11 @@ export default class batsignal extends Component {
     }
 
     FCM.on('notification', (notif) => {
-      Alert.alert(notif.aps.alert);
+      if( notif.aps ) {
+        Alert.alert(notif.aps.alert);
+      } else {
+        console.warn("Unknown notification", notif);
+      }
       if(notif.opened_from_tray){
         //app is open/resumed because user clicked banner
       }
@@ -47,7 +51,7 @@ export default class batsignal extends Component {
     AsyncStorage.getItem('@floats:user').then((user) => {
       if( user ) {
         store.dispatch({type: 'login', user: JSON.parse(user)});
-        this.setState({scene: 'CreateFloatScene'});
+        this.setState({scene: 'FloatsScene'});
       } else {
         this.setState({scene: 'LoginScene'});
       }
