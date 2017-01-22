@@ -140,6 +140,11 @@ function store(state, action) {
 
 module.exports = redux.createStore(store);
 
+//
+//
+// Example state:
+//
+//
 const example = {
   navigation: {
     pendingRoute: 'MessagesScene',
@@ -152,7 +157,8 @@ const example = {
   user: {
     loading: false,
     error: null,
-    access_token: 'abc123',
+    id: '',
+    access_token: '',
     avatar_url: '',
     name: '',
     facebook_id: '',
@@ -162,68 +168,58 @@ const example = {
   invitations: {
     loading: false,
     error: null,
-    all: [
-      {
-        id: 'abc123',
-        user: {
-          id: '',
-          name: '',
-          avatar_url: '',
-        },
-        created_at: +new Date,
-        bumped: {
-          loading: false,
-          error: false,
-        }
-      }
-    ]
+    all: [float, float],
   },
   convos: {
     loading: false,
     error: null,
-    all: [
-      {
-        id: 'abc123',
-        message: {
-          created_at: +new Date,
-          text: '',
-          user: {
-            avatar_url: '',
-            name: '',
-          }
-        },
-        unread: false,
-      }
-    ]
+    all: [convo, convo, convo],
   },
   floats: {
     loading: false,
     error: null,
-    all: [
-      {
-        id: 'abc123',
-        user_id: 'abc123',
-        created_at: +new Date,
-      }
-    ],
+    all: [float, float]
   },
   messages: {
     oneConvoId: {
       loading: false,
       error: null,
-      all: [
-        {
-          text: '',
-          created_at: +new Date,
-          type: '',
-          user: {
-            id: '',
-            avatar_url: '',
-            name: '',
-          }
-        }
-      ]
+      all: [message, message, message],
     },
-    secondConvoId: {}
+    anotherConvoId: {
+      loading: false,
+      error: null,
+      all: [],
+    }
   }
+}
+
+const user = {
+  id: '',
+  name: '',
+  avatar_url: '',
+}
+
+const convo = {
+  id: 'abc123',
+  message: {
+    created_at: +new Date,
+    text: '',
+    user: user
+  },
+  unread: false,
+}
+
+const float = {
+  id: '',
+  title: '',
+  user: user,
+  created_at: +new Date,
+}
+
+const message = {
+  text: '',
+  created_at: +new Date,
+  type: '',
+  user: user,
 }
