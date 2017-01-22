@@ -115,10 +115,10 @@ module.exports = StyleSheet.create({
     borderRadius: 9,
     marginLeft: 10,
     marginRight: 10,
+    marginBottom: 1,
     borderWidth: 0.5,
     borderColor: colors.offwhite,
   },
-
   bgBreakingSection: {
     backgroundColor: colors.offwhite,
     borderBottomWidth: 0.5,
