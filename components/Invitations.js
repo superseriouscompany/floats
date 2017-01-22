@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   context: {
     paddingTop: 1.25,
-    color: base.colors.mediumgrey,
+    color: base.colors.mediumlightgrey,
   },
   rightQuote: {
     color: base.colors.darkgrey,

@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   time: {
-    color: base.colors.mediumdarkgrey,
+    color: base.colors.mediumlightgrey,
     position: 'absolute',
     right: 12,
     bottom: 4,
