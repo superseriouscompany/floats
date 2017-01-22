@@ -75,7 +75,7 @@ export default class FloatsScene extends Component {
               </TouchableOpacity>
             </View>
         :
-          <ScrollView style={{paddingTop: 10}}>
+          <ScrollView>
             <View>
               { this.state.invitations.loading || this.state.myFloats.loading || this.state.convos.loading ?
                 <View style={{height: 50}}>
@@ -93,7 +93,7 @@ export default class FloatsScene extends Component {
               : this.state.invitations.loading ?
                 null
               : this.state.invitations.all && this.state.invitations.all.length ?
-                <View style={{flex: 1, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.lightgrey, marginBottom: 8}}>
+                <View style={{flex: 1, backgroundColor: base.colors.color2, paddingTop: 10}}>
                   <Invitations invitations={this.state.invitations.all.filter((i) => { return !i.attending;})} />
                 </View>
               : null
