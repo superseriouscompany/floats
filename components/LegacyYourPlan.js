@@ -23,7 +23,7 @@ export default class YourPlan extends Component {
     const plan = this.props.plan;
     if( !plan ) { return null; }
     return (
-    <View style={[{flexDirection: 'row', paddingBottom: 18, backgroundColor: base.colors.offwhite, borderBottomWidth: 0.5, borderBottomColor: base.colors.lightgrey}, base.padFullHorizontal, base.padMainItem]}>
+    <View style={[{flexDirection: 'row', paddingBottom: 18, backgroundColor: base.colors.offwhite, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: base.colors.lightgrey}, base.padFullHorizontal, base.padMainItem]}>
       <Image source={{url: plan.user.avatar_url}} style={base.photoCircle} />
       <View style={{flex: 1}}>
         <Float plan={plan} attendees={plan.attendees}/>

@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     marginLeft: 11,
     marginRight: 11,
     borderColor: base.colors.lightgrey,
-    borderWidth: 0.5,
+    borderWidth: StyleSheet.hairlineWidth,
   },
   top: {
     alignItems: 'center',
@@ -123,6 +123,6 @@ const styles = StyleSheet.create({
     borderRadius: 23,
     marginRight: 10,
     borderColor: base.colors.lightgrey,
-    borderWidth: 0.5,
+    borderWidth: StyleSheet.hairlineWidth,
   },
 })

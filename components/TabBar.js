@@ -90,8 +90,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingTop: 12,
     paddingBottom: 12,
-    borderTopWidth: 0.5,
+    borderTopWidth: StyleSheet.hairlineWidth,
     borderColor: base.colors.lightgrey,
+    backgroundColor: 'white',
   },
   tabItem: {
     flex: .333,

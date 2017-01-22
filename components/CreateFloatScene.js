@@ -87,7 +87,7 @@ export default class CreateFloatScene extends Component {
           <Text style={{color: 'indianred', textAlign: 'center'}}>{this.state.error}</Text>
         : !this.state.friends.length ?
           <View style={{alignItems: 'center'}}>
-            <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: 0.5, borderColor: base.colors.mediumgrey}]}>
+            <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.mediumgrey}]}>
               <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
                 no nearby friends
               </Text>

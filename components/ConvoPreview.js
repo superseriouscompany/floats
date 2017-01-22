@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   bottomBorder: {
     flex: 1,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: base.colors.lightgrey,
     marginLeft: 20,
   },

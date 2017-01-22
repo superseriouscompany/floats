@@ -45,7 +45,7 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomWidth: 0.5,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.lightgrey,
   },
   leftNav: {
@@ -65,7 +65,7 @@ module.exports = StyleSheet.create({
   bottomBar: {
     height: 42.1,
     backgroundColor: colors.darkgrey,
-    borderTopWidth: 0.5,
+    borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: colors.lightgrey,
   },
   padFullHorizontal: {
@@ -107,7 +107,7 @@ module.exports = StyleSheet.create({
     height: 46,
     borderRadius: 23,
     marginRight: 15,
-    borderWidth: 0.5,
+    borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.lightgrey,
   },
   miniPhotoCircle: {
@@ -117,12 +117,12 @@ module.exports = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 1,
-    borderWidth: 0.5,
+    borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.offwhite,
   },
   bgBreakingSection: {
     backgroundColor: colors.offwhite,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.lightgrey,
   },
 });

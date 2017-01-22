@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     paddingLeft: 20,
     paddingRight: 21,
-    borderBottomWidth: .5,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: base.colors.lightgrey,
   },
 })
