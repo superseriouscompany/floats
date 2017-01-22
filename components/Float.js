@@ -17,13 +17,13 @@ export default class Float extends Component {
     <View>
       <View style={styles.heading}>
         <Image source={{url: f.user.avatar_url}} style={base.miniPhotoCircle} />
-        <Text style={styles.floatTitle}>"{f.title}"</Text>
+        <Text style={styles.floatTitle}>“{f.title}”</Text>
         <TouchableOpacity onPress={this.showDialog.bind(this)} style={{paddingRight: 8, paddingTop: 7, paddingBottom: 7, paddingLeft: 8}}>
           <Image source={require('../images/ThreeDotsLight.png')} />
         </TouchableOpacity>
       </View>
       { f.convos && f.convos.length ?
-        <View>
+        <View style={{backgroundColor: 'white', borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor: base.colors.lightgrey, marginBottom: 10}}>
           { f.convos.map((c, key) => (
             <ConvoPreview convo={c} key={key} />
           ))}

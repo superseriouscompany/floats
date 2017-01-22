@@ -16,7 +16,7 @@ export default class ConvoPreview extends Component {
   render() { const c = this.props.convo; return (
     <TouchableOpacity onPress={this.showConvo.bind(this)}>
       <View style={styles.container}>
-        <Image source={{url: c.message.user.avatar_url}} style={base.photoCircle}/>
+        <Image source={{url: c.message.user.avatar_url}} style={styles.photoCircle}/>
         <View style={styles.message}>
           <Text style={styles.name}>
             { c.members.length == 2 ?
@@ -50,7 +50,7 @@ export default class ConvoPreview extends Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: 'white',
+    alignItems: 'center',
   },
   message: {
     flex: 1,
@@ -64,5 +64,13 @@ const styles = StyleSheet.create({
   text: {
     color: base.colors.mediumgrey,
     fontSize: base.fontSizes.small,
-  }
+  },
+  photoCircle: {
+    width: 54,
+    height: 54,
+    borderRadius: 27,
+    marginLeft: 10,
+    marginTop: 16,
+    marginBottom: 17
+  },
 })

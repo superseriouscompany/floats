@@ -41,7 +41,7 @@ export default class Invitations extends Component {
                   <Image source={{url: f.user.avatar_url}} style={{width: 45, height: 45, borderRadius: 23, marginRight: 10, borderColor: base.colors.lightgrey, borderWidth: 0.5}}/>
                 </TouchableOpacity>
                 <View style={{flex: 1, paddingRight: 45}}>
-                  <Text style={{fontSize: 16}}>"{f.title}"</Text>
+                  <Text style={{fontSize: 16}}>“{f.title}”</Text>
                   <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
                     {moment(f.created_at).fromNow()}
                   </Text>
