@@ -128,6 +128,7 @@ function loadMessages(floatId, convoId) {
   waiting.messages = false;
   store.dispatch({
     type: 'load:messages',
+    convoId: convoId,
   })
   return api.messages.all(floatId, convoId).then(function(messages) {
     store.dispatch({

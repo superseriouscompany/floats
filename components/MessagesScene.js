@@ -16,21 +16,29 @@ export default class MessagesScene extends Component {
     super(props);
     this.state = {messages: []};
     this.onSend = this.onSend.bind(this);
+    console.log('called constructor');
   }
 
   componentWillMount() {
-    this.unsubscribe = this.context.store.subscribe(this.render.bind(this));
+    console.log('called will mount');
+    this.unsubscribe = this.context.store.subscribe(this.applyState.bind(this));
+    this.applyState();
   }
 
   componentWillUnmount() {
     this.unsubscribe();
   }
 
-  render() {
+  applyState() {
     const state = this.context.store.getState();
 
+    const messages = state.messages[state.activeConvoId];
+    if( !messages ) { return; }
     this.setState({
-      messages: state.messages[state.activeConvoId],
+      loading:  messages.loading,
+      error:    messages.error,
+      messages: (messages.all || []).map(decorate),
+      user:     state.user,
     })
   }
 
@@ -41,23 +49,12 @@ export default class MessagesScene extends Component {
       return console.warn("Couldn't parse", message, err);
     }
 
-    AsyncStorage.getItem('@floats:user', (user) => {
-      message = {
-        _id: message.id,
-        text: message.text,
-        createdAt: new Date(message.created_at),
-        user: {
-          _id: message.user.id,
-          name: message.user.name,
-          avatar: message.user.avatar_url,
-        }
-      }
+    message = decorate(message);
 
-      this.setState((previousState) => {
-        return {
-          messages: GiftedChat.append(previousState.messages, [message])
-        }
-      })
+    this.setState((previousState) => {
+      return {
+        messages: GiftedChat.append(previousState.messages, [message])
+      }
     })
   }
 
@@ -70,8 +67,6 @@ export default class MessagesScene extends Component {
     if( !convo ) { return console.error("Active convo doesn't exist"); }
 
     messages.forEach(function(m) {
-      console.log("gonna create", m.text);
-
       api.messages.create(convo.float_id, convo.id, m.text).catch(function(err) {
         console.error(err);
         // FIXME: show message as failed
@@ -84,19 +79,35 @@ export default class MessagesScene extends Component {
       };
     });
   }
+
   render() {
+    if( !this.state.user ) return null;
+
     return (
       <View style={{flex: 1}}>
         <GiftedChat
           messages={this.state.messages}
           onSend={this.onSend}
           user={{
-            _id: 1,
+            _id: this.state.user.id,
           }}
         />
         <TabBar />
       </View>
-    );
+    )
+  }
+}
+
+function decorate(message) {
+  return {
+    _id: message.id,
+    text: message.text,
+    createdAt: new Date(message.created_at),
+    user: {
+      _id: message.user.id,
+      name: message.user.name,
+      avatar: message.user.avatar_url,
+    }
   }
 }
 
