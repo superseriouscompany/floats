@@ -7,6 +7,8 @@ import TabBar from './TabBar';
 import api from '../services/api';
 import {
   AsyncStorage,
+  StyleSheet,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -85,6 +87,12 @@ export default class MessagesScene extends Component {
 
     return (
       <View style={{flex: 1}}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={this.back.bind(this)} style={styles.topLeft}>
+            <Text style={{color: 'hotpink'}}>&larr;</Text>
+          </TouchableOpacity>
+          <Text>Kevin David Crowe</Text>
+        </View>
         <GiftedChat
           messages={this.state.messages}
           onSend={this.onSend}
@@ -96,7 +104,24 @@ export default class MessagesScene extends Component {
       </View>
     )
   }
+
+  back() {
+    this.context.store.dispatch({type: 'navigation:queue', route: 'FloatsScene'});
+  }
 }
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: 'cornflowerblue',
+    paddingTop: 20,
+    alignItems: 'center',
+  },
+  topLeft: {
+    position: 'absolute',
+    left: 5,
+    top: 20,
+  }
+})
 
 function decorate(message) {
   return {
