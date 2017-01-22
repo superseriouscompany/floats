@@ -23,7 +23,7 @@ export default class KillSwitchScene extends Component {
       </View>
 
       <View style={{alignItems: 'center'}}>
-        <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: 0.5, borderColor: base.colors.mediumgrey}]}>
+        <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.mediumgrey}]}>
           <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
             update required
           </Text>

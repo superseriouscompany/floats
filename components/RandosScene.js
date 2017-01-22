@@ -47,7 +47,7 @@ export default class RandosScene extends Component {
           />
         : this.state.randos.length ?
           <ScrollView>
-            <View style={{paddingBottom: 16, borderBottomWidth: 0.5, borderBottomColor:base.colors.lightgrey}}>
+            <View style={{paddingBottom: 16, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor:base.colors.lightgrey}}>
               {this.state.randos.map((f, i) => (
                 <Rando key={i} friend={f} />
               ))}
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    borderTopWidth: .5,
+    borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: base.colors.lightgrey,
   }
 })
