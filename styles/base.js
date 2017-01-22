@@ -111,9 +111,9 @@ module.exports = StyleSheet.create({
     borderColor: colors.lightgrey,
   },
   miniPhotoCircle: {
-    width: 18,
-    height: 18,
-    borderRadius: 9,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 1,
