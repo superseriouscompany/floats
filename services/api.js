@@ -245,9 +245,20 @@ const api = {
   },
 
   messages: {
-    create: function(text) {
+    all: function(floatId, convoId) {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
-        return fetch(`${baseUrl}/floats/nope/convos/nope/messages`, {
+        return fetch(`${baseUrl}/floats/${floatId}/convos/${convoId}/messages`, {
+          headers: headers(accessToken),
+        })
+      }).then(function(response) {
+        return response.json()
+      }).then(function(json) {
+        return json.messages;
+      })
+    },
+    create: function(floatId, convoId, text) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats/${floatId}/convos/${convoId}/messages`, {
           method: 'POST',
           headers: headers(accessToken),
           body: JSON.stringify({text: text})

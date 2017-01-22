@@ -11,6 +11,7 @@ let waiting = {
   invitations: true,
   myFloats: true,
   convos: true,
+  messages: true,
 }
 
 let queue = [];
@@ -29,9 +30,26 @@ function work(navigator) {
 
     if( state.pendingRoute ) {
       navigator.navigate(state.pendingRoute);
-      store.dispatch({
-        type: 'navigation:success',
-      })
+      if( state.pendingRoute === 'MessagesScene' ) {
+        const payload = state.pendingRoutePayload;
+        const promise = waiting.messages
+          ? loadMessages(payload.float_id, payload.id)
+          : Promise.resolve(true);
+
+        promise.then(function() {
+          store.dispatch({
+            type: 'navigation:success'
+          })
+        }).catch(function() {
+          store.dispatch({
+            type: 'navigation:success'
+          })
+        })
+      } else {
+        store.dispatch({
+          type: 'navigation:success',
+        })
+      }
     }
   })
 }
@@ -96,6 +114,28 @@ function loadConvos() {
   })
 }
 
+function loadMessages(floatId, convoId) {
+  waiting.messages = false;
+  store.dispatch({
+    type: 'load:messages',
+  })
+  return api.messages.all(floatId, convoId).then(function(messages) {
+    store.dispatch({
+      type: 'load:messages:success',
+      floatId: floatId,
+      convoId: convoId,
+      messages: messages,
+    })
+    waiting.messages = false;
+  }).catch(function(messages) {
+    store.dispatch({
+      type: 'load:messages:failure',
+      floatId: floatId,
+      convoId: convoId,
+    });
+    waiting.messages = false;
+  })
+}
 
 // const ws = new WebSocket('ws://192.168.1.72:3001');
 //
