@@ -24,12 +24,12 @@ export default class Float extends Component {
           <Text style={styles.floatTitle}>{f.title}”</Text>
           <Text style={styles.rightQuote}>“</Text>
         </View>
-        <TouchableOpacity onPress={this.showDialog.bind(this)} style={{paddingRight: 10, paddingTop: 6.5, paddingBottom: 7.5, paddingLeft: 8}}>
+        <TouchableOpacity onPress={this.showDialog.bind(this)} style={{paddingRight: 10, paddingTop: 4, paddingBottom: 9, paddingLeft: 8}}>
           <Image source={require('../images/ThreeDotsLight.png')} />
         </TouchableOpacity>
       </View>
       { f.convos && f.convos.length ?
-        <View style={{backgroundColor: 'white', borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.lightgrey, marginBottom: 25}}>
+        <View style={{backgroundColor: 'white', borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.lightgrey}}>
           { f.convos.map((c, key) => (
             <ConvoPreview convo={c} key={key} doBottomBorder={(key == f.convos.length - 1) ? 0 : 1}/>
           ))}
@@ -91,19 +91,21 @@ const styles = StyleSheet.create({
   heading: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    paddingTop: 2,
+    paddingTop: 20,
     paddingBottom: 5,
   },
   rightQuote: {
     color: base.colors.mediumgrey,
     fontSize: 12,
     position: 'absolute',
-    left: -4.5,
+    left: -4,
+    top: 1,
   },
   floatTitle: {
     color: base.colors.mediumgrey,
     fontSize: 12,
     flex: 1,
+    paddingTop: 1,
   },
   unanswered: {
     flexDirection: 'row',
