@@ -39,6 +39,13 @@ module.exports = StyleSheet.create({
     height: 40,
     transform: [{scale: 1.25}],
   },
+  airplaneLoader: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 36,
+    height: 27,
+    transform: [{scale: 1.25}],
+  },
   header: {
     height: 45,
     backgroundColor: colors.white,
