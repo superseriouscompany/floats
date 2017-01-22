@@ -39,14 +39,17 @@ export default class Zapper extends Component {
       AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
         return api.floats.join(accessToken, this.props.floatId, !!this.state.wasActive);
       }).then(() => {
-        this.setState({wasActive: true});
-        Alert.alert("Boom", `We let them know that you're down. Text to coordinate.`);
+        this.context.store.dispatch({type: 'dirty'});
       }).catch(function(err) {
         console.error(err);
       })
     }
     this.setState({active: !this.state.active});
   }
+}
+
+Zapper.contextTypes = {
+  store: React.PropTypes.object
 }
 
 const styles = StyleSheet.create({

@@ -7,13 +7,8 @@ module.exports = {
   work: work
 }
 
-let waiting = {
-  invitations: true,
-  myFloats: true,
-  convos: true,
-  messages: true,
-}
-
+let lock = false;
+let messagesLock = false;
 let queue = [];
 
 function work(navigator) {
@@ -21,12 +16,17 @@ function work(navigator) {
     const state = store.getState();
 
     if( !state.user.access_token ) {
+      console.warn("No user set");
       return;
     }
 
-    waiting.invitations && loadInvitations();
-    waiting.myFloats && loadMyFloats();
-    waiting.convos && loadConvos();
+    if( state.dirty ) {
+      lock = false;
+    }
+
+    if( !lock ) {
+      load();
+    }
 
     // this is an abomination
     if( state.pendingRoute ) {
@@ -34,11 +34,7 @@ function work(navigator) {
       if( state.pendingRoute === 'MessagesScene' ) {
         const payload = state.pendingRoutePayload;
 
-        const promise = waiting.messages
-          ? loadMessages(payload.float_id, payload.id)
-          : Promise.resolve(true);
-
-        promise.then(function() {
+        loadMessages(payload.float_id, payload.id).then(function() {
           store.dispatch({
             type: 'navigation:success'
           })
@@ -46,6 +42,7 @@ function work(navigator) {
             type: 'convos:activate',
             id: payload.id,
           })
+          messagesLock = false;
         }).catch(function() {
           store.dispatch({
             type: 'navigation:success'
@@ -54,6 +51,7 @@ function work(navigator) {
             type: 'convos:activate',
             id: payload.id,
           })
+          messagesLock = false;
         })
       } else {
         store.dispatch({
@@ -64,19 +62,29 @@ function work(navigator) {
   })
 }
 
+function load() {
+  if( lock ) { return Promise.resolve(); }
+  lock = true;
+  store.dispatch({
+    type: 'clean'
+  })
+  return Promise.all([
+    loadInvitations(),
+    loadMyFloats(),
+    loadConvos(),
+  ])
+}
+
 function loadInvitations() {
-  waiting.invitations = false;
   store.dispatch({
     type: 'load:invitations',
   })
   api.floats.invites().then(function(invitations) {
-    waiting.invitations = false;
     store.dispatch({
       type: 'load:invitations:success',
       invitations: invitations,
     })
   }).catch(function(err) {
-    waiting.invitations = false;
     store.dispatch({
       type: 'load:invitations:failure',
       error: err.message,
@@ -85,7 +93,6 @@ function loadInvitations() {
 }
 
 function loadMyFloats() {
-  waiting.myFloats = false;
   store.dispatch({
     type: 'load:myFloats',
   })
@@ -94,18 +101,15 @@ function loadMyFloats() {
       type: 'load:myFloats:success',
       floats: floats,
     })
-    waiting.myFloats = false;
   }).catch(function(err) {
     store.dispatch({
       type: 'load:myFloats:failure',
       error: err.message,
     })
-    waiting.myFloats = false;
   })
 }
 
 function loadConvos() {
-  waiting.convos = false;
   store.dispatch({
     type: 'load:convos',
   })
@@ -114,18 +118,18 @@ function loadConvos() {
       type: 'load:convos:success',
       convos: convos,
     });
-    waiting.convos = false;
   }).catch(function(err) {
     store.dispatch({
       type: 'load:convos:failure',
       error: err.message,
     });
-    waiting.convos = false;
   })
 }
 
 function loadMessages(floatId, convoId) {
-  waiting.messages = false;
+  if( messagesLock ) { return Promise.resolve(); }
+  messagesLock = true;
+
   store.dispatch({
     type: 'load:messages',
     convoId: convoId,
@@ -137,14 +141,12 @@ function loadMessages(floatId, convoId) {
       convoId: convoId,
       messages: messages,
     })
-    waiting.messages = false;
   }).catch(function(messages) {
     store.dispatch({
       type: 'load:messages:failure',
       floatId: floatId,
       convoId: convoId,
     });
-    waiting.messages = false;
   })
 }
 

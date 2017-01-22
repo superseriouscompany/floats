@@ -53,6 +53,7 @@ export default class FloatDialog extends Component {
       return api.floats.create(accessToken, friends, this.state.text)
     }).then(() => {
       this.context.store.dispatch({type: 'navigation:queue', route: 'FloatsScene'});
+      this.context.store.dispatch({type: 'dirty'});
     }).catch(function(err) {
       this.setState({sending: false});
       Alert.alert(err);

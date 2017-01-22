@@ -65,8 +65,8 @@ export default class Float extends Component {
           ]
         )
       } else {
-        api.floats.leave(this.props.float.id).then(function() {
-          alert('Left.');
+        api.floats.leave(this.props.float.id).then(() => {
+          this.context.store.dispatch({type: 'dirty'});
         }).catch(function(err) {
           console.error(err);
         })
@@ -75,12 +75,16 @@ export default class Float extends Component {
   }
 
   deleteFloat() {
-    return api.floats.destroy(this.props.float.id).then(function() {
-      alert('Deleted.');
+    return api.floats.destroy(this.props.float.id).then(() => {
+      this.context.store.dispatch({type: 'dirty'});
     }).catch(function(err) {
       console.error(err);
     })
   }
+}
+
+Float.contextTypes = {
+  store: React.PropTypes.object,
 }
 
 const styles = StyleSheet.create({
