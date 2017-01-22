@@ -15,7 +15,7 @@ let waiting = {
 
 let queue = [];
 
-function work() {
+function work(navigator) {
   store.subscribe(function() {
     const state = store.getState();
 
@@ -23,10 +23,16 @@ function work() {
       return;
     }
 
-    // TODO: retry
     waiting.invitations && loadInvitations();
     waiting.myFloats && loadMyFloats();
     waiting.convos && loadConvos();
+
+    if( state.pendingRoute ) {
+      navigator.navigate(state.pendingRoute);
+      store.dispatch({
+        type: 'navigation:success',
+      })
+    }
   })
 }
 
@@ -36,11 +42,13 @@ function loadInvitations() {
     type: 'load:invitations',
   })
   api.floats.invites().then(function(invitations) {
+    waiting.invitations = false;
     store.dispatch({
       type: 'load:invitations:success',
       invitations: invitations,
     })
   }).catch(function(err) {
+    waiting.invitations = false;
     store.dispatch({
       type: 'load:invitations:failure',
       error: err.message,
@@ -58,11 +66,13 @@ function loadMyFloats() {
       type: 'load:myFloats:success',
       floats: floats,
     })
+    waiting.myFloats = false;
   }).catch(function(err) {
     store.dispatch({
       type: 'load:myFloats:failure',
       error: err.message,
     })
+    waiting.myFloats = false;
   })
 }
 
@@ -75,11 +85,37 @@ function loadConvos() {
     store.dispatch({
       type: 'load:convos:success',
       convos: convos,
-    })
+    });
+    waiting.convos = false;
   }).catch(function(err) {
     store.dispatch({
       type: 'load:convos:failure',
       error: err.message,
-    })
+    });
+    waiting.convos = false;
   })
 }
+
+
+// const ws = new WebSocket('ws://192.168.1.72:3001');
+//
+// ws.onopen = () => {
+//   // connection opened
+//   ws.send('something'); // send a message
+// };
+//
+// ws.onmessage = (e) => {
+//   // a message was received
+//   console.warn('received message', e.data);
+//   this.appendMessage(e.data);
+// };
+//
+// ws.onerror = (e) => {
+//   // an error occurred
+//   console.warn(e.message);
+// };
+//
+// ws.onclose = (e) => {
+//   // connection closed
+//   console.warn(e.code, e.reason);
+// };
