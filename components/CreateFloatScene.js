@@ -87,9 +87,26 @@ export default class CreateFloatScene extends Component {
           <Text style={{color: 'indianred', textAlign: 'center'}}>{this.state.error}</Text>
         : !this.state.friends.length ?
           <View style={{alignItems: 'center'}}>
-            <Text style={[base.timestamp, base.bgBreakingSection, {paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]}>
-              nobody is nearby.
-            </Text>
+            <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: 0.5, borderColor: base.colors.mediumgrey}]}>
+              <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
+                no nearby friends
+              </Text>
+            </View>
+            <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15, }}>
+              <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center'}]}>
+                floats works best when you’ve got{"\n"}your closest friends.
+              </Text>
+            </View>
+            <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
+              <Text style={styles.emptyButtonText}>
+                add friends
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color3}]} onPress={() => this.copyToClipboard()}>
+              <Text style={styles.emptyButtonText}>
+                invite someone
+              </Text>
+            </TouchableOpacity>
           </View>
         :
           <View>
@@ -141,8 +158,27 @@ export default class CreateFloatScene extends Component {
 
     this.setState({friends: friends, allSelected: allSelected});
   }
+
+  copyToClipboard() {
+    alert('not implemented');
+  }
 }
 
 function selected(f) {
   return !!f.selected;
 }
+
+const styles = StyleSheet.create({
+  emptyButtons: {
+    width: 200,
+    height: 50,
+    borderRadius: 100,
+    marginBottom: 15,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  emptyButtonText: {
+    color: 'white',
+    textAlign: 'center'
+  },
+});
