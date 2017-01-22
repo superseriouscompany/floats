@@ -2,11 +2,14 @@
 
 import React from 'react';
 import Component from './Component';
+import base from '../styles/base';
+import Heading from './Heading';
 import Text from './Text';
 import TabBar from './TabBar';
 import api from '../services/api';
 import {
   AsyncStorage,
+  Image,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -86,13 +89,19 @@ export default class MessagesScene extends Component {
     if( !this.state.user ) return null;
 
     return (
-      <View style={{flex: 1}}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={this.back.bind(this)} style={styles.topLeft}>
-            <Text style={{color: 'hotpink'}}>&larr;</Text>
+      <View style={base.screen}>
+        <View style={base.header}>
+          <TouchableOpacity onPress={this.back.bind(this)} style={[base.leftNav, styles.leftNavButton]}>
+            <Image source={require('../images/SmallLeftArrow.png')} />
           </TouchableOpacity>
-          <Text>Kevin David Crowe</Text>
+          <View style={base.header}>
+            <Heading>Kevin David Crowe</Heading>
+          </View>
+          <TouchableOpacity onPress={() => this.showOptions()} style={[base.rightNav, styles.rightNavButton]}>
+            <Image source={require('../images/Ellipses.png')} />
+          </TouchableOpacity>
         </View>
+
         <GiftedChat
           messages={this.state.messages}
           onSend={this.onSend}
@@ -107,20 +116,26 @@ export default class MessagesScene extends Component {
   back() {
     this.context.store.dispatch({type: 'navigation:queue', route: 'FloatsScene'});
   }
+
+  showOptions() {
+    alert('not implemented');
+  }
 }
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: 'cornflowerblue',
-    paddingTop: 20,
-    alignItems: 'center',
+  leftNavButton: {
+    paddingTop: 21,
+    paddingBottom: 17,
+    paddingLeft: 19,
+    paddingRight: 14
   },
-  topLeft: {
-    position: 'absolute',
-    left: 5,
-    top: 20,
+  rightNavButton: {
+    paddingTop: 22,
+    paddingBottom: 22,
+    paddingLeft: 14,
+    paddingRight: 19
   }
-})
+});
 
 function decorate(message) {
   return {
