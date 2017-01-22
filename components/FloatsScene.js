@@ -17,6 +17,7 @@ import {
   Dimensions,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   View
 } from 'react-native';
 
@@ -59,34 +60,52 @@ export default class FloatsScene extends Component {
         <Heading>floats</Heading>
       </View>
 
-      <ScrollView style={{backgroundColor: '#FAF9F8', paddingTop: 10}}>
-        <View style={{flex: 1, borderBottomWidth: 0.5, borderColor: base.colors.lightgrey, marginBottom: 8}}>
-          { this.state.invitations.loading || this.state.myFloats.loading || this.state.convos.loading ?
-            <View style={{height: 50}}>
-              <ActivityIndicator
-                style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
-                size="small"
-                color={base.colors.mediumgrey}
-              />
-            </View>
-          :
-            null
-          }
-          { this.state.invitations.error ?
-            <Text style={{color: 'indianred'}}>{this.state.invitations.error}</Text>
-          : this.state.invitations.loading ?
-            null
-          :
-            <Invitations invitations={this.state.invitations.all.filter((i) => { return !i.attending;})} />
-          }
-        </View>
+      <View style={[base.mainWindow, {backgroundColor: '#FAF9F8'}]}>
         { this.state.empty ?
-          <Text style={{color: 'hotpink'}}>Empty State</Text>
-        : this.state.inbox ?
-          <Inbox inbox={this.state.inbox} />
-        : null
+            <View style={{alignItems: 'center'}}>
+              <View style={{alignItems: 'center', paddingTop: 18, paddingBottom: 15}}>
+                <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center'}]}>
+                  be the first of your friends to suggest{"\n"}something to do today
+                </Text>
+              </View>
+              <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
+                <Text style={styles.emptyButtonText}>
+                  float somethin&#39;
+                </Text>
+              </TouchableOpacity>
+            </View>
+        :
+          <ScrollView style={{paddingTop: 10}}>
+            <View>
+              { this.state.invitations.loading || this.state.myFloats.loading || this.state.convos.loading ?
+                <View style={{height: 50}}>
+                  <ActivityIndicator
+                    style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
+                    size="small"
+                    color={base.colors.mediumgrey}
+                  />
+                </View>
+              :
+                null
+              }
+              { this.state.invitations.error ?
+                <Text style={{color: 'indianred'}}>{this.state.invitations.error}</Text>
+              : this.state.invitations.loading ?
+                null
+              :
+                <View style={{flex: 1, borderBottomWidth: 0.5, borderColor: base.colors.lightgrey, marginBottom: 8}}>
+                  <Invitations invitations={this.state.invitations.all.filter((i) => { return !i.attending;})} />
+                </View>
+              }
+            </View>
+
+            { this.state.inbox ?
+              <Inbox inbox={this.state.inbox} />
+            : null
+            }
+          </ScrollView>
         }
-      </ScrollView>
+      </View>
       <TabBar active="floats" navigator={this.props.navigator}/>
     </View>
   )}
@@ -126,3 +145,18 @@ function generateInbox(invitations, myFloats, convos) {
 FloatsScene.contextTypes = {
   store: React.PropTypes.object
 }
+
+const styles = StyleSheet.create({
+  emptyButtons: {
+    width: 200,
+    height: 50,
+    borderRadius: 100,
+    marginBottom: 15,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  emptyButtonText: {
+    color: 'white',
+    textAlign: 'center'
+  },
+});
