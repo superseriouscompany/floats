@@ -73,7 +73,7 @@ export default class CreateFloatScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <Heading>float something fun</Heading>
+        <Heading>do something</Heading>
       </View>
 
       <View style={base.mainWindow}>
