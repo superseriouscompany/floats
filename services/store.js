@@ -111,7 +111,7 @@ function store(state, action) {
       var messages = {
         ...state.messages
       };
-      messages[action.convoId] = action.messages;
+      messages[action.convoId].all = action.messages;
       return {
         ...state,
         messages: messages,
