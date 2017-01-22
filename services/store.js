@@ -10,6 +10,16 @@ function store(state, action) {
         ...state,
         user: action.user,
       }
+    case 'clean':
+      return {
+        ...state,
+        dirty: false,
+      }
+    case 'dirty':
+      return {
+        ...state,
+        dirty: true,
+      }
     // invitations
     case 'load:invitations':
       return {
