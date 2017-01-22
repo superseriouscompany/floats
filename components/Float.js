@@ -48,7 +48,7 @@ export default class Float extends Component {
   )}
 
   showDialog() {
-    const isMine = !!this.props.float.invitees;
+    const isMine  = !!this.props.float.invitees;
     ActionSheetIOS.showActionSheetWithOptions({
       options: [isMine ? `Delete Float` : 'Leave', 'Cancel'],
       destructiveButtonIndex: 0,
@@ -65,16 +65,20 @@ export default class Float extends Component {
           ]
         )
       } else {
-
+        api.floats.leave(this.props.float.id).then(function() {
+          alert('Left.');
+        }).catch(function(err) {
+          console.error(err);
+        })
       }
     })
   }
 
-
-
   deleteFloat() {
     return api.floats.destroy(this.props.float.id).then(function() {
       alert('Deleted.');
+    }).catch(function(err) {
+      console.error(err);
     })
   }
 }
