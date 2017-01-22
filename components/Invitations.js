@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   context: {
     paddingTop: 1.25,
     color: base.colors.mediumlightgrey,
-    marginLeft: -12
+    marginLeft: -12,
   },
   rightQuote: {
     color: base.colors.darkgrey,
