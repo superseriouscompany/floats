@@ -18,13 +18,13 @@ export default class ConvoPreview extends Component {
       <View style={styles.container}>
         <Image source={{url: c.message.user.avatar_url}} style={styles.photoCircle}/>
         <View style={styles.message}>
-          <Text style={styles.name}>
+          <Text style={styles.name} numberOfLines={1}>
             { c.members.length == 2 ?
               c.message.user.name
             : c.members.length == 3 ?
-              `${c.message.user.name.split(' ')[0]} and 1 other`
+              `${c.message.user.name.split(' ')[0]} & 1 other`
             : c.members.length > 3 ?
-              `${c.message.user.name.split(' ')[0]} and ${c.members.length - 2} others`
+              `${c.message.user.name.split(' ')[0]} & ${c.members.length - 2} others`
             : null
             }
           </Text>
