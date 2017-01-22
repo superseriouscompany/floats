@@ -8,7 +8,6 @@ module.exports = {
 }
 
 let lock = false;
-let messagesLock = false;
 let queue = [];
 
 function work(navigator) {
@@ -24,38 +23,23 @@ function work(navigator) {
       lock = false;
     }
 
-    if( !lock ) {
-      load();
-    }
+    load();
 
     // this is an abomination
     if( state.pendingRoute ) {
       navigator.navigate(state.pendingRoute);
+      store.dispatch({
+        type: 'navigation:success'
+      })
+
       if( state.pendingRoute === 'MessagesScene' ) {
         const payload = state.pendingRoutePayload;
-
-        loadMessages(payload.float_id, payload.id).then(function() {
-          store.dispatch({
-            type: 'navigation:success'
-          })
-          store.dispatch({
-            type: 'convos:activate',
-            id: payload.id,
-          })
-          messagesLock = false;
-        }).catch(function() {
-          store.dispatch({
-            type: 'navigation:success'
-          })
-          store.dispatch({
-            type: 'convos:activate',
-            id: payload.id,
-          })
-          messagesLock = false;
-        })
-      } else {
         store.dispatch({
-          type: 'navigation:success',
+          type: 'convos:activate',
+          id: payload.id,
+        })
+        store.dispatch({
+          type: 'dirty',
         })
       }
     }
@@ -72,6 +56,7 @@ function load() {
     loadInvitations(),
     loadMyFloats(),
     loadConvos(),
+    loadMessages(),
   ])
 }
 
@@ -126,9 +111,14 @@ function loadConvos() {
   })
 }
 
-function loadMessages(floatId, convoId) {
-  if( messagesLock ) { return Promise.resolve(); }
-  messagesLock = true;
+function loadMessages() {
+  const state = store.getState();
+  if( !state.activeConvoId ) { return; }
+  const convo = state.convos.all.find(function(c) {
+    return c.id == state.activeConvoId;
+  })
+  const floatId = convo.float_id;
+  const convoId = convo.id;
 
   store.dispatch({
     type: 'load:messages',
