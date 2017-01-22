@@ -15,6 +15,7 @@ import FriendsScene from './components/FriendsScene';
 import Scratch from './components/Scratch';
 import Text from './components/Text';
 import MessagesScene from './components/MessagesScene';
+import KillSwitchScene from './components/KillSwitchScene';
 import api from './services/api';
 import store from './services/store';
 import God from './services/god';
@@ -85,6 +86,8 @@ export default class batsignal extends Component {
           <RandosScene navigator={this.navigator} />
         : this.state.scene == 'MessagesScene' ?
           <MessagesScene navigator={this.navigator} />
+        : this.state.scene == 'KillSwitchScene' ?
+          <KillSwitchScene navigator={this.navigator} />
         : this.state.scene == 'Scratch' ?
           <Scratch />
         : !!this.state.scene ?
