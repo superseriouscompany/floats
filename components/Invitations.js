@@ -36,8 +36,9 @@ export default class Invitations extends Component {
                 <TouchableOpacity onPress={() => this.reportDialog(p)}>
                   <Image source={{url: f.user.avatar_url}} style={styles.photoCircle}/>
                 </TouchableOpacity>
-                <View style={{flex: 1, paddingRight: 45}}>
-                  <Text style={{fontSize: 16}}>“{f.title}”</Text>
+                <View style={{flex: 1, paddingRight: 45, marginLeft: 2.5}}>
+                  <Text style={{fontSize: 16}}>{f.title}”</Text>
+                  <Text style={styles.rightQuote}>“</Text>
                   <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
                     {moment(f.created_at).fromNow()}
                   </Text>
@@ -86,6 +87,12 @@ const styles = StyleSheet.create({
   context: {
     paddingTop: 1.25,
     color: base.colors.mediumgrey,
+  },
+  rightQuote: {
+    color: base.colors.darkgrey,
+    fontSize: 16,
+    position: 'absolute',
+    left: -6,
   },
   main: {
     flexDirection: 'row',
