@@ -100,7 +100,6 @@ export default class MessagesScene extends Component {
             _id: this.state.user.id,
           }}
         />
-        <TabBar />
       </View>
     )
   }
