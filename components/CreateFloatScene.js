@@ -2,6 +2,7 @@
 
 import React from 'react';
 import FCM from 'react-native-fcm';
+import LinearGradient from 'react-native-linear-gradient'
 import Heading from './Heading';
 import Component from './Component';
 import Logo from './Logo';
