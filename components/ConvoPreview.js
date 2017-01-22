@@ -44,7 +44,7 @@ export default class ConvoPreview extends Component {
     this.context.store.dispatch({
       type: 'navigation:queue',
       route: 'MessagesScene',
-      convo: this.props.convo,
+      payload: this.props.convo,
     })
   }
 }
