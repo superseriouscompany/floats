@@ -29,7 +29,7 @@ export default class FloatDialog extends Component {
       </View>
       { this.state.sending ?
         <ActivityIndicator
-          style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
+          style={base.airplaneLoader}
           size="small"
           color={base.colors.mediumgrey}
         />
