@@ -41,7 +41,11 @@ export default class ConvoPreview extends Component {
   )}
 
   showConvo() {
-    alert('not implemented');
+    this.context.store.dispatch({
+      type: 'navigation:queue',
+      route: 'MessagesScene',
+      convo: this.props.convo,
+    })
   }
 }
 
@@ -79,3 +83,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   }
 })
+
+ConvoPreview.contextTypes = {
+  store: React.PropTypes.object,
+}
