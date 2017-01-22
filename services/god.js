@@ -42,7 +42,7 @@ function loadInvitations() {
     })
   }).catch(function(err) {
     store.dispatch({
-      type: 'load:invitations:error',
+      type: 'load:invitations:failure',
       error: err.message,
     })
   })
@@ -60,7 +60,7 @@ function loadMyFloats() {
     })
   }).catch(function(err) {
     store.dispatch({
-      type: 'load:myFloats:error',
+      type: 'load:myFloats:failure',
       error: err.message,
     })
   })
@@ -78,7 +78,7 @@ function loadConvos() {
     })
   }).catch(function(err) {
     store.dispatch({
-      type: 'load:convos:error',
+      type: 'load:convos:failure',
       error: err.message,
     })
   })
