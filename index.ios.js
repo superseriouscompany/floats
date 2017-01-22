@@ -53,7 +53,7 @@ export default class batsignal extends Component {
     AsyncStorage.getItem('@floats:user').then((user) => {
       if( user ) {
         store.dispatch({type: 'login', user: JSON.parse(user)});
-        this.setState({scene: 'FloatsScene'});
+        this.setState({scene: 'CreateFloatScene'});
       } else {
         this.setState({scene: 'LoginScene'});
       }
