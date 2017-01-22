@@ -67,8 +67,6 @@ export default class MessagesScene extends Component {
     if( !convo ) { return console.error("Active convo doesn't exist"); }
 
     messages.forEach(function(m) {
-      console.log("gonna create", m.text);
-
       api.messages.create(convo.float_id, convo.id, m.text).catch(function(err) {
         console.error(err);
         // FIXME: show message as failed
