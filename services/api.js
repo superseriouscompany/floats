@@ -218,7 +218,7 @@ const api = {
       })
     },
 
-    leave: function(accessToken, floatId) {
+    leave: function(floatId) {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
         return fetch(`${baseUrl}/floats/${floatId}/leave`, {
           method: 'DELETE',
