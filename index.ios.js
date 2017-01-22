@@ -40,6 +40,8 @@ export default class batsignal extends Component {
     FCM.on('notification', (notif) => {
       if( notif.aps ) {
         Alert.alert(notif.aps.alert);
+      } else if( notif.body ){
+        Alert.alert(notif.body);
       } else {
         console.warn("Unknown notification", notif);
       }
