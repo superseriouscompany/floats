@@ -18,8 +18,8 @@ import {
 
 export default class Invitations extends Component {
   dismiss(float) {
-    api.floats.leave(float.id).then(function() {
-      alert('left.');
+    api.floats.leave(float.id).then(() => {
+      this.context.store.dispatch({type: 'dirty'});
     }).catch(function(err) {
       console.error(err);
     })
@@ -71,6 +71,10 @@ export default class Invitations extends Component {
       }
     })
   }
+}
+
+Invitations.contextTypes = {
+  store: React.PropTypes.object,
 }
 
 const styles = StyleSheet.create({
