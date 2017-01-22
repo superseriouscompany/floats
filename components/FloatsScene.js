@@ -68,7 +68,7 @@ export default class FloatsScene extends Component {
                   be the first of your friends to suggest{"\n"}something to do today
                 </Text>
               </View>
-              <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
+              <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
                 <Text style={styles.emptyButtonText}>
                   float somethin&#39;
                 </Text>
