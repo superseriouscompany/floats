@@ -50,7 +50,7 @@ export default class Float extends Component {
   showDialog() {
     const isMine  = !!this.props.float.invitees;
     ActionSheetIOS.showActionSheetWithOptions({
-      options: [isMine ? `Delete Float` : 'Leave', 'Cancel'],
+      options: [isMine ? `Delete Float` : 'Leave Float', 'Cancel'],
       destructiveButtonIndex: 0,
       cancelButtonIndex: 1,
     }, (index) => {
