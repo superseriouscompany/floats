@@ -103,11 +103,6 @@ export default class FriendsScene extends Component {
                 add friends
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color3}]} onPress={() => this.copyToClipboard()}>
-              <Text style={styles.emptyButtonText}>
-                invite someone
-              </Text>
-            </TouchableOpacity>
           </View>
         :
           <View style={{paddingBottom: 15}}>
