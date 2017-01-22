@@ -133,6 +133,7 @@ function generateInbox(invitations, myFloats, convos) {
   })
 
   convos.all.forEach(function(c) {
+    if( !floats[c.float_id] ) { return console.warn("Missing float for convo", c.id, c.float_id); }
     floats[c.float_id].convos = floats[c.float_id].convos || [];
     floats[c.float_id].convos.push(c);
     floats[c.float_id].time = Math.max(floats[c.float_id].time, c.message.created_at);
