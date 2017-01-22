@@ -5,7 +5,10 @@ import Component from './Component';
 import Text from './Text';
 import ConvoPreview from './ConvoPreview';
 import base from '../styles/base';
+import api  from '../services/api';
 import {
+  ActionSheetIOS,
+  Alert,
   Image,
   StyleSheet,
   TouchableOpacity,
@@ -45,7 +48,34 @@ export default class Float extends Component {
   )}
 
   showDialog() {
-    alert('Not implemented');
+    const isMine = !!this.props.float.invitees;
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: [isMine ? `Delete Float` : 'Leave', 'Cancel'],
+      destructiveButtonIndex: 0,
+      cancelButtonIndex: 1,
+    }, (index) => {
+      if( index == 1 ) { return; }
+      if( isMine ) {
+        Alert.alert(
+          'Delete Float',
+          'Are you sure?',
+          [
+            {text: 'Yes, delete it.', onPress: () => this.deleteFloat()},
+            {text: 'No', style: 'cancel'},
+          ]
+        )
+      } else {
+
+      }
+    })
+  }
+
+
+
+  deleteFloat() {
+    return api.floats.destroy(this.props.float.id).then(function() {
+      alert('Deleted.');
+    })
   }
 }
 
