@@ -29,7 +29,7 @@ export default class Float extends Component {
         </TouchableOpacity>
       </View>
       { f.convos && f.convos.length ?
-        <View style={{backgroundColor: 'white', borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.lightgrey, marginBottom: 10}}>
+        <View style={{backgroundColor: 'white', borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.lightgrey, marginBottom: 25}}>
           { f.convos.map((c, key) => (
             <ConvoPreview convo={c} key={key} doBottomBorder={(key == f.convos.length - 1) ? 0 : 1}/>
           ))}
