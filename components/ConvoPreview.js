@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderBottomWidth: 0.5,
     borderColor: base.colors.lightgrey,
-    marginLeft: 16,
+    marginLeft: 20,
   },
   message: {
     flex: 1,
