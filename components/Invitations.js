@@ -28,28 +28,26 @@ export default class Invitations extends Component {
       :
         <View>
           {this.props.invitations.map((f, i) => (
-            <View key={i} style={[base.padFullHorizontal, styles.container]}>
+            <View key={i} style={styles.container}>
               <View style={styles.top}>
                 <TouchableOpacity onPress={this.dismiss.bind(this)} style={styles.dismiss}>
-                  <Text style={{color: base.colors.mediumgrey}}>
-                    &times;
-                  </Text>
+                  <Image source={require('../images/XLight.png')} />
                 </TouchableOpacity>
-                <Text style={[base.timestamp, styles.context]}>{f.user.name} sent you a float. Into it?</Text>
+                <Text style={[base.timestamp, styles.context, {fontSize: 12}]}>{f.user.name} sent you a float. Into it?</Text>
                 <View style={styles.unread}></View>
               </View>
               <View style={styles.main}>
                 <TouchableOpacity onPress={() => this.reportDialog(p)}>
-                  <Image source={{url: f.user.avatar_url}} style={base.photoCircle}/>
+                  <Image source={{url: f.user.avatar_url}} style={{width: 45, height: 45, borderRadius: 23, marginRight: 10, borderColor: base.colors.lightgrey, borderWidth: 0.5}}/>
                 </TouchableOpacity>
-                <View style={{flex: 1}}>
-                  <Text style={{fontSize: 16}}>{f.user.name} "{f.title}"</Text>
+                <View style={{flex: 1, paddingRight: 45}}>
+                  <Text style={{fontSize: 16}}>"{f.title}"</Text>
                   <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
                     {moment(f.created_at).fromNow()}
                   </Text>
                 </View>
-                <Zapper floatId={f.id} active={false}></Zapper>
               </View>
+              <Zapper floatId={f.id} active={false}></Zapper>
             </View>
           ))}
         </View>
@@ -72,11 +70,15 @@ export default class Invitations extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 2,
-    paddingBottom: 4,
-    borderRadius: 5,
+    paddingTop: 4,
+    paddingBottom: 22,
+    paddingRight: 13,
+    paddingLeft: 10,
+    borderRadius: 10,
     backgroundColor: 'white',
-    marginBottom: 8,
+    marginBottom: 10,
+    marginLeft: 11,
+    marginRight: 11,
   },
   top: {
     alignItems: 'center',
@@ -88,15 +90,16 @@ const styles = StyleSheet.create({
   },
   main: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    paddingTop: 13,
   },
   dismiss: {
   },
   unread: {
-    width: 10,
-    height: 10,
-    backgroundColor: 'indianred',
-    borderRadius: 10,
+    width: 8,
+    height: 8,
+    backgroundColor: base.colors.color1,
+    borderRadius: 4,
   },
 
 })

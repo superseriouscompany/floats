@@ -51,8 +51,8 @@ export default class FloatsScene extends Component {
         <Heading>floats in action</Heading>
       </View>
 
-      <ScrollView style={{backgroundColor: 'whitesmoke', paddingLeft: 5, paddingRight: 5, paddingTop: 5}}>
-        <View style={[base.mainWindow, {backgroundColor: 'whitesmoke'}]}>
+      <ScrollView style={{backgroundColor: '#FAFAFA', paddingTop: 10}}>
+        <View style={{flex: 1}}>
           { this.state.invitations.loading || this.state.myFloats.loading || this.state.convos.loading ?
             <View style={{height: 50}}>
               <ActivityIndicator
