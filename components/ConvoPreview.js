@@ -30,7 +30,7 @@ export default class ConvoPreview extends Component {
             }
           </Text>
           <Text style={styles.text} numberOfLines={1}>
-            { c.message.text }
+            {('' && ''.length) ? c.message.text : 'Send a message'}
           </Text>
         </View>
         <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
