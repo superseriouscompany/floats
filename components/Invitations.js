@@ -1,11 +1,13 @@
 'use strict';
 
 import React from 'react';
+import moment from 'moment';
 import Component from './Component';
 import Text from './Text';
 import Zapper from './Zapper';
 import base from '../styles/base';
-import moment from 'moment';
+import api from '../services/api';
+
 import {
   ActionSheetIOS,
   Image,
@@ -15,8 +17,12 @@ import {
 } from 'react-native';
 
 export default class Invitations extends Component {
-  dismiss() {
-    alert('not implemented');
+  dismiss(float) {
+    api.floats.leave(float.id).then(function() {
+      alert('left.');
+    }).catch(function(err) {
+      console.error(err);
+    })
   }
 
   render() { return (
@@ -26,7 +32,7 @@ export default class Invitations extends Component {
           {this.props.invitations.map((f, i) => (
             <View key={i} style={styles.container}>
               <View style={styles.top}>
-                <TouchableOpacity onPress={this.dismiss.bind(this)} style={styles.dismiss}>
+                <TouchableOpacity onPress={() => this.dismiss(f)} style={styles.dismiss}>
                   <Image source={require('../images/XLight.png')} />
                 </TouchableOpacity>
                 <Text style={[base.timestamp, styles.context, {fontSize: 12}]}>{f.user.name} sent you a float</Text>
@@ -61,7 +67,7 @@ export default class Invitations extends Component {
       cancelButtonIndex: 1,
     }, (index) => {
       if( index == 0 ) {
-        alert(`You have reported ${f.user.name} for floating ${p.title}`);
+        alert(`You have reported ${f.user.name} for floating ${f.title}`);
       }
     })
   }
