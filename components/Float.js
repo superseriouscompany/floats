@@ -33,8 +33,8 @@ export default class Float extends Component {
         </View>
       : f.invitees && f.invitees.length ?
         <View style={styles.unanswered}>
-          <Text style={styles.check}>✔</Text>
-          <Text>
+          <Image source={require('../images/GreenCheck.png')} style={{position: 'absolute', marginTop: 7.5, marginLeft: 17, left: 0}}/>
+          <Text style={{fontSize: base.fontSizes.small, color: base.colors.mediumgrey}}>
             delivered to {f.invitees.length}
             { f.invitees.length == 1 ? ' friend' : ' friends' }
           </Text>
@@ -68,15 +68,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   unanswered: {
-    backgroundColor: 'white',
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 5,
-    paddingRight: 5,
     flexDirection: 'row',
-  },
-  check: {
-    color: 'lawngreen',
-    fontSize: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    paddingTop: 7,
+    paddingBottom: 7,
+    borderTopWidth: 0.5,
+    borderBottomWidth: 0.5,
+    borderColor: base.colors.lightgrey,
   },
 })

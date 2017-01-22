@@ -51,7 +51,7 @@ export default class FloatsScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
-        <Heading>floats in action</Heading>
+        <Heading>floats</Heading>
       </View>
 
       <ScrollView style={{backgroundColor: '#FAF9F8', paddingTop: 10}}>
