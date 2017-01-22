@@ -17,7 +17,10 @@ export default class Float extends Component {
     <View>
       <View style={styles.heading}>
         <Image source={{url: f.user.avatar_url}} style={base.miniPhotoCircle} />
-        <Text style={styles.floatTitle}>“{f.title}”</Text>
+        <View style={{flex: 1}}>
+          <Text style={styles.floatTitle}>{f.title}”</Text>
+          <Text style={styles.rightQuote}>“</Text>
+        </View>
         <TouchableOpacity onPress={this.showDialog.bind(this)} style={{paddingRight: 8, paddingTop: 7, paddingBottom: 7, paddingLeft: 8}}>
           <Image source={require('../images/ThreeDotsLight.png')} />
         </TouchableOpacity>
@@ -52,6 +55,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 2,
     paddingBottom: 4,
+  },
+  rightQuote: {
+    color: base.colors.mediumgrey,
+    fontSize: 12,
+    position: 'absolute',
+    left: -4.5,
   },
   floatTitle: {
     color: base.colors.mediumgrey,
