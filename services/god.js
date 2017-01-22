@@ -8,6 +8,7 @@ module.exports = {
 }
 
 let lock = false;
+let messagesLock = false;
 let queue = [];
 
 function work(navigator) {
@@ -33,11 +34,7 @@ function work(navigator) {
       if( state.pendingRoute === 'MessagesScene' ) {
         const payload = state.pendingRoutePayload;
 
-        const promise = waiting.messages
-          ? loadMessages(payload.float_id, payload.id)
-          : Promise.resolve(true);
-
-        promise.then(function() {
+        loadMessages(payload.float_id, payload.id).then(function() {
           store.dispatch({
             type: 'navigation:success'
           })
@@ -45,6 +42,7 @@ function work(navigator) {
             type: 'convos:activate',
             id: payload.id,
           })
+          messagesLock = false;
         }).catch(function() {
           store.dispatch({
             type: 'navigation:success'
@@ -53,6 +51,7 @@ function work(navigator) {
             type: 'convos:activate',
             id: payload.id,
           })
+          messagesLock = false;
         })
       } else {
         store.dispatch({
@@ -128,6 +127,9 @@ function loadConvos() {
 }
 
 function loadMessages(floatId, convoId) {
+  if( messagesLock ) { return Promise.resolve(); }
+  messagesLock = true;
+
   store.dispatch({
     type: 'load:messages',
     convoId: convoId,

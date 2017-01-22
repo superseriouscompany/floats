@@ -39,6 +39,7 @@ export default class batsignal extends Component {
     }
 
     FCM.on('notification', (notif) => {
+      store.dispatch({type: 'dirty'});
       if( notif.aps ) {
         Alert.alert(notif.aps.alert);
       } else if( notif.body ){
