@@ -28,13 +28,11 @@ export default class ConvoPreview extends Component {
             : null
             }
           </Text>
-          <Text style={styles.text}>
+          <Text style={styles.text} numberOfLines={1}>
             { c.message.text }
           </Text>
         </View>
-        <Text>
-          &gt;
-        </Text>
+        <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
         <Text style={[base.timestamp, styles.time]}>
           { moment(c.message.created_at).format('h:mma') }
         </Text>
@@ -56,21 +54,28 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   time: {
-    color: base.colors.mediumgrey,
+    color: base.colors.mediumdarkgrey,
     position: 'absolute',
-    right: 5,
-    bottom: 5,
+    right: 12,
+    bottom: 4,
+    fontSize: 12,
   },
   text: {
     color: base.colors.mediumgrey,
     fontSize: base.fontSizes.small,
+    paddingRight: 35,
   },
   photoCircle: {
     width: 54,
     height: 54,
     borderRadius: 27,
     marginLeft: 10,
+    marginRight: 10,
     marginTop: 16,
     marginBottom: 17
   },
+  rightArrow: {
+    marginLeft: 14,
+    marginRight: 12,
+  }
 })

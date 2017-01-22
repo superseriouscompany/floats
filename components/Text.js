@@ -11,7 +11,7 @@ import {
 export default class AppText extends Component {
   constructor(props) {
     super(props)
-    this.style = [{fontFamily: 'Poppins', fontSize: 16, color: base.colors.darkgrey}];
+    this.style = [{fontFamily: 'Poppins', fontSize: 16, color: base.colors.darkgrey, letterSpacing: 1.05}];
     if( props.style ) {
       if( Array.isArray(props.style) ) {
         this.style = this.style.concat(props.style)

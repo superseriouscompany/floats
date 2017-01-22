@@ -38,7 +38,7 @@ export default class Invitations extends Component {
               </View>
               <View style={styles.main}>
                 <TouchableOpacity onPress={() => this.reportDialog(p)}>
-                  <Image source={{url: f.user.avatar_url}} style={{width: 45, height: 45, borderRadius: 23, marginRight: 10, borderColor: base.colors.lightgrey, borderWidth: 0.5}}/>
+                  <Image source={{url: f.user.avatar_url}} style={styles.photoCircle}/>
                 </TouchableOpacity>
                 <View style={{flex: 1, paddingRight: 45}}>
                   <Text style={{fontSize: 16}}>“{f.title}”</Text>
@@ -101,5 +101,12 @@ const styles = StyleSheet.create({
     backgroundColor: base.colors.color1,
     borderRadius: 4,
   },
-
+  photoCircle: {
+    width: 45,
+    height: 45,
+    borderRadius: 23,
+    marginRight: 10,
+    borderColor: base.colors.lightgrey,
+    borderWidth: 0.5,
+  },
 })
