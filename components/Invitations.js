@@ -32,7 +32,7 @@ export default class Invitations extends Component {
           {this.props.invitations.map((f, i) => (
             <View key={i} style={styles.container}>
               <View style={styles.top}>
-                <TouchableOpacity onPress={() => this.dismiss(f)} style={styles.dismiss}>
+                <TouchableOpacity onPress={() => this.dismiss(f)} style={{paddingLeft: 12, paddingRight: 10, marginLeft: -10}}>
                   <Image source={require('../images/XLight.png')} />
                 </TouchableOpacity>
                 <Text style={[base.timestamp, styles.context, {fontSize: 12}]}>{f.user.name.split(' '[0])} sent you a float</Text>
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
   context: {
     paddingTop: 1.25,
     color: base.colors.mediumlightgrey,
+    marginLeft: -12
   },
   rightQuote: {
     color: base.colors.darkgrey,
