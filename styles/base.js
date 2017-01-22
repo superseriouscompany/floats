@@ -7,6 +7,7 @@ const colors = {
   offwhite: '#FEFDFF',
   lightgrey: '#EFEEF0',
   mediumgrey: '#898989',
+  mediumdarkgrey: '#D4D4D4',
   darkgrey: '#443B3B',
   color1: '#E88868',
   color2: '#34B7B5',
@@ -77,9 +78,6 @@ module.exports = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 12,
   },
-  padShort: {
-
-  },
   timestamp: {
     fontSize: 12,
   },
@@ -103,7 +101,6 @@ module.exports = StyleSheet.create({
     paddingLeft: 22,
     fontSize: 16,
   },
-
   photoCircle: {
     width: 46,
     height: 46,
