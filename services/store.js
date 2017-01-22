@@ -92,6 +92,11 @@ function store(state, action) {
         }
       }
     // messages
+    case 'convos:activate':
+      return {
+        ...state,
+        activeConvoId: action.id,
+      }
     case 'load:messages':
       var messages = {
         ...state.messages
@@ -153,6 +158,7 @@ const example = {
     facebook_id: '',
     facebook_access_token: '',
   },
+  activeConvoId: '',
   invitations: {
     loading: false,
     error: null,

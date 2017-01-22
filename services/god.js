@@ -28,10 +28,12 @@ function work(navigator) {
     waiting.myFloats && loadMyFloats();
     waiting.convos && loadConvos();
 
+    // this is an abomination
     if( state.pendingRoute ) {
       navigator.navigate(state.pendingRoute);
       if( state.pendingRoute === 'MessagesScene' ) {
         const payload = state.pendingRoutePayload;
+
         const promise = waiting.messages
           ? loadMessages(payload.float_id, payload.id)
           : Promise.resolve(true);
@@ -40,9 +42,17 @@ function work(navigator) {
           store.dispatch({
             type: 'navigation:success'
           })
+          store.dispatch({
+            type: 'convos:activate',
+            id: payload.id,
+          })
         }).catch(function() {
           store.dispatch({
             type: 'navigation:success'
+          })
+          store.dispatch({
+            type: 'convos:activate',
+            id: payload.id,
           })
         })
       } else {
