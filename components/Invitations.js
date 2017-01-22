@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   unread: {
     width: 8,
     height: 8,
-    backgroundColor: base.colors.color1,
+    backgroundColor: base.colors.color3,
     borderRadius: 4,
     marginTop: -.25,
   },

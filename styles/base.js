@@ -11,6 +11,7 @@ const colors = {
   darkgrey: '#443B3B',
   color1: '#E88868',
   color2: '#34B7B5',
+  color3: '#92D8D7',
 }
 const fontSizes = {
   normal: 16,
