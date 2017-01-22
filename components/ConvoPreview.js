@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   time: {
     color: base.colors.mediumlightgrey,
     position: 'absolute',
-    right: 12,
+    right: 10,
     bottom: 4,
     fontSize: 12,
   },
@@ -92,13 +92,13 @@ const styles = StyleSheet.create({
   },
   rightArrow: {
     marginLeft: 14,
-    marginRight: 12,
+    marginRight: 10,
     marginTop: -1
   },
   unread: {
     position: 'absolute',
-    right: 9,
-    top: 9,
+    right: 10,
+    top: 10,
     width: 8,
     height: 8,
     backgroundColor: base.colors.color3,
