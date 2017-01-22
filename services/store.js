@@ -91,6 +91,17 @@ function store(state, action) {
           error: action.error,
         }
       }
+    // navigation
+    case 'navigation:queue':
+      return {
+        ...state,
+        pendingRoute: action.route,
+      }
+    case 'navigation:success':
+      return {
+        ...state,
+        pendingRoute: null,
+      }
     case '@@redux/INIT':
       return state;
     default:

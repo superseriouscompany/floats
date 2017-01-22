@@ -30,19 +30,22 @@ export default class FloatsScene extends Component {
   }
 
   componentWillMount() {
-    this.unsubscribe = this.context.store.subscribe(() => {
-      const state = this.context.store.getState();
-      this.setState({
-        invitations: state.invitations,
-        myFloats:    state.myFloats,
-        convos:      state.convos,
-        inbox:       generateInbox(state.invitations, state.myFloats, state.convos),
-      });
-    })
+    this.unsubscribe = this.context.store.subscribe(this.refreshState.bind(this));
+    this.refreshState();
   }
 
   componentWillUnmount() {
     this.unsubscribe();
+  }
+
+  refreshState() {
+    const state = this.context.store.getState();
+    this.setState({
+      invitations: state.invitations,
+      myFloats:    state.myFloats,
+      convos:      state.convos,
+      inbox:       generateInbox(state.invitations, state.myFloats, state.convos),
+    });
   }
 
   render() { return (

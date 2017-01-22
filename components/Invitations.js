@@ -21,11 +21,7 @@ export default class Invitations extends Component {
 
   render() { return (
     <View>
-      { !this.props.invitations || !this.props.invitations.length ?
-        <View style={{alignItems: 'center', paddingTop: 9, paddingBottom: 10 }}>
-          <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>no pending invitations</Text>
-        </View>
-      :
+      { this.props.invitations && this.props.invitations.length ?
         <View>
           {this.props.invitations.map((f, i) => (
             <View key={i} style={styles.container}>
@@ -51,6 +47,8 @@ export default class Invitations extends Component {
             </View>
           ))}
         </View>
+      :
+        null
       }
     </View>
   )}
