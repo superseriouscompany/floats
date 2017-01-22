@@ -16,10 +16,10 @@ export default class Float extends Component {
   render() { const f = this.props.float; return (
     <View>
       <View style={styles.heading}>
-        <Image source={{url: f.user.avatar_url}} style={[base.miniPhotoCircle]} />
+        <Image source={{url: f.user.avatar_url}} style={base.miniPhotoCircle} />
         <Text style={styles.floatTitle}>"{f.title}"</Text>
-        <TouchableOpacity onPress={this.showDialog.bind(this)}>
-          <Text style={styles.overflow}>●●●</Text>
+        <TouchableOpacity onPress={this.showDialog.bind(this)} style={{paddingRight: 8, paddingTop: 7, paddingBottom: 7, paddingLeft: 8}}>
+          <Image source={require('../images/ThreeDotsLight.png')} />
         </TouchableOpacity>
       </View>
       { f.convos && f.convos.length ?
@@ -50,16 +50,13 @@ const styles = StyleSheet.create({
   heading: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingBottom: 5,
+    paddingTop: 2,
+    paddingBottom: 4,
   },
   floatTitle: {
-    color: 'darkgrey',
+    color: base.colors.mediumgrey,
     fontSize: 12,
     flex: 1,
-  },
-  overflow: {
-    color: 'darkgrey',
-    fontSize: 12,
   },
   unanswered: {
     backgroundColor: 'white',
