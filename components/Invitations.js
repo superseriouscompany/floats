@@ -33,7 +33,7 @@ export default class Invitations extends Component {
                 <View style={styles.unread}></View>
               </View>
               <View style={styles.main}>
-                <TouchableOpacity onPress={() => this.reportDialog(p)}>
+                <TouchableOpacity onPress={() => this.reportDialog(f)}>
                   <Image source={{url: f.user.avatar_url}} style={styles.photoCircle}/>
                 </TouchableOpacity>
                 <View style={{flex: 1, paddingRight: 45, marginLeft: 2.5}}>
@@ -54,14 +54,14 @@ export default class Invitations extends Component {
     </View>
   )}
 
-  reportDialog(p) {
+  reportDialog(f) {
     ActionSheetIOS.showActionSheetWithOptions({
-      options: [`Report ${p.user.name}`, 'Cancel'],
+      options: [`Report ${f.user.name}`, 'Cancel'],
       destructiveButtonIndex: 0,
       cancelButtonIndex: 1,
     }, (index) => {
       if( index == 0 ) {
-        alert(`You have reported ${p.user.name} for floating ${p.title}`);
+        alert(`You have reported ${f.user.name} for floating ${p.title}`);
       }
     })
   }
