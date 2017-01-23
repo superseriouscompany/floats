@@ -35,8 +35,12 @@ export default class Invitations extends Component {
                 <TouchableOpacity onPress={() => this.dismiss(f)} style={{paddingLeft: 12, paddingRight: 10, marginLeft: -10}}>
                   <Image source={require('../images/XLight.png')} />
                 </TouchableOpacity>
-                <Text style={[base.timestamp, styles.context, {fontSize: 12}]}>{f.user.name.split(' '[0])} sent you a float</Text>
-                <View style={styles.unread}></View>
+                <Text style={[base.timestamp, styles.context, {fontSize: 12}]}>{f.user.name.split(' ')[0]} sent you a float</Text>
+                { i.unread ?
+                  <View style={styles.unread}></View>
+                :
+                  null
+                }
               </View>
               <View style={styles.main}>
                 <TouchableOpacity onPress={() => this.reportDialog(f)}>
