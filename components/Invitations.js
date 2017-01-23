@@ -31,17 +31,21 @@ export default class Invitations extends Component {
         <View>
           {this.props.invitations.map((f, i) => (
             <View key={i} style={styles.container}>
+
               <View style={styles.top}>
-                <TouchableOpacity onPress={() => this.dismiss(f)} style={{paddingLeft: 12, paddingRight: 10, marginLeft: -10}}>
-                  <Image source={require('../images/XLight.png')} />
-                </TouchableOpacity>
                 <Text style={[base.timestamp, styles.context, {fontSize: 12}]}>{f.user.name.split(' ')[0]} sent you a float</Text>
-                { i.unread ?
-                  <View style={styles.unread}></View>
-                :
-                  null
-                }
               </View>
+
+              <TouchableOpacity onPress={() => this.dismiss(f)} style={{position: 'absolute', marginLeft: 13, marginTop: 9.5, addingLeft: 12, paddingRight: 10}}>
+                <Image source={require('../images/XLight.png')} />
+              </TouchableOpacity>
+
+              { i.unread || true ?
+                <View style={styles.unread}></View>
+              :
+                null
+              }
+
               <View style={styles.main}>
                 <TouchableOpacity onPress={() => this.reportDialog(f)}>
                   <Image source={{url: f.user.avatar_url}} style={styles.photoCircle}/>
@@ -83,7 +87,7 @@ Invitations.contextTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 4,
+    paddingTop: 5,
     paddingBottom: 22,
     paddingRight: 13,
     paddingLeft: 10,
@@ -98,12 +102,14 @@ const styles = StyleSheet.create({
   top: {
     alignItems: 'center',
     justifyContent: 'space-between',
-    flexDirection: 'row',
+    alignSelf: 'stretch',
+    flexDirection: 'column',
   },
   context: {
+    alignSelf: 'stretch',
+    textAlign: 'center',
     paddingTop: 1.25,
     color: base.colors.mediumlightgrey,
-    marginLeft: -12,
   },
   rightQuote: {
     color: base.colors.darkgrey,
@@ -119,6 +125,9 @@ const styles = StyleSheet.create({
   dismiss: {
   },
   unread: {
+    position: 'absolute',
+    top: 11,
+    right: 13,
     width: 8,
     height: 8,
     backgroundColor: base.colors.color3,
