@@ -40,6 +40,11 @@ export default class batsignal extends Component {
 
     FCM.on('notification', (notif) => {
       store.dispatch({type: 'dirty'});
+      const state = store.getState();
+      if( notif.convoId && state.activeConvoId && notif.convoId == state.activeConvoId ) {
+        return;
+      }
+
       if( notif.aps ) {
         Alert.alert(notif.aps.alert);
       } else if( notif.body ){
