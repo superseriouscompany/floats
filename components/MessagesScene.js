@@ -21,11 +21,9 @@ export default class MessagesScene extends Component {
     super(props);
     this.state = {messages: []};
     this.onSend = this.onSend.bind(this);
-    console.log('called constructor');
   }
 
   componentWillMount() {
-    console.log('called will mount');
     this.unsubscribe = this.context.store.subscribe(this.applyState.bind(this));
     this.applyState();
   }
@@ -38,12 +36,20 @@ export default class MessagesScene extends Component {
     const state = this.context.store.getState();
 
     const messages = state.messages[state.activeConvoId];
+
+    const convo = state.convos.all && state.convos.all.find(function(c) {
+      return c.id == state.activeConvoId;
+    });
+    const name = convo.users[0].id == state.user.id
+      ? convo.users[1].name : convo.users[0].name
+
     if( !messages ) { return; }
     this.setState({
       loading:  messages.loading,
       error:    messages.error,
       messages: (messages.all || []).map(decorate),
       user:     state.user,
+      name:     name,
     })
   }
 
@@ -68,7 +74,6 @@ export default class MessagesScene extends Component {
     const convo = state.convos.all && state.convos.all.find(function(c) {
       return c.id == state.activeConvoId;
     });
-    console.log("Looking for active convo", state);
     if( !convo ) { return console.error("Active convo doesn't exist"); }
 
     messages.forEach(function(m) {
@@ -95,7 +100,7 @@ export default class MessagesScene extends Component {
             <Image source={require('../images/SmallLeftArrow.png')} />
           </TouchableOpacity>
           <View style={base.header}>
-            <Heading>Kevin David Crowe</Heading>
+            <Heading>{this.state.name}</Heading>
           </View>
           <TouchableOpacity onPress={() => this.showOptions()} style={[base.rightNav, styles.rightNavButton]}>
             <Image source={require('../images/Ellipses.png')} />
