@@ -13,24 +13,25 @@ import {
 } from 'react-native';
 
 export default class ConvoPreview extends Component {
-  render() { const c = this.props.convo; return (
+  render() {
+    const c = this.props.convo;
+    const other = this.other(c);
+
+    return (
     <TouchableOpacity onPress={this.showConvo.bind(this)} style={{flex: 1}}>
       <View style={[styles.container, (this.props.doBottomBorder == 1) ? {paddingBottom: 0.5} : {paddingBottom: 0}]}>
-        <View style={styles.unread}></View>
-        <Image source={{url: c.message.user.avatar_url}} style={styles.photoCircle}/>
+        { this.props.unread ?
+          <View style={styles.unread}></View>
+        :
+          null
+        }
+        <Image source={{url: other.avatar_url}} style={styles.photoCircle}/>
         <View style={styles.message}>
           <Text style={styles.name} numberOfLines={1}>
-            { c.members.length == 2 ?
-              c.message.user.name
-            : c.members.length == 3 ?
-              `${c.message.user.name.split(' ')[0]} & 1 other`
-            : c.members.length > 3 ?
-              `${c.message.user.name.split(' ')[0]} & ${c.members.length - 2} others`
-            : null
-            }
+            { other.name }
           </Text>
           <Text style={styles.text} numberOfLines={1}>
-            {('' && ''.length) ? c.message.text : 'Send a message'}
+            {c.message.text || 'Send a message' }
           </Text>
         </View>
         <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
@@ -52,6 +53,14 @@ export default class ConvoPreview extends Component {
       route: 'MessagesScene',
       payload: this.props.convo,
     })
+  }
+
+  other(convo) {
+    const user = this.context.store.getState().user;
+
+    return convo.users[0].id == user.id
+      ? convo.users[1]
+      : convo.users[0];
   }
 }
 
