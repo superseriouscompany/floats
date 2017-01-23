@@ -141,9 +141,10 @@ function generateInbox(invitations, myFloats, convos) {
     }
   })
 
-  return _.values(floats).sort(function(a, b) {
+  const inbox = _.values(floats).sort(function(a, b) {
     return a.time < b.time;
   })
+  return inbox;
 }
 
 FloatsScene.contextTypes = {
