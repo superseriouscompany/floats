@@ -6,10 +6,12 @@ const colors = {
   white: '#FFFFFF',
   offwhite: '#FEFDFF',
   lightgrey: '#EFEEF0',
+  mediumlightgrey: '#BFBFBF',
   mediumgrey: '#898989',
   darkgrey: '#443B3B',
   color1: '#E88868',
   color2: '#34B7B5',
+  color3: '#92D8D7',
 }
 const fontSizes = {
   normal: 16,
@@ -37,13 +39,20 @@ module.exports = StyleSheet.create({
     height: 40,
     transform: [{scale: 1.25}],
   },
+  airplaneLoader: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 36,
+    height: 27,
+    transform: [{scale: 1.25}],
+  },
   header: {
     height: 45,
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomWidth: 0.5,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.lightgrey,
   },
   leftNav: {
@@ -63,7 +72,7 @@ module.exports = StyleSheet.create({
   bottomBar: {
     height: 42.1,
     backgroundColor: colors.darkgrey,
-    borderTopWidth: 0.5,
+    borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: colors.lightgrey,
   },
   padFullHorizontal: {
@@ -76,9 +85,6 @@ module.exports = StyleSheet.create({
   padTall: {
     paddingTop: 12,
     paddingBottom: 12,
-  },
-  padShort: {
-
   },
   timestamp: {
     fontSize: 12,
@@ -103,26 +109,27 @@ module.exports = StyleSheet.create({
     paddingLeft: 22,
     fontSize: 16,
   },
-
   photoCircle: {
     width: 46,
     height: 46,
     borderRadius: 23,
     marginRight: 15,
-    borderWidth: 0.5,
+    borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.lightgrey,
   },
   miniPhotoCircle: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    marginLeft: 10,
     marginRight: 10,
-    borderColor: colors.lightgrey,
+    marginBottom: 1,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.offwhite,
   },
-
   bgBreakingSection: {
     backgroundColor: colors.offwhite,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.lightgrey,
   },
 });

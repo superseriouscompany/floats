@@ -13,7 +13,7 @@ import {
 import FCM from 'react-native-fcm';
 import CreateFloatScene from './components/CreateFloatScene';
 import LoginScene from './components/LoginScene';
-import PlansScene from './components/PlansScene';
+import FloatsScene from './components/FloatsScene';
 import Text from './components/Text';
 import api from './services/api';
 
@@ -38,8 +38,8 @@ export default class batsignal extends Component {
           <LoginScene navigator={this.navigator} />
         : this.state.scene == 'CreateFloatScene' ?
           <CreateFloatScene navigator={this.navigator} />
-        : this.state.scene == 'PlansScene' ?
-          <PlansScene navigator={this.navigator} />
+        : this.state.scene == 'FloatsScene' ?
+          <FloatsScene navigator={this.navigator} />
         :
           <Text>404</Text>
         }

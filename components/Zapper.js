@@ -6,11 +6,12 @@ import Text from './Text';
 import api from '../services/api';
 import base from '../styles/base';
 import {
-  TouchableOpacity,
-  View,
-  Image,
   Alert,
   AsyncStorage,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default class Zapper extends Component {
@@ -22,7 +23,7 @@ export default class Zapper extends Component {
   }
 
   render() { return (
-    <View>
+    <View style={styles.zapContainer}>
       <TouchableOpacity onPress={this.toggle.bind(this)}>
         { this.state.active ?
           <Image source={require('../images/Bumped.png')} />
@@ -38,8 +39,7 @@ export default class Zapper extends Component {
       AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
         return api.floats.join(accessToken, this.props.floatId, !!this.state.wasActive);
       }).then(() => {
-        this.setState({wasActive: true});
-        Alert.alert("Boom", `We let them know that you're down. Text to coordinate.`);
+        this.context.store.dispatch({type: 'dirty'});
       }).catch(function(err) {
         console.error(err);
       })
@@ -47,3 +47,17 @@ export default class Zapper extends Component {
     this.setState({active: !this.state.active});
   }
 }
+
+Zapper.contextTypes = {
+  store: React.PropTypes.object
+}
+
+const styles = StyleSheet.create({
+  zapContainer: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    paddingRight: 10.5,
+    paddingBottom: 11.5,
+  }
+});
