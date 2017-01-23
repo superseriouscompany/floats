@@ -58,6 +58,11 @@ export default class ConvoPreview extends Component {
   other(convo) {
     const user = this.context.store.getState().user;
 
+    if( !convo.users ) {
+      console.warn('No users present', convo);
+      return {};
+    }
+
     return convo.users[0].id == user.id
       ? convo.users[1]
       : convo.users[0];

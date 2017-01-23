@@ -139,26 +139,3 @@ function loadMessages() {
     });
   })
 }
-
-// const ws = new WebSocket('ws://192.168.1.72:3001');
-//
-// ws.onopen = () => {
-//   // connection opened
-//   ws.send('something'); // send a message
-// };
-//
-// ws.onmessage = (e) => {
-//   // a message was received
-//   console.warn('received message', e.data);
-//   this.appendMessage(e.data);
-// };
-//
-// ws.onerror = (e) => {
-//   // an error occurred
-//   console.warn(e.message);
-// };
-//
-// ws.onclose = (e) => {
-//   // connection closed
-//   console.warn(e.code, e.reason);
-// };
