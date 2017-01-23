@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Text  from './Text';
-import Plan     from './Plan';
+import Float     from './Float';
 import Attendee from './Attendee';
 import Component from './Component';
 import base from '../styles/base';
@@ -23,10 +23,10 @@ export default class YourPlan extends Component {
     const plan = this.props.plan;
     if( !plan ) { return null; }
     return (
-    <View style={[{flexDirection: 'row', paddingBottom: 18, backgroundColor: base.colors.offwhite, borderBottomWidth: 0.5, borderBottomColor: base.colors.lightgrey}, base.padFullHorizontal, base.padMainItem]}>
+    <View style={[{flexDirection: 'row', paddingBottom: 18, backgroundColor: base.colors.offwhite, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: base.colors.lightgrey}, base.padFullHorizontal, base.padMainItem]}>
       <Image source={{url: plan.user.avatar_url}} style={base.photoCircle} />
       <View style={{flex: 1}}>
-        <Plan plan={plan} attendees={plan.attendees}/>
+        <Float plan={plan} attendees={plan.attendees}/>
         { plan.attendees && plan.attendees.length ?
           <View>
             <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>text them to coordinate</Text>

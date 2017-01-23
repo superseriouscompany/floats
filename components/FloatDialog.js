@@ -7,6 +7,7 @@ import api from '../services/api';
 import Text from './Text';
 import {
   Alert,
+  ActivityIndicator,
   AsyncStorage,
   Image,
   StyleSheet,
@@ -26,24 +27,44 @@ export default class FloatDialog extends Component {
       <View style={[styles.inputContainer]}>
         <TextInput style={[styles.input]} placeholder="gauge interest" placeholderTextColor={base.colors.mediumgrey} onChangeText={(text) => this.setState({text})}/>
       </View>
-      <TouchableOpacity onPress={this.create.bind(this)}>
-        <Image source={require('../images/PaperAirplane.png')} />
-      </TouchableOpacity>
+      { this.state.sending ?
+        <ActivityIndicator
+          style={base.airplaneLoader}
+          size="small"
+          color={base.colors.mediumgrey}
+        />
+      :
+        <TouchableOpacity onPress={this.create.bind(this)}>
+          <Image source={require('../images/PaperAirplane.png')} />
+        </TouchableOpacity>
+      }
     </View>
   )}
 
   create() {
     if( !this.state.text ) { return; }
+    if( !this.props.friends.length ) { return; }
+
+    this.setState({sending: true});
 
     AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
-      return api.floats.create(accessToken, this.props.friends.map(function(f) { return f.id}), this.state.text).then(function() {
-        Alert.alert("We told your friends!");
-      });
+      const friends = this.props.friends.map(function(f) {
+        return f.id
+      })
+      return api.floats.create(accessToken, friends, this.state.text)
+    }).then(() => {
+      this.context.store.dispatch({type: 'navigation:queue', route: 'FloatsScene'});
+      this.context.store.dispatch({type: 'dirty'});
     }).catch(function(err) {
+      this.setState({sending: false});
       Alert.alert(err);
       console.error(err);
     })
   }
+}
+
+FloatDialog.contextTypes = {
+  store: React.PropTypes.object,
 }
 
 const styles = StyleSheet.create({
@@ -69,7 +90,7 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     paddingLeft: 20,
     paddingRight: 21,
-    borderBottomWidth: .5,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: base.colors.lightgrey,
   },
 })

@@ -8,6 +8,8 @@ import {
   AsyncStorage
 } from 'react-native'
 
+import store from './store';
+
 const api = {
   sessions: {
     create: function(facebookAccessToken) {
@@ -171,9 +173,11 @@ const api = {
       })
     },
 
-    mine: function(accessToken) {
-      return fetch(`${baseUrl}/floats/mine`, {
-        headers: headers(accessToken),
+    mine: function() {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats/mine`, {
+          headers: headers(accessToken),
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return response.json();
@@ -182,14 +186,23 @@ const api = {
       })
     },
 
-    invites: function(accessToken) {
-      return fetch(`${baseUrl}/floats`, {
-        headers: headers(accessToken),
+    invites: function() {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats`, {
+          headers: headers(accessToken),
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return response.json();
       }).then(function(json) {
         return json.floats;
+      }).catch(function(err) {
+        console.error(err);
+        store.dispatch({
+          type: 'load:invitations:failure',
+          error: err.message,
+        })
+        throw err;
       })
     },
 
@@ -205,14 +218,66 @@ const api = {
       })
     },
 
-    destroy: function(accessToken, floatId) {
-      return fetch(`${baseUrl}/floats/${floatId}`, {
-        method: 'DELETE',
-        headers: headers(accessToken),
+    leave: function(floatId) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats/${floatId}/leave`, {
+          method: 'DELETE',
+          headers: headers(accessToken)
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
 
         return true;
+      })
+    },
+
+    destroy: function(floatId) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats/${floatId}`, {
+          method: 'DELETE',
+          headers: headers(accessToken),
+        })
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error(response.status); }
+
+        return true;
+      })
+    },
+  },
+
+  convos: {
+    all: function() {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/convos`, {
+          headers: headers(accessToken)
+        }).then(function(response) {
+          return response.json()
+        }).then(function(json) {
+          return json.convos;
+        })
+      })
+    },
+  },
+
+  messages: {
+    all: function(floatId, convoId) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats/${floatId}/convos/${convoId}/messages`, {
+          headers: headers(accessToken),
+        })
+      }).then(function(response) {
+        return response.json()
+      }).then(function(json) {
+        return json.messages;
+      })
+    },
+    create: function(floatId, convoId, text) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats/${floatId}/convos/${convoId}/messages`, {
+          method: 'POST',
+          headers: headers(accessToken),
+          body: JSON.stringify({text: text})
+        })
       })
     },
   }

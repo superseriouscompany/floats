@@ -18,7 +18,7 @@ import {
 export default class TabBar extends Component {
   render() { return (
     <View style={[styles.container]}>
-      <TouchableOpacity style={styles.tabItem} onPress={() => this.props.navigator.navigate('PlansScene')}>
+      <TouchableOpacity style={styles.tabItem} onPress={() => this.props.navigator.navigate('FloatsScene')}>
         { this.props.active == 'floats' ?
           <Image source={require('../images/HeartActive.png')} />
         :
@@ -90,8 +90,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingTop: 12,
     paddingBottom: 12,
-    borderTopWidth: 0.5,
+    borderTopWidth: StyleSheet.hairlineWidth,
     borderColor: base.colors.lightgrey,
+    backgroundColor: 'white',
   },
   tabItem: {
     flex: .333,
