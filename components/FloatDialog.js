@@ -43,6 +43,7 @@ export default class FloatDialog extends Component {
 
   create() {
     if( !this.state.text ) { return; }
+    if( !this.props.friends.length ) { return; }
 
     this.setState({sending: true});
 
