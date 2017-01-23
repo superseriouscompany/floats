@@ -92,7 +92,7 @@ export default class FloatsScene extends Component {
                 <Text style={{color: 'indianred'}}>{this.state.invitations.error}</Text>
               : this.state.invitations.loading ?
                 null
-              : this.state.invitations.all && this.state.invitations.all.length ?
+              : this.state.invitations.all.filter((i) => { return !i.attending;}).length ?
                 <View style={{flex: 1, backgroundColor: base.colors.color2, paddingTop: 10}}>
                   <Invitations invitations={this.state.invitations.all.filter((i) => { return !i.attending;})} />
                 </View>
