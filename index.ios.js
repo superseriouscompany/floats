@@ -26,6 +26,9 @@ import {
   View,
 } from 'react-native';
 
+var defaultScene = 'CreateFloatScene';
+defaultScene = 'Scratch';
+
 export default class floats extends Component {
   constructor(props) {
     super(props);
@@ -60,7 +63,7 @@ export default class floats extends Component {
     AsyncStorage.getItem('@floats:user').then((user) => {
       if( user ) {
         store.dispatch({type: 'login', user: JSON.parse(user)});
-        this.setState({scene: 'CreateFloatScene'});
+        this.setState({scene: defaultScene});
       } else {
         this.setState({scene: 'LoginScene'});
       }
