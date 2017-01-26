@@ -12,10 +12,24 @@ import { Provider, connect } from 'react-redux';
 
 function reducer(state = {}, action) {
   switch(action.type) {
-    case 'foo':
+    case 'items:load':
       return {
         ...state,
-        cool: 'nice'
+        loading: true,
+        error: null,
+        items: []
+      }
+    case 'items:load:yes':
+      return {
+        ...state,
+        loading: false,
+        items: action.items,
+      }
+    case 'items:load:no':
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
       }
     default:
       return state;
@@ -35,11 +49,6 @@ export default class Scratch extends Component {
 class ScratchDumb extends Component {
   constructor(props) {
     super(props)
-
-    setTimeout(function() {
-      store.dispatch({type: 'foo'});
-    }, 1000);
-
     this.state = { items: []};
   }
 
@@ -54,24 +63,12 @@ class ScratchDumb extends Component {
       items.push(`Thing ${Math.floor(Math.random() * 100)}`)
     }
 
-    this.setState({
-      loading: true,
-      error: null,
-      items: [],
-    })
-
+    this.props.dispatch({type: 'items:load'});
     setTimeout( ()=> {
       if( Math.random() > 0.5 ) {
-        this.setState({
-          items: items,
-          error: null,
-          loading: false,
-        })
+        this.props.dispatch({type: 'items:load:yes', items: items });
       } else {
-        this.setState({
-          error: 'Something went wrong...',
-          loading: false,
-        })
+        this.props.dispatch({type: 'items:load:no', error: new Error('Something went wrong') });
       }
     }, 500);
   }
@@ -82,18 +79,19 @@ class ScratchDumb extends Component {
         <Text>Reload</Text>
       </TouchableOpacity>
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        { this.state.loading ?
+        { this.props.loading ?
           <Text>Loading...</Text>
         : null }
 
-        { this.state.error ?
+        { this.props.error ?
           <Text style={{color: 'indianred'}}>{this.state.error}</Text>
-        :
+        : this.props.items ?
           <View>
-            {this.state.items.map( (x, key) => (
+            {this.props.items.map( (x, key) => (
               <Text key={key}>{x}</Text>
             ))}
           </View>
+        : null
         }
 
         <Text>{ this.props.cool }</Text>
@@ -103,7 +101,11 @@ class ScratchDumb extends Component {
 }
 
 function mapStateToProps(state) {
-  return { cool: state.cool }
+  return {
+    items:   state.items,
+    error:   state.error,
+    loading: state.loading,
+  }
 }
 
 const Poop = connect(mapStateToProps)(ScratchDumb)
