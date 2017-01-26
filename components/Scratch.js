@@ -1,16 +1,44 @@
 'use strict';
 
 import React, {Component} from 'react';
-import FCM from 'react-native-fcm';
 import {
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 
+import {createStore} from 'redux';
+import { Provider, connect } from 'react-redux';
+
+function reducer(state = {}, action) {
+  switch(action.type) {
+    case 'foo':
+      return {
+        ...state,
+        cool: 'nice'
+      }
+    default:
+      return state;
+  }
+}
+
+const store = createStore(reducer);
+
 export default class Scratch extends Component {
+  render() { return (
+    <Provider store={store}>
+      <Poop />
+    </Provider>
+  )}
+}
+
+class ScratchDumb extends Component {
   constructor(props) {
     super(props)
+
+    setTimeout(function() {
+      store.dispatch({type: 'foo'});
+    }, 1000);
 
     this.state = { items: []};
   }
@@ -67,11 +95,15 @@ export default class Scratch extends Component {
             ))}
           </View>
         }
+
+        <Text>{ this.props.cool }</Text>
       </View>
     </View>
   )}
 }
 
-Scratch.contextTypes =  {
-  store: React.PropTypes.object
+function mapStateToProps(state) {
+  return { cool: state.cool }
 }
+
+const Poop = connect(mapStateToProps)(ScratchDumb)
