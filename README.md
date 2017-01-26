@@ -12,7 +12,7 @@
 ## Running
 
     # iOS
-    $ open ios/batsignal.xcodeproj
+    $ open ios/floats.xcodeproj
 
     # Android
     Run android studio, open android folder
