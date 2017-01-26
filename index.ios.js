@@ -26,7 +26,7 @@ import {
   View,
 } from 'react-native';
 
-export default class batsignal extends Component {
+export default class floats extends Component {
   constructor(props) {
     super(props);
     this.state = { props: {}};
@@ -106,8 +106,8 @@ export default class batsignal extends Component {
   }
 }
 
-batsignal.childContextTypes = {
+floats.childContextTypes = {
   store: React.PropTypes.object
 }
 
-AppRegistry.registerComponent('batsignal', () => batsignal);
+AppRegistry.registerComponent('floats', () => floats);
