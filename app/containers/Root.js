@@ -38,7 +38,7 @@ export default class Root extends Component {
     FCM.on('notification', (notif) => {
       store.dispatch({type: 'dirty'});
       const state = store.getState();
-      if( notif.convoId && state.activeConvoId && notif.convoId == state.activeConvoId ) {
+      if( notif.convoId && state.convos.activeConvoId && notif.convoId == state.convos.activeConvoId ) {
         return;
       }
 
