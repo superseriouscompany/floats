@@ -37,7 +37,7 @@ export default class Zapper extends Component {
   toggle() {
     if( !this.state.active ) {
       AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
-        return api.floats.join(accessToken, this.props.floatId, !!this.state.wasActive);
+        return api.floats.join(this.props.floatId, !!this.state.wasActive);
       }).then(() => {
         this.context.store.dispatch({type: 'dirty'});
       }).catch(function(err) {

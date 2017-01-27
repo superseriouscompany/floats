@@ -35,10 +35,10 @@ export default class MessagesScene extends Component {
   applyState() {
     const state = this.context.store.getState();
 
-    const messages = state.messages[state.activeConvoId];
+    const messages = state.messages[state.convos.activeConvoId];
 
     const convo = state.convos.all && state.convos.all.find(function(c) {
-      return c.id == state.activeConvoId;
+      return c.id == state.convos.activeConvoId;
     });
     const name = convo.users[0].id == state.user.id
       ? convo.users[1].name : convo.users[0].name
@@ -72,7 +72,7 @@ export default class MessagesScene extends Component {
   onSend(messages = []) {
     const state = this.context.store.getState();
     const convo = state.convos.all && state.convos.all.find(function(c) {
-      return c.id == state.activeConvoId;
+      return c.id == state.convos.activeConvoId;
     });
     if( !convo ) { return console.error("Active convo doesn't exist"); }
 
