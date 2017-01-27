@@ -39,7 +39,6 @@ _render state_: `containers` map state to props and re-render their `component` 
 
 Containers could also be called controllers. They translate state to properties for rendering and inject listeners into their components. They follow the pattern outlined here: https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.3f41m3lyx
 
-
 `app/actions/`
 
 Actions provide logic that can be dispatched from containers or components in response to user interaction.

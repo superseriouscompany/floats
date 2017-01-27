@@ -1,7 +1,8 @@
 import React from 'react';
 import FCM from 'react-native-fcm'
+import { Provider } from 'react-redux';
 import Component from '../components/Component';
-import CreateFloatScene from '../components/CreateFloatScene';
+import CreateFloatScene from '../containers/CreateFloatCtrl';
 import LoginScene from '../components/LoginScene';
 import FloatsScene from '../components/FloatsScene';
 import RandosScene from '../components/RandosScene';
@@ -75,29 +76,31 @@ export default class Root extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
-        { this.state.scene == 'LoginScene' ?
-          <LoginScene navigator={this.navigator} />
-        : this.state.scene == 'CreateFloatScene' ?
-          <CreateFloatScene navigator={this.navigator} />
-        : this.state.scene == 'FloatsScene' ?
-          <FloatsScene navigator={this.navigator} />
-        : this.state.scene == 'FriendsScene' ?
-          <FriendsScene navigator={this.navigator} />
-        : this.state.scene == 'RandosScene' ?
-          <RandosScene navigator={this.navigator} />
-        : this.state.scene == 'MessagesScene' ?
-          <MessagesScene navigator={this.navigator} />
-        : this.state.scene == 'KillSwitchScene' ?
-          <KillSwitchScene navigator={this.navigator} />
-        : this.state.scene == 'Scratch' ?
-          <Scratch />
-        : !!this.state.scene ?
-          <Text style={{padding: 200}}>404</Text>
-        :
-          null
-        }
-      </View>
+      <Provider store={store}>
+        <View style={{flex: 1}}>
+          { this.state.scene == 'LoginScene' ?
+            <LoginScene navigator={this.navigator} />
+          : this.state.scene == 'CreateFloatScene' ?
+            <CreateFloatScene navigator={this.navigator} />
+          : this.state.scene == 'FloatsScene' ?
+            <FloatsScene navigator={this.navigator} />
+          : this.state.scene == 'FriendsScene' ?
+            <FriendsScene navigator={this.navigator} />
+          : this.state.scene == 'RandosScene' ?
+            <RandosScene navigator={this.navigator} />
+          : this.state.scene == 'MessagesScene' ?
+            <MessagesScene navigator={this.navigator} />
+          : this.state.scene == 'KillSwitchScene' ?
+            <KillSwitchScene navigator={this.navigator} />
+          : this.state.scene == 'Scratch' ?
+            <Scratch />
+          : !!this.state.scene ?
+            <Text style={{padding: 200}}>404</Text>
+          :
+            null
+          }
+        </View>
+      </Provider>
     )
   }
 }

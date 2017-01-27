@@ -1,15 +1,14 @@
 'use strict';
 
 import React from 'react';
-import FCM from 'react-native-fcm';
-import Heading from './Heading';
-import Component from './Component';
-import Logo from './Logo';
-import FriendsCount from './FriendsCount';
-import NearbyFriend from './NearbyFriend';
-import FloatDialog from './FloatDialog';
-import TabBar from './TabBar';
-import Text from './Text';
+import Heading from '../components/Heading';
+import Component from '../components/Component';
+import Logo from '../components/Logo';
+import FriendsCount from '../components/FriendsCount';
+import NearbyFriend from '../components/NearbyFriend';
+import FloatDialog from '../components/FloatDialog';
+import TabBar from '../components/TabBar';
+import Text from '../components/Text';
 import base from '../styles/base';
 import api  from '../services/api';
 import {
@@ -31,45 +30,6 @@ export default class CreateFloatScene extends Component {
     }
   }
 
-  componentDidMount() {
-    AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
-      FCM.requestPermissions();
-      // FIXME: retry as long as it's not set
-      FCM.getFCMToken().then( (token) => {
-        if( !token ) { return console.warn("No firebase token available."); }
-        api.sessions.updateFirebaseToken(accessToken, token);
-      });
-      FCM.on('refreshToken', (token) => {
-        if( !token ) { return console.warn("No firebase token on refresh."); }
-        api.sessions.updateFirebaseToken(accessToken, token);
-      })
-
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          var initialPosition = JSON.stringify(position);
-          api.pins.create(accessToken, {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          }).then(function() {
-            return api.friends.nearby(accessToken);
-          }).then((friends) => {
-            friends = friends.map(function(f) {
-              f.selected = true;
-              return f;
-            })
-            this.setState({friends: friends, loaded: true, allSelected: true});
-          }).catch(function(err) {
-            return console.error(err);
-          })
-        },
-        (error) => alert(JSON.stringify(error)),
-        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-      );
-    }).catch((err) => {
-      this.setState({error: err, loaded: true});
-    })
-  }
-
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
@@ -77,15 +37,15 @@ export default class CreateFloatScene extends Component {
       </View>
 
       <View style={base.mainWindow}>
-        { !this.state.loaded ?
+        { !this.props.loaded ?
           <ActivityIndicator
             style={[base.loadingCenter, {transform: [{scale: 1.25}]}]}
             size="small"
             color={base.colors.mediumgrey}
           />
-        : this.state.error ?
-          <Text style={{color: 'indianred', textAlign: 'center'}}>{this.state.error}</Text>
-        : !this.state.friends.length ?
+        : this.props.error ?
+          <Text style={{color: 'indianred', textAlign: 'center'}}>{this.props.error}</Text>
+        : !this.props.friends.length ?
           <View style={{alignItems: 'center'}}>
             <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.mediumgrey}]}>
               <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
@@ -110,7 +70,7 @@ export default class CreateFloatScene extends Component {
           </View>
         :
           <View>
-            <FloatDialog friends={this.state.friends.filter(selected)} />
+            <FloatDialog friends={this.props.friends.filter(selected)} />
             <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
             <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
               <Text>
@@ -118,7 +78,7 @@ export default class CreateFloatScene extends Component {
               </Text>
               </View>
               <TouchableOpacity onPress={this.toggleAll.bind(this)}>
-                { this.state.allSelected ?
+                { this.props.allSelected ?
                   <Image source={require('../images/Checked.png')} />
                   :
                   <Image source={require('../images/EmptyCircle.png')} />
@@ -126,7 +86,7 @@ export default class CreateFloatScene extends Component {
               </TouchableOpacity>
             </View>
             <ScrollView>
-              {this.state.friends.map((f, i) => (
+              {this.props.friends.map((f, i) => (
                 <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
               ))}
             </ScrollView>
