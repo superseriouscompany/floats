@@ -13,7 +13,7 @@ class CreateFloatCtrl extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = { loading: true };
   }
 
   componentDidMount() {
@@ -42,7 +42,7 @@ class CreateFloatCtrl extends Component {
               f.selected = true;
               return f;
             })
-            this.setState({friends: friends, loaded: true, allSelected: true});
+            this.setState({friends: friends, loading: false, allSelected: true});
           }).catch(function(err) {
             return console.error(err);
           })
@@ -51,13 +51,21 @@ class CreateFloatCtrl extends Component {
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
       );
     }).catch((err) => {
-      this.setState({error: err, loaded: true});
+      this.setState({error: err, loading: false});
     })
   }
 
   render() { return (
-    <CreateFloatScene {...this.props} loaded={this.state.loaded} error={this.state.error} friends={this.state.friends}/>
+    <CreateFloatScene {...this.props} loading={this.state.loading} error={this.state.error} friends={this.state.friends}/>
   )}
+}
+
+function mapStateToProps(state) {
+  return {
+    loaded: state.nearbyFriends.loading,
+    error: state.nearbyFriends.error,
+    friends: state.nearbyFriends.items,
+  }
 }
 
 export default connect()(CreateFloatCtrl);
