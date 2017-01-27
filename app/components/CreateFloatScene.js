@@ -22,8 +22,13 @@ import {
 export default class CreateFloatScene extends Component {
   constructor(props) {
     super(props);
+    this.state = {allSelected: true, friends: []};
+  }
 
-    this.state = {allSelected: true, friends: props.friends};
+  componentWillReceiveProps(props) {
+    this.setState({
+      friends: props.friends,
+    })
   }
 
   render() { return (
@@ -45,7 +50,7 @@ export default class CreateFloatScene extends Component {
           <Ronery navigator={this.props.navigator}/>
         :
           <View>
-            <FloatDialog friends={this.props.friends.filter(selected)} />
+            <FloatDialog friends={this.state.friends.filter(selected)} />
             <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
               <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
                 <Text>
@@ -61,7 +66,7 @@ export default class CreateFloatScene extends Component {
               </TouchableOpacity>
             </View>
             <ScrollView>
-              {this.props.friends.map((f, i) => (
+              {this.state.friends.map((f, i) => (
                 <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
               ))}
             </ScrollView>
