@@ -102,7 +102,9 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginTop: 16,
-    marginBottom: 17
+    marginBottom: 17,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: base.colors.lightgrey,
   },
   rightArrow: {
     marginLeft: 14,
