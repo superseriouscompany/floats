@@ -26,14 +26,14 @@ function work(navigator) {
     load();
 
     // this is an abomination
-    if( state.pendingRoute ) {
-      navigator.navigate(state.pendingRoute);
+    if( state.navigation.pendingRoute ) {
+      navigator.navigate(state.navigation.pendingRoute);
       store.dispatch({
         type: 'navigation:success'
       })
 
-      if( state.pendingRoute === 'MessagesScene' ) {
-        const payload = state.pendingRoutePayload;
+      if( state.navigation.pendingRoute === 'MessagesScene' ) {
+        const payload = state.navigation.pendingRoutePayload;
         store.dispatch({
           type: 'convos:activate',
           id: payload.id,
@@ -113,9 +113,9 @@ function loadConvos() {
 
 function loadMessages() {
   const state = store.getState();
-  if( !state.activeConvoId ) { return; }
+  if( !state.convos.activeConvoId ) { return; }
   const convo = state.convos.all.find(function(c) {
-    return c.id == state.activeConvoId;
+    return c.id == state.convos.activeConvoId;
   })
   const floatId = convo.float_id;
   const convoId = convo.id;

@@ -51,7 +51,7 @@ export default class FloatDialog extends Component {
       const friends = this.props.friends.map(function(f) {
         return f.id
       })
-      return api.floats.create(accessToken, friends, this.state.text)
+      return api.floats.create(friends, this.state.text)
     }).then(() => {
       this.context.store.dispatch({type: 'navigation:queue', route: 'FloatsScene'});
       this.context.store.dispatch({type: 'dirty'});

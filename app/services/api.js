@@ -25,13 +25,15 @@ const api = {
       })
     },
 
-    updateFirebaseToken: function(accessToken, firebaseToken) {
-      return fetch(`${baseUrl}/users/me`, {
-        method: 'PATCH',
-        body: JSON.stringify({
-          firebase_token: firebaseToken,
-        }),
-        headers: headers(accessToken),
+    updateFirebaseToken: function(firebaseToken) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/users/me`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            firebase_token: firebaseToken,
+          }),
+          headers: headers(accessToken),
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return true;
@@ -54,11 +56,13 @@ const api = {
   },
 
   pins: {
-    create: function(accessToken, location) {
-      return fetch(`${baseUrl}/pins`, {
-        method: 'POST',
-        body: JSON.stringify(location),
-        headers: headers(accessToken),
+    create: function(location) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/pins`, {
+          method: 'POST',
+          body: JSON.stringify(location),
+          headers: headers(accessToken),
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return true;
@@ -67,9 +71,11 @@ const api = {
   },
 
   friends: {
-    nearby: function(accessToken) {
-      return fetch(`${baseUrl}/friends/nearby`, {
-        headers: headers(accessToken),
+    nearby: function() {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/friends/nearby`, {
+          headers: headers(accessToken),
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return response.json();
@@ -78,9 +84,11 @@ const api = {
       })
     },
 
-    all: function(accessToken) {
-      return fetch(`${baseUrl}/friends`, {
-        headers: headers(accessToken),
+    all: function() {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/friends`, {
+          headers: headers(accessToken),
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return response.json();
@@ -91,7 +99,7 @@ const api = {
   },
 
   randos: {
-    all: function(accessToken) {
+    all: function() {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
         return fetch(`${baseUrl}/randos`, {
           headers: headers(accessToken),
@@ -159,14 +167,16 @@ const api = {
   },
 
   floats: {
-    create: function(accessToken, userIds, title) {
-      return fetch(`${baseUrl}/floats`, {
-        method: 'POST',
-        body: JSON.stringify({
-          title: title,
-          invitees: userIds
-        }),
-        headers: headers(accessToken),
+    create: function(userIds, title) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats`, {
+          method: 'POST',
+          body: JSON.stringify({
+            title: title,
+            invitees: userIds
+          }),
+          headers: headers(accessToken),
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
         return true;
@@ -206,11 +216,13 @@ const api = {
       })
     },
 
-    join: function(accessToken, floatId, silent) {
-      return fetch(`${baseUrl}/floats/${floatId}/join`, {
-        method: 'POST',
-        headers: headers(accessToken),
-        body: JSON.stringify({silent: !!silent}),
+    join: function(floatId, silent) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/floats/${floatId}/join`, {
+          method: 'POST',
+          headers: headers(accessToken),
+          body: JSON.stringify({silent: !!silent}),
+        })
       }).then(function(response) {
         if( !response.ok ) { throw new Error(response.status); }
 
