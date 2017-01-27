@@ -1,15 +1,15 @@
 'use strict';
 
-import React        from 'react';
-import Heading      from '../components/Heading';
-import Component    from '../components/Component';
-import Logo         from '../components/Logo';
-import FriendsCount from '../components/FriendsCount';
-import NearbyFriend from '../components/NearbyFriend';
-import FloatDialog  from '../components/FloatDialog';
-import TabBar       from '../components/TabBar';
-import Text         from '../components/Text';
-import base         from '../styles/base';
+import React, {PropTypes} from 'react';
+import Heading            from '../components/Heading';
+import Component          from '../components/Component';
+import Logo               from '../components/Logo';
+import FriendsCount       from '../components/FriendsCount';
+import NearbyFriend       from '../components/NearbyFriend';
+import FloatDialog        from '../components/FloatDialog';
+import TabBar             from '../components/TabBar';
+import Text               from '../components/Text';
+import base               from '../styles/base';
 import {
   ActivityIndicator,
   Image,
@@ -20,6 +20,12 @@ import {
 } from 'react-native';
 
 export default class CreateFloatScene extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {allSelected: true, friends: props.friends};
+  }
+
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
@@ -35,7 +41,7 @@ export default class CreateFloatScene extends Component {
           />
         : this.props.error ?
           <Text style={{color: 'indianred', textAlign: 'center'}}>{this.props.error}</Text>
-        : !this.props.friends.length ?
+        : !this.props.friends || !this.props.friends.length ?
           <Ronery navigator={this.props.navigator}/>
         :
           <View>
@@ -47,7 +53,7 @@ export default class CreateFloatScene extends Component {
                 </Text>
               </View>
               <TouchableOpacity onPress={this.toggleAll.bind(this)}>
-                { this.props.allSelected ?
+                { this.state.allSelected ?
                   <Image source={require('../images/Checked.png')} />
                   :
                   <Image source={require('../images/EmptyCircle.png')} />
@@ -122,6 +128,16 @@ class Ronery extends Component {
       </TouchableOpacity>
     </View>
   )}
+}
+
+CreateFloatScene.propTypes = {
+  loading: PropTypes.bool,
+  error:   PropTypes.instanceOf(Error),
+  friends: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    avatar_url: PropTypes.string,
+    name: PropTypes.string,
+  }))
 }
 
 const styles = StyleSheet.create({

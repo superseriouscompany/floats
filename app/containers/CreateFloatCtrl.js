@@ -12,11 +12,13 @@ import {
 class CreateFloatCtrl extends Component {
   constructor(props) {
     super(props);
-
-    this.state = { loading: true };
+    this.state = {};
   }
 
   componentDidMount() {
+    this.setState({loading: true});
+    this.props.dispatch({type: 'nearbyFriends:load'});
+
     AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
       FCM.requestPermissions();
       // FIXME: retry as long as it's not set
@@ -42,6 +44,7 @@ class CreateFloatCtrl extends Component {
               f.selected = true;
               return f;
             })
+            this.props.dispatch({type: 'nearbyFriends:load:yes', friends: friends});
             this.setState({friends: friends, loading: false, allSelected: true});
           }).catch(function(err) {
             return console.error(err);
@@ -51,21 +54,22 @@ class CreateFloatCtrl extends Component {
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
       );
     }).catch((err) => {
+      this.props.dispatch({type: 'nearbyFriends:load:no', error: err});
       this.setState({error: err, loading: false});
     })
   }
 
   render() { return (
-    <CreateFloatScene {...this.props} loading={this.state.loading} error={this.state.error} friends={this.state.friends}/>
+    <CreateFloatScene {...this.props}/>
   )}
 }
 
 function mapStateToProps(state) {
   return {
-    loaded: state.nearbyFriends.loading,
-    error: state.nearbyFriends.error,
-    friends: state.nearbyFriends.items,
+    loading: state.nearbyFriends && state.nearbyFriends.loading,
+    error: state.nearbyFriends && state.nearbyFriends.error,
+    friends: state.nearbyFriends && state.nearbyFriends.items,
   }
 }
 
-export default connect()(CreateFloatCtrl);
+export default connect(mapStateToProps)(CreateFloatCtrl);
