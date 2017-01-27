@@ -1,9 +1,10 @@
 'use strict';
 
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import FCM from 'react-native-fcm';
 import { connect } from 'react-redux';
 import CreateFloatScene from '../components/CreateFloatScene';
+import { fetchNearbyFriends } from '../actions/nearbyFriends';
 import api from '../services/api';
 import {
   AsyncStorage
@@ -17,7 +18,7 @@ class CreateFloatCtrl extends Component {
 
   componentDidMount() {
     this.setState({loading: true});
-    this.props.dispatch({type: 'nearbyFriends:load'});
+    this.props.dispatch(fetchNearbyFriends);
 
     AsyncStorage.getItem('@floats:accessToken').then((accessToken) => {
       FCM.requestPermissions();
