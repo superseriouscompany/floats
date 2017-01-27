@@ -76,6 +76,8 @@ export default class TabBar extends Component {
 
   logout() {
     AsyncStorage.removeItem('@floats:accessToken').then(() => {
+      return AsyncStorage.removeItem('@floats:user')
+    }).then(() => {
       this.props.navigator.navigate('LoginScene');
     }).catch(function(err) {
       console.error(err);
