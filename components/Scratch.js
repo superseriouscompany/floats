@@ -7,13 +7,13 @@ import {
   View,
 } from 'react-native';
 
-import {createStore} from 'redux';
-import { Provider, connect } from 'react-redux';
-
 // Goals:
 //
-// * trigger api call when root component is not being displayed
-
+// * trigger api call from arbitrary notification handler
+import {createStore, applyMiddleware} from 'redux';
+import { Provider, connect } from 'react-redux';
+import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
 
 function reducer(state = {}, action) {
   switch(action.type) {
@@ -41,7 +41,20 @@ function reducer(state = {}, action) {
   }
 }
 
-const store = createStore(reducer);
+const middleware = [thunk];
+if( __DEV__ ) {
+  middleware.push(createLogger());
+}
+const store = createStore(
+  reducer,
+  applyMiddleware(...middleware),
+);
+
+const party = (dispatch, getState) => {
+  setTimeout(function() {
+    dispatch({type: 'items:load:no', error: new Error('nope')});
+  }, 1000);
+}
 
 class Scratch extends Component {
   render() { return (
@@ -56,6 +69,8 @@ export default Scratch;
 class Foo extends Component {
   constructor(props) {
     super(props);
+
+    setTimeout(receiveNotification, 1000);
     this.load();
   }
 
@@ -76,7 +91,7 @@ class Foo extends Component {
     }, 500);
   }
 
-  render() { console.log('re-rendered with', this.props); return (
+  render() { return (
     <FooView {...this.props} load={this.load.bind(this)} />
   )}
 }
@@ -94,8 +109,6 @@ function mapStateToProps(state) {
 class FooView extends Component {
   constructor(props) {
     super(props)
-
-    console.log("loaded with props", props);
   }
 
   render() { return (
@@ -135,4 +148,9 @@ class ReloadButton extends Component {
 
 FooView.propTypes = {
   load: React.PropTypes.func.isRequired,
+}
+
+function receiveNotification() {
+  // TODO: append intelligently
+  store.dispatch(party);
 }
