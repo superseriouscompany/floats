@@ -24,10 +24,6 @@ import {
 export default class CreateFloatScene extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loaded: false,
-      friends: []
-    }
   }
 
   render() { return (
@@ -37,7 +33,7 @@ export default class CreateFloatScene extends Component {
       </View>
 
       <View style={base.mainWindow}>
-        { !this.props.loaded ?
+        { this.props.loading ?
           <ActivityIndicator
             style={[base.loadingCenter, {transform: [{scale: 1.25}]}]}
             size="small"
@@ -46,36 +42,15 @@ export default class CreateFloatScene extends Component {
         : this.props.error ?
           <Text style={{color: 'indianred', textAlign: 'center'}}>{this.props.error}</Text>
         : !this.props.friends.length ?
-          <View style={{alignItems: 'center'}}>
-            <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.mediumgrey}]}>
-              <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
-                no nearby friends
-              </Text>
-            </View>
-            <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15, }}>
-              <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center'}]}>
-                floats works best when you’ve got{"\n"}your closest friends.
-              </Text>
-            </View>
-            <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
-              <Text style={styles.emptyButtonText}>
-                add friends
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color3}]} onPress={() => this.copyToClipboard()}>
-              <Text style={styles.emptyButtonText}>
-                invite someone
-              </Text>
-            </TouchableOpacity>
-          </View>
+          <Ronery navigator={this.props.navigator}/>
         :
           <View>
             <FloatDialog friends={this.props.friends.filter(selected)} />
             <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
-            <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
-              <Text>
-                Nearby Friends
-              </Text>
+              <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
+                <Text>
+                  Nearby Friends
+                </Text>
               </View>
               <TouchableOpacity onPress={this.toggleAll.bind(this)}>
                 { this.props.allSelected ?
@@ -122,6 +97,33 @@ export default class CreateFloatScene extends Component {
   copyToClipboard() {
     alert('not implemented');
   }
+}
+
+class Ronery extends Component {
+  render() { return(
+    <View style={{alignItems: 'center'}}>
+      <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.mediumgrey}]}>
+        <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
+          no nearby friends
+        </Text>
+      </View>
+      <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15, }}>
+        <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center'}]}>
+          floats works best when you’ve got{"\n"}your closest friends.
+        </Text>
+      </View>
+      <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
+        <Text style={styles.emptyButtonText}>
+          add friends
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color3}]} onPress={() => this.copyToClipboard()}>
+        <Text style={styles.emptyButtonText}>
+          invite someone
+        </Text>
+      </TouchableOpacity>
+    </View>
+  )}
 }
 
 function selected(f) {
