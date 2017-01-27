@@ -22,21 +22,21 @@ class CreateFloatCtrl extends Component {
       // FIXME: retry as long as it's not set
       FCM.getFCMToken().then( (token) => {
         if( !token ) { return console.warn("No firebase token available."); }
-        api.sessions.updateFirebaseToken(accessToken, token);
+        api.sessions.updateFirebaseToken(token);
       });
       FCM.on('refreshToken', (token) => {
         if( !token ) { return console.warn("No firebase token on refresh."); }
-        api.sessions.updateFirebaseToken(accessToken, token);
+        api.sessions.updateFirebaseToken(token);
       })
 
       navigator.geolocation.getCurrentPosition(
         (position) => {
           var initialPosition = JSON.stringify(position);
-          api.pins.create(accessToken, {
+          api.pins.create({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           }).then(function() {
-            return api.friends.nearby(accessToken);
+            return api.friends.nearby();
           }).then((friends) => {
             friends = friends.map(function(f) {
               f.selected = true;

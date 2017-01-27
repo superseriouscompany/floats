@@ -1,18 +1,16 @@
 'use strict';
 
-import React from 'react';
-import Heading from '../components/Heading';
-import Component from '../components/Component';
-import Logo from '../components/Logo';
+import React        from 'react';
+import Heading      from '../components/Heading';
+import Component    from '../components/Component';
+import Logo         from '../components/Logo';
 import FriendsCount from '../components/FriendsCount';
 import NearbyFriend from '../components/NearbyFriend';
-import FloatDialog from '../components/FloatDialog';
-import TabBar from '../components/TabBar';
-import Text from '../components/Text';
-import base from '../styles/base';
-import api  from '../services/api';
+import FloatDialog  from '../components/FloatDialog';
+import TabBar       from '../components/TabBar';
+import Text         from '../components/Text';
+import base         from '../styles/base';
 import {
-  AsyncStorage,
   ActivityIndicator,
   Image,
   ScrollView,
@@ -22,10 +20,6 @@ import {
 } from 'react-native';
 
 export default class CreateFloatScene extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
@@ -99,6 +93,10 @@ export default class CreateFloatScene extends Component {
   }
 }
 
+function selected(f) {
+  return !!f.selected;
+}
+
 class Ronery extends Component {
   render() { return(
     <View style={{alignItems: 'center'}}>
@@ -124,10 +122,6 @@ class Ronery extends Component {
       </TouchableOpacity>
     </View>
   )}
-}
-
-function selected(f) {
-  return !!f.selected;
 }
 
 const styles = StyleSheet.create({
