@@ -8,8 +8,7 @@ import { Linking } from 'react-native'
 
 class KillSwitchCtrl extends Component {
   componentDidMount() {
-    this.props.dispatch({type: 'killed'});
-    // this.props.dispatch(checkStatus);
+    this.props.dispatch(checkStatus);
   }
 
   render() {
