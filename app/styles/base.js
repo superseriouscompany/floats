@@ -1,6 +1,9 @@
 import {
   StyleSheet,
+  StatusBar,
 } from 'react-native'
+
+var statusBarHeight = (StatusBar.currentHeight === undefined) ? 20 : StatusBar.currentHeight;
 
 const colors = {
   white: '#FFFFFF',
@@ -21,7 +24,7 @@ module.exports = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingTop: 20,
+    paddingTop: statusBarHeight,
   },
   loadingCenter: {
     flex: 1,
