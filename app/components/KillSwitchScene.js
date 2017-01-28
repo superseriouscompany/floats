@@ -6,6 +6,7 @@ import Heading from './Heading';
 import Text from './Text';
 import base from '../styles/base';
 import {
+  Linking,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -33,7 +34,7 @@ export default class KillSwitchScene extends Component {
             hello! we’ve made some big changes{"\n"}and ask that you update floats:
           </Text>
         </View>
-        <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
+        <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={this.props.downloadUpdate}>
           <Text style={styles.emptyButtonText}>
             update app
           </Text>
@@ -41,6 +42,10 @@ export default class KillSwitchScene extends Component {
       </View>
     </View>
   )}
+}
+
+KillSwitchScene.propTypes = {
+  downloadUpdate: React.PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

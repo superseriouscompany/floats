@@ -11,6 +11,7 @@ import myFloats from './myFloats';
 import messages from './messages';
 import convos from './convos';
 import navigation from './navigation';
+import killed from './killSwitch'
 
 const middleware = [thunk];
 if( __DEV__ ) {
@@ -25,6 +26,7 @@ const reducers = combineReducers({
   messages,
   convos,
   navigation,
+  killed,
 })
 
 module.exports = createStore(
