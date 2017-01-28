@@ -26,7 +26,7 @@ export default class LoginScene extends Component {
   }
 
   render() { return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}}>
       <Image source={require('../images/Floats.jpg')}/>
       <View style={{alignItems: 'center', position: 'absolute', left: 0, right: 0, bottom: 25}}>
         { this.state.awaitingLogin ?
