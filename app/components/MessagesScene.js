@@ -24,7 +24,6 @@ export default class MessagesScene extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log("setting state to", props);
     this.setState(props);
   }
 
@@ -54,7 +53,7 @@ export default class MessagesScene extends Component {
     messages.forEach(function(m) {
       api.messages.create(convo.float_id, convo.id, m.text).catch(function(err) {
         console.error(err);
-        // FIXME: show message as failed
+        alert("Message failed to send");
       });
     })
 
