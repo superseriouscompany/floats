@@ -15,7 +15,10 @@ import {
 export default class ConvoPreview extends Component {
   render() {
     const c = this.props.convo;
-    const other = this.other(c);
+
+    if( this.props.isCreator && !c.message ) {
+      return null;
+    }
 
     return (
     <TouchableOpacity onPress={this.showConvo.bind(this)} style={{flex: 1}}>
@@ -25,12 +28,16 @@ export default class ConvoPreview extends Component {
         :
           null
         }
-        <Image source={{url: other.avatar_url}} style={styles.photoCircle}/>
+        { c.message ?
+          <Image source={{url: c.message.user.avatar_url}} style={styles.photoCircle}/>
+        :
+          <Image source={{url: this.convoAvatar(convo)}} style={styles.photoCircle} />
+        }
         <View style={styles.message}>
           <Text style={styles.name} numberOfLines={1}>
-            { c.users.length == 2 ? other.name : 'Everyone' }
+            {this.convoName(c)}
           </Text>
-          { c.message && c.message.text ?
+          { c.message ?
             <Text style={styles.text} numberOfLines={1}>
               {c.message.user.name.split(' ')[0]}: {c.message.text }
             </Text>
@@ -61,18 +68,44 @@ export default class ConvoPreview extends Component {
     })
   }
 
-  other(convo) {
-    const user = this.context.store.getState().user;
-
+  convoName(convo) {
     if( !convo.users ) {
       console.warn('No users present', convo);
-      return {};
+      return 'Messages';
+    }
+    if( convo.users > 2 ) { return 'Everyone' }
+
+    const user = this.context.store.getState().user;
+    return convo.users[0].id == user.id
+      ? convo.users[1].name
+      : convo.users[0].name;
+  }
+
+  convoAvatar(convo) {
+    if( !convo.users ) {
+      console.warn('No users present', convo);
+      return 'Messages';
     }
 
+    const user = this.context.store.getState().user;
     return convo.users[0].id == user.id
-      ? convo.users[1]
-      : convo.users[0];
+      ? convo.users[1].name
+      : convo.users[0].name;
   }
+}
+
+ConvoPreview.propTypes = {
+  isCreator: React.PropTypes.bool.isRequired,
+  convo: React.PropTypes.shape({
+    message: React.PropTypes.shape({
+      text: React.PropTypes.string,
+      user: React.PropTypes.shape({
+        id: React.PropTypes.string,
+        name: React.PropTypes.string,
+        avatar_url: React.PropTypes.string,
+      })
+    })
+  }).isRequired
 }
 
 const styles = StyleSheet.create({
