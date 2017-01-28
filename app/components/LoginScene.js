@@ -56,11 +56,12 @@ export default class LoginScene extends Component {
     } else if (result.isCancelled) {
       console.warn("Login cancelled");
     }
+    this.setState({ awaitingLogin: true })
 
-    this.login();
+    this.login(true);
   }
 
-  login() {
+  login(shouldAlert) {
     AccessToken.getCurrentAccessToken().then((data) => {
       if( !data ) { throw new Error('nope'); }
       return api.sessions.create(data.accessToken.toString())
@@ -73,7 +74,11 @@ export default class LoginScene extends Component {
     }).then(() => {
       this.props.navigator.navigate('CreateFloatScene');
     }).catch(function(err) {
-      if( err.message == 'nope' ) { return; }
+      if( err.message == 'nope' ) {
+        if( shouldAlert ) { alert('Not logged in'); }
+        return;
+      }
+      alert(JSON.stringify(err));
       console.error(err);
     });
   }
