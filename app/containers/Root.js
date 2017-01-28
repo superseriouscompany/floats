@@ -5,12 +5,12 @@ import { ActionSheetProvider } from '@exponent/react-native-action-sheet';
 import CreateFloatScene from '../containers/CreateFloatCtrl';
 import FloatsScene from '../containers/FloatsCtrl';
 import MessagesScene from '../containers/MessagesCtrl';
+import KillSwitchScene from '../containers/KillSwitchCtrl';
 import LoginScene from '../components/LoginScene';
 import RandosScene from '../components/RandosScene';
 import FriendsScene from '../components/FriendsScene';
 import Scratch from '../components/Scratch';
 import Text from '../components/Text';
-import KillSwitchScene from '../components/KillSwitchScene';
 import api from '../services/api';
 import store from '../services/store';
 import God from '../services/god';
@@ -81,29 +81,29 @@ export default class Root extends Component {
     return (
       <Provider store={store}>
         <ActionSheetProvider>
-          <View style={{flex: 1}}>
-            { this.state.scene == 'LoginScene' ?
-              <LoginScene navigator={this.navigator} />
-            : this.state.scene == 'CreateFloatScene' ?
-              <CreateFloatScene navigator={this.navigator} />
-            : this.state.scene == 'FloatsScene' ?
-              <FloatsScene navigator={this.navigator} />
-            : this.state.scene == 'FriendsScene' ?
-              <FriendsScene navigator={this.navigator} />
-            : this.state.scene == 'RandosScene' ?
-              <RandosScene navigator={this.navigator} />
-            : this.state.scene == 'MessagesScene' ?
-              <MessagesScene navigator={this.navigator} />
-            : this.state.scene == 'KillSwitchScene' ?
-              <KillSwitchScene navigator={this.navigator} />
-            : this.state.scene == 'Scratch' ?
-              <Scratch />
-            : !!this.state.scene ?
-              <Text style={{padding: 200}}>404</Text>
-            :
-              null
-            }
-          </View>
+          <KillSwitchScene>
+            <View style={{flex: 1}}>
+              { this.state.scene == 'LoginScene' ?
+                <LoginScene navigator={this.navigator} />
+              : this.state.scene == 'CreateFloatScene' ?
+                <CreateFloatScene navigator={this.navigator} />
+              : this.state.scene == 'FloatsScene' ?
+                <FloatsScene navigator={this.navigator} />
+              : this.state.scene == 'FriendsScene' ?
+                <FriendsScene navigator={this.navigator} />
+              : this.state.scene == 'RandosScene' ?
+                <RandosScene navigator={this.navigator} />
+              : this.state.scene == 'MessagesScene' ?
+                <MessagesScene navigator={this.navigator} />
+              : this.state.scene == 'Scratch' ?
+                <Scratch />
+              : !!this.state.scene ?
+                <Text style={{padding: 200}}>404</Text>
+              :
+                null
+              }
+            </View>
+          </KillSwitchScene>
         </ActionSheetProvider>
       </Provider>
     )
