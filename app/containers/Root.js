@@ -3,8 +3,8 @@ import FCM from 'react-native-fcm'
 import { Provider } from 'react-redux';
 import { ActionSheetProvider } from '@exponent/react-native-action-sheet';
 import CreateFloatScene from '../containers/CreateFloatCtrl';
+import FloatsScene from '../containers/FloatsCtrl';
 import LoginScene from '../components/LoginScene';
-import FloatsScene from '../components/FloatsScene';
 import RandosScene from '../components/RandosScene';
 import FriendsScene from '../components/FriendsScene';
 import Scratch from '../components/Scratch';
