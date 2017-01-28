@@ -23,7 +23,6 @@ import {
 export default class FloatsScene extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       invitations: {loading: true},
       myFloats:    {loading: true},
