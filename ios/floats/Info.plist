@@ -59,12 +59,14 @@
 	<string>Where you at doe</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Roboto-Italic.ttf</string>
+		<string>OleoScript-Regular.ttf</string>
+		<string>OleoScript-Bold.ttf</string>
 		<string>Poppins-Bold.ttf</string>
 		<string>Poppins-Light.ttf</string>
 		<string>Poppins-Medium.ttf</string>
 		<string>Poppins-Regular.ttf</string>
 		<string>Poppins-SemiBold.ttf</string>
-		<string>Lobster-Regular.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
