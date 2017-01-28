@@ -11,7 +11,6 @@ import TabBar from './TabBar';
 import Text from './Text';
 import Inbox from './Inbox';
 import {
-  ActionSheetIOS,
   ActivityIndicator,
   AsyncStorage,
   Dimensions,
