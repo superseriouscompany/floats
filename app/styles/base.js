@@ -1,9 +1,13 @@
 import {
+  Platform,
   StyleSheet,
   StatusBar,
 } from 'react-native'
 
-var statusBarHeight = (StatusBar.currentHeight === undefined) ? 20 : StatusBar.currentHeight;
+var statusBarHeight = 0;
+if( Platform.OS === 'ios' ) {
+  statusBarHeight = (StatusBar.currentHeight === undefined) ? 20 : StatusBar.currentHeight;
+}
 
 const colors = {
   white: '#FFFFFF',
