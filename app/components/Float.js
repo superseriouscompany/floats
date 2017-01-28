@@ -32,7 +32,7 @@ class Float extends Component {
       { f.convos && f.convos.length ?
         <View style={{backgroundColor: 'white', borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.lightgrey}}>
           { f.convos.map((c, key) => (
-            <ConvoPreview convo={c} key={key} doBottomBorder={key != f.convos.length - 1}/>
+            <ConvoPreview convo={c} isCreator={true} key={key} doBottomBorder={key != f.convos.length - 1}/>
           ))}
         </View>
       : f.invitees && f.invitees.length ?
