@@ -28,11 +28,17 @@ export default class ConvoPreview extends Component {
         <Image source={{url: other.avatar_url}} style={styles.photoCircle}/>
         <View style={styles.message}>
           <Text style={styles.name} numberOfLines={1}>
-            { other.name }
+            { c.users.length == 2 ? other.name : 'Everyone' }
           </Text>
-          <Text style={styles.text} numberOfLines={1}>
-            {c.message.text || 'Send a message' }
-          </Text>
+          { c.message && c.message.text ?
+            <Text style={styles.text} numberOfLines={1}>
+              {c.message.user.name.split(' ')[0]}: {c.message.text }
+            </Text>
+          :
+            <Text style={[styles.text, styles.prompt]} numberOfLines={1}>
+              Send a direct message...
+            </Text>
+          }
         </View>
         <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
         <Text style={[base.timestamp, styles.time]}>
@@ -94,6 +100,9 @@ const styles = StyleSheet.create({
     color: base.colors.mediumgrey,
     fontSize: base.fontSizes.small,
     paddingRight: 35,
+  },
+  prompt: {
+    fontStyle: 'italic',
   },
   photoCircle: {
     width: 54,
