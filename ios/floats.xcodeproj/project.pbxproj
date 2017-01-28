@@ -46,6 +46,9 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		F6116F401E3C09590040E05E /* OleoScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6116F3F1E3C09590040E05E /* OleoScript-Regular.ttf */; };
 		F6116F421E3C096D0040E05E /* OleoScript-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6116F411E3C096D0040E05E /* OleoScript-Bold.ttf */; };
+		F6116F461E3CE38D0040E05E /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6116F431E3CE38D0040E05E /* OpenSans-Italic.ttf */; };
+		F6116F471E3CE38D0040E05E /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6116F441E3CE38D0040E05E /* OpenSans-LightItalic.ttf */; };
+		F6116F481E3CE38D0040E05E /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6116F451E3CE38D0040E05E /* OpenSans-SemiboldItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -295,6 +298,9 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		F6116F3F1E3C09590040E05E /* OleoScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OleoScript-Regular.ttf"; sourceTree = "<group>"; };
 		F6116F411E3C096D0040E05E /* OleoScript-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OleoScript-Bold.ttf"; sourceTree = "<group>"; };
+		F6116F431E3CE38D0040E05E /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		F6116F441E3CE38D0040E05E /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		F6116F451E3CE38D0040E05E /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -480,6 +486,9 @@
 		3FE6728A1E22BA29009C4C31 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				F6116F431E3CE38D0040E05E /* OpenSans-Italic.ttf */,
+				F6116F441E3CE38D0040E05E /* OpenSans-LightItalic.ttf */,
+				F6116F451E3CE38D0040E05E /* OpenSans-SemiboldItalic.ttf */,
 				3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */,
 				3FE6728C1E22BA73009C4C31 /* Poppins-Light.ttf */,
 				3FE6728D1E22BA73009C4C31 /* Poppins-Medium.ttf */,
@@ -916,6 +925,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				F6116F481E3CE38D0040E05E /* OpenSans-SemiboldItalic.ttf in Resources */,
+				F6116F461E3CE38D0040E05E /* OpenSans-Italic.ttf in Resources */,
+				F6116F471E3CE38D0040E05E /* OpenSans-LightItalic.ttf in Resources */,
 				3FE672921E22BA73009C4C31 /* Poppins-Medium.ttf in Resources */,
 				3FBE01E31E2C46C800679C85 /* GoogleService-Info.plist in Resources */,
 				3FE672911E22BA73009C4C31 /* Poppins-Light.ttf in Resources */,
