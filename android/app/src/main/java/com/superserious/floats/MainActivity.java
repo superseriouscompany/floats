@@ -1,4 +1,4 @@
-package com.superserious.batsignal;
+package com.superserious.floats;
 
 import android.content.Intent;
 
@@ -12,7 +12,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "batsignal";
+        return "floats";
     }
 
     @Override

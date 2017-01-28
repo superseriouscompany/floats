@@ -7,16 +7,16 @@ import Text from './Text';
 import Zapper from './Zapper';
 import base from '../styles/base';
 import api from '../services/api';
+import { connectActionSheet } from '@exponent/react-native-action-sheet';
 
 import {
-  ActionSheetIOS,
   Image,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-export default class Invitations extends Component {
+class Invitations extends Component {
   dismiss(float) {
     api.floats.leave(float.id).then(() => {
       this.context.store.dispatch({type: 'dirty'});
@@ -69,7 +69,7 @@ export default class Invitations extends Component {
   )}
 
   reportDialog(f) {
-    ActionSheetIOS.showActionSheetWithOptions({
+    this.props.showActionSheetWithOptions({
       options: [`Report ${f.user.name}`, 'Cancel'],
       destructiveButtonIndex: 0,
       cancelButtonIndex: 1,
@@ -80,6 +80,8 @@ export default class Invitations extends Component {
     })
   }
 }
+
+export default connectActionSheet(Invitations)
 
 Invitations.contextTypes = {
   store: React.PropTypes.object,

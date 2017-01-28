@@ -55,7 +55,7 @@ export default class FloatDialog extends Component {
     }).then(() => {
       this.context.store.dispatch({type: 'navigation:queue', route: 'FloatsScene'});
       this.context.store.dispatch({type: 'dirty'});
-    }).catch(function(err) {
+    }).catch((err) => {
       this.setState({sending: false});
       Alert.alert(err);
       console.error(err);

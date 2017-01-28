@@ -29,12 +29,12 @@ export function fetchNearbyFriends(dispatch) {
         })
         dispatch({type: 'nearbyFriends:load:yes', friends: friends});
       }).catch(function(err) {
-        dispatch({type: 'nearbyFriends:load:no', error: err});
+        dispatch({type: 'nearbyFriends:load:no', error: err.message});
       })
     },
     (error) => {
-      dispatch({type: 'nearbyFriends:load:no', error: error});
+      dispatch({type: 'nearbyFriends:load:no', error: error.message});
     },
-    {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
   );
 }
