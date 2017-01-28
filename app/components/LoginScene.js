@@ -10,6 +10,8 @@ import {
   ActivityIndicator,
   Image,
   Linking,
+  Platform,
+  StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -33,7 +35,7 @@ export default class LoginScene extends Component {
           <ActivityIndicator color="hotpink" size="small" />
         :
           <LoginButton
-            style={{height: 50, width: 200}}
+            style={styles.loginButton}
             onLoginFinished={this.onLoginFinished.bind(this)}
             />
         }
@@ -85,3 +87,10 @@ LoginScene.propTypes = {
 LoginScene.contextTypes = {
   store: React.PropTypes.object
 }
+
+const styles = StyleSheet.create({
+  loginButton: {
+    height: (Platform.OS === 'ios') ? 50 : 30,
+    width: (Platform.OS === 'ios') ? 200 : 180,
+  }
+});
