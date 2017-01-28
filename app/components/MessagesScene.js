@@ -19,38 +19,13 @@ import { GiftedChat } from 'react-native-gifted-chat';
 export default class MessagesScene extends Component {
   constructor(props) {
     super(props);
-    this.state = {messages: []};
     this.onSend = this.onSend.bind(this);
+    this.state = {};
   }
 
-  componentWillMount() {
-    this.unsubscribe = this.context.store.subscribe(this.applyState.bind(this));
-    this.applyState();
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  applyState() {
-    const state = this.context.store.getState();
-
-    const messages = state.messages[state.convos.activeConvoId];
-
-    const convo = state.convos.all && state.convos.all.find(function(c) {
-      return c.id == state.convos.activeConvoId;
-    });
-    const name = convo.users[0].id == state.user.id
-      ? convo.users[1].name : convo.users[0].name
-
-    if( !messages ) { return; }
-    this.setState({
-      loading:  messages.loading,
-      error:    messages.error,
-      messages: (messages.all || []).map(decorate),
-      user:     state.user,
-      name:     name,
-    })
+  componentWillReceiveProps(props) {
+    console.log("setting state to", props);
+    this.setState(props);
   }
 
   appendMessage(message) {
@@ -141,19 +116,6 @@ const styles = StyleSheet.create({
     paddingRight: 19
   }
 });
-
-function decorate(message) {
-  return {
-    _id: message.id,
-    text: message.text,
-    createdAt: new Date(message.created_at),
-    user: {
-      _id: message.user.id,
-      name: message.user.name,
-      avatar: message.user.avatar_url,
-    }
-  }
-}
 
 MessagesScene.contextTypes = {
   store: React.PropTypes.object,
