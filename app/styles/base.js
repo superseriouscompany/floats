@@ -96,7 +96,7 @@ module.exports = StyleSheet.create({
   },
   textTagline: {
     fontSize: 12,
-    fontFamily: 'Lobster',
+    fontFamily: 'Oleo',
     color: colors.darkgrey,
     backgroundColor: 'rgba(0,0,0,0)',
     marginTop: -6,
