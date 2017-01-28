@@ -6,8 +6,9 @@ import Text from './Text';
 import ConvoPreview from './ConvoPreview';
 import base from '../styles/base';
 import api  from '../services/api';
+import { connectActionSheet } from '@exponent/react-native-action-sheet';
+
 import {
-  ActionSheetIOS,
   Alert,
   Image,
   StyleSheet,
@@ -15,8 +16,11 @@ import {
   View,
 } from 'react-native';
 
-export default class Float extends Component {
-  render() { const f = this.props.float; return (
+class Float extends Component {
+  render() {
+    const f = this.props.float;
+    const isCreator = this.context.store.getState().user.id === f.user.id;
+    return (
     <View>
       <View style={styles.heading}>
         <Image source={{url: f.user.avatar_url}} style={base.miniPhotoCircle} />
@@ -31,7 +35,7 @@ export default class Float extends Component {
       { f.convos && f.convos.length ?
         <View style={{backgroundColor: 'white', borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.lightgrey}}>
           { f.convos.map((c, key) => (
-            <ConvoPreview convo={c} key={key} doBottomBorder={(key == f.convos.length - 1) ? 0 : 1}/>
+            <ConvoPreview convo={c} isCreator={isCreator} key={key} doBottomBorder={key != f.convos.length - 1}/>
           ))}
         </View>
       : f.invitees && f.invitees.length ?
@@ -49,7 +53,7 @@ export default class Float extends Component {
 
   showDialog() {
     const isMine  = !!this.props.float.invitees;
-    ActionSheetIOS.showActionSheetWithOptions({
+    this.props.showActionSheetWithOptions({
       options: [isMine ? `Delete Float` : 'Leave Float', 'Cancel'],
       destructiveButtonIndex: 0,
       cancelButtonIndex: 1,
@@ -82,6 +86,8 @@ export default class Float extends Component {
     })
   }
 }
+
+export default connectActionSheet(Float);
 
 Float.contextTypes = {
   store: React.PropTypes.object,

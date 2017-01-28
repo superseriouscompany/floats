@@ -1,7 +1,7 @@
 import React from 'react';
 import FCM from 'react-native-fcm'
 import { Provider } from 'react-redux';
-import Component from '../components/Component';
+import { ActionSheetProvider } from '@exponent/react-native-action-sheet';
 import CreateFloatScene from '../containers/CreateFloatCtrl';
 import LoginScene from '../components/LoginScene';
 import FloatsScene from '../components/FloatsScene';
@@ -14,6 +14,7 @@ import KillSwitchScene from '../components/KillSwitchScene';
 import api from '../services/api';
 import store from '../services/store';
 import God from '../services/god';
+import Component from '../components/Component';
 import {
   Alert,
   AsyncStorage,
@@ -46,6 +47,8 @@ export default class Root extends Component {
         Alert.alert(notif.aps.alert);
       } else if( notif.body ){
         Alert.alert(notif.body);
+      } else if( notif.fcm ){
+        Alert.alert(notif.fcm.body);
       } else {
         console.warn("Unknown notification", notif);
       }
@@ -77,29 +80,31 @@ export default class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={{flex: 1}}>
-          { this.state.scene == 'LoginScene' ?
-            <LoginScene navigator={this.navigator} />
-          : this.state.scene == 'CreateFloatScene' ?
-            <CreateFloatScene navigator={this.navigator} />
-          : this.state.scene == 'FloatsScene' ?
-            <FloatsScene navigator={this.navigator} />
-          : this.state.scene == 'FriendsScene' ?
-            <FriendsScene navigator={this.navigator} />
-          : this.state.scene == 'RandosScene' ?
-            <RandosScene navigator={this.navigator} />
-          : this.state.scene == 'MessagesScene' ?
-            <MessagesScene navigator={this.navigator} />
-          : this.state.scene == 'KillSwitchScene' ?
-            <KillSwitchScene navigator={this.navigator} />
-          : this.state.scene == 'Scratch' ?
-            <Scratch />
-          : !!this.state.scene ?
-            <Text style={{padding: 200}}>404</Text>
-          :
-            null
-          }
-        </View>
+        <ActionSheetProvider>
+          <View style={{flex: 1}}>
+            { this.state.scene == 'LoginScene' ?
+              <LoginScene navigator={this.navigator} />
+            : this.state.scene == 'CreateFloatScene' ?
+              <CreateFloatScene navigator={this.navigator} />
+            : this.state.scene == 'FloatsScene' ?
+              <FloatsScene navigator={this.navigator} />
+            : this.state.scene == 'FriendsScene' ?
+              <FriendsScene navigator={this.navigator} />
+            : this.state.scene == 'RandosScene' ?
+              <RandosScene navigator={this.navigator} />
+            : this.state.scene == 'MessagesScene' ?
+              <MessagesScene navigator={this.navigator} />
+            : this.state.scene == 'KillSwitchScene' ?
+              <KillSwitchScene navigator={this.navigator} />
+            : this.state.scene == 'Scratch' ?
+              <Scratch />
+            : !!this.state.scene ?
+              <Text style={{padding: 200}}>404</Text>
+            :
+              null
+            }
+          </View>
+        </ActionSheetProvider>
       </Provider>
     )
   }

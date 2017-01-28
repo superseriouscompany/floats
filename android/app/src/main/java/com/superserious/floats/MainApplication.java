@@ -1,4 +1,4 @@
-package com.superserious.batsignal;
+package com.superserious.floats;
 
 import android.app.Application;
 

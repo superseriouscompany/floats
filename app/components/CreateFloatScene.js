@@ -137,7 +137,7 @@ class Ronery extends Component {
 
 CreateFloatScene.propTypes = {
   loading: PropTypes.bool,
-  error:   PropTypes.instanceOf(Error),
+  error:   PropTypes.string,
   friends: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     avatar_url: PropTypes.string,

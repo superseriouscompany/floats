@@ -15,7 +15,10 @@ import {
 export default class ConvoPreview extends Component {
   render() {
     const c = this.props.convo;
-    const other = this.other(c);
+
+    if( this.props.isCreator && !c.message ) {
+      return null;
+    }
 
     return (
     <TouchableOpacity onPress={this.showConvo.bind(this)} style={{flex: 1}}>
@@ -25,19 +28,32 @@ export default class ConvoPreview extends Component {
         :
           null
         }
-        <Image source={{url: other.avatar_url}} style={styles.photoCircle}/>
+        { c.message ?
+          <Image source={{url: c.message.user.avatar_url}} style={styles.photoCircle}/>
+        :
+          <Image source={{url: this.convoAvatar(c)}} style={styles.photoCircle} />
+        }
         <View style={styles.message}>
           <Text style={styles.name} numberOfLines={1}>
-            { other.name }
+            {this.convoName(c)}
           </Text>
-          <Text style={styles.text} numberOfLines={1}>
-            {c.message.text || 'Send a message' }
-          </Text>
+          { c.message ?
+            <Text style={styles.text} numberOfLines={1}>
+              {c.message.user.name.split(' ')[0]}: {c.message.text }
+            </Text>
+          :
+            <Text style={[styles.text, styles.prompt]} numberOfLines={1}>
+              Send a direct message...
+            </Text>
+          }
         </View>
         <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
-        <Text style={[base.timestamp, styles.time]}>
-          { moment(c.message.created_at).format('h:mma') }
-        </Text>
+        { c.message ?
+          <Text style={[base.timestamp, styles.time]}>
+            { moment(c.message.created_at).format('h:mma') }
+          </Text>
+        : null
+        }
       </View>
       {
         this.props.doBottomBorder == 1 ?
@@ -55,18 +71,44 @@ export default class ConvoPreview extends Component {
     })
   }
 
-  other(convo) {
-    const user = this.context.store.getState().user;
-
+  convoName(convo) {
     if( !convo.users ) {
       console.warn('No users present', convo);
-      return {};
+      return 'Messages';
+    }
+    if( convo.users.length > 2 ) { return 'Everyone' }
+
+    const user = this.context.store.getState().user;
+    return convo.users[0].id == user.id
+      ? convo.users[1].name
+      : convo.users[0].name;
+  }
+
+  convoAvatar(convo) {
+    if( !convo.users ) {
+      console.warn('No users present', convo);
+      return 'Messages';
     }
 
+    const user = this.context.store.getState().user;
     return convo.users[0].id == user.id
-      ? convo.users[1]
-      : convo.users[0];
+      ? convo.users[1].avatar_url
+      : convo.users[0].avatar_url;
   }
+}
+
+ConvoPreview.propTypes = {
+  isCreator: React.PropTypes.bool.isRequired,
+  convo: React.PropTypes.shape({
+    message: React.PropTypes.shape({
+      text: React.PropTypes.string,
+      user: React.PropTypes.shape({
+        id: React.PropTypes.string,
+        name: React.PropTypes.string,
+        avatar_url: React.PropTypes.string,
+      })
+    })
+  }).isRequired
 }
 
 const styles = StyleSheet.create({
@@ -94,6 +136,10 @@ const styles = StyleSheet.create({
     color: base.colors.mediumgrey,
     fontSize: base.fontSizes.small,
     paddingRight: 35,
+  },
+  prompt: {
+    fontStyle: 'italic',
+    color: 'hotpink',
   },
   photoCircle: {
     width: 54,

@@ -11,8 +11,8 @@ import Enemy from './Enemy';
 import TabBar from './TabBar';
 import api from '../services/api';
 import base from '../styles/base';
+import { connectActionSheet } from '@exponent/react-native-action-sheet';
 import {
-  ActionSheetIOS,
   ActivityIndicator,
   Image,
   ScrollView,
@@ -21,7 +21,7 @@ import {
   View,
 } from 'react-native';
 
-export default class FriendsScene extends Component {
+class FriendsScene extends Component {
   constructor(props) {
     super(props);
 
@@ -140,7 +140,7 @@ export default class FriendsScene extends Component {
   )}
 
   showLogoutDialog() {
-    ActionSheetIOS.showActionSheetWithOptions({
+    this.props.showActionSheetWithOptions({
       options: [`Logout`, `Delete Account`, 'Cancel'],
       destructiveButtonIndex: 1,
       cancelButtonIndex: 2,
@@ -163,6 +163,7 @@ export default class FriendsScene extends Component {
   }
 }
 
+export default connectActionSheet(FriendsScene);
 
 const styles = StyleSheet.create({
   leftNavButton: {
