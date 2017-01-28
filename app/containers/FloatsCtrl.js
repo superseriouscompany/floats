@@ -66,7 +66,7 @@ function generateInbox(invitations, myFloats, convos) {
 
       if( c.users.length > 2 || convosForFloat.length == 1 ) {
         c.message = {
-          text: 'Wuterr' || float.title,
+          text: float.title,
           user: float.user,
           created_at: float.created_at,
         }
