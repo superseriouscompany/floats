@@ -43,7 +43,7 @@ export default class ConvoPreview extends Component {
             </Text>
           :
             <Text style={[styles.text, styles.prompt]} numberOfLines={1}>
-              Send a direct message...
+              Send a direct message
             </Text>
           }
         </View>
@@ -138,8 +138,7 @@ const styles = StyleSheet.create({
     paddingRight: 35,
   },
   prompt: {
-    fontStyle: 'italic',
-    color: 'hotpink',
+    fontFamily: 'Roboto',
   },
   photoCircle: {
     width: 54,
