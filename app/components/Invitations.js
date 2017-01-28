@@ -48,7 +48,7 @@ class Invitations extends Component {
 
               <View style={styles.main}>
                 <TouchableOpacity onPress={() => this.reportDialog(f)}>
-                  <Image source={{url: f.user.avatar_url}} style={styles.photoCircle}/>
+                  <Image source={{uri: f.user.avatar_url}} style={styles.photoCircle}/>
                 </TouchableOpacity>
                 <View style={{flex: 1, paddingRight: 45, marginLeft: 2.5}}>
                   <Text style={{fontSize: 16}}>{f.title}”</Text>

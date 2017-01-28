@@ -10,6 +10,8 @@ import {
   ActivityIndicator,
   Image,
   Linking,
+  Platform,
+  StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -26,14 +28,14 @@ export default class LoginScene extends Component {
   }
 
   render() { return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}}>
       <Image source={require('../images/Floats.jpg')}/>
       <View style={{alignItems: 'center', position: 'absolute', left: 0, right: 0, bottom: 25}}>
         { this.state.awaitingLogin ?
           <ActivityIndicator color="hotpink" size="small" />
         :
           <LoginButton
-            style={{height: 50, width: 200}}
+            style={styles.loginButton}
             onLoginFinished={this.onLoginFinished.bind(this)}
             />
         }
@@ -89,3 +91,10 @@ LoginScene.propTypes = {
 LoginScene.contextTypes = {
   store: React.PropTypes.object
 }
+
+const styles = StyleSheet.create({
+  loginButton: {
+    height: (Platform.OS === 'ios') ? 50 : 30,
+    width: (Platform.OS === 'ios') ? 200 : 180,
+  }
+});
