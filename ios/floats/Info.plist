@@ -59,9 +59,7 @@
 	<string>Where you at doe</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>OpenSans-SemiboldItalic.ttf</string>
-		<string>OpenSans-LightItalic.ttf</string>
-		<string>OpenSans-Italic.ttf</string>
+		<string>Roboto-Italic.ttf</string>
 		<string>OleoScript-Regular.ttf</string>
 		<string>OleoScript-Bold.ttf</string>
 		<string>Poppins-Bold.ttf</string>
