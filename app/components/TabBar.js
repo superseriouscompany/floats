@@ -5,8 +5,8 @@ import Component from './Component';
 import Text from './Text';
 import base from '../styles/base';
 import api from '../services/api';
+import { connectActionSheet } from '@exponent/react-native-action-sheet';
 import {
-  ActionSheetIOS,
   Alert,
   AsyncStorage,
   Image,
@@ -15,7 +15,7 @@ import {
   View,
 } from 'react-native';
 
-export default class TabBar extends Component {
+class TabBar extends React.Component {
   render() { return (
     <View style={[styles.container]}>
       <TouchableOpacity style={styles.tabItem} onPress={() => this.props.navigator.navigate('FloatsScene')}>
@@ -43,7 +43,7 @@ export default class TabBar extends Component {
   )}
 
   showLogoutDialog() {
-    ActionSheetIOS.showActionSheetWithOptions({
+    this.props.showActionSheetWithOptions({
       options: [`Logout`, `Delete Account`, 'Cancel'],
       destructiveButtonIndex: 1,
       cancelButtonIndex: 2,
@@ -85,6 +85,8 @@ export default class TabBar extends Component {
     })
   }
 }
+
+export default connectActionSheet(TabBar);
 
 const styles = StyleSheet.create({
   container: {

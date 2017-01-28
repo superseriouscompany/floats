@@ -6,8 +6,9 @@ import Text from './Text';
 import ConvoPreview from './ConvoPreview';
 import base from '../styles/base';
 import api  from '../services/api';
+import { connectActionSheet } from '@exponent/react-native-action-sheet';
+
 import {
-  ActionSheetIOS,
   Alert,
   Image,
   StyleSheet,
@@ -15,7 +16,7 @@ import {
   View,
 } from 'react-native';
 
-export default class Float extends Component {
+class Float extends Component {
   render() { const f = this.props.float; return (
     <View>
       <View style={styles.heading}>
@@ -49,7 +50,7 @@ export default class Float extends Component {
 
   showDialog() {
     const isMine  = !!this.props.float.invitees;
-    ActionSheetIOS.showActionSheetWithOptions({
+    this.props.showActionSheetWithOptions({
       options: [isMine ? `Delete Float` : 'Leave Float', 'Cancel'],
       destructiveButtonIndex: 0,
       cancelButtonIndex: 1,
@@ -82,6 +83,8 @@ export default class Float extends Component {
     })
   }
 }
+
+export default connectActionSheet(Float);
 
 Float.contextTypes = {
   store: React.PropTypes.object,
