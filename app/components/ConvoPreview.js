@@ -31,7 +31,7 @@ export default class ConvoPreview extends Component {
         { c.message ?
           <Image source={{url: c.message.user.avatar_url}} style={styles.photoCircle}/>
         :
-          <Image source={{url: this.convoAvatar(convo)}} style={styles.photoCircle} />
+          <Image source={{url: this.convoAvatar(c)}} style={styles.photoCircle} />
         }
         <View style={styles.message}>
           <Text style={styles.name} numberOfLines={1}>
@@ -48,9 +48,12 @@ export default class ConvoPreview extends Component {
           }
         </View>
         <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
-        <Text style={[base.timestamp, styles.time]}>
-          { moment(c.message.created_at).format('h:mma') }
-        </Text>
+        { c.message ?
+          <Text style={[base.timestamp, styles.time]}>
+            { moment(c.message.created_at).format('h:mma') }
+          </Text>
+        : null
+        }
       </View>
       {
         this.props.doBottomBorder == 1 ?
@@ -73,7 +76,7 @@ export default class ConvoPreview extends Component {
       console.warn('No users present', convo);
       return 'Messages';
     }
-    if( convo.users > 2 ) { return 'Everyone' }
+    if( convo.users.length > 2 ) { return 'Everyone' }
 
     const user = this.context.store.getState().user;
     return convo.users[0].id == user.id
@@ -89,8 +92,8 @@ export default class ConvoPreview extends Component {
 
     const user = this.context.store.getState().user;
     return convo.users[0].id == user.id
-      ? convo.users[1].name
-      : convo.users[0].name;
+      ? convo.users[1].avatar_url
+      : convo.users[0].avatar_url;
   }
 }
 
@@ -136,6 +139,7 @@ const styles = StyleSheet.create({
   },
   prompt: {
     fontStyle: 'italic',
+    color: 'hotpink',
   },
   photoCircle: {
     width: 54,

@@ -17,7 +17,10 @@ import {
 } from 'react-native';
 
 class Float extends Component {
-  render() { const f = this.props.float; return (
+  render() {
+    const f = this.props.float;
+    const isCreator = this.context.store.getState().user.id === f.user.id;
+    return (
     <View>
       <View style={styles.heading}>
         <Image source={{url: f.user.avatar_url}} style={base.miniPhotoCircle} />
@@ -32,7 +35,7 @@ class Float extends Component {
       { f.convos && f.convos.length ?
         <View style={{backgroundColor: 'white', borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.lightgrey}}>
           { f.convos.map((c, key) => (
-            <ConvoPreview convo={c} isCreator={true} key={key} doBottomBorder={key != f.convos.length - 1}/>
+            <ConvoPreview convo={c} isCreator={isCreator} key={key} doBottomBorder={key != f.convos.length - 1}/>
           ))}
         </View>
       : f.invitees && f.invitees.length ?
