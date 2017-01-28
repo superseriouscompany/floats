@@ -23,7 +23,7 @@ class Float extends Component {
     return (
     <View>
       <View style={styles.heading}>
-        <Image source={{url: f.user.avatar_url}} style={base.miniPhotoCircle} />
+        <Image source={{uri: f.user.avatar_url}} style={base.miniPhotoCircle} />
         <View style={{flex: 1}}>
           <Text style={styles.floatTitle}>{f.title}”</Text>
           <Text style={styles.rightQuote}>“</Text>
