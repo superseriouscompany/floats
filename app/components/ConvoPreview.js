@@ -28,7 +28,9 @@ export default class ConvoPreview extends Component {
         :
           null
         }
-        { c.message ?
+        { c.users.length > 2 ?
+          <Image source={require('../images/GroupsAvatar.png')} style={styles.photoCircle}/>
+        : c.message ?
           <Image source={{url: c.message.user.avatar_url}} style={styles.photoCircle}/>
         :
           <Image source={{url: this.convoAvatar(c)}} style={styles.photoCircle} />
@@ -43,7 +45,7 @@ export default class ConvoPreview extends Component {
             </Text>
           :
             <Text style={[styles.text, styles.prompt]} numberOfLines={1}>
-              Send a direct message...
+              Send a direct message
             </Text>
           }
         </View>
@@ -76,7 +78,7 @@ export default class ConvoPreview extends Component {
       console.warn('No users present', convo);
       return 'Messages';
     }
-    if( convo.users.length > 2 ) { return 'Everyone' }
+    if( convo.users.length > 2 ) { return 'Group Chat' }
 
     const user = this.context.store.getState().user;
     return convo.users[0].id == user.id
@@ -138,8 +140,7 @@ const styles = StyleSheet.create({
     paddingRight: 35,
   },
   prompt: {
-    fontStyle: 'italic',
-    color: 'hotpink',
+    fontFamily: 'Roboto',
   },
   photoCircle: {
     width: 54,
@@ -147,8 +148,8 @@ const styles = StyleSheet.create({
     borderRadius: 27,
     marginLeft: 10,
     marginRight: 10,
-    marginTop: 16,
-    marginBottom: 17,
+    marginTop: 17,
+    marginBottom: 16,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: base.colors.lightgrey,
   },
