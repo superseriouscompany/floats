@@ -40,7 +40,14 @@ export default class CreateFloatScene extends Component {
 
       <View style={base.mainWindow}>
         { this.props.error ?
-          <Text style={{color: 'indianred', textAlign: 'center'}}>{this.props.error}</Text>
+          <View style={{alignItems: 'center'}}>
+            <Text style={{color: 'indianred', textAlign: 'center', marginBottom: 10, marginTop: 10}}>{this.props.error}</Text>
+            <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={this.props.refresh}>
+              <Text style={styles.emptyButtonText}>
+                Try Again
+              </Text>
+            </TouchableOpacity>
+          </View>
         : this.state.friends && !this.state.friends.length ?
           <Ronery navigator={this.props.navigator}/>
         : this.state.friends && this.state.friends.length ?
