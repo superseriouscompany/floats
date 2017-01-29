@@ -44,7 +44,7 @@ export default class FloatsScene extends Component {
             </View>
         :
           <ScrollView
-            refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]} />}>
+            refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading || false} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]} />}>
             <View>
               { this.props.invitations.error ?
                 <Text style={{color: 'indianred'}}>{this.props.invitations.error}</Text>
