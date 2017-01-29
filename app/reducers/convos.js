@@ -22,6 +22,15 @@ export default function convos(state = {}, action) {
         ...state,
         activeConvoId: action.id,
       }
+    case 'convos:changePreview':
+      return {
+        ...state,
+        all: state.all.map(function(c) {
+          if( c.id != action.convoId ) { return c; }
+          c.message = action.message;
+          return c;
+        }),
+      }
     default:
       return state;
   }

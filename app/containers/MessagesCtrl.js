@@ -2,11 +2,38 @@
 
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import MessagesScene from '../components/MessagesScene'
+import MessagesScene from '../components/MessagesScene';
+import {send} from '../actions/messages'
+import api from '../services/api';
 
 class MessagesCtrl extends Component {
+  constructor(props) {
+    super(props)
+    this.back = this.back.bind(this)
+    this.send = this.send.bind(this)
+  }
+
+  back() {
+    this.props.dispatch({type: 'navigation:queue', route: 'FloatsScene'});
+  }
+
+  send(message) {
+    if( !this.props.convo ) {
+      console.error("No active convo", this.props); alert('Message failed to send to convo');
+    }
+
+    const pendingMessage = {
+      ...message,
+      user: this.props.user,
+      created_at: +new Date,
+      id: 'pending'
+    }
+
+    this.props.dispatch(send(this.props.convo, message, pendingMessage));
+  }
+
   render() { return (
-    <MessagesScene {...this.props} />
+    <MessagesScene {...this.props} back={this.back} send={this.send}/>
   )}
 }
 
@@ -47,6 +74,7 @@ function mapStateToProps(state) {
     messages: items.map(decorate),
     user:     state.user,
     name:     name,
+    convo:    convo,
   })
 }
 

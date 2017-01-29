@@ -1,16 +1,24 @@
 'use strict';
 
 export default function messages(state = {}, action) {
+  let ret;
   switch(action.type) {
+    case 'messages:append':
+      ret = {...state};
+      const messages = ret[action.convoId].all;
+      ret[action.convoId].all = [action.message].concat(messages)
+      return ret;
+    case 'messages:send:no':
+      return state;
     case 'load:messages':
-      let ret0 = {...state};
-      ret0[action.convoId] = ret0[action.convoId] || {};
-      ret0[action.convoId].loading = true;
-      return ret0;
+      ret = {...state};
+      ret[action.convoId] = ret[action.convoId] || {};
+      ret[action.convoId].loading = true;
+      return ret;
     case 'load:messages:success':
-      let ret1 = {...state};
-      ret1[action.convoId].all = action.messages;
-      return ret1;
+      ret = {...state};
+      ret[action.convoId].all = action.messages;
+      return ret;
     default:
       return state;
   }
