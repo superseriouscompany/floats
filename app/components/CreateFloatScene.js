@@ -13,6 +13,7 @@ import base               from '../styles/base';
 import {
   ActivityIndicator,
   Image,
+  RefreshControl,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -22,7 +23,7 @@ import {
 export default class CreateFloatScene extends Component {
   constructor(props) {
     super(props);
-    this.state = {allSelected: true, friends: []};
+    this.state = {allSelected: true, friends: props.friends};
   }
 
   componentWillReceiveProps(props) {
@@ -38,18 +39,12 @@ export default class CreateFloatScene extends Component {
       </View>
 
       <View style={base.mainWindow}>
-        { this.props.loading ?
-          <ActivityIndicator
-            style={[base.loadingCenter, {transform: [{scale: 1.25}]}]}
-            size="small"
-            color={base.colors.mediumgrey}
-          />
-        : this.props.error ?
+        { this.props.error ?
           <Text style={{color: 'indianred', textAlign: 'center'}}>{this.props.error}</Text>
-        : !this.props.friends || !this.props.friends.length ?
+        : this.state.friends && !this.state.friends.length ?
           <Ronery navigator={this.props.navigator}/>
-        :
-          <View>
+        : this.state.friends && this.state.friends.length ?
+          <View style={{flex: 1}}>
             <FloatDialog friends={this.state.friends.filter(selected)} />
             <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
               <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
@@ -65,12 +60,16 @@ export default class CreateFloatScene extends Component {
                 }
               </TouchableOpacity>
             </View>
-            <ScrollView>
-              {this.state.friends.map((f, i) => (
-                <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
-              ))}
+            <ScrollView style={{flex: 1}}
+             refreshControl={<RefreshControl tintColor={base.colors.mediumgrey} refreshing={this.props.loading} onRefresh={this.props.refresh} />}>
+             {this.state.friends.map((f, i) => (
+               <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
+             ))}
             </ScrollView>
+
           </View>
+        :
+          null
         }
       </View>
       <TabBar active="createFloat" navigator={this.props.navigator}/>
