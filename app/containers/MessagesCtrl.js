@@ -51,8 +51,9 @@ function mapStateToProps(state) {
     return c.id == state.convos.activeConvoId;
   });
 
-  const name = convo.users[0].id == state.user.id
-    ? convo.users[1].name : convo.users[0].name
+  const otherName = convo.users[0].id == state.user.id
+    ? convo.users[1].name : convo.users[0].name;
+  const name = convo.users.length > 2 ? 'Group Message' : otherName;
 
   const messages = state.messages[state.convos.activeConvoId];
   const items = messages.all ? [].concat(messages.all) : [];
