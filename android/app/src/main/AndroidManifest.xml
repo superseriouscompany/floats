@@ -38,7 +38,7 @@
 
         <activity
             android:name="com.superserious.floats.MainActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:windowSoftInputMode="adjustResize"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTop">
