@@ -1,17 +1,18 @@
 export default function convos(state = {}, action) {
   switch(action.type) {
-    case 'load:convos':
+    case 'convos:load':
       return {
         ...state,
         loading: true,
+        error: null,
       }
-    case 'load:convos:success':
+    case 'convos:load:yes':
       return {
         ...state,
         all: action.convos,
         loading: false,
       }
-    case 'load:convos:failure':
+    case 'convos:load:no':
       return {
         ...state,
         loading: false,
