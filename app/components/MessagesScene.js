@@ -29,11 +29,6 @@ export default class MessagesScene extends Component {
 
   onSend(messages = []) {
     this.props.send(messages[0]);
-    this.setState((previousState) => {
-      return {
-        messages: GiftedChat.append(previousState.messages, messages),
-      };
-    });
   }
 
   render() {
