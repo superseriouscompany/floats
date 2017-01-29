@@ -15,7 +15,10 @@ class MessagesCtrl extends Component {
   }
 
   componentWillMount() {
-    BackAndroid.addEventListener('hardwareBackPress', this.back);
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      this.back();
+      return true;
+    });
   }
 
   componentWillUnmount() {
