@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import MessagesScene from '../components/MessagesScene';
+import {send} from '../actions/messages'
 import api from '../services/api';
 
 class MessagesCtrl extends Component {
@@ -21,10 +22,7 @@ class MessagesCtrl extends Component {
       console.error("No active convo", this.props); alert('Message failed to send to convo');
     }
 
-    api.messages.create(this.props.convo.float_id, this.props.convo.id, message.text).catch(function(err) {
-      console.error(err);
-      alert("Message failed to send");
-    });
+    this.props.dispatch(send(this.props.convo, message));
   }
 
   render() { return (
