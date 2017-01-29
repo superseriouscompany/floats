@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import moment from 'moment';
 import Component from './Component';
 import Text from './Text';
 import ConvoPreview from './ConvoPreview';
@@ -21,34 +22,29 @@ class Float extends Component {
     const f         = this.props.float;
     const user      = this.context.store.getState().user;
     const isCreator = user.id === f.user.id;
+    const mainChat  = extractMainChat(f);
+    const sideChats = extractSideChats(f);
+
     return (
     <View>
-      <View style={styles.heading}>
-        <Image source={{uri: f.user.avatar_url}} style={base.miniPhotoCircle} />
-        <View style={{flex: 1}}>
-          <Text style={styles.floatTitle}>{f.title}”</Text>
-          <Text style={styles.rightQuote}>“</Text>
-        </View>
-        <TouchableOpacity onPress={this.showDialog.bind(this)} style={{paddingRight: 10, paddingTop: 4, paddingBottom: 9, paddingLeft: 8}}>
+      <View style={styles.top}>
+        <Text style={[styles.timestamp, base.timestamp]}>
+          { moment(f.created_at).format('h:mma') }
+        </Text>
+        <Image source={{uri: f.user.avatar_url}} style={base.photoCircle} />
+        <TouchableOpacity onPress={this.showDialog.bind(this)} style={styles.garbage}>
           <Image source={require('../images/ThreeDotsLight.png')} />
         </TouchableOpacity>
       </View>
-      { f.convos && f.convos.length ?
-        <View style={{backgroundColor: 'white', borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.lightgrey}}>
-          { f.convos.map((c, key) => (
-            <ConvoPreview convo={c} user={user} isCreator={isCreator} key={key} doBottomBorder={key != f.convos.length - 1}/>
-          ))}
-        </View>
-      : f.invitees && f.invitees.length ?
-        <View style={styles.unanswered}>
-          <Image source={require('../images/GreenCheck.png')} style={{position: 'absolute', marginTop: 7.5, marginLeft: 17, left: 0}}/>
-          <Text style={{fontSize: base.fontSizes.small, color: base.colors.mediumgrey}}>
-            delivered to {f.invitees.length}
-            { f.invitees.length == 1 ? ' friend' : ' friends' }
-          </Text>
-        </View>
-      : null
-      }
+      <View style={styles.titleContainer}>
+        <Text>
+          {f.user.name.split(' ')[0]} floated: "
+          <Text style={styles.title}>{f.title}</Text>
+          "
+        </Text>
+      </View>
+      <MainChatPreview {...this.props} chat={mainChat}/>
+      <SideChats {...this.props} chats={sideChats} />
     </View>
   )}
 
@@ -86,6 +82,35 @@ class Float extends Component {
       console.error(err);
     })
   }
+}
+
+class MainChatPreview extends Component {
+  render() { return (
+    <Text>Main chats</Text>
+  )}
+}
+
+class SideChats extends Component {
+  render() { return (
+    <Text>Side chats</Text>
+  )}
+}
+
+function extractMainChat(float) {
+  if( !float.convos ) { return null; }
+  const group = float.convos.find((c) => {
+    return c.users.length > 2
+  })
+
+  return group || float.convos[0];
+}
+
+function extractSideChats(float) {
+  if( !float.convos ) { return []; }
+
+  return float.convos.filter((c) => {
+    return c.users.length == 2
+  })
 }
 
 export default connectActionSheet(Float);
