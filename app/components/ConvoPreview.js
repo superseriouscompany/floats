@@ -30,8 +30,6 @@ export default class ConvoPreview extends Component {
         }
         { c.users.length > 2 ?
           <Image source={require('../images/GroupsAvatar.png')} style={styles.photoCircle}/>
-        : c.message ?
-          <Image style={styles.photoCircle} source={{uri: c.message.user.avatar_url}}/>
         :
           <Image source={{uri: this.convoAvatar(c)}} style={styles.photoCircle} />
         }
