@@ -178,7 +178,15 @@ const api = {
           headers: headers(accessToken),
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) {
+          return response.json().then(function(json) {
+            if( json.message ) {
+              throw new Error(json.message)
+            } else {
+              throw new Error('Sorry, something went wrong.');
+            }
+          })
+        }
         return true;
       })
     },
