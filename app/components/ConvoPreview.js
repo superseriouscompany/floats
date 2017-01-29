@@ -41,7 +41,7 @@ export default class ConvoPreview extends Component {
           </Text>
           { c.message ?
             <Text style={styles.text} numberOfLines={1}>
-              {c.message.user.name.split(' ')[0]}: {c.message.text }
+              {this.convoSpeaker.bind(this)(c.message)}: {c.message.text}
             </Text>
           :
             <Text style={[styles.text, styles.prompt]} numberOfLines={1}>
@@ -73,6 +73,11 @@ export default class ConvoPreview extends Component {
     })
   }
 
+  convoSpeaker(message) {
+    return this.props.user.id == message.user.id ?
+      'You' : message.user.name.split(' ')[0];
+  }
+
   convoName(convo) {
     if( !convo.users ) {
       console.warn('No users present', convo);
@@ -101,6 +106,11 @@ export default class ConvoPreview extends Component {
 
 ConvoPreview.propTypes = {
   isCreator: React.PropTypes.bool.isRequired,
+  user: React.PropTypes.shape({
+    id: React.PropTypes.string,
+    name: React.PropTypes.string,
+    avatar_url: React.PropTypes.string,
+  }),
   convo: React.PropTypes.shape({
     message: React.PropTypes.shape({
       text: React.PropTypes.string,
