@@ -26,25 +26,28 @@ class Float extends Component {
     const sideChats = extractSideChats(f);
 
     return (
-    <View>
-      <View style={styles.top}>
-        <Text style={[styles.timestamp, base.timestamp]}>
-          { moment(f.created_at).format('h:mma') }
+    <View style={styles.container}>
+      <View style={styles.main}>
+        <View style={styles.top}>
+          <Text style={[styles.timestamp, base.timestamp]}>
+            { moment(f.created_at).format('h:mma') }
+          </Text>
+          <Image source={{uri: f.user.avatar_url}} style={base.photoCircle} />
+          <TouchableOpacity onPress={this.showDialog.bind(this)} style={styles.garbage}>
+            <Image source={require('../images/ThreeDotsLight.png')} />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.title}>
+          { f.user.id == user.id ?
+            'You '
+          :
+            f.user.name.split(' ')[0] + ' '
+          }
+          floated: "{f.title}"
         </Text>
-        <Image source={{uri: f.user.avatar_url}} style={base.photoCircle} />
-        <TouchableOpacity onPress={this.showDialog.bind(this)} style={styles.garbage}>
-          <Image source={require('../images/ThreeDotsLight.png')} />
-        </TouchableOpacity>
+        <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
+        <SideChats {...this.props} chats={sideChats} user={user} isCreator={isCreator}/>
       </View>
-      <View style={styles.titleContainer}>
-        <Text>
-          {f.user.name.split(' ')[0]} floated: "
-          <Text style={styles.title}>{f.title}</Text>
-          "
-        </Text>
-      </View>
-      <ConvoPreview {...this.props} convo={mainChat} user={user} isCreator={isCreator}/>
-      <SideChats {...this.props} chats={sideChats} user={user} isCreator={isCreator}/>
     </View>
   )}
 
@@ -70,6 +73,7 @@ class Float extends Component {
           this.context.store.dispatch({type: 'dirty'});
         }).catch(function(err) {
           console.error(err);
+          alert(err.message);
         })
       }
     })
@@ -80,26 +84,23 @@ class Float extends Component {
       this.context.store.dispatch({type: 'dirty'});
     }).catch(function(err) {
       console.error(err);
+      alert(err.message);
     })
   }
 }
 
 class SideChats extends Component {
   render() {
-    if( !this.props.chats || !this.props.chats.length ) { return null; }
+    const {convos} = this.props;
+    if( !convos || !convos.length ) { return null; }
     return (
       <View style={styles.sideChats}>
-        { this.props.chats.map((c, key) => (
-          <ConvoPreview convo={c} user={this.props.user} isCreator={this.props.isCreator} key={key} doBottomBorder={key != this.props.chats.length - 1}/>
+        { convos.map((c, key) => (
+          <ConvoPreview convo={c} isMain={false} user={this.props.user} isCreator={this.props.isCreator} key={key} doBottomBorder={key != convos.length - 1}/>
         ))}
       </View>
     )
   }
-}
-
-function convoSpeaker(user, message) {
-  return user.id == message.user.id ?
-    'You' : message.user.name.split(' ')[0];
 }
 
 function extractMainChat(float) {
@@ -126,34 +127,43 @@ Float.contextTypes = {
 }
 
 const styles = StyleSheet.create({
-  heading: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    paddingTop: 20,
-    paddingBottom: 5,
+  container: {
+    padding: 20,
   },
-  rightQuote: {
-    color: base.colors.mediumgrey,
-    fontSize: 12,
+
+  main: {
+    shadowColor: 'hotpink',
+    shadowRadius: 10,
+    shadowOpacity: 0.6,
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    borderRadius: 20,
+    padding: 15,
+  },
+
+  timestamp: {
     position: 'absolute',
-    left: -4,
-    top: 1,
+    left: 0,
+    top: 0,
   },
-  floatTitle: {
-    color: base.colors.mediumgrey,
-    fontSize: 12,
-    flex: 1,
-    paddingTop: 1,
+
+  garbage: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
   },
-  unanswered: {
+
+  top: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
-    paddingTop: 7,
-    paddingBottom: 7,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: base.colors.lightgrey,
+  },
+
+  title: {
+    color: base.colors.mediumgrey,
+    fontSize: base.fontSizes.big,
+    lineHeight: 28,
+    marginBottom: 50,
   },
 })

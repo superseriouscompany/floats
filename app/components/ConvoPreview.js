@@ -21,37 +21,33 @@ export default class ConvoPreview extends Component {
     }
 
     return (
-    <TouchableOpacity onPress={this.showConvo.bind(this)} style={{flex: 1}}>
-      <View>
+    <TouchableOpacity onPress={this.showConvo.bind(this)}>
+      <View style={styles.faces}>
         { c.users.length == 2 ?
           <Image source={{uri: this.convoAvatar(c)}} style={base.miniPhotoCircle} />
-        :
-          <View>
-            { c.users.map((u, key) => (
-              <Image source={{uri: u.avatar_url}} style={base.miniPhotoCircle} key={key}/>
-            ))}
-          </View>
-        }
+        : c.users.map((u, key) => (
+          <Image source={{uri: u.avatar_url}} style={[base.miniPhotoCircle, styles.face]} key={key}/>
+        ))}
       </View>
       { c.message ?
-        <View>
-          <View>
-            { this.props.unread ?
-              <View style={styles.unread}></View>
-            :
-              null
-            }
-            <Text>{ moment(c.message.created_at).format('h:mma') }</Text>
+        <View style={styles.latest}>
+          <View style={styles.left}>
+            <View style={{flexDirection: 'row'}}>
+              { this.props.unread ?
+                <View style={styles.unread}></View>
+              :
+                null
+              }
+              <Text style={base.timestamp}>{ moment(c.message.created_at).format('h:mma') }</Text>
+            </View>
             <Text style={styles.text} numberOfLines={1}>
               {this.convoSpeaker.bind(this)(c.message)}: {c.message.text}
             </Text>
-            <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
           </View>
+          <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
         </View>
       :
-        <View>
-          <Text>Message the group</Text>
-        </View>
+        <Text style={styles.prompt}>Message the group</Text>
       }
     </TouchableOpacity>
     )
@@ -116,58 +112,30 @@ ConvoPreview.propTypes = {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  faces: {
+    flexDirection: 'row',
+  },
+  face: {
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
+  },
+  latest: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  bottomBorder: {
+  left: {
     flex: 1,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: base.colors.lightgrey,
-    marginLeft: 20,
-  },
-  message: {
-    flex: 1,
-  },
-  time: {
-    color: base.colors.mediumlightgrey,
-    position: 'absolute',
-    right: 10,
-    bottom: 4,
-    fontSize: 12,
   },
   text: {
     color: base.colors.mediumgrey,
-    fontSize: base.fontSizes.small,
-    paddingRight: 35,
   },
   prompt: {
-    fontFamily: 'Roboto',
-  },
-  photoCircle: {
-    width: 54,
-    height: 54,
-    borderRadius: 27,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 17,
-    marginBottom: 16,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: base.colors.lightgrey,
+    fontSize: base.fontSizes.normal,
+    textAlign: 'center',
+    padding: 20,
   },
   rightArrow: {
-    marginLeft: 14,
-    marginRight: 10,
-    marginTop: -1
-  },
-  unread: {
-    position: 'absolute',
-    right: 10,
-    top: 10,
-    width: 8,
-    height: 8,
-    backgroundColor: base.colors.color3,
-    borderRadius: 4,
   },
 })
 
