@@ -14,6 +14,7 @@ import {
   ActivityIndicator,
   AsyncStorage,
   Dimensions,
+  RefreshControl,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -42,19 +43,9 @@ export default class FloatsScene extends Component {
               </TouchableOpacity>
             </View>
         :
-          <ScrollView>
+          <ScrollView
+            refreshControl={<RefreshControl tintColor={base.colors.mediumgrey} refreshing={this.props.invitations.loading || this.props.myFloats.loading || this.props.convos.loading} onRefresh={this.props.refresh} />}>
             <View>
-              { this.props.invitations.loading || this.props.myFloats.loading || this.props.convos.loading ?
-                <View style={{height: 50}}>
-                  <ActivityIndicator
-                    style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
-                    size="small"
-                    color={base.colors.mediumgrey}
-                  />
-                </View>
-              :
-                null
-              }
               { this.props.invitations.error ?
                 <Text style={{color: 'indianred'}}>{this.props.invitations.error}</Text>
               : this.props.invitations.loading ?
