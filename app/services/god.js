@@ -1,7 +1,8 @@
 // v obviously an anti-pattern...
 
-const store = require('./store');
-const api   = require('./api');
+import store from './store';
+import api from './api';
+import { fetchInvitations } from '../actions/invitations';
 
 module.exports = {
   work: work
@@ -61,20 +62,7 @@ function load() {
 }
 
 function loadInvitations() {
-  store.dispatch({
-    type: 'load:invitations',
-  })
-  api.floats.invites().then(function(invitations) {
-    store.dispatch({
-      type: 'load:invitations:success',
-      invitations: invitations,
-    })
-  }).catch(function(err) {
-    store.dispatch({
-      type: 'load:invitations:failure',
-      error: err.message,
-    })
-  })
+  return store.dispatch(fetchInvitations());
 }
 
 function loadMyFloats() {

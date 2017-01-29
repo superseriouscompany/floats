@@ -206,13 +206,6 @@ const api = {
         return response.json();
       }).then(function(json) {
         return json.floats;
-      }).catch(function(err) {
-        console.error(err);
-        store.dispatch({
-          type: 'load:invitations:failure',
-          error: err.message,
-        })
-        throw err;
       })
     },
 
