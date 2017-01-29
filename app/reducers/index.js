@@ -1,6 +1,8 @@
 'use strict';
 
 import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {persistStore, autoRehydrate } from 'redux-persist';
+import {AsyncStorage} from 'react-native'
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import nearbyFriends from './nearbyFriends';
@@ -12,7 +14,6 @@ import messages from './messages';
 import convos from './convos';
 import navigation from './navigation';
 import killed from './killSwitch'
-
 const middleware = [thunk];
 if( __DEV__ ) {
   middleware.push(createLogger());
@@ -29,10 +30,14 @@ const reducers = combineReducers({
   killed,
 })
 
-module.exports = createStore(
+const store = createStore(
   reducers,
   applyMiddleware(...middleware),
+  autoRehydrate(),
 );
+persistStore(store, {storage: AsyncStorage});
+
+module.exports = store;
 
 //
 //
