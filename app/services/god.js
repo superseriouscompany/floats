@@ -3,6 +3,7 @@
 import store from './store';
 import api from './api';
 import { fetchInvitations } from '../actions/invitations';
+import { fetchMyFloats } from '../actions/myFloats';
 
 module.exports = {
   work: work
@@ -66,20 +67,7 @@ function loadInvitations() {
 }
 
 function loadMyFloats() {
-  store.dispatch({
-    type: 'load:myFloats',
-  })
-  api.floats.mine().then(function(floats) {
-    store.dispatch({
-      type: 'load:myFloats:success',
-      floats: floats,
-    })
-  }).catch(function(err) {
-    store.dispatch({
-      type: 'load:myFloats:failure',
-      error: err.message,
-    })
-  })
+  return store.dispatch(fetchMyFloats());
 }
 
 function loadConvos() {
