@@ -18,9 +18,9 @@ function mapStateToProps(state) {
     ? convo.users[1].name : convo.users[0].name
 
   const messages = state.messages[state.convos.activeConvoId];
-  const items = messages.all || [];
+  const items = messages.all ? [].concat(messages.all) : [];
 
-  if( !items.length && isPrimary(state, convo) ) {
+  if( isPrimary(state, convo) ) {
     let float = state.myFloats.all.find((f) => {
       return f.id === convo.float_id
     })
