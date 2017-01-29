@@ -43,7 +43,7 @@ class Float extends Component {
           "
         </Text>
       </View>
-      <MainChatPreview {...this.props} chat={mainChat}/>
+      <ConvoPreview {...this.props} convo={mainChat} user={user} isCreator={isCreator}/>
       <SideChats {...this.props} chats={sideChats} user={user} isCreator={isCreator}/>
     </View>
   )}
@@ -84,12 +84,6 @@ class Float extends Component {
   }
 }
 
-class MainChatPreview extends Component {
-  render() { return (
-    <Text>Main chats</Text>
-  )}
-}
-
 class SideChats extends Component {
   render() {
     if( !this.props.chats || !this.props.chats.length ) { return null; }
@@ -101,6 +95,11 @@ class SideChats extends Component {
       </View>
     )
   }
+}
+
+function convoSpeaker(user, message) {
+  return user.id == message.user.id ?
+    'You' : message.user.name.split(' ')[0];
 }
 
 function extractMainChat(float) {

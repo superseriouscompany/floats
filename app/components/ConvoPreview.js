@@ -22,46 +22,40 @@ export default class ConvoPreview extends Component {
 
     return (
     <TouchableOpacity onPress={this.showConvo.bind(this)} style={{flex: 1}}>
-      <View style={[styles.container, (this.props.doBottomBorder == 1) ? {paddingBottom: 0.5} : {paddingBottom: 0}]}>
-        { this.props.unread ?
-          <View style={styles.unread}></View>
+      <View>
+        { c.users.length == 2 ?
+          <Image source={{uri: this.convoAvatar(c)}} style={base.miniPhotoCircle} />
         :
-          null
+          <View>
+            { c.users.map((u, key) => (
+              <Image source={{uri: u.avatar_url}} style={base.miniPhotoCircle} key={key}/>
+            ))}
+          </View>
         }
-        { c.users.length > 2 ?
-          <Image source={require('../images/GroupsAvatar.png')} style={styles.photoCircle}/>
-        :
-          <Image source={{uri: this.convoAvatar(c)}} style={styles.photoCircle} />
-        }
-        <View style={styles.message}>
-          <Text style={styles.name} numberOfLines={1}>
-            {this.convoName(c)}
-          </Text>
-          { c.message ?
+      </View>
+      { c.message ?
+        <View>
+          <View>
+            { this.props.unread ?
+              <View style={styles.unread}></View>
+            :
+              null
+            }
+            <Text>{ moment(c.message.created_at).format('h:mma') }</Text>
             <Text style={styles.text} numberOfLines={1}>
               {this.convoSpeaker.bind(this)(c.message)}: {c.message.text}
             </Text>
-          :
-            <Text style={[styles.text, styles.prompt]} numberOfLines={1}>
-              Send a direct message
-            </Text>
-          }
+            <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
+          </View>
         </View>
-        <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
-        { c.message ?
-          <Text style={[base.timestamp, styles.time]}>
-            { moment(c.message.created_at).format('h:mma') }
-          </Text>
-        : null
-        }
-      </View>
-      {
-        this.props.doBottomBorder == 1 ?
-          <View style={styles.bottomBorder}></View>
-        : null
+      :
+        <View>
+          <Text>Message the group</Text>
+        </View>
       }
     </TouchableOpacity>
-  )}
+    )
+  }
 
   showConvo() {
     this.context.store.dispatch({
