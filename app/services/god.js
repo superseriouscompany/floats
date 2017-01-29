@@ -4,6 +4,7 @@ import store from './store';
 import api from './api';
 import { fetchInvitations } from '../actions/invitations';
 import { fetchMyFloats } from '../actions/myFloats';
+import { fetchConvos } from '../actions/convos';
 
 module.exports = {
   work: work
@@ -71,20 +72,7 @@ function loadMyFloats() {
 }
 
 function loadConvos() {
-  store.dispatch({
-    type: 'load:convos',
-  })
-  api.convos.all().then(function(convos) {
-    store.dispatch({
-      type: 'load:convos:success',
-      convos: convos,
-    });
-  }).catch(function(err) {
-    store.dispatch({
-      type: 'load:convos:failure',
-      error: err.message,
-    });
-  })
+  return store.dispatch(fetchConvos());
 }
 
 function loadMessages() {
