@@ -78,7 +78,7 @@ function loadConvos() {
 function loadMessages() {
   const state = store.getState();
   if( !state.convos.activeConvoId ) { return; }
-  const convo = state.convos.all.find(function(c) {
+  const convo = state.convos && state.convos.all.find(function(c) {
     return c.id == state.convos.activeConvoId;
   })
   if( !convo ) { return console.warn('Active convo was not found. Maybe it was deleted or left?'); }
