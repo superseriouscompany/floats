@@ -1,11 +1,11 @@
 import React from 'react';
-import FCM from 'react-native-fcm'
 import { Provider } from 'react-redux';
 import { ActionSheetProvider } from '@exponent/react-native-action-sheet';
 import CreateFloatScene from '../containers/CreateFloatCtrl';
 import FloatsScene from '../containers/FloatsCtrl';
 import MessagesScene from '../containers/MessagesCtrl';
 import KillSwitchScene from '../containers/KillSwitchCtrl';
+import PushCtrl from '../containers/PushCtrl';
 import LoginScene from '../components/LoginScene';
 import RandosScene from '../components/RandosScene';
 import FriendsScene from '../components/FriendsScene';
@@ -36,35 +36,6 @@ export default class Root extends Component {
       }
     }
 
-    FCM.on('notification', (notif) => {
-      store.dispatch({type: 'dirty'});
-      const state = store.getState();
-      if( notif.convoId && state.convos.activeConvoId && notif.convoId == state.convos.activeConvoId ) {
-        return;
-      }
-
-      if(notif.opened_from_tray){
-        if( notif.type == 'floats:new' ) {
-          return store.dispatch({
-            type:  'navigation:queue',
-            route: 'FloatsScene',
-          });
-        }
-        console.warn(JSON.stringify(notif));
-        return;
-      }
-
-      if( notif.aps ) {
-        Alert.alert(notif.aps.alert);
-      } else if( notif.body ){
-        Alert.alert(notif.body);
-      } else if( notif.fcm && notif.fcm.body ){
-        Alert.alert(notif.fcm.body);
-      } else {
-        console.warn("Unknown notification", notif);
-      }
-    });
-
     AsyncStorage.getItem('@floats:user').then((user) => {
       if( user ) {
         store.dispatch({type: 'login', user: JSON.parse(user)});
@@ -90,27 +61,29 @@ export default class Root extends Component {
       <Provider store={store}>
         <ActionSheetProvider>
           <KillSwitchScene>
-            <View style={{flex: 1}}>
-              { this.state.scene == 'LoginScene' ?
-                <LoginScene navigator={this.navigator} />
-              : this.state.scene == 'CreateFloatScene' ?
-                <CreateFloatScene navigator={this.navigator} />
-              : this.state.scene == 'FloatsScene' ?
-                <FloatsScene navigator={this.navigator} />
-              : this.state.scene == 'FriendsScene' ?
-                <FriendsScene navigator={this.navigator} />
-              : this.state.scene == 'RandosScene' ?
-                <RandosScene navigator={this.navigator} />
-              : this.state.scene == 'MessagesScene' ?
-                <MessagesScene navigator={this.navigator} />
-              : this.state.scene == 'Scratch' ?
-                <Scratch />
-              : !!this.state.scene ?
-                <Text style={{padding: 200}}>404</Text>
-              :
-                null
-              }
-            </View>
+            <PushCtrl>
+              <View style={{flex: 1}}>
+                { this.state.scene == 'LoginScene' ?
+                  <LoginScene navigator={this.navigator} />
+                : this.state.scene == 'CreateFloatScene' ?
+                  <CreateFloatScene navigator={this.navigator} />
+                : this.state.scene == 'FloatsScene' ?
+                  <FloatsScene navigator={this.navigator} />
+                : this.state.scene == 'FriendsScene' ?
+                  <FriendsScene navigator={this.navigator} />
+                : this.state.scene == 'RandosScene' ?
+                  <RandosScene navigator={this.navigator} />
+                : this.state.scene == 'MessagesScene' ?
+                  <MessagesScene navigator={this.navigator} />
+                : this.state.scene == 'Scratch' ?
+                  <Scratch />
+                : !!this.state.scene ?
+                  <Text style={{padding: 200}}>404</Text>
+                :
+                  null
+                }
+              </View>
+            </PushCtrl>
           </KillSwitchScene>
         </ActionSheetProvider>
       </Provider>
