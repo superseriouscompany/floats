@@ -43,6 +43,17 @@ export default class Root extends Component {
         return;
       }
 
+      if(notif.opened_from_tray){
+        if( notif.type == 'floats:new' ) {
+          return store.dispatch({
+            type:  'navigation:queue',
+            route: 'FloatsScene',
+          });
+        }
+        console.warn(JSON.stringify(notif));
+        return;
+      }
+
       if( notif.aps ) {
         Alert.alert(notif.aps.alert);
       } else if( notif.body ){
@@ -51,9 +62,6 @@ export default class Root extends Component {
         Alert.alert(notif.fcm.body);
       } else {
         console.warn("Unknown notification", notif);
-      }
-      if(notif.opened_from_tray){
-        //app is open/resumed because user clicked banner
       }
     });
 

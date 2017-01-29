@@ -41,6 +41,7 @@ function mapStateToProps(state) {
   const convo = state.convos.all && state.convos.all.find(function(c) {
     return c.id == state.convos.activeConvoId;
   });
+
   const name = convo.users[0].id == state.user.id
     ? convo.users[1].name : convo.users[0].name
 
