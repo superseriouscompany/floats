@@ -44,7 +44,7 @@ class Float extends Component {
         </Text>
       </View>
       <MainChatPreview {...this.props} chat={mainChat}/>
-      <SideChats {...this.props} chats={sideChats} />
+      <SideChats {...this.props} chats={sideChats} user={user} isCreator={isCreator}/>
     </View>
   )}
 
@@ -91,9 +91,16 @@ class MainChatPreview extends Component {
 }
 
 class SideChats extends Component {
-  render() { return (
-    <Text>Side chats</Text>
-  )}
+  render() {
+    if( !this.props.chats || !this.props.chats.length ) { return null; }
+    return (
+      <View style={styles.sideChats}>
+        { this.props.chats.map((c, key) => (
+          <ConvoPreview convo={c} user={this.props.user} isCreator={this.props.isCreator} key={key} doBottomBorder={key != this.props.chats.length - 1}/>
+        ))}
+      </View>
+    )
+  }
 }
 
 function extractMainChat(float) {
