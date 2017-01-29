@@ -20,7 +20,7 @@ const api = {
           'Content-Type': 'application/json',
         },
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
         return response.json();
       })
     },
@@ -35,7 +35,7 @@ const api = {
           headers: headers(accessToken),
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
         return true;
       })
     },
@@ -49,7 +49,7 @@ const api = {
           headers: headers(accessToken),
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
         return true;
       })
     }
@@ -64,7 +64,7 @@ const api = {
           headers: headers(accessToken),
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
         return true;
       })
     },
@@ -77,7 +77,7 @@ const api = {
           headers: headers(accessToken),
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
         return response.json();
       }).then(function(json) {
         return json.friends;
@@ -90,7 +90,7 @@ const api = {
           headers: headers(accessToken),
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
         return response.json();
       }).then(function(json) {
         return json.friends;
@@ -105,7 +105,7 @@ const api = {
           headers: headers(accessToken),
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
         return response.json();
       }).then(function(json) {
         return json.randos;
@@ -119,7 +119,7 @@ const api = {
         return fetch(`${baseUrl}/friend_requests`, {
           headers: headers(accessToken),
         }).then(function(response) {
-          if( !response.ok ) { throw new Error(response.status); }
+          if( !response.ok ) { throw new Error('' + response.status); }
           return response.json();
         }).then(function(json) {
           return json.friend_requests;
@@ -133,7 +133,7 @@ const api = {
           method: 'PUT',
           headers: headers(accessToken),
         }).then(function(response) {
-          if( !response.ok ) { throw new Error(response.status); }
+          if( !response.ok ) { throw new Error('' + response.status); }
           return true;
         })
       })
@@ -146,7 +146,7 @@ const api = {
           body: JSON.stringify({ user_id: id }),
           headers: headers(accessToken),
         }).then(function(response) {
-          if( !response.ok ) { throw new Error(response.status); }
+          if( !response.ok ) { throw new Error('' + response.status); }
           return true;
         })
       })
@@ -159,7 +159,7 @@ const api = {
           body: JSON.stringify({ user_id: id }),
           headers: headers(accessToken),
         }).then(function(response) {
-          if( !response.ok ) { throw new Error(response.status); }
+          if( !response.ok ) { throw new Error('' + response.status); }
           return true;
         })
       })
@@ -189,7 +189,7 @@ const api = {
           headers: headers(accessToken),
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
         return response.json();
       }).then(function(json) {
         return json.floats;
@@ -202,7 +202,7 @@ const api = {
           headers: headers(accessToken),
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
         return response.json();
       }).then(function(json) {
         return json.floats;
@@ -217,7 +217,7 @@ const api = {
           body: JSON.stringify({silent: !!silent}),
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
 
         return true;
       })
@@ -230,7 +230,7 @@ const api = {
           headers: headers(accessToken)
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
 
         return true;
       })
@@ -243,7 +243,7 @@ const api = {
           headers: headers(accessToken),
         })
       }).then(function(response) {
-        if( !response.ok ) { throw new Error(response.status); }
+        if( !response.ok ) { throw new Error('' + response.status); }
 
         return true;
       })

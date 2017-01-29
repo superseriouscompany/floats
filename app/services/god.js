@@ -81,6 +81,7 @@ function loadMessages() {
   const convo = state.convos.all.find(function(c) {
     return c.id == state.convos.activeConvoId;
   })
+  if( !convo ) { return console.warn('Active convo was not found. Maybe it was deleted or left?'); }
   const floatId = convo.float_id;
   const convoId = convo.id;
 

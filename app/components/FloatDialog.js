@@ -57,7 +57,7 @@ export default class FloatDialog extends Component {
       this.context.store.dispatch({type: 'dirty'});
     }).catch((err) => {
       this.setState({sending: false});
-      Alert.alert(err);
+      Alert.alert(err.message);
       console.error(err);
     })
   }
