@@ -71,12 +71,13 @@ function generateInbox(invitations, myFloats, convos) {
 
     float.convos.push(c);
     if( c.message && c.message.created_at ) {
-      floats[c.float_id].time = Math.max(float.time, c.message.created_at);
+      float.time = Math.max(float.time, c.message.created_at);
     }
   })
 
-  const inbox = _.values(floats).sort(function(a, b) {
-    return a.time < b.time;
+  let inbox = _.values(floats);
+  inbox = inbox.sort(function(a, b) {
+    return a.time > b.time ? -1 : 1;
   })
   return inbox;
 }
