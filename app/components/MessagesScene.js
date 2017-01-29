@@ -23,16 +23,12 @@ export default class MessagesScene extends Component {
     this.state = {};
   }
 
-  componentWillReceiveProps(props) {
-    this.setState(props);
-  }
-
   onSend(messages = []) {
     this.props.send(messages[0]);
   }
 
   render() {
-    if( !this.state.user ) return null;
+    if( !this.props.user ) return null;
 
     return (
       <View style={base.screen}>
@@ -41,7 +37,7 @@ export default class MessagesScene extends Component {
             <Image source={require('../images/SmallLeftArrow.png')} />
           </TouchableOpacity>
           <View style={base.header}>
-            <Heading>{this.state.name}</Heading>
+            <Heading>{this.props.name}</Heading>
           </View>
           <TouchableOpacity onPress={() => this.showOptions()} style={[base.rightNav, styles.rightNavButton]}>
             <Image source={require('../images/Ellipses.png')} />
@@ -49,10 +45,10 @@ export default class MessagesScene extends Component {
         </View>
 
         <GiftedChat
-          messages={this.state.messages}
+          messages={this.props.messages}
           onSend={this.onSend}
           user={{
-            _id: this.state.user.id,
+            _id: this.props.user.id,
           }}
         />
       </View>
