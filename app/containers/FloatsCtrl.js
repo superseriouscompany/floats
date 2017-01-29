@@ -8,13 +8,15 @@ import FloatsScene from '../components/FloatsScene';
 class FloatsCtrl extends Component {
   constructor(props) {
     super(props);
+    this.refresh = this.refresh.bind(this);
   }
 
-  componentDidMount() {
+  refresh() {
+    this.props.dispatch({type: 'dirty'});
   }
 
   render() { return (
-    <FloatsScene {...this.props}/>
+    <FloatsScene {...this.props} refresh={this.refresh}/>
   )}
 }
 
