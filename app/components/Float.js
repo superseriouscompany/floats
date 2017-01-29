@@ -46,8 +46,8 @@ class Float extends Component {
           floated: "{f.title}"
         </Text>
         <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
-        <SideChats {...this.props} chats={sideChats} user={user} isCreator={isCreator}/>
       </View>
+      <SideChats {...this.props} convos={sideChats} user={user} isCreator={isCreator}/>
     </View>
   )}
 
@@ -92,11 +92,17 @@ class Float extends Component {
 class SideChats extends Component {
   render() {
     const {convos} = this.props;
-    if( !convos || !convos.length ) { return null; }
+    const cs = convos.filter((c) => {
+      return !this.props.isCreator || c.message
+    })
+
+    if( !cs || !cs.length ) { return null; }
     return (
-      <View style={styles.sideChats}>
-        { convos.map((c, key) => (
-          <ConvoPreview convo={c} isMain={false} user={this.props.user} isCreator={this.props.isCreator} key={key} doBottomBorder={key != convos.length - 1}/>
+      <View>
+        {cs.map((c, key) => (
+          <View style={styles.sideChat} key={key}>
+            <ConvoPreview convo={c} isMain={false} user={this.props.user} isCreator={this.props.isCreator}/>
+          </View>
         ))}
       </View>
     )
@@ -140,6 +146,21 @@ const styles = StyleSheet.create({
       height: 10,
     },
     borderRadius: 20,
+    padding: 15,
+  },
+
+  sideChat: {
+    marginTop: 20,
+    shadowColor: 'cornflowerblue',
+    shadowRadius: 2,
+    shadowOpacity: 0.6,
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    borderWidth: 1,
+    borderColor: 'lawngreen',
+    borderRadius: 10,
     padding: 15,
   },
 
