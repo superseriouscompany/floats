@@ -21,6 +21,7 @@ const colors = {
   color3: '#92D8D7',
 }
 const fontSizes = {
+  big: 20,
   normal: 16,
   small: 12,
 }
