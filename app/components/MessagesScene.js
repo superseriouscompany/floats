@@ -27,36 +27,8 @@ export default class MessagesScene extends Component {
     this.setState(props);
   }
 
-  appendMessage(message) {
-    try {
-      message = JSON.parse(message);
-    } catch(err) {
-      return console.warn("Couldn't parse", message, err);
-    }
-
-    message = decorate(message);
-
-    this.setState((previousState) => {
-      return {
-        messages: GiftedChat.append(previousState.messages, [message])
-      }
-    })
-  }
-
   onSend(messages = []) {
-    const state = this.context.store.getState();
-    const convo = state.convos.all && state.convos.all.find(function(c) {
-      return c.id == state.convos.activeConvoId;
-    });
-    if( !convo ) { return console.error("Active convo doesn't exist"); }
-
-    messages.forEach(function(m) {
-      api.messages.create(convo.float_id, convo.id, m.text).catch(function(err) {
-        console.error(err);
-        alert("Message failed to send");
-      });
-    })
-
+    this.props.send(messages[0]);
     this.setState((previousState) => {
       return {
         messages: GiftedChat.append(previousState.messages, messages),
@@ -70,7 +42,7 @@ export default class MessagesScene extends Component {
     return (
       <View style={base.screen}>
         <View style={base.header}>
-          <TouchableOpacity onPress={this.back.bind(this)} style={[base.leftNav, styles.leftNavButton]}>
+          <TouchableOpacity onPress={this.props.back.bind(this)} style={[base.leftNav, styles.leftNavButton]}>
             <Image source={require('../images/SmallLeftArrow.png')} />
           </TouchableOpacity>
           <View style={base.header}>
@@ -92,13 +64,13 @@ export default class MessagesScene extends Component {
     )
   }
 
-  back() {
-    this.context.store.dispatch({type: 'navigation:queue', route: 'FloatsScene'});
-  }
-
   showOptions() {
     alert('not implemented');
   }
+}
+
+MessagesScene.propTypes = {
+  send: React.PropTypes.func.isRequired,
 }
 
 const styles = StyleSheet.create({
@@ -115,7 +87,3 @@ const styles = StyleSheet.create({
     paddingRight: 19
   }
 });
-
-MessagesScene.contextTypes = {
-  store: React.PropTypes.object,
-}
