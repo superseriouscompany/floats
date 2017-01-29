@@ -5,12 +5,21 @@ import { connect } from 'react-redux';
 import MessagesScene from '../components/MessagesScene';
 import {send} from '../actions/messages'
 import api from '../services/api';
+import {BackAndroid} from 'react-native'
 
 class MessagesCtrl extends Component {
   constructor(props) {
     super(props)
     this.back = this.back.bind(this)
     this.send = this.send.bind(this)
+  }
+
+  componentWillMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this.back);
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.back);
   }
 
   back() {

@@ -58,7 +58,7 @@ export default class Root extends Component {
         Alert.alert(notif.aps.alert);
       } else if( notif.body ){
         Alert.alert(notif.body);
-      } else if( notif.fcm ){
+      } else if( notif.fcm && notif.fcm.body ){
         Alert.alert(notif.fcm.body);
       } else {
         console.warn("Unknown notification", notif);
