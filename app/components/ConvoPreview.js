@@ -22,13 +22,16 @@ export default class ConvoPreview extends Component {
 
     return (
     <TouchableOpacity onPress={this.showConvo.bind(this)}>
-      <View style={styles.faces}>
-        { c.users.length == 2 ?
-          <Image source={{uri: this.convoAvatar(c)}} style={base.miniPhotoCircle} />
-        : c.users.map((u, key) => (
-          <Image source={{uri: u.avatar_url}} style={[base.miniPhotoCircle, styles.face]} key={key}/>
-        ))}
-      </View>
+      { this.props.isMain ?
+        <View style={styles.faces}>
+          { c.users.length == 2 ?
+            <Image source={{uri: this.convoAvatar(c)}} style={base.miniPhotoCircle} />
+          : c.users.map((u, key) => (
+            <Image source={{uri: u.avatar_url}} style={[base.miniPhotoCircle, styles.face]} key={key}/>
+          ))}
+        </View>
+      : null
+      }
       { c.message ?
         <View style={styles.latest}>
           <View style={styles.left}>
@@ -47,7 +50,7 @@ export default class ConvoPreview extends Component {
           <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
         </View>
       :
-        <Text style={styles.prompt}>Message the group</Text>
+        <Text style={styles.prompt}>Message {this.convoName(c)}</Text>
       }
     </TouchableOpacity>
     )
@@ -71,12 +74,12 @@ export default class ConvoPreview extends Component {
       console.warn('No users present', convo);
       return 'Messages';
     }
-    if( convo.users.length > 2 ) { return 'Group Chat' }
+    if( convo.users.length > 2 ) { return 'the group' }
 
     const user = this.context.store.getState().user;
     return convo.users[0].id == user.id
-      ? convo.users[1].name
-      : convo.users[0].name;
+      ? convo.users[1].name.split(' ')[0]
+      : convo.users[0].name.split(' ')[0];
   }
 
   convoAvatar(convo) {
