@@ -1,18 +1,19 @@
 export default function myFloats(state = {}, action) {
   switch(action.type) {
-    case 'load:myFloats':
+    case 'myFloats:load':
       return {
         ...state,
         loading: true,
+        error: null,
       }
-    case 'load:myFloats:success':
+    case 'myFloats:load:yes':
       return {
         ...state,
         all: action.floats,
         loading: false,
         cacheTime: +new Date,
       }
-    case 'load:myFloats:failure':
+    case 'myFloats:load:no':
       return {
         ...state,
         loading: false,
