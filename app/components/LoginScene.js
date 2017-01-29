@@ -32,7 +32,11 @@ export default class LoginScene extends Component {
       <Image source={require('../images/Floats.jpg')}/>
       <View style={{alignItems: 'center', position: 'absolute', left: 0, right: 0, bottom: 25}}>
         { this.state.awaitingLogin ?
-          <ActivityIndicator color="hotpink" size="small" />
+          <ActivityIndicator
+            style={base.buttonLoader}
+            size="small"
+            color={base.colors.mediumgrey}
+          />
         :
           <LoginButton
             style={styles.loginButton}
