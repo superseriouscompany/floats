@@ -22,7 +22,14 @@ class MessagesCtrl extends Component {
       console.error("No active convo", this.props); alert('Message failed to send to convo');
     }
 
-    this.props.dispatch(send(this.props.convo, message));
+    const pendingMessage = {
+      ...message,
+      user: this.props.user,
+      created_at: +new Date,
+      id: 'pending'
+    }
+
+    this.props.dispatch(send(this.props.convo, message, pendingMessage));
   }
 
   render() { return (
