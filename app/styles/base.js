@@ -21,6 +21,7 @@ const colors = {
   color3: '#92D8D7',
 }
 const fontSizes = {
+  big: 20,
   normal: 16,
   small: 12,
 }
@@ -125,14 +126,11 @@ module.exports = StyleSheet.create({
     borderColor: colors.lightgrey,
   },
   miniPhotoCircle: {
-    width: 22,
-    height: 22,
-    borderRadius: 11,
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 1,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.offwhite,
+    width: 25,
+    height: 25,
+    borderRadius: 12.5,
+    borderWidth: 1,
+    borderColor: colors.lightgrey,
   },
   bgBreakingSection: {
     backgroundColor: colors.offwhite,
