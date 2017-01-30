@@ -1,11 +1,12 @@
 'use strict';
 
-import React from 'react';
-import Component from './Component';
+import React, {Component} from 'react';
 import Text from './Text';
 import base from '../styles/base';
 import api from '../services/api';
 import { connectActionSheet } from '@exponent/react-native-action-sheet';
+import { connect } from 'react-redux';
+import { persistStore } from 'redux-persist'
 import {
   Alert,
   AsyncStorage,
@@ -15,7 +16,7 @@ import {
   View,
 } from 'react-native';
 
-class TabBar extends React.Component {
+class TabBar extends Component {
   render() { return (
     <View style={[styles.container]}>
       <TouchableOpacity style={styles.tabItem} onPress={() => this.props.navigator.navigate('FloatsScene')}>
@@ -78,12 +79,17 @@ class TabBar extends React.Component {
     AsyncStorage.removeItem('@floats:accessToken').then(() => {
       return AsyncStorage.removeItem('@floats:user')
     }).then(() => {
+      persistStore(this.context.store, {storage: AsyncStorage}).purge();
       this.props.navigator.navigate('LoginScene');
     }).catch(function(err) {
       console.error(err);
       alert("Sorry, we couldn't log you out. Please try again.")
     })
   }
+}
+
+TabBar.contextTypes = {
+  store: React.PropTypes.object
 }
 
 export default connectActionSheet(TabBar);

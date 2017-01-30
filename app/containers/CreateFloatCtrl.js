@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CreateFloatScene from '../components/CreateFloatScene';
 import { fetchNearbyFriends } from '../actions/nearbyFriends';
+import FCM from 'react-native-fcm';
+import api from '../services/api';
 
 class CreateFloatCtrl extends Component {
   constructor(props) {
@@ -13,6 +15,17 @@ class CreateFloatCtrl extends Component {
 
   componentDidMount() {
     this.props.dispatch(fetchNearbyFriends(this.props.cacheTime));
+
+    // FIXME: move this to its own container and retry as long as it's not set
+    FCM.requestPermissions();
+    FCM.getFCMToken().then( (token) => {
+      if( !token ) { return console.warn("No firebase token available."); }
+      api.sessions.updateFirebaseToken(token);
+    });
+    FCM.on('refreshToken', (token) => {
+      if( !token ) { return console.warn("No firebase token on refresh."); }
+      api.sessions.updateFirebaseToken(token);
+    })
   }
 
   refresh() {

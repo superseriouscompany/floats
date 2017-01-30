@@ -1,5 +1,6 @@
-import FCM from 'react-native-fcm';
 import api from '../services/api';
+
+var fail = true;
 
 export function fetchNearbyFriends(cacheTime) {
 
@@ -7,16 +8,6 @@ export function fetchNearbyFriends(cacheTime) {
     if( cacheTime && +new Date - cacheTime < 1000 * 60 ) { console.log('Using cache'); return; }
 
     dispatch({type: 'nearbyFriends:load'});
-    FCM.requestPermissions();
-    // FIXME: retry as long as it's not set
-    FCM.getFCMToken().then( (token) => {
-      if( !token ) { return console.warn("No firebase token available."); }
-      api.sessions.updateFirebaseToken(token);
-    });
-    FCM.on('refreshToken', (token) => {
-      if( !token ) { return console.warn("No firebase token on refresh."); }
-      api.sessions.updateFirebaseToken(token);
-    })
 
     navigator.geolocation.getCurrentPosition(
       (position) => {

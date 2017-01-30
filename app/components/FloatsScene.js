@@ -28,7 +28,7 @@ export default class FloatsScene extends Component {
         <Heading>floats</Heading>
       </View>
 
-      <View style={[base.mainWindow, {backgroundColor: '#FAF9F8'}]}>
+      <View style={[base.mainWindow, {backgroundColor: 'white'}]}>
         { this.props.empty ?
             <View style={{alignItems: 'center'}}>
               <View style={{alignItems: 'center', paddingTop: 18, paddingBottom: 15}}>
@@ -44,7 +44,7 @@ export default class FloatsScene extends Component {
             </View>
         :
           <ScrollView
-            refreshControl={<RefreshControl tintColor={base.colors.mediumgrey} refreshing={this.props.invitations.loading || this.props.myFloats.loading || this.props.convos.loading} onRefresh={this.props.refresh} />}>
+            refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading || false} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]} />}>
             <View>
               { this.props.invitations.error ?
                 <Text style={{color: 'indianred'}}>{this.props.invitations.error}</Text>
