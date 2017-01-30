@@ -23,6 +23,11 @@ export default function convos(state = {}, action) {
         ...state,
         activeConvoId: action.id,
       }
+    case 'convos:deactivate':
+      return {
+        ...state,
+        activeConvoId: null,
+      }
     case 'convos:changePreview':
       return {
         ...state,

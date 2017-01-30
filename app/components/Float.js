@@ -51,7 +51,23 @@ class Float extends Component {
             </Text>
             <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
           </View>
+<<<<<<< 519b2a6cd6c0d7ec4a377739bd7252e5a3386b95
           <SideChats {...this.props} convos={sideChats} user={user} isCreator={isCreator}/>
+=======
+          <Text style={styles.title}>
+            { f.user.id == user.id ?
+              'You '
+            :
+              f.user.name.split(' ')[0] + ' '
+            }
+            floated: "{f.title}"
+          </Text>
+          { mainChat ?
+            <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
+          :
+            null
+          }
+>>>>>>> Deactivate active convo id, set pending id properly and don't show chat preview until we have the chat
         </View>
       </TouchableOpacity>
     </View>

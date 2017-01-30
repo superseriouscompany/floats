@@ -44,6 +44,10 @@ function work(navigator) {
         store.dispatch({
           type: 'dirty',
         })
+      } else {
+        store.dispatch({
+          type: 'convos:deactivate',
+        })
       }
     }
   })

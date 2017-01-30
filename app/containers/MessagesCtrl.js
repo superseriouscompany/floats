@@ -38,7 +38,7 @@ class MessagesCtrl extends Component {
       ...message,
       user: this.props.user,
       created_at: +new Date,
-      id: 'pending'
+      id: `pending${Math.random()}`
     }
 
     this.props.dispatch(send(this.props.convo, message, pendingMessage));
