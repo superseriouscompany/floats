@@ -27,29 +27,31 @@ class Float extends Component {
 
     return (
     <View style={styles.container}>
-      <View style={styles.main}>
-        <View style={{position: 'absolute', left: 0, right: 0, top: 9, justifyContent: 'center', alignItems: 'center'}}>
-          <Image source={{uri: f.user.avatar_url}} style={styles.organizerPhotoCircle} />
-        </View>
-        <View style={styles.top}>
-          <Text style={[styles.topTimestamp, base.timestamp]}>
-            { moment(f.created_at).format('h:mma') }
+      <View style={styles.float}>
+        <View style={styles.main}>
+          <View style={{position: 'absolute', left: 0, right: 0, top: 9, justifyContent: 'center', alignItems: 'center'}}>
+            <Image source={{uri: f.user.avatar_url}} style={styles.organizerPhotoCircle} />
+          </View>
+          <View style={styles.top}>
+            <Text style={[styles.topTimestamp, base.timestamp]}>
+              { moment(f.created_at).format('h:mma') }
+            </Text>
+            <TouchableOpacity onPress={this.showDialog.bind(this)} style={styles.garbage}>
+              <Image source={require('../images/GarbageCan.png')} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.title}>
+            { f.user.id == user.id ?
+              'You '
+            :
+              f.user.name.split(' ')[0] + ' '
+            }
+            floated: "{f.title}"
           </Text>
-          <TouchableOpacity onPress={this.showDialog.bind(this)} style={styles.garbage}>
-            <Image source={require('../images/GarbageCan.png')} />
-          </TouchableOpacity>
+          <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
         </View>
-        <Text style={styles.title}>
-          { f.user.id == user.id ?
-            'You '
-          :
-            f.user.name.split(' ')[0] + ' '
-          }
-          floated: "{f.title}"
-        </Text>
-        <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
+        <SideChats {...this.props} convos={sideChats} user={user} isCreator={isCreator}/>
       </View>
-      <SideChats {...this.props} convos={sideChats} user={user} isCreator={isCreator}/>
     </View>
   )}
 
@@ -138,13 +140,11 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 7,
     paddingRight: 7,
-    paddingTop: 15,
-    paddingBottom: 15,
-    borderBottomColor: base.colors.lightgrey,
-    borderBottomWidth: 0.5,
+    paddingTop: 9,
+    paddingBottom: 5,
   },
 
-  main: {
+  float: {
     shadowColor: '#ACAAA7',
     shadowRadius: 3,
     shadowOpacity: 0.49,
@@ -153,6 +153,10 @@ const styles = StyleSheet.create({
       height: 3,
     },
     borderRadius: 4,
+    backgroundColor: 'white',
+  },
+
+  main: {
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 9,
@@ -160,19 +164,12 @@ const styles = StyleSheet.create({
   },
 
   sideChat: {
-    shadowColor: '#ACAAA7',
-    shadowRadius: 3,
-    shadowOpacity: 0.49,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    borderRadius: 4,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderColor: base.colors.lightgrey,
     paddingLeft: 15,
     paddingRight: 15,
-    paddingTop: 7,
-    paddingBottom: 9,
-    marginTop: 5,
+    paddingTop: 15,
+    paddingBottom: 15,
   },
 
   topTimestamp: {
