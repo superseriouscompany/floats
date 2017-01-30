@@ -21,7 +21,7 @@ export default class ConvoPreview extends Component {
     }
 
     return (
-    <TouchableOpacity onPress={this.showConvo.bind(this)}>
+    <View>
       { this.props.isMain ?
         <View style={styles.faces}>
           { c.users.length == 2 ?
@@ -53,16 +53,8 @@ export default class ConvoPreview extends Component {
       :
         <Text style={styles.prompt}>Message {this.convoName(c)}</Text>
       }
-    </TouchableOpacity>
+    </View>
     )
-  }
-
-  showConvo() {
-    this.context.store.dispatch({
-      type: 'navigation:queue',
-      route: 'MessagesScene',
-      payload: this.props.convo,
-    })
   }
 
   convoSpeaker(message) {

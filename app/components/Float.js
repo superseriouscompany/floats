@@ -18,6 +18,14 @@ import {
 } from 'react-native';
 
 class Float extends Component {
+  showConvo(convo) {
+    this.context.store.dispatch({
+      type: 'navigation:queue',
+      route: 'MessagesScene',
+      payload: convo,
+    })
+  }
+
   render() {
     const f         = this.props.float;
     const user      = this.context.store.getState().user;
@@ -27,7 +35,7 @@ class Float extends Component {
 
     return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => { this.showConvo(mainChat)}}>
         <View style={styles.float}>
           <View style={styles.main}>
             <View style={{position: 'absolute', left: 0, right: 0, top: 9, justifyContent: 'center', alignItems: 'center'}}>
@@ -49,25 +57,14 @@ class Float extends Component {
               }
               floated: "{f.title}"
             </Text>
-            <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
-          </View>
-<<<<<<< 519b2a6cd6c0d7ec4a377739bd7252e5a3386b95
-          <SideChats {...this.props} convos={sideChats} user={user} isCreator={isCreator}/>
-=======
-          <Text style={styles.title}>
-            { f.user.id == user.id ?
-              'You '
+            { mainChat ?
+              <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
             :
-              f.user.name.split(' ')[0] + ' '
+              null
             }
-            floated: "{f.title}"
-          </Text>
-          { mainChat ?
-            <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
-          :
-            null
-          }
->>>>>>> Deactivate active convo id, set pending id properly and don't show chat preview until we have the chat
+
+          </View>
+          <SideChats {...this.props} convos={sideChats} user={user} isCreator={isCreator}/>
         </View>
       </TouchableOpacity>
     </View>
