@@ -5,6 +5,12 @@ export default function messages(state = {}, action) {
   switch(action.type) {
     case 'messages:append':
       ret = {...state};
+      if( !ret[action.convoId] ) {
+        ret[action.convoId] = {}
+      }
+      if( !ret[action.convoId].all ) {
+        ret[action.convoId].all = []
+      }
       const messages = ret[action.convoId].all;
       ret[action.convoId].all = [action.message].concat(messages)
       return ret;
