@@ -193,6 +193,10 @@ const styles = StyleSheet.create({
   },
 
   garbage: {
+    paddingTop: 9,
+    marginTop: -9,
+    paddingRight: 15,
+    marginRight: -15,
   },
 
   top: {
