@@ -27,31 +27,33 @@ class Float extends Component {
 
     return (
     <View style={styles.container}>
-      <View style={styles.float}>
-        <View style={styles.main}>
-          <View style={{position: 'absolute', left: 0, right: 0, top: 9, justifyContent: 'center', alignItems: 'center'}}>
-            <Image source={{uri: f.user.avatar_url}} style={styles.organizerPhotoCircle} />
-          </View>
-          <View style={styles.top}>
-            <Text style={[styles.topTimestamp, base.timestamp]}>
-              { moment(f.created_at).format('h:mma') }
+      <TouchableOpacity>
+        <View style={styles.float}>
+          <View style={styles.main}>
+            <View style={{position: 'absolute', left: 0, right: 0, top: 9, justifyContent: 'center', alignItems: 'center'}}>
+              <Image source={{uri: f.user.avatar_url}} style={styles.organizerPhotoCircle} />
+            </View>
+            <View style={styles.top}>
+              <Text style={[styles.topTimestamp, base.timestamp]}>
+                { moment(f.created_at).format('h:mma') }
+              </Text>
+              <TouchableOpacity onPress={this.showDialog.bind(this)} style={styles.garbage}>
+                <Image source={require('../images/GarbageCan.png')} />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.title}>
+              { f.user.id == user.id ?
+                'You '
+              :
+                f.user.name.split(' ')[0] + ' '
+              }
+              floated: "{f.title}"
             </Text>
-            <TouchableOpacity onPress={this.showDialog.bind(this)} style={styles.garbage}>
-              <Image source={require('../images/GarbageCan.png')} />
-            </TouchableOpacity>
+            <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
           </View>
-          <Text style={styles.title}>
-            { f.user.id == user.id ?
-              'You '
-            :
-              f.user.name.split(' ')[0] + ' '
-            }
-            floated: "{f.title}"
-          </Text>
-          <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
+          <SideChats {...this.props} convos={sideChats} user={user} isCreator={isCreator}/>
         </View>
-        <SideChats {...this.props} convos={sideChats} user={user} isCreator={isCreator}/>
-      </View>
+      </TouchableOpacity>
     </View>
   )}
 
