@@ -16,7 +16,7 @@ export default class ConvoPreview extends Component {
   render() {
     const c = this.props.convo;
 
-    if( this.props.isCreator && !c.message ) {
+    if( this.props.isCreator && !this.props.isMain && !c.message ) {
       return null;
     }
 
