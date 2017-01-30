@@ -44,6 +44,7 @@ export default class ConvoPreview extends Component {
               <Text style={base.timestamp, styles.timestamp}>{ moment(c.message.created_at).format('h:mma') }</Text>
             </View>
             <Text style={styles.text} numberOfLines={1}>
+              { !this.props.isMain && c.users.length == 2 ? `${this.convoName(c)} | ` : null }
               {this.convoSpeaker.bind(this)(c.message)}: {c.message.text}
             </Text>
           </View>
