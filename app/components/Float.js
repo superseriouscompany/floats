@@ -35,8 +35,8 @@ class Float extends Component {
 
     return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => { this.showConvo(mainChat)}}>
-        <View style={styles.float}>
+      <View style={styles.float}>
+        <TouchableOpacity onPress={() => { this.showConvo(mainChat)}}>
           <View style={styles.main}>
             <View style={{position: 'absolute', left: 0, right: 0, top: 9, justifyContent: 'center', alignItems: 'center'}}>
               <Image source={{uri: f.user.avatar_url}} style={styles.organizerPhotoCircle} />
@@ -64,9 +64,9 @@ class Float extends Component {
             }
 
           </View>
-          <SideChats {...this.props} convos={sideChats} user={user} isCreator={isCreator}/>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        <SideChats {...this.props} convos={sideChats} user={user} isCreator={isCreator}/>
+      </View>
     </View>
   )}
 
