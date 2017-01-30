@@ -70,7 +70,7 @@ export default class CreateFloatScene extends Component {
               </TouchableOpacity>
             </View>
             <ScrollView style={{flex: 1}}
-             refreshControl={<RefreshControl tintColor={base.colors.mediumgrey} refreshing={this.props.loading} onRefresh={this.props.refresh} />}>
+             refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
              {this.state.friends.map((f, i) => (
                <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
              ))}
