@@ -59,7 +59,7 @@ function mapStateToProps(state) {
   const name = convo.users.length > 2 ? 'Group Message' : otherName;
 
   const messages = state.messages[state.convos.activeConvoId];
-  const items = messages.all ? [].concat(messages.all) : [];
+  const items = messages && messages.all ? [].concat(messages.all) : [];
 
   if( isPrimary(state, convo) ) {
     let float = state.myFloats.all.find((f) => {
