@@ -109,6 +109,14 @@ class Float extends Component {
 }
 
 class SideChats extends Component {
+  showConvo(convo) {
+    this.context.store.dispatch({
+      type: 'navigation:queue',
+      route: 'MessagesScene',
+      payload: convo,
+    })
+  }
+
   render() {
     const {convos} = this.props;
     const cs = convos.filter((c) => {
@@ -119,13 +127,17 @@ class SideChats extends Component {
     return (
       <View>
         {cs.map((c, key) => (
-          <View style={styles.sideChat} key={key}>
+          <TouchableOpacity style={styles.sideChat} key={key} onPress={() => { this.showConvo(c)}}>
             <ConvoPreview convo={c} isMain={false} user={this.props.user} isCreator={this.props.isCreator}/>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
     )
   }
+}
+
+SideChats.contextTypes = {
+  store: React.PropTypes.object
 }
 
 function extractMainChat(float) {
