@@ -121,7 +121,7 @@ function extractMainChat(float) {
 }
 
 function extractSideChats(float) {
-  if( !float.convos ) { return []; }
+  if( !float.convos || float.convos.length == 1 ) { return []; }
 
   return float.convos.filter((c) => {
     return c.users.length == 2
