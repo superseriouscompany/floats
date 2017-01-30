@@ -28,13 +28,15 @@ class Float extends Component {
     return (
     <View style={styles.container}>
       <View style={styles.main}>
+        <View style={{position: 'absolute', left: 0, right: 0, top: 9, justifyContent: 'center', alignItems: 'center'}}>
+          <Image source={{uri: f.user.avatar_url}} style={styles.organizerPhotoCircle} />
+        </View>
         <View style={styles.top}>
-          <Text style={[styles.timestamp, base.timestamp]}>
+          <Text style={[styles.topTimestamp, base.timestamp]}>
             { moment(f.created_at).format('h:mma') }
           </Text>
-          <Image source={{uri: f.user.avatar_url}} style={base.photoCircle} />
           <TouchableOpacity onPress={this.showDialog.bind(this)} style={styles.garbage}>
-            <Image source={require('../images/ThreeDotsLight.png')} />
+            <Image source={require('../images/GarbageCan.png')} />
           </TouchableOpacity>
         </View>
         <Text style={styles.title}>
@@ -134,57 +136,72 @@ Float.contextTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingLeft: 7,
+    paddingRight: 7,
+    paddingTop: 15,
+    paddingBottom: 15,
+    borderBottomColor: base.colors.lightgrey,
+    borderBottomWidth: 0.5,
   },
 
   main: {
-    shadowColor: 'hotpink',
-    shadowRadius: 10,
-    shadowOpacity: 0.6,
+    shadowColor: '#ACAAA7',
+    shadowRadius: 3,
+    shadowOpacity: 0.49,
     shadowOffset: {
       width: 0,
-      height: 10,
+      height: 3,
     },
-    borderRadius: 20,
-    padding: 15,
+    borderRadius: 4,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 9,
+    paddingBottom: 15,
   },
 
   sideChat: {
-    marginTop: 20,
-    shadowColor: 'cornflowerblue',
-    shadowRadius: 2,
-    shadowOpacity: 0.6,
+    shadowColor: '#ACAAA7',
+    shadowRadius: 3,
+    shadowOpacity: 0.49,
     shadowOffset: {
       width: 0,
-      height: 10,
+      height: 3,
     },
-    borderWidth: 1,
-    borderColor: 'lawngreen',
-    borderRadius: 10,
-    padding: 15,
+    borderRadius: 4,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 7,
+    paddingBottom: 9,
+    marginTop: 5,
   },
 
-  timestamp: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
+  topTimestamp: {
+    color: base.colors.mediumlightgrey,
+    fontSize: 12,
+    marginTop: 39,
   },
 
   garbage: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
   },
 
   top: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between'
   },
 
   title: {
     color: base.colors.mediumgrey,
-    fontSize: base.fontSizes.big,
-    lineHeight: 28,
-    marginBottom: 50,
+    fontSize: base.fontSizes.normal,
+    lineHeight: 26,
+    marginTop: 5,
+  },
+
+  organizerPhotoCircle: {
+    width: 54,
+    height: 54,
+    borderRadius: 27,
+    borderWidth: 1,
+    borderColor: base.colors.lightgrey,
   },
 })

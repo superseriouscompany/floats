@@ -41,7 +41,7 @@ export default class ConvoPreview extends Component {
               :
                 null
               }
-              <Text style={base.timestamp}>{ moment(c.message.created_at).format('h:mma') }</Text>
+              <Text style={base.timestamp, styles.timestamp}>{ moment(c.message.created_at).format('h:mma') }</Text>
             </View>
             <Text style={styles.text} numberOfLines={1}>
               {this.convoSpeaker.bind(this)(c.message)}: {c.message.text}
@@ -117,11 +117,13 @@ ConvoPreview.propTypes = {
 const styles = StyleSheet.create({
   faces: {
     flexDirection: 'row',
+    paddingTop: 9,
+    paddingBottom: 11,
   },
   face: {
     marginBottom: 0,
     marginLeft: 0,
-    marginRight: 0,
+    marginRight: 5,
   },
   latest: {
     flexDirection: 'row',
@@ -132,6 +134,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: base.colors.mediumgrey,
+    fontSize: 12,
+  },
+  timestamp: {
+    color: base.colors.mediumlightgrey,
+    fontSize: 12,
   },
   prompt: {
     fontSize: base.fontSizes.normal,
