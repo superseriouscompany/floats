@@ -12,6 +12,8 @@ import Text               from '../components/Text';
 import base               from '../styles/base';
 import {
   ActivityIndicator,
+  Alert,
+  Clipboard,
   Image,
   RefreshControl,
   ScrollView,
@@ -104,10 +106,6 @@ export default class CreateFloatScene extends Component {
 
     this.setState({friends: friends, allSelected: allSelected});
   }
-
-  copyToClipboard() {
-    alert('not implemented');
-  }
 }
 
 function selected(f) {
@@ -115,6 +113,11 @@ function selected(f) {
 }
 
 class Ronery extends Component {
+  copyToClipboard() {
+    Clipboard.setString('https://itunes.apple.com/us/app/floats-find-close-friends/id1195463981?mt=8');
+    Alert.alert('Copied app link to clipboard.');
+  }
+
   render() { return(
     <View style={{alignItems: 'center'}}>
       <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.mediumgrey}]}>
@@ -127,11 +130,14 @@ class Ronery extends Component {
           floats works best when you’ve got{"\n"}your closest friends.
         </Text>
       </View>
-      <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
-        <Text style={styles.emptyButtonText}>
-          add friends
-        </Text>
-      </TouchableOpacity>
+
+      { true ? null :
+        <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
+          <Text style={styles.emptyButtonText}>
+            add friends
+          </Text>
+        </TouchableOpacity>
+      }
       <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color3}]} onPress={() => this.copyToClipboard()}>
         <Text style={styles.emptyButtonText}>
           invite someone
