@@ -141,9 +141,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   prompt: {
-    fontSize: base.fontSizes.normal,
+    fontSize: base.fontSizes.small,
+    color: base.colors.mediumgrey,
     textAlign: 'center',
-    padding: 20,
+    paddingTop: 8,
+    paddingBottom: 7,
   },
   rightArrow: {
   },
