@@ -11,7 +11,7 @@ import {
 
 export default class Inbox extends Component {
   render() { return (
-    <View>
+    <View style={{paddingBottom: 14}}>
       { this.props.inbox.map((float, key) => (
         <Float key={key} float={float} />
       ))}
