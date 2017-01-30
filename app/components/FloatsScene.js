@@ -28,7 +28,7 @@ export default class FloatsScene extends Component {
         <Heading>floats</Heading>
       </View>
 
-      <View style={[base.mainWindow, {backgroundColor: 'white'}]}>
+      <View style={[base.mainWindow, {backgroundColor: base.colors.lightgrey}]}>
         { this.props.empty ?
             <View style={{alignItems: 'center'}}>
               <View style={{alignItems: 'center', paddingTop: 18, paddingBottom: 15}}>
