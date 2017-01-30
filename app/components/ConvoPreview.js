@@ -16,52 +16,45 @@ export default class ConvoPreview extends Component {
   render() {
     const c = this.props.convo;
 
-    if( this.props.isCreator && !c.message ) {
+    if( this.props.isCreator && !this.props.isMain && !c.message ) {
       return null;
     }
 
     return (
-    <TouchableOpacity onPress={this.showConvo.bind(this)} style={{flex: 1}}>
-      <View style={[styles.container, (this.props.doBottomBorder == 1) ? {paddingBottom: 0.5} : {paddingBottom: 0}]}>
-        { this.props.unread ?
-          <View style={styles.unread}></View>
-        :
-          null
-        }
-        { c.users.length > 2 ?
-          <Image source={require('../images/GroupsAvatar.png')} style={styles.photoCircle}/>
-        :
-          <Image source={{uri: this.convoAvatar(c)}} style={styles.photoCircle} />
-        }
-        <View style={styles.message}>
-          <Text style={styles.name} numberOfLines={1}>
-            {this.convoName(c)}
-          </Text>
-          { c.message ?
+    <TouchableOpacity onPress={this.showConvo.bind(this)}>
+      { this.props.isMain ?
+        <View style={styles.faces}>
+          { c.users.length == 2 ?
+            <Image source={{uri: this.convoAvatar(c)}} style={base.miniPhotoCircle} />
+          : c.users.map((u, key) => (
+            <Image source={{uri: u.avatar_url}} style={[base.miniPhotoCircle, styles.face]} key={key}/>
+          ))}
+        </View>
+      : null
+      }
+      { c.message ?
+        <View style={styles.latest}>
+          <View style={styles.left}>
+            <View style={{flexDirection: 'row'}}>
+              { this.props.unread ?
+                <View style={styles.unread}></View>
+              :
+                null
+              }
+              <Text style={base.timestamp, styles.timestamp}>{ moment(c.message.created_at).format('h:mma') }</Text>
+            </View>
             <Text style={styles.text} numberOfLines={1}>
               {this.convoSpeaker.bind(this)(c.message)}: {c.message.text}
             </Text>
-          :
-            <Text style={[styles.text, styles.prompt]} numberOfLines={1}>
-              Send a direct message
-            </Text>
-          }
+          </View>
+          <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
         </View>
-        <Image style={styles.rightArrow} source={require('../images/RightArrowLight.png')}/>
-        { c.message ?
-          <Text style={[base.timestamp, styles.time]}>
-            { moment(c.message.created_at).format('h:mma') }
-          </Text>
-        : null
-        }
-      </View>
-      {
-        this.props.doBottomBorder == 1 ?
-          <View style={styles.bottomBorder}></View>
-        : null
+      :
+        <Text style={styles.prompt}>Message {this.convoName(c)}</Text>
       }
     </TouchableOpacity>
-  )}
+    )
+  }
 
   showConvo() {
     this.context.store.dispatch({
@@ -81,12 +74,12 @@ export default class ConvoPreview extends Component {
       console.warn('No users present', convo);
       return 'Messages';
     }
-    if( convo.users.length > 2 ) { return 'Group Chat' }
+    if( convo.users.length > 2 ) { return 'the group' }
 
     const user = this.context.store.getState().user;
     return convo.users[0].id == user.id
-      ? convo.users[1].name
-      : convo.users[0].name;
+      ? convo.users[1].name.split(' ')[0]
+      : convo.users[0].name.split(' ')[0];
   }
 
   convoAvatar(convo) {
@@ -122,58 +115,39 @@ ConvoPreview.propTypes = {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  faces: {
+    flexDirection: 'row',
+    paddingTop: 9,
+    paddingBottom: 11,
+  },
+  face: {
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 5,
+  },
+  latest: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  bottomBorder: {
+  left: {
     flex: 1,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: base.colors.lightgrey,
-    marginLeft: 20,
-  },
-  message: {
-    flex: 1,
-  },
-  time: {
-    color: base.colors.mediumlightgrey,
-    position: 'absolute',
-    right: 10,
-    bottom: 4,
-    fontSize: 12,
   },
   text: {
     color: base.colors.mediumgrey,
-    fontSize: base.fontSizes.small,
-    paddingRight: 35,
+    fontSize: 12,
+  },
+  timestamp: {
+    color: base.colors.mediumlightgrey,
+    fontSize: 12,
   },
   prompt: {
-    fontFamily: 'Roboto',
-  },
-  photoCircle: {
-    width: 54,
-    height: 54,
-    borderRadius: 27,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 17,
-    marginBottom: 16,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: base.colors.lightgrey,
+    fontSize: base.fontSizes.small,
+    color: base.colors.mediumgrey,
+    textAlign: 'center',
+    paddingTop: 8,
+    paddingBottom: 7,
   },
   rightArrow: {
-    marginLeft: 14,
-    marginRight: 10,
-    marginTop: -1
-  },
-  unread: {
-    position: 'absolute',
-    right: 10,
-    top: 10,
-    width: 8,
-    height: 8,
-    backgroundColor: base.colors.color3,
-    borderRadius: 4,
   },
 })
 

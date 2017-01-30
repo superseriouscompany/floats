@@ -57,20 +57,6 @@ function generateInbox(invitations, myFloats, convos) {
     const float = floats[c.float_id];
     if( !float ) { return console.warn("Missing float for convo", c.id, c.float_id); }
     float.convos = float.convos || [];
-    if( !c.message ) {
-      const convosForFloat = convos.all.filter((c0) => {
-        return c0.float_id == float.id
-      })
-
-      if( c.users.length > 2 || convosForFloat.length == 1 ) {
-        c.message = {
-          text: float.title,
-          user: float.user,
-          created_at: float.created_at,
-        }
-      }
-    }
-
     float.convos.push(c);
     if( c.message && c.message.created_at ) {
       float.time = Math.max(float.time, c.message.created_at);
