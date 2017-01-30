@@ -19,6 +19,7 @@ import {
 
 class Float extends Component {
   showConvo(convo) {
+    if( !convo ) { return; }
     this.context.store.dispatch({
       type: 'navigation:queue',
       route: 'MessagesScene',
@@ -110,6 +111,8 @@ class Float extends Component {
 
 class SideChats extends Component {
   showConvo(convo) {
+    if( !convo ) { return; }
+
     this.context.store.dispatch({
       type: 'navigation:queue',
       route: 'MessagesScene',
