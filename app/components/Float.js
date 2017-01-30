@@ -140,8 +140,7 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 7,
     paddingRight: 7,
-    paddingTop: 9,
-    paddingBottom: 5,
+    paddingTop: 14,
   },
 
   float: {
