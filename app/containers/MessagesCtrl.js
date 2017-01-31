@@ -54,6 +54,8 @@ function mapStateToProps(state) {
     return c.id == state.convos.activeConvoId;
   });
 
+  if( !convo ) { console.warn("Couldn't find convo", JSON.stringify(state.convos)); return {} }
+
   const otherName = convo.users[0].id == state.user.id
     ? convo.users[1].name : convo.users[0].name;
   const name = convo.users.length > 2 ? 'Group Message' : otherName;
