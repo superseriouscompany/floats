@@ -29,20 +29,9 @@ class FriendsScene extends Component {
     super(props);
 
     this.state = {
-      loadingFriends: true,
       loadingRequests: true,
-      friends: [],
       friendRequests: [],
-      enemies: []
     };
-    api.friends.all().then((allFriends) => {
-      const friends = allFriends.filter(function(f) { return !f.blocked });
-      const enemies = allFriends.filter(function(f) { return !!f.blocked });
-
-      this.setState({friends: friends, enemies: enemies, loadingFriends: false});
-    }).catch((err) => {
-      this.setState({error: err.message, loadingFriends: false});
-    })
     api.friendRequests.all().then((requests) => {
       this.setState({friendRequests: requests, loadingRequests: false});
     }).catch((err) => {
@@ -53,15 +42,6 @@ class FriendsScene extends Component {
   accept(id) {
     if( !id ) { return console.warn('No id provided'); }
     api.friendRequests.accept(id).then(() => {
-      api.friends.all().then((allFriends) => {
-        const friends = allFriends.filter(function(f) { return !f.blocked });
-        const enemies = allFriends.filter(function(f) { return !!f.blocked });
-
-        this.setState({friends: friends, enemies: enemies, loadingFriends: false});
-      }).catch((err) => {
-        this.setState({error: err.message, loadingFriends: false});
-      })
-
       api.friendRequests.all().then((requests) => {
         this.setState({friendRequests: requests, loadingRequests: false});
       }).catch((err) => {
@@ -75,15 +55,6 @@ class FriendsScene extends Component {
   deny() {
     if( !id ) { return console.warn('No id provided'); }
     api.friendRequests.deny(id).then(() => {
-      api.friends.all().then((allFriends) => {
-        const friends = allFriends.filter(function(f) { return !f.blocked });
-        const enemies = allFriends.filter(function(f) { return !!f.blocked });
-
-        this.setState({friends: friends, enemies: enemies, loadingFriends: false});
-      }).catch((err) => {
-        this.setState({error: err.message, loadingFriends: false});
-      })
-
       api.friendRequests.all().then((requests) => {
         this.setState({friendRequests: requests, loadingRequests: false});
       }).catch((err) => {
@@ -129,7 +100,7 @@ class FriendsScene extends Component {
           </View>
         : null
         }
-        { this.state.loadingFriends ?
+        { this.props.friends.loading ?
           <View style={{height: 50}}>
             <ActivityIndicator
               style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
@@ -137,7 +108,7 @@ class FriendsScene extends Component {
               color={base.colors.mediumgrey}
             />
           </View>
-        : !this.state.friends.length ?
+        : !this.props.friends.items || !this.props.friends.items.length ?
           <View style={{alignItems: 'center'}}>
             <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15, }}>
               <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center'}]}>
@@ -153,16 +124,16 @@ class FriendsScene extends Component {
         :
           <View style={{paddingBottom: 15}}>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.state.friends.length} {this.state.friends.length == 1 ? 'friend' : 'friends'}</Text>
+              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.props.friends.items.length} {this.props.friends.items.length == 1 ? 'friend' : 'friends'}</Text>
             </View>
             <View style={{marginTop: -15}}>
-              { this.state.friends.map((f, i) => (
+              { this.props.friends.items.map((f, i) => (
                 <Friend friend={f} key={i} />
               ))}
             </View>
           </View>
         }
-        { this.state.enemies.length ?
+        { this.props.friends.enemies && this.props.friends.enemies.length ?
           <View>
             <View style={[base.bgBreakingSection, {alignItems: 'center', justifyContent: 'center', borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: base.colors.lightgrey}]}>
               <Text style={[base.timestamp, {paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]} onPress={() => this.setState({showEnemies: !this.state.showEnemies})}>
@@ -171,7 +142,7 @@ class FriendsScene extends Component {
             </View>
             { this.state.showEnemies ?
               <View style={{paddingBottom: 15}}>
-                {this.state.enemies.map((e, i) => (
+                {this.props.friends.enemies.map((e, i) => (
                   <Enemy enemy={e} key={i} />
                 ))}
               </View>
