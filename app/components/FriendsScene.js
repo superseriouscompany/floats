@@ -43,11 +43,54 @@ class FriendsScene extends Component {
     }).catch((err) => {
       this.setState({error: err.message, loadingFriends: false});
     })
-
     api.friendRequests.all().then((requests) => {
       this.setState({friendRequests: requests, loadingRequests: false});
     }).catch((err) => {
       this.setState({error: err.message, loadingRequests: false});
+    })
+  }
+
+  accept(id) {
+    if( !id ) { return console.warn('No id provided'); }
+    api.friendRequests.accept(id).then(() => {
+      api.friends.all().then((allFriends) => {
+        const friends = allFriends.filter(function(f) { return !f.blocked });
+        const enemies = allFriends.filter(function(f) { return !!f.blocked });
+
+        this.setState({friends: friends, enemies: enemies, loadingFriends: false});
+      }).catch((err) => {
+        this.setState({error: err.message, loadingFriends: false});
+      })
+
+      api.friendRequests.all().then((requests) => {
+        this.setState({friendRequests: requests, loadingRequests: false});
+      }).catch((err) => {
+        this.setState({error: err.message, loadingRequests: false});
+      })
+    }).catch((err) => {
+      Alert.alert(err.message || 'Something went wrong.')
+    })
+  }
+
+  deny() {
+    if( !id ) { return console.warn('No id provided'); }
+    api.friendRequests.deny(id).then(() => {
+      api.friends.all().then((allFriends) => {
+        const friends = allFriends.filter(function(f) { return !f.blocked });
+        const enemies = allFriends.filter(function(f) { return !!f.blocked });
+
+        this.setState({friends: friends, enemies: enemies, loadingFriends: false});
+      }).catch((err) => {
+        this.setState({error: err.message, loadingFriends: false});
+      })
+
+      api.friendRequests.all().then((requests) => {
+        this.setState({friendRequests: requests, loadingRequests: false});
+      }).catch((err) => {
+        this.setState({error: err.message, loadingRequests: false});
+      })
+    }).catch((err) => {
+      Alert.alert(err.message || 'Something went wrong.')
     })
   }
 
@@ -80,7 +123,7 @@ class FriendsScene extends Component {
             </View>
             <View style={{marginTop: -10}}>
               {this.state.friendRequests.map((f, i) => (
-                <FriendRequest key={i} friend={f.user} />
+                <FriendRequest key={i} friend={f.user} accept={this.accept} deny={this.deny}/>
               ))}
             </View>
           </View>
