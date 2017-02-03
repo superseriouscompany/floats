@@ -11,7 +11,12 @@ class FriendsCtrl extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    loading: state.friends.loading,
+    friends: state.friends.items,
+    enemies: state.friends.enemies,
+    error:   state.friends.error,
+  };
 }
 
 export default connect(mapStateToProps)(FriendsCtrl);
