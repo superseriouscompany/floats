@@ -41,6 +41,7 @@ export function accept(userId) {
     api.friendRequests.accept(userId).then(() => {
       dispatch({type: 'friendRequests:accept:yes', id: userId})
       dispatch(fetchFriends())
+      dispatch(fetchFriendRequests());
     }).catch((err) => {
       dispatch({type: 'friendRequests:accept:no', id: userId})
     })
@@ -54,6 +55,7 @@ export function deny(userId) {
     api.friendRequests.deny(userId).then(() => {
       dispatch({type: 'friendRequests:deny:yes', id: userId})
       dispatch(fetchFriends())
+      dispatch(fetchFriendRequests());
     }).catch((err) => {
       dispatch({type: 'friendRequests:deny:no', id: userId})
     })
