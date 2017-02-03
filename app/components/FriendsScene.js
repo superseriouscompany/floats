@@ -56,7 +56,7 @@ class FriendsScene extends Component {
         { this.props.friendRequests.items && this.props.friendRequests.items.length ?
           <View style={[base.bgBreakingSection, {paddingBottom: 16}]}>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.props.friendRequests.items.length} {this.props.friendRequests.items.length == 1 ? 'friend requests' : 'friend request'}</Text>
+              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.props.friendRequests.items.length} {this.props.friendRequests.items.length == 1 ? 'friend request' : 'friend requests'}</Text>
             </View>
             <View style={{marginTop: -10}}>
               {this.props.friendRequests.items.map((f, i) => (
@@ -75,7 +75,18 @@ class FriendsScene extends Component {
             />
           </View>
         : null }
-        { !this.props.friends.items || !this.props.friends.items.length ?
+        { this.props.friends.items && this.props.friends.items.length ?
+          <View style={{paddingBottom: 15}}>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.props.friends.items.length} {this.props.friends.items.length == 1 ? 'friend' : 'friends'}</Text>
+            </View>
+            <View style={{marginTop: -15}}>
+              { this.props.friends.items.map((f, i) => (
+                <Friend friend={f} key={i} />
+              ))}
+            </View>
+          </View>
+        : !this.props.friends.loading ?
           <View style={{alignItems: 'center'}}>
             <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15, }}>
               <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center'}]}>
@@ -88,18 +99,7 @@ class FriendsScene extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-        :
-          <View style={{paddingBottom: 15}}>
-            <View style={{alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.props.friends.items.length} {this.props.friends.items.length == 1 ? 'friend' : 'friends'}</Text>
-            </View>
-            <View style={{marginTop: -15}}>
-              { this.props.friends.items.map((f, i) => (
-                <Friend friend={f} key={i} />
-              ))}
-            </View>
-          </View>
-        }
+        : null }
         { this.props.friends.enemies && this.props.friends.enemies.length ?
           <View>
             <View style={[base.bgBreakingSection, {alignItems: 'center', justifyContent: 'center', borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: base.colors.lightgrey}]}>
