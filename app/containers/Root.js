@@ -5,10 +5,10 @@ import CreateFloatScene from '../containers/CreateFloatCtrl';
 import FloatsScene from '../containers/FloatsCtrl';
 import MessagesScene from '../containers/MessagesCtrl';
 import KillSwitchScene from '../containers/KillSwitchCtrl';
+import FriendsCtrl from '../containers/FriendsCtrl';
 import PushCtrl from '../containers/PushCtrl';
 import LoginScene from '../components/LoginScene';
 import RandosScene from '../components/RandosScene';
-import FriendsScene from '../components/FriendsScene';
 import Scratch from '../components/Scratch';
 import Text from '../components/Text';
 import api from '../services/api';
@@ -71,7 +71,7 @@ export default class Root extends Component {
                 : this.state.scene == 'FloatsScene' ?
                   <FloatsScene navigator={this.navigator} />
                 : this.state.scene == 'FriendsScene' ?
-                  <FriendsScene navigator={this.navigator} />
+                  <FriendsCtrl navigator={this.navigator} />
                 : this.state.scene == 'RandosScene' ?
                   <RandosScene navigator={this.navigator} />
                 : this.state.scene == 'MessagesScene' ?
