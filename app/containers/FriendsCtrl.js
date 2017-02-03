@@ -3,8 +3,13 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import FriendsScene from '../components/FriendsScene'
+import { fetchFriends } from '../actions/friends'
 
 class FriendsCtrl extends Component {
+  componentWillMount() {
+    this.props.dispatch(fetchFriends());
+  }
+
   render() { return (
     <FriendsScene {...this.props} />
   )}
@@ -12,10 +17,7 @@ class FriendsCtrl extends Component {
 
 function mapStateToProps(state) {
   return {
-    loading: state.friends.loading,
-    friends: state.friends.items,
-    enemies: state.friends.enemies,
-    error:   state.friends.error,
+    friends: state.friends,
   };
 }
 

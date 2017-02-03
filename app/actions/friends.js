@@ -1,6 +1,6 @@
 import api from '../services/api';
 
-export function fetch(cacheTime) {
+export function fetchFriends(cacheTime) {
   return function(dispatch) {
     if( cacheTime && +new Date - cacheTime < 1000 * 60 ) { console.log('Using cache'); return; }
 
