@@ -153,7 +153,7 @@ class FriendsScene extends Component {
         :
           <View style={{paddingBottom: 15}}>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.state.friends.length} friends</Text>
+              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.state.friends.length} {this.state.friends.length == 1 ? 'friend' : 'friends'}</Text>
             </View>
             <View style={{marginTop: -15}}>
               { this.state.friends.map((f, i) => (
