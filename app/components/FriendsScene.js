@@ -27,42 +27,6 @@ import {
 class FriendsScene extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      loadingRequests: true,
-      friendRequests: [],
-    };
-    api.friendRequests.all().then((requests) => {
-      this.setState({friendRequests: requests, loadingRequests: false});
-    }).catch((err) => {
-      this.setState({error: err.message, loadingRequests: false});
-    })
-  }
-
-  accept(id) {
-    if( !id ) { return console.warn('No id provided'); }
-    api.friendRequests.accept(id).then(() => {
-      api.friendRequests.all().then((requests) => {
-        this.setState({friendRequests: requests, loadingRequests: false});
-      }).catch((err) => {
-        this.setState({error: err.message, loadingRequests: false});
-      })
-    }).catch((err) => {
-      Alert.alert(err.message || 'Something went wrong.')
-    })
-  }
-
-  deny() {
-    if( !id ) { return console.warn('No id provided'); }
-    api.friendRequests.deny(id).then(() => {
-      api.friendRequests.all().then((requests) => {
-        this.setState({friendRequests: requests, loadingRequests: false});
-      }).catch((err) => {
-        this.setState({error: err.message, loadingRequests: false});
-      })
-    }).catch((err) => {
-      Alert.alert(err.message || 'Something went wrong.')
-    })
   }
 
   render() { return (
@@ -79,7 +43,7 @@ class FriendsScene extends Component {
         </TouchableOpacity>
       </View>
       <ScrollView>
-        { this.state.loadingRequests ?
+        { this.props.friendRequests.loading ?
           <View style={{height: 50}}>
             <ActivityIndicator
               style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
@@ -87,14 +51,16 @@ class FriendsScene extends Component {
               color={base.colors.mediumgrey}
             />
           </View>
-        : this.state.friendRequests.length ?
+        : null
+        }
+        { this.props.friendRequests.items && this.props.friendRequests.items.length ?
           <View style={[base.bgBreakingSection, {paddingBottom: 16}]}>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.state.friendRequests.length} friend requests</Text>
+              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.props.friendRequests.items.length} {this.props.friendRequests.items.length == 1 ? 'friend requests' : 'friend request'}</Text>
             </View>
             <View style={{marginTop: -10}}>
-              {this.state.friendRequests.map((f, i) => (
-                <FriendRequest key={i} friend={f.user} accept={this.accept} deny={this.deny}/>
+              {this.props.friendRequests.items.map((f, i) => (
+                <FriendRequest key={i} friend={f.user} accept={this.props.accept} deny={this.props.deny}/>
               ))}
             </View>
           </View>
@@ -108,7 +74,8 @@ class FriendsScene extends Component {
               color={base.colors.mediumgrey}
             />
           </View>
-        : !this.props.friends.items || !this.props.friends.items.length ?
+        : null }
+        { !this.props.friends.items || !this.props.friends.items.length ?
           <View style={{alignItems: 'center'}}>
             <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15, }}>
               <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center'}]}>
@@ -199,6 +166,11 @@ class FriendsScene extends Component {
       alert("Sorry, we couldn't log you out. Please try again.")
     })
   }
+}
+
+FriendsScene.propTypes = {
+  accept: React.PropTypes.func.isRequired,
+  deny:   React.PropTypes.func.isRequired,
 }
 
 FriendsScene.contextTypes = {
