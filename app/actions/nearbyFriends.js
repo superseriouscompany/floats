@@ -1,7 +1,5 @@
 import api from '../services/api';
 
-var fail = true;
-
 export function fetchNearbyFriends(cacheTime) {
 
   return function(dispatch) {

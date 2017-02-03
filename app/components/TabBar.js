@@ -44,6 +44,7 @@ class TabBar extends Component {
   )}
 
   showLogoutDialog() {
+    //return this.props.navigator.navigate('FriendsScene')
     this.props.showActionSheetWithOptions({
       options: [`Logout`, `Delete Account`, 'Cancel'],
       destructiveButtonIndex: 1,
