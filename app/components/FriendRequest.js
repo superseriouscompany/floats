@@ -18,10 +18,10 @@ export default class FriendRequest extends Component {
       <View style={styles.right}>
         <Text>{this.props.friend.name}</Text>
         <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity style={[styles.button, {backgroundColor: base.colors.color2}]} onPress={this.accept.bind(this)}>
+          <TouchableOpacity style={[styles.button, {backgroundColor: base.colors.color2}]} onPress={() => this.props.accept(this.props.friend.id)}>
             <Text style={styles.confirm}>confirm</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, {backgroundColor: base.colors.lightgrey}]} onPress={this.deny.bind(this)}>
+          <TouchableOpacity style={[styles.button, {backgroundColor: base.colors.lightgrey}]} onPress={() => this.props.deny(this.props.friend.id)}>
             <Text style={styles.nah}>nah</Text>
           </TouchableOpacity>
         </View>
