@@ -6,6 +6,9 @@ import base from '../styles/base';
 import api from '../services/api';
 import Text from './Text';
 import {
+  send
+} from '../actions/friendRequests.js'
+import {
   ActivityIndicator,
   Image,
   StyleSheet,
@@ -34,13 +37,13 @@ export default class Rando extends Component {
         <TouchableOpacity onPress={this.undoFriendRequest.bind(this)} accessible={true} accessibilityLabel={`Undo friend request to ${this.props.friend.name}`}>
           <Image source={require('../images/SuccessCheck.png')} />
         </TouchableOpacity>
-      : this.state.failed || Math.random() < 0.5 ?
+      : this.state.failed ?
         <TouchableOpacity onPress={this.sendFriendRequest.bind(this)} accessible={true} accessibilityLabel={`Send friend request to ${this.props.friend.name}`}>
-          <Image source={require('../images/AddButton.png')} />
+          <Image source={require('../images/FailureExclamation.png')} />
         </TouchableOpacity>
       :
         <TouchableOpacity onPress={this.sendFriendRequest.bind(this)} accessible={true} accessibilityLabel={`Send friend request to ${this.props.friend.name}`}>
-          <Image source={require('../images/FailureExclamation.png')} />
+          <Image source={require('../images/AddButton.png')} />
         </TouchableOpacity>
       }
     </View>
@@ -48,10 +51,10 @@ export default class Rando extends Component {
 
   sendFriendRequest() {
     this.setState({sending: true});
-    api.friendRequests.send(this.props.friend.id).then(() => {
+    api.friendRequests.create(this.props.friend.id).then(() => {
       this.setState({sent: true, sending: false});
     }).catch(() => {
-      this.setState({sendFailed: true});
+      this.setState({failed: true});
     });
   }
 

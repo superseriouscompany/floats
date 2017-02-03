@@ -23,6 +23,7 @@ import {
 } from 'react-native';
 
 var defaultScene = 'CreateFloatScene';
+defaultScene = 'FriendsScene';
 
 export default class Root extends Component {
   constructor(props) {

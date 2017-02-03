@@ -7,6 +7,7 @@ import base from '../styles/base';
 import {
   Image,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -17,16 +18,24 @@ export default class FriendRequest extends Component {
       <View style={styles.right}>
         <Text>{this.props.friend.name}</Text>
         <View style={{flexDirection: 'row'}}>
-            <View style={[styles.button, {backgroundColor: base.colors.color2}]}>
-              <Text style={styles.confirm}>confirm</Text>
-            </View>
-            <View style={[styles.button, {backgroundColor: base.colors.lightgrey}]}>
-              <Text style={styles.nah}>nah</Text>
-            </View>
+          <TouchableOpacity style={[styles.button, {backgroundColor: base.colors.color2}]} onPress={this.accept.bind(this)}>
+            <Text style={styles.confirm}>confirm</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, {backgroundColor: base.colors.lightgrey}]} onPress={this.deny.bind(this)}>
+            <Text style={styles.nah}>nah</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
   )}
+
+  accept() {
+    alert('accept');
+  }
+
+  deny() {
+    alert('deny');
+  }
 }
 
 const styles = StyleSheet.create({

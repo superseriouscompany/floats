@@ -77,7 +77,7 @@ class FriendsScene extends Component {
             </View>
             <View style={{marginTop: -10}}>
               {this.state.friendRequests.map((f, i) => (
-                <FriendRequest key={i} friend={f} />
+                <FriendRequest key={i} friend={f.user} />
               ))}
             </View>
           </View>

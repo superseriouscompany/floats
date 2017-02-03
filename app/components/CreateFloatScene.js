@@ -131,13 +131,11 @@ class Ronery extends Component {
         </Text>
       </View>
 
-      { true ? null :
-        <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
-          <Text style={styles.emptyButtonText}>
-            add friends
-          </Text>
-        </TouchableOpacity>
-      }
+      <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
+        <Text style={styles.emptyButtonText}>
+          add friends
+        </Text>
+      </TouchableOpacity>
       <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color3}]} onPress={() => this.copyToClipboard()}>
         <Text style={styles.emptyButtonText}>
           invite someone
