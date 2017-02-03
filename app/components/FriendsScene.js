@@ -11,9 +11,12 @@ import Enemy from './Enemy';
 import TabBar from './TabBar';
 import api from '../services/api';
 import base from '../styles/base';
+import {persistStore} from 'redux-persist'
 import { connectActionSheet } from '@exponent/react-native-action-sheet';
 import {
   ActivityIndicator,
+  Alert,
+  AsyncStorage,
   Image,
   ScrollView,
   StyleSheet,
@@ -161,6 +164,31 @@ class FriendsScene extends Component {
       }
     })
   }
+
+  deleteAccount() {
+    api.users.deleteAccount().then(() => {
+      this.logout();
+    }).catch(function(err) {
+      console.error(err);
+      alert("Sorry, something went wrong in deleting your account. Please try again or email support@superserious.co");
+    })
+  }
+
+  logout() {
+    AsyncStorage.removeItem('@floats:accessToken').then(() => {
+      return AsyncStorage.removeItem('@floats:user')
+    }).then(() => {
+      persistStore(this.context.store, {storage: AsyncStorage}).purge();
+      this.props.navigator.navigate('LoginScene');
+    }).catch(function(err) {
+      console.error(err);
+      alert("Sorry, we couldn't log you out. Please try again.")
+    })
+  }
+}
+
+FriendsScene.contextTypes = {
+  store: React.PropTypes.object
 }
 
 export default connectActionSheet(FriendsScene);
