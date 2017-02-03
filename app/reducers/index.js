@@ -15,6 +15,7 @@ import convos from './convos';
 import navigation from './navigation';
 import killed from './killSwitch'
 import friends from './friends'
+import friendRequests from './friendRequests'
 const middleware = [thunk];
 if( __DEV__ ) {
   middleware.push(createLogger());
@@ -30,6 +31,7 @@ const reducers = combineReducers({
   navigation,
   killed,
   friends,
+  friendRequests,
 })
 
 const store = createStore(

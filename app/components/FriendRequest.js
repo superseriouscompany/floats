@@ -38,6 +38,12 @@ export default class FriendRequest extends Component {
   }
 }
 
+FriendRequest.propTypes = {
+  accept: React.PropTypes.func.isRequired,
+  deny:   React.PropTypes.func.isRequired,
+}
+
+
 const styles = StyleSheet.create({
   box: {
     flexDirection: 'row',

@@ -4,20 +4,40 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import FriendsScene from '../components/FriendsScene'
 import { fetchFriends } from '../actions/friends'
+import { fetchFriendRequests, accept, deny } from '../actions/friendRequests'
 
 class FriendsCtrl extends Component {
+  constructor(props) {
+    super(props)
+
+    this.accept = this.accept.bind(this);
+    this.deny   = this.deny.bind(this);
+  }
+
   componentWillMount() {
     this.props.dispatch(fetchFriends());
+    this.props.dispatch(fetchFriendRequests());
   }
 
   render() { return (
-    <FriendsScene {...this.props} />
+    <FriendsScene {...this.props} accept={this.accept} deny={this.deny}/>
   )}
+
+  accept(id) {
+    if( !id ) { return console.warn('No id provided'); }
+    this.props.dispatch(accept(id));
+  }
+
+  deny(id) {
+    if( !id ) { return console.warn('No id provided'); }
+    this.props.dispatch(deny(id));
+  }
 }
 
 function mapStateToProps(state) {
   return {
-    friends: state.friends,
+    friends:        state.friends,
+    friendRequests: state.friendRequests,
   };
 }
 
