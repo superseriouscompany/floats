@@ -6,6 +6,9 @@ import CreateFloatScene from '../components/CreateFloatScene';
 import { fetchNearbyFriends } from '../actions/nearbyFriends';
 import FCM, {FCMEvent} from 'react-native-fcm';
 import api from '../services/api';
+import {
+  ActionSheetIOS
+} from 'react-native'
 
 class CreateFloatCtrl extends Component {
   constructor(props) {
@@ -32,8 +35,25 @@ class CreateFloatCtrl extends Component {
     this.props.dispatch(fetchNearbyFriends(null));
   }
 
+  invitationDialog() {
+    ActionSheetIOS.showShareActionSheetWithOptions({
+      url: 'https://superseriouscompany.com',
+      message: 'Go fuck yourself',
+      subject: 'You Can',
+    }, (error) => {
+      console.error(error);
+      alert(error.message);
+    }, (success, method) => {
+      if( success ) {
+        alert(`Shared via ${method}`)
+      } else {
+        alert('Not shared')
+      }
+    })
+  }
+
   render() { return (
-    <CreateFloatScene {...this.props} refresh={this.refresh}/>
+    <CreateFloatScene {...this.props} refresh={this.refresh} invitationDialog={this.invitationDialog}/>
   )}
 }
 
