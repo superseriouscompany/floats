@@ -23,8 +23,8 @@ import {BackAndroid} from 'react-native'
 export default class RandosScene extends Component {
   constructor(props) {
     super(props);
-
     this.state = { loaded: false, friends: [] }
+    this.androidBackButton = this.androidBackButton.bind(this);
 
     api.randos.all().then((randos) => {
       this.setState({loaded: true, randos: randos });
@@ -43,7 +43,7 @@ export default class RandosScene extends Component {
   }
 
   androidBackButton() {
-    this.props.navigator.navigate('FriendsScene')
+    this.props.navigator.navigate('FriendsScene');
     return true;
 }
 
