@@ -27,6 +27,8 @@ import {
 class FriendsScene extends Component {
   constructor(props) {
     super(props);
+
+    this.state = { showEnemies: false }
   }
 
   render() { return (
@@ -82,7 +84,7 @@ class FriendsScene extends Component {
             </View>
             <View style={{marginTop: -15}}>
               { this.props.friends.items.map((f, i) => (
-                <Friend friend={f} key={i} />
+                <Friend friend={f} key={i} blockDialog={this.blockDialog.bind(this)}/>
               ))}
             </View>
           </View>
@@ -110,7 +112,7 @@ class FriendsScene extends Component {
             { this.state.showEnemies ?
               <View style={{paddingBottom: 15}}>
                 {this.props.friends.enemies.map((e, i) => (
-                  <Enemy enemy={e} key={i} />
+                  <Enemy enemy={e} key={i} unblockDialog={this.unblockDialog.bind(this)}/>
                 ))}
               </View>
             : null
@@ -146,6 +148,28 @@ class FriendsScene extends Component {
     })
   }
 
+  blockDialog(id, name) {
+    this.props.showActionSheetWithOptions({
+      options: [`Block ${name}`, 'Cancel'],
+      destructiveButtonIndex: 0,
+      cancelButtonIndex: 1,
+    }, (index) => {
+      if( index === 1 ) { return; }
+      this.props.block(id);
+    })
+  }
+
+  unblockDialog(id, name) {
+    this.props.showActionSheetWithOptions({
+      options: [`Unblock ${name}`, 'Cancel'],
+      destructiveButtonIndex: 0,
+      cancelButtonIndex: 1,
+    }, (index) => {
+      if( index === 1 ) { return; }
+      this.props.unblock(id);
+    })
+  }
+
   deleteAccount() {
     api.users.deleteAccount().then(() => {
       this.logout();
@@ -169,8 +193,10 @@ class FriendsScene extends Component {
 }
 
 FriendsScene.propTypes = {
-  accept: React.PropTypes.func.isRequired,
-  deny:   React.PropTypes.func.isRequired,
+  accept:  React.PropTypes.func.isRequired,
+  deny:    React.PropTypes.func.isRequired,
+  block:   React.PropTypes.func.isRequired,
+  unblock: React.PropTypes.func.isRequired,
 }
 
 FriendsScene.contextTypes = {
