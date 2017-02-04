@@ -21,11 +21,9 @@ export default function(props) { return (
        barStyle="light-content"
      />
     <View style={styles.backgroundSection}>
-      <Image style={styles.leftFloat} source={require('../images/BlueFloat.png')}/>
-      <View style={styles.centerFloat}>
-        <Image style={styles.centerFloat} source={require('../images/PinkFloat.png')}/>
-      </View>
-      <Image style={styles.rightFloat} source={require('../images/GreyFloat.png')}/>
+      <Balloon style={styles.leftFloat} source={require('../images/BlueFloat.png')}/>
+      <Balloon style={styles.centerFloat} source={require('../images/PinkFloat.png')}/>
+      <Balloon style={styles.rightFloat} source={require('../images/GreyFloat.png')}/>
       <View style={styles.peopleRow}>
         <View style={{flex: .5, flexDirection: 'row', justifyContent: 'flex-start'}}>
           <View style={{marginLeft: 26}}>
@@ -69,7 +67,7 @@ class Person extends Component {
    componentDidMount() {
      Animated.timing(
        this.state.fadeAnim,
-       {toValue: 1, duration: 3000}
+       {toValue: 1, duration: 3000, delay: 2500}
      ).start();
    }
 
@@ -83,6 +81,54 @@ class Person extends Component {
      );
    }
 }
+
+class Balloon extends Component {
+  constructor(props) {
+     super(props);
+     this.state = {
+       offsetY: new Animated.Value(20),
+     };
+   }
+
+   componentDidMount() {
+     this.cycleAnimation();
+   }
+
+   cycleAnimation() {
+     Animated.sequence([
+       Animated.timing(
+         this.state.offsetY,
+         {
+           toValue: -10,
+           easing: Easing.inOut(Easing.ease),
+           duration: 2500
+         }
+       ),
+       Animated.timing(
+         this.state.offsetY,
+         {
+           toValue: 0,
+           easing: Easing.inOut(Easing.ease),
+           duration: 2000
+         }
+       )
+     ]).start(event => {
+       if (event.finished) { this.cycleAnimation(); }
+     });
+   }
+
+   render() {
+     return (
+       <Animated.Image
+          style={[this.props.style, {transform: [{translateY: this.state.offsetY}]}]}
+          source={this.props.source}>
+         {this.props.children}
+       </Animated.Image>
+     );
+   }
+}
+
+
 
 const styles = StyleSheet.create({
   skyBackground: {
