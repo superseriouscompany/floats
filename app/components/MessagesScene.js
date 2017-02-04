@@ -14,13 +14,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, Bubble } from 'react-native-gifted-chat';
 
 export default class MessagesScene extends Component {
   constructor(props) {
     super(props);
-    this.onSend = this.onSend.bind(this);
-    this.state = {};
+    this.onSend       = this.onSend.bind(this);
+    this.state        = {};
+    this.renderBubble = this.renderBubble.bind(this);
+    this.onSend       = this.onSend.bind(this);
   }
 
   onSend(messages = []) {
@@ -47,6 +49,7 @@ export default class MessagesScene extends Component {
         <GiftedChat
           messages={this.props.messages}
           onSend={this.onSend}
+          renderBubble={this.renderBubble}
           user={{
             _id: this.props.user.id,
           }}
@@ -54,6 +57,34 @@ export default class MessagesScene extends Component {
       </View>
     )
   }
+
+  renderBubble(props) { return(
+    <View>
+      { props.position == 'left' ?
+        <Text style={styles.name}>{props.currentMessage.user.name.split(' ')[0]}</Text>
+      : null
+      }
+      <Bubble
+        {...props}
+        containerToNextStyle={{
+          left: {
+            borderBottomLeftRadius: 15,
+          },
+          right: {
+            borderBottomRightRadius: 15,
+          },
+        }}
+        containerToPreviousStyle={{
+          left: {
+            borderTopLeftRadius: 15,
+          },
+          right: {
+            borderTopRightRadius: 15,
+          },
+        }}
+        />
+    </View>
+  )}
 
   showOptions() {
     alert('not implemented');
@@ -65,6 +96,10 @@ MessagesScene.propTypes = {
 }
 
 const styles = StyleSheet.create({
+  name: {
+    color: 'hotpink',
+    fontSize: base.fontSizes.small,
+  },
   leftNavButton: {
     paddingTop: 21,
     paddingBottom: 17,
