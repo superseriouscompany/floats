@@ -35,10 +35,7 @@ export default class RandosScene extends Component {
   }
 
   componentWillMount() {
-    BackAndroid.addEventListener('hardwareBackPress', () => {
-      this.androidBackButton();
-      return true;
-    });
+    BackAndroid.addEventListener('hardwareBackPress', this.androidBackButton);
   }
 
   componentWillUnmount() {
@@ -46,8 +43,9 @@ export default class RandosScene extends Component {
   }
 
   androidBackButton() {
-    this.props.navigator.navigate('FriendsScene');
-  }
+    this.props.navigator.navigate('FriendsScene')
+    return true;
+}
 
 
   render() { return (
