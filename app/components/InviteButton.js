@@ -13,7 +13,7 @@ export default class InviteButton extends Component {
   render() { return (
     <View style={{padding: 19, justifyContent: 'center', alignItems: 'center'}}>
       <View style={styles.inviteButton}>
-        <Text style={{fontSize: base.fontSizes.normal, color: 'white'}}>invite friends</Text>
+        <Text style={{fontSize: base.fontSizes.normal, color: 'white'}}>invite more</Text>
       </View>
     </View>
   )}

@@ -21,7 +21,9 @@ export default class Friend extends Component {
     <View style={[styles.box, base.padFullHorizontal, base.padMainItem]}>
       <Image style={[base.photoCircle]} source={{uri: this.props.friend.avatar_url}}/>
       <Text style={[styles.main, {marginRight: 10}]}>{this.props.friend.name}</Text>
-      <Image source={require('../images/Gear.png')} />
+      <TouchableOpacity onPress={() => this.props.blockDialog(this.props.friend.id, this.props.friend.name)}>
+        <Image source={require('../images/Gear.png')} />
+      </TouchableOpacity>
     </View>
   )}
 }
