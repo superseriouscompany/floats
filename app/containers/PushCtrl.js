@@ -2,14 +2,14 @@
 
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import FCM from 'react-native-fcm';
-import { Alert } from 'react-native';
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
+import { Alert, Platform } from 'react-native';
 import { fetchFriends } from '../actions/friends';
 import { fetchFriendRequests } from '../actions/friendRequests';
 
 class PushCtrl extends Component {
   componentWillMount() {
-    FCM.on('notification', (notif) => {
+    FCM.on(FCMEvent.Notification, (notif) => {
       this.props.dispatch({type: 'dirty'});
       if( notif.convoId && this.props.convos.activeConvoId && notif.convoId == this.props.convos.activeConvoId ) {
         return;
@@ -72,14 +72,18 @@ class PushCtrl extends Component {
         return console.warn(JSON.stringify(notif));
       }
 
-      if( notif.aps ) {
-        Alert.alert(notif.aps.alert);
-      } else if( notif.body ){
-        Alert.alert(notif.body);
-      } else if( notif.fcm && notif.fcm.body ){
-        Alert.alert(notif.fcm.body);
-      } else {
-        console.warn("Unknown notification", notif);
+      if(Platform.OS ==='ios'){
+        switch(notif._notificationType){
+          case NotificationType.Remote:
+            notif.finish(RemoteNotificationResult.NewData) //other types available: RemoteNotificationResult.NewData, RemoteNotificationResult.ResultFailed
+            break;
+          case NotificationType.NotificationResponse:
+            notif.finish();
+            break;
+          case NotificationType.WillPresent:
+            notif.finish(WillPresentNotificationResult.All) //other types available: WillPresentNotificationResult.None
+            break;
+        }
       }
     });
   }
