@@ -175,7 +175,7 @@ const api = {
       })
     },
 
-    destroy: function(id) {
+    deny: function(id) {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
         return fetch(`${baseUrl}/friend_requests/${id}`, {
           method: 'DELETE',

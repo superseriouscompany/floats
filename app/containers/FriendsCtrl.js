@@ -10,15 +10,16 @@ class FriendsCtrl extends Component {
   constructor(props) {
     super(props)
 
-    this.accept = this.accept.bind(this);
-    this.deny   = this.deny.bind(this);
-    this.block  = this.block.bind(this);
-    this.unblock  = this.unblock.bind(this);
+    this.accept  = this.accept.bind(this);
+    this.deny    = this.deny.bind(this);
+    this.block   = this.block.bind(this);
+    this.unblock = this.unblock.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   componentWillMount() {
-    this.props.dispatch(fetchFriends());
-    this.props.dispatch(fetchFriendRequests());
+    this.props.dispatch(fetchFriends(this.props.friends.cacheTime));
+    this.props.dispatch(fetchFriendRequests(this.props.friendRequests.cacheTime));
   }
 
   render() { return (
@@ -26,8 +27,14 @@ class FriendsCtrl extends Component {
       accept={this.accept}
       deny={this.deny}
       block={this.block}
-      unblock={this.unblock}/>
+      unblock={this.unblock}
+      refresh={this.refresh} />
   )}
+
+  refresh() {
+    this.props.dispatch(fetchFriends());
+    this.props.dispatch(fetchFriendRequests());
+  }
 
   accept(id) {
     if( !id ) { return console.warn('No id provided'); }
