@@ -251,18 +251,17 @@ const api = {
       })
     },
 
-    join: function(floatId, silent) {
+    join: function(token) {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
-        return fetch(`${baseUrl}/floats/${floatId}/join`, {
+        return fetch(`${baseUrl}/floats/join/${token}`, {
           method: 'POST',
           headers: headers(accessToken),
-          body: JSON.stringify({silent: !!silent}),
         })
       }).then(function(response) {
         if( !response.ok ) { throw new Error('' + response.status); }
 
-        return true;
-      })
+        return response.json();
+      });
     },
 
     leave: function(floatId) {
