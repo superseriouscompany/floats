@@ -1,5 +1,6 @@
 'use strict';
 
+import DeviceInfo from 'react-native-device-info'
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
@@ -83,6 +84,20 @@ class PushCtrl extends Component {
           case NotificationType.WillPresent:
             notif.finish(WillPresentNotificationResult.All) //other types available: WillPresentNotificationResult.None
             break;
+        }
+
+        const osVersion = DeviceInfo.getSystemVersion()
+
+        if( osVersion && osVersion.split('.')[0] < 10 ) {
+          if( notif.aps ) {
+            Alert.alert(notif.aps.alert);
+          } else if( notif.body ){
+            Alert.alert(notif.body);
+          } else if( notif.fcm && notif.fcm.body ){
+            Alert.alert(notif.fcm.body);
+          } else {
+            console.warn("Unknown notification", notif);
+          }
         }
       }
     });
