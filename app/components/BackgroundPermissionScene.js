@@ -1,13 +1,18 @@
 import React from 'react'
+import Component from '../components/Component';
 import Text from './Text'
 import base from '../styles/base';
 import {
+  Animated,
+  Easing,
   Image,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native'
+
+
 
 export default function(props) { return (
   <Image style={styles.skyBackground} source={require('../images/SkyBackground.jpg')}>
@@ -18,16 +23,22 @@ export default function(props) { return (
     <View style={styles.backgroundSection}>
       <Image style={styles.leftFloat} source={require('../images/BlueFloat.png')}/>
       <View style={styles.centerFloat}>
-        <Image source={require('../images/PinkFloat.png')}/>
+        <Image style={styles.centerFloat} source={require('../images/PinkFloat.png')}/>
       </View>
       <Image style={styles.rightFloat} source={require('../images/GreyFloat.png')}/>
       <View style={styles.peopleRow}>
         <View style={{flex: .5, flexDirection: 'row', justifyContent: 'flex-start'}}>
-          <Image source={require('../images/Person.png')} style={{marginLeft: 26}}/>
+          <View style={{marginLeft: 26}}>
+            <Person/>
+          </View>
         </View>
         <View style={{flex: .5, flexDirection: 'row', justifyContent: 'flex-end'}}>
-          <Image source={require('../images/Person.png')} style={{marginRight: 48}}/>
-          <Image source={require('../images/Person.png')} style={{marginRight: 18}}/>
+          <View style={{marginRight: 48}}>
+            <Person/>
+          </View>
+          <View style={{marginRight: 18}}>
+            <Person/>
+          </View>
         </View>
       </View>
     </View>
@@ -46,6 +57,32 @@ export default function(props) { return (
     </View>
   </Image>
 )}
+
+class Person extends Component {
+  constructor(props) {
+     super(props);
+     this.state = {
+       fadeAnim: new Animated.Value(0),
+     };
+   }
+
+   componentDidMount() {
+     Animated.timing(
+       this.state.fadeAnim,
+       {toValue: 1, duration: 3000}
+     ).start();
+   }
+
+  render() {
+     return (
+       <Animated.Image
+         style={{opacity: this.state.fadeAnim}}
+         source={require('../images/Person.png')}>
+         {this.props.children}
+       </Animated.Image>
+     );
+   }
+}
 
 const styles = StyleSheet.create({
   skyBackground: {
