@@ -22,11 +22,11 @@ export default function(props) { return (
       <Balloon style={styles.rightFloat} source={require('../images/GreyFloat.png')}/>
       <View style={styles.peopleRow}>
         <View style={styles.rowLeft}>
-          <Person style={{marginLeft: 26}}/>
+          <Person style={{marginLeft: 26}} gender="female"/>
         </View>
         <View style={styles.rowRight}>
-          <Person style={{marginRight: 48}}/>
-          <Person style={{marginRight: 18}}/>
+          <Person style={{marginRight: 48}} gender="female"/>
+          <Person style={{marginRight: 18}} gender="male"/>
         </View>
       </View>
     </View>
@@ -66,7 +66,7 @@ class Person extends Component {
      return (
        <Animated.Image
        style={[this.props.style, {opacity: this.state.fadeAnim}]}
-       source={require('../images/Person.png')}>
+       source={this.props.gender == 'woman' ? require('../images/Woman.png') : require('../images/Man.png')}>
          {this.props.children}
        </Animated.Image>
      );
