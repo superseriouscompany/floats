@@ -13,7 +13,9 @@ export default function(props) { return (
        backgroundColor="blue"
        barStyle="light-content"
      />
-    <View style={styles.container}>
+    <View style={styles.backgroundSection}>
+    </View>
+    <View style={styles.textSection}>
       <Text onPress={() => props.navigator.navigate('NotificationPermissionScene')}>
         Background Permissions
       </Text>
@@ -22,8 +24,14 @@ export default function(props) { return (
 )}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  backgroundSection: {
+    flex: 0.6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textSection: {
+    flex: 0.4,
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
