@@ -23,3 +23,43 @@ export function fetchFriends(cacheTime) {
     })
   }
 }
+
+export function block(id) {
+  return function(dispatch) {
+    dispatch({type: 'friends:block:load'});
+
+    api.friends.block(id).then(function() {
+      dispatch({
+        type: 'friends:block:yes',
+        id:   id,
+      })
+      dispatch(fetchFriends())
+    }).catch(function(err) {
+      dispatch({
+        type:  'friends:block:no',
+        id:    id,
+        error: err.message,
+      })
+    })
+  }
+}
+
+export function unblock(id) {
+  return function(dispatch) {
+    dispatch({type: 'friends:unblock:load'});
+
+    api.friends.unblock(id).then(function() {
+      dispatch({
+        type: 'friends:unblock:yes',
+        id:   id,
+      })
+      dispatch(fetchFriends())
+    }).catch(function(err) {
+      dispatch({
+        type:  'friends:unblock:no',
+        id:    id,
+        error: err.message,
+      })
+    })
+  }
+}

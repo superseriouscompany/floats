@@ -95,6 +95,30 @@ const api = {
       }).then(function(json) {
         return json.friends;
       })
+    },
+
+    block: function(id) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/friends/${id}`, {
+          method: 'DELETE',
+          headers: headers(accessToken),
+        })
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error('' + response.status); }
+        return true;
+      })
+    },
+
+    unblock: function(id) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/friends/${id}`, {
+          method: 'PUT',
+          headers: headers(accessToken),
+        })
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error('' + response.status); }
+        return true;
+      })
     }
   },
 
