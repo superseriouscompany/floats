@@ -21,18 +21,12 @@ export default function(props) { return (
       <Balloon style={styles.centerFloat} source={require('../images/PinkFloat.png')}/>
       <Balloon style={styles.rightFloat} source={require('../images/GreyFloat.png')}/>
       <View style={styles.peopleRow}>
-        <View style={{flex: .5, flexDirection: 'row', justifyContent: 'flex-start'}}>
-          <View style={{marginLeft: 26}}>
-            <Person/>
-          </View>
+        <View style={styles.rowLeft}>
+          <Person style={{marginLeft: 26}}/>
         </View>
-        <View style={{flex: .5, flexDirection: 'row', justifyContent: 'flex-end'}}>
-          <View style={{marginRight: 48}}>
-            <Person/>
-          </View>
-          <View style={{marginRight: 18}}>
-            <Person/>
-          </View>
+        <View style={styles.rowRight}>
+          <Person style={{marginRight: 48}}/>
+          <Person style={{marginRight: 18}}/>
         </View>
       </View>
     </View>
@@ -71,8 +65,8 @@ class Person extends Component {
   render() {
      return (
        <Animated.Image
-         style={{opacity: this.state.fadeAnim}}
-         source={require('../images/Person.png')}>
+       style={[this.props.style, {opacity: this.state.fadeAnim}]}
+       source={require('../images/Person.png')}>
          {this.props.children}
        </Animated.Image>
      );
@@ -117,8 +111,8 @@ class Balloon extends Component {
    render() {
      return (
        <Animated.Image
-          style={[this.props.style, {transform: [{translateY: this.state.offsetY}]}]}
-          source={this.props.source}>
+       style={[this.props.style, {transform: [{translateY: this.state.offsetY}]}]}
+       source={this.props.source}>
          {this.props.children}
        </Animated.Image>
      );
@@ -161,6 +155,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     bottom: 0,
+  },
+  rowLeft: {
+    flex: .5,
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
+  },
+  rowRight: {
+    flex: .5,
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
   },
   textSection: {
     flex: 0.35,

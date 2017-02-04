@@ -68,8 +68,8 @@ class BalloonWithMembers extends Component {
    render() {
      return (
        <Animated.Image
-          style={[this.props.style, {opacity: this.state.fadeAnim, transform: [{translateX: this.state.offsetX}]}]}
-          source={this.props.source}>
+       style={[this.props.style, {opacity: this.state.fadeAnim, transform: [{translateX: this.state.offsetX}]}]}
+       source={this.props.source}>
          {this.props.children}
        </Animated.Image>
      );
@@ -94,8 +94,8 @@ class Person extends Component {
   render() {
      return (
        <Animated.Image
-         style={{opacity: this.state.fadeAnim}}
-         source={require('../images/PersonHandsUp.png')}>
+       style={{opacity: this.state.fadeAnim}}
+       source={require('../images/PersonHandsUp.png')}>
          {this.props.children}
        </Animated.Image>
      );
