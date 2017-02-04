@@ -1,11 +1,21 @@
 'use strict';
 
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {joinFloat} from '../actions/floats';
 import {
   Linking
 } from 'react-native'
 
-export default class DeepLinkCtrl extends Component {
+const qs  = require('querystring');
+const URL = require('url');
+
+class DeepLinkCtrl extends Component {
+  constructor(props) {
+    super(props);
+    this.handleLink = this.handleLink.bind(this)
+  }
+
   componentWillMount() {
     Linking.getInitialURL().then((url) => {
       if (url) {
@@ -21,8 +31,19 @@ export default class DeepLinkCtrl extends Component {
   }
 
   handleLink(event) {
-    console.warn('Got link', event.url);
+    const url    = URL.parse(event.url);
+    const query  = qs.parse(url.query);
+
+    const noun = url.host;
+    const verb = url.pathname.substring(1);
+    if( noun == 'floats' && verb == 'join' ) {
+      const token = query.token;
+      if( !token ) { return console.warn('No token in', event.url); }
+      this.props.dispatch(joinFloat(token))
+    }
   }
 
   render() { return this.props.children }
 }
+
+export default connect()(DeepLinkCtrl);
