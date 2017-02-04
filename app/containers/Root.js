@@ -9,6 +9,8 @@ import FriendsCtrl from '../containers/FriendsCtrl';
 import PushCtrl from '../containers/PushCtrl';
 import LoginScene from '../components/LoginScene';
 import RandosScene from '../components/RandosScene';
+import BackgroundPermissionScene from '../components/BackgroundPermissionScene';
+import NotificationPermissionScene from '../components/NotificationPermissionScene';
 import Scratch from '../components/Scratch';
 import Text from '../components/Text';
 import api from '../services/api';
@@ -23,6 +25,7 @@ import {
 } from 'react-native';
 
 var defaultScene = 'CreateFloatScene';
+defaultScene = 'BackgroundPermissionScene';
 
 export default class Root extends Component {
   constructor(props) {
@@ -75,6 +78,10 @@ export default class Root extends Component {
                   <RandosScene navigator={this.navigator} />
                 : this.state.scene == 'MessagesScene' ?
                   <MessagesScene navigator={this.navigator} />
+                : this.state.scene == 'BackgroundPermissionScene' ?
+                  <BackgroundPermissionScene navigator={this.navigator} />
+                : this.state.scene == 'NotificationPermissionScene' ?
+                  <NotificationPermissionScene navigator={this.navigator} />
                 : this.state.scene == 'Scratch' ?
                   <Scratch />
                 : !!this.state.scene ?
