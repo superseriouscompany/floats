@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CreateFloatScene from '../components/CreateFloatScene';
 import { fetchNearbyFriends } from '../actions/nearbyFriends';
-import FCM from 'react-native-fcm';
+import FCM, {FCMEvent} from 'react-native-fcm';
 import api from '../services/api';
 
 class CreateFloatCtrl extends Component {
@@ -22,7 +22,7 @@ class CreateFloatCtrl extends Component {
       if( !token ) { return console.warn("No firebase token available."); }
       api.sessions.updateFirebaseToken(token);
     });
-    FCM.on('refreshToken', (token) => {
+    FCM.on(FCMEvent.RefreshToken, (token) => {
       if( !token ) { return console.warn("No firebase token on refresh."); }
       api.sessions.updateFirebaseToken(token);
     })
