@@ -60,7 +60,7 @@ export default class Rando extends Component {
 
   undoFriendRequest() {
     this.setState({sending: true});
-    api.friendRequests.destroy(this.props.friend.id).then(() => {
+    api.friendRequests.undo(this.props.friend.id).then(() => {
       this.setState({sent: false, sending: false});
     }).catch((err) => {
       console.error(err);
