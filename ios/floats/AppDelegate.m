@@ -80,4 +80,8 @@
   [RNFIRMessaging didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
 }
 
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+  [RNFIRMessaging didReceiveLocalNotification:notification];
+}
+
 @end
