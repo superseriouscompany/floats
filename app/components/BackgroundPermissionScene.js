@@ -22,11 +22,11 @@ export default function(props) { return (
       <Balloon style={styles.rightFloat} lag={3} source={require('../images/GreyFloat.png')}/>
       <View style={styles.peopleRow}>
         <View style={styles.rowLeft}>
-          <Person style={{marginLeft: 26}} lag={3} gender="female"/>
+          <Person style={{marginLeft: 26}} gender="female"/>
         </View>
         <View style={styles.rowRight}>
-          <Person style={{marginRight: 48}} lag={1} gender="female"/>
-          <Person style={{marginRight: 18}} lag={2} gender="male"/>
+          <Person style={{marginRight: 48}} gender="female"/>
+          <Person style={{marginRight: 18}} gender="male"/>
         </View>
       </View>
     </View>
@@ -53,33 +53,6 @@ class Person extends Component {
      this.state = {
        offsetY: new Animated.Value(0),
      };
-   }
-
-   componentDidMount() {
-     this.cycleAnimation();
-   }
-
-   cycleAnimation() {
-     Animated.sequence([
-       Animated.timing(
-         this.state.offsetY,
-         {
-           delay: (2000 * this.props.lag) + (this.props.lag * 500),
-           toValue: -8,
-           easing: Easing.linear,
-           duration: 250
-         }
-       ),
-       Animated.timing(
-         this.state.offsetY,
-         {
-           toValue: 0,
-           easing: Easing.bounce,
-         }
-       )
-     ]).start(event => {
-       if (event.finished) { this.cycleAnimation(); }
-     });
    }
 
   render() {
