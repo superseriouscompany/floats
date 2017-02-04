@@ -4,6 +4,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import FCM from 'react-native-fcm';
 import { Alert } from 'react-native';
+import { fetchFriends } from '../actions/friends';
+import { fetchFriendRequests } from '../actions/friendRequests';
 
 class PushCtrl extends Component {
   componentWillMount() {
@@ -13,13 +15,28 @@ class PushCtrl extends Component {
         return;
       }
 
-      if(notif.opened_from_tray){
+      if(notif.opened_from_tray) {
         if( notif.type == 'floats:new' ) {
           return this.props.dispatch({
             type:  'navigation:queue',
             route: 'FloatsScene',
           });
         }
+
+        if( notif.type == 'friends:new' ) {
+          return this.props.dispatch({
+            type: 'navigation:queue',
+            route: 'FriendsScene',
+          })
+        }
+
+        if( notif.type == 'friend_requests:new' ) {
+          return this.props.dispatch({
+            type: 'navigation:queue',
+            route: 'FriendsScene',
+          })
+        }
+
         if( notif.type == 'messages:new' ) {
           const convo = this.props.convos && this.props.convos.all && this.props.convos.all.find((c) => {
             return c.id == notif.convoId
@@ -47,6 +64,12 @@ class PushCtrl extends Component {
           })
         }
         return console.warn(JSON.stringify(notif));
+      } else {
+        if( notif.type == 'friends:new' ) {
+          this.props.dispatch(fetchFriends());
+        } else if( notif.type == 'friend_requests:new') {
+          this.props.dispatch(fetchFriendRequests());
+        }
       }
 
       if( notif.aps ) {
