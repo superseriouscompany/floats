@@ -15,10 +15,7 @@ class MessagesCtrl extends Component {
   }
 
   componentWillMount() {
-    BackAndroid.addEventListener('hardwareBackPress', () => {
-      this.back();
-      return true;
-    });
+    BackAndroid.addEventListener('hardwareBackPress', this.back);
   }
 
   componentWillUnmount() {
@@ -27,6 +24,7 @@ class MessagesCtrl extends Component {
 
   back() {
     this.props.dispatch({type: 'navigation:queue', route: 'FloatsScene'});
+    return true;
   }
 
   send(message) {
