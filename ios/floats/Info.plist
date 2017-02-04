@@ -23,6 +23,20 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Floats</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>floats</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Facebook SDK</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb1425876794111744</string>
