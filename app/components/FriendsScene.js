@@ -11,9 +11,12 @@ import Enemy from './Enemy';
 import TabBar from './TabBar';
 import api from '../services/api';
 import base from '../styles/base';
+import {persistStore} from 'redux-persist'
 import { connectActionSheet } from '@exponent/react-native-action-sheet';
 import {
   ActivityIndicator,
+  Alert,
+  AsyncStorage,
   Image,
   ScrollView,
   StyleSheet,
@@ -25,27 +28,7 @@ class FriendsScene extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loadingFriends: true,
-      loadingRequests: true,
-      friends: [],
-      friendRequests: [],
-      enemies: []
-    };
-    api.friends.all().then((allFriends) => {
-      const friends = allFriends.filter(function(f) { return !f.blocked });
-      const enemies = allFriends.filter(function(f) { return !!f.blocked });
-
-      this.setState({friends: friends, enemies: enemies, loadingFriends: false});
-    }).catch((err) => {
-      this.setState({error: err.message, loadingFriends: false});
-    })
-
-    api.friendRequests.all().then((requests) => {
-      this.setState({friendRequests: requests, loadingRequests: false});
-    }).catch((err) => {
-      this.setState({error: err.message, loadingRequests: false});
-    })
+    this.state = { showEnemies: false }
   }
 
   render() { return (
@@ -62,7 +45,7 @@ class FriendsScene extends Component {
         </TouchableOpacity>
       </View>
       <ScrollView>
-        { this.state.loadingRequests ?
+        { this.props.friendRequests.loading ?
           <View style={{height: 50}}>
             <ActivityIndicator
               style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
@@ -70,20 +53,22 @@ class FriendsScene extends Component {
               color={base.colors.mediumgrey}
             />
           </View>
-        : this.state.friendRequests.length ?
+        : null
+        }
+        { this.props.friendRequests.items && this.props.friendRequests.items.length ?
           <View style={[base.bgBreakingSection, {paddingBottom: 16}]}>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.state.friendRequests.length} friend requests</Text>
+              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.props.friendRequests.items.length} {this.props.friendRequests.items.length == 1 ? 'friend request' : 'friend requests'}</Text>
             </View>
             <View style={{marginTop: -10}}>
-              {this.state.friendRequests.map((f, i) => (
-                <FriendRequest key={i} friend={f} />
+              {this.props.friendRequests.items.map((f, i) => (
+                <FriendRequest key={i} friend={f.user} accept={this.props.accept} deny={this.props.deny}/>
               ))}
             </View>
           </View>
         : null
         }
-        { this.state.loadingFriends ?
+        { this.props.friends.loading ?
           <View style={{height: 50}}>
             <ActivityIndicator
               style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
@@ -91,7 +76,19 @@ class FriendsScene extends Component {
               color={base.colors.mediumgrey}
             />
           </View>
-        : !this.state.friends.length ?
+        : null }
+        { this.props.friends.items && this.props.friends.items.length ?
+          <View style={{paddingBottom: 15}}>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.props.friends.items.length} {this.props.friends.items.length == 1 ? 'friend' : 'friends'}</Text>
+            </View>
+            <View style={{marginTop: -15}}>
+              { this.props.friends.items.map((f, i) => (
+                <Friend friend={f} key={i} blockDialog={this.blockDialog.bind(this)}/>
+              ))}
+            </View>
+          </View>
+        : !this.props.friends.loading ?
           <View style={{alignItems: 'center'}}>
             <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15, }}>
               <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center'}]}>
@@ -104,19 +101,8 @@ class FriendsScene extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-        :
-          <View style={{paddingBottom: 15}}>
-            <View style={{alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{paddingTop: 10, color: base.colors.mediumgrey, fontSize: 12}}>{this.state.friends.length} friends</Text>
-            </View>
-            <View style={{marginTop: -15}}>
-              { this.state.friends.map((f, i) => (
-                <Friend friend={f} key={i} />
-              ))}
-            </View>
-          </View>
-        }
-        { this.state.enemies.length ?
+        : null }
+        { this.props.friends.enemies && this.props.friends.enemies.length ?
           <View>
             <View style={[base.bgBreakingSection, {alignItems: 'center', justifyContent: 'center', borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: base.colors.lightgrey}]}>
               <Text style={[base.timestamp, {paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]} onPress={() => this.setState({showEnemies: !this.state.showEnemies})}>
@@ -125,8 +111,8 @@ class FriendsScene extends Component {
             </View>
             { this.state.showEnemies ?
               <View style={{paddingBottom: 15}}>
-                {this.state.enemies.map((e, i) => (
-                  <Enemy enemy={e} key={i} />
+                {this.props.friends.enemies.map((e, i) => (
+                  <Enemy enemy={e} key={i} unblockDialog={this.unblockDialog.bind(this)}/>
                 ))}
               </View>
             : null
@@ -161,6 +147,60 @@ class FriendsScene extends Component {
       }
     })
   }
+
+  blockDialog(id, name) {
+    this.props.showActionSheetWithOptions({
+      options: [`Block ${name}`, 'Cancel'],
+      destructiveButtonIndex: 0,
+      cancelButtonIndex: 1,
+    }, (index) => {
+      if( index === 1 ) { return; }
+      this.props.block(id);
+    })
+  }
+
+  unblockDialog(id, name) {
+    this.props.showActionSheetWithOptions({
+      options: [`Unblock ${name}`, 'Cancel'],
+      destructiveButtonIndex: 0,
+      cancelButtonIndex: 1,
+    }, (index) => {
+      if( index === 1 ) { return; }
+      this.props.unblock(id);
+    })
+  }
+
+  deleteAccount() {
+    api.users.deleteAccount().then(() => {
+      this.logout();
+    }).catch(function(err) {
+      console.error(err);
+      alert("Sorry, something went wrong in deleting your account. Please try again or email support@superserious.co");
+    })
+  }
+
+  logout() {
+    AsyncStorage.removeItem('@floats:accessToken').then(() => {
+      return AsyncStorage.removeItem('@floats:user')
+    }).then(() => {
+      persistStore(this.context.store, {storage: AsyncStorage}).purge();
+      this.props.navigator.navigate('LoginScene');
+    }).catch(function(err) {
+      console.error(err);
+      alert("Sorry, we couldn't log you out. Please try again.")
+    })
+  }
+}
+
+FriendsScene.propTypes = {
+  accept:  React.PropTypes.func.isRequired,
+  deny:    React.PropTypes.func.isRequired,
+  block:   React.PropTypes.func.isRequired,
+  unblock: React.PropTypes.func.isRequired,
+}
+
+FriendsScene.contextTypes = {
+  store: React.PropTypes.object
 }
 
 export default connectActionSheet(FriendsScene);

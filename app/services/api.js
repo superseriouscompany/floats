@@ -95,6 +95,30 @@ const api = {
       }).then(function(json) {
         return json.friends;
       })
+    },
+
+    block: function(id) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/friends/${id}`, {
+          method: 'DELETE',
+          headers: headers(accessToken),
+        })
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error('' + response.status); }
+        return true;
+      })
+    },
+
+    unblock: function(id) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/friends/${id}`, {
+          method: 'PUT',
+          headers: headers(accessToken),
+        })
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error('' + response.status); }
+        return true;
+      })
     }
   },
 
@@ -139,11 +163,10 @@ const api = {
       })
     },
 
-    send: function(id) {
+    create: function(id) {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
-        return fetch(`${baseUrl}/friend_requests`, {
+        return fetch(`${baseUrl}/friend_requests/${id}`, {
           method: 'POST',
-          body: JSON.stringify({ user_id: id }),
           headers: headers(accessToken),
         }).then(function(response) {
           if( !response.ok ) { throw new Error('' + response.status); }
@@ -156,7 +179,18 @@ const api = {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
         return fetch(`${baseUrl}/friend_requests/${id}`, {
           method: 'DELETE',
-          body: JSON.stringify({ user_id: id }),
+          headers: headers(accessToken),
+        }).then(function(response) {
+          if( !response.ok ) { throw new Error('' + response.status); }
+          return true;
+        })
+      })
+    },
+
+    undo: function(id) {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/friend_requests/mine/${id}`, {
+          method: 'DELETE',
           headers: headers(accessToken),
         }).then(function(response) {
           if( !response.ok ) { throw new Error('' + response.status); }
@@ -307,7 +341,7 @@ const api = {
 
       throw response.status;
     })
-  }
+  },
 }
 module.exports = api;
 
