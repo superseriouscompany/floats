@@ -7,6 +7,7 @@ import MessagesCtrl from '../containers/MessagesCtrl';
 import KillSwitchCtrl from '../containers/KillSwitchCtrl';
 import FriendsCtrl from '../containers/FriendsCtrl';
 import PushCtrl from '../containers/PushCtrl';
+import DeepLinkCtrl from '../containers/DeepLinkCtrl';
 import LoginScene from '../components/LoginScene';
 import RandosScene from '../components/RandosScene';
 import Scratch from '../components/Scratch';
@@ -61,29 +62,31 @@ export default class Root extends Component {
       <Provider store={store}>
         <ActionSheetProvider>
           <KillSwitchCtrl>
-            <PushCtrl>
-              <View style={{flex: 1}}>
-                { this.state.scene == 'LoginScene' ?
-                  <LoginScene navigator={this.navigator} />
-                : this.state.scene == 'CreateFloatScene' ?
-                  <CreateFloatCtrl navigator={this.navigator} />
-                : this.state.scene == 'FloatsScene' ?
-                  <FloatsCtrl navigator={this.navigator} />
-                : this.state.scene == 'FriendsScene' ?
-                  <FriendsCtrl navigator={this.navigator} />
-                : this.state.scene == 'RandosScene' ?
-                  <RandosScene navigator={this.navigator} />
-                : this.state.scene == 'MessagesScene' ?
-                  <MessagesCtrl navigator={this.navigator} />
-                : this.state.scene == 'Scratch' ?
-                  <Scratch />
-                : !!this.state.scene ?
-                  <Text style={{padding: 200}}>404</Text>
-                :
-                  null
-                }
-              </View>
-            </PushCtrl>
+            <DeepLinkCtrl>
+              <PushCtrl>
+                <View style={{flex: 1}}>
+                  { this.state.scene == 'LoginScene' ?
+                    <LoginScene navigator={this.navigator} />
+                  : this.state.scene == 'CreateFloatScene' ?
+                    <CreateFloatCtrl navigator={this.navigator} />
+                  : this.state.scene == 'FloatsScene' ?
+                    <FloatsCtrl navigator={this.navigator} />
+                  : this.state.scene == 'FriendsScene' ?
+                    <FriendsCtrl navigator={this.navigator} />
+                  : this.state.scene == 'RandosScene' ?
+                    <RandosScene navigator={this.navigator} />
+                  : this.state.scene == 'MessagesScene' ?
+                    <MessagesCtrl navigator={this.navigator} />
+                  : this.state.scene == 'Scratch' ?
+                    <Scratch />
+                  : !!this.state.scene ?
+                    <Text style={{padding: 200}}>404</Text>
+                  :
+                    null
+                  }
+                </View>
+              </PushCtrl>
+            </DeepLinkCtrl>
           </KillSwitchCtrl>
         </ActionSheetProvider>
       </Provider>
