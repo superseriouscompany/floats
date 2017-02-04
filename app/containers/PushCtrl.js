@@ -15,6 +15,12 @@ class PushCtrl extends Component {
         return;
       }
 
+      if( notif.type == 'friends:new' ) {
+        this.props.dispatch(fetchFriends());
+      } else if( notif.type == 'friend_requests:new') {
+        this.props.dispatch(fetchFriendRequests());
+      }
+
       if(notif.opened_from_tray) {
         if( notif.type == 'floats:new' ) {
           return this.props.dispatch({
@@ -64,12 +70,6 @@ class PushCtrl extends Component {
           })
         }
         return console.warn(JSON.stringify(notif));
-      } else {
-        if( notif.type == 'friends:new' ) {
-          this.props.dispatch(fetchFriends());
-        } else if( notif.type == 'friend_requests:new') {
-          this.props.dispatch(fetchFriendRequests());
-        }
       }
 
       if( notif.aps ) {
