@@ -1,10 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { ActionSheetProvider } from '@exponent/react-native-action-sheet';
-import CreateFloatScene from '../containers/CreateFloatCtrl';
-import FloatsScene from '../containers/FloatsCtrl';
-import MessagesScene from '../containers/MessagesCtrl';
-import KillSwitchScene from '../containers/KillSwitchCtrl';
+import CreateFloatCtrl from '../containers/CreateFloatCtrl';
+import FloatsCtrl from '../containers/FloatsCtrl';
+import MessagesCtrl from '../containers/MessagesCtrl';
+import KillSwitchCtrl from '../containers/KillSwitchCtrl';
 import FriendsCtrl from '../containers/FriendsCtrl';
 import PushCtrl from '../containers/PushCtrl';
 import LoginScene from '../components/LoginScene';
@@ -60,21 +60,21 @@ export default class Root extends Component {
     return (
       <Provider store={store}>
         <ActionSheetProvider>
-          <KillSwitchScene>
+          <KillSwitchCtrl>
             <PushCtrl>
               <View style={{flex: 1}}>
                 { this.state.scene == 'LoginScene' ?
                   <LoginScene navigator={this.navigator} />
                 : this.state.scene == 'CreateFloatScene' ?
-                  <CreateFloatScene navigator={this.navigator} />
+                  <CreateFloatCtrl navigator={this.navigator} />
                 : this.state.scene == 'FloatsScene' ?
-                  <FloatsScene navigator={this.navigator} />
+                  <FloatsCtrl navigator={this.navigator} />
                 : this.state.scene == 'FriendsScene' ?
                   <FriendsCtrl navigator={this.navigator} />
                 : this.state.scene == 'RandosScene' ?
                   <RandosScene navigator={this.navigator} />
                 : this.state.scene == 'MessagesScene' ?
-                  <MessagesScene navigator={this.navigator} />
+                  <MessagesCtrl navigator={this.navigator} />
                 : this.state.scene == 'Scratch' ?
                   <Scratch />
                 : !!this.state.scene ?
@@ -84,7 +84,7 @@ export default class Root extends Component {
                 }
               </View>
             </PushCtrl>
-          </KillSwitchScene>
+          </KillSwitchCtrl>
         </ActionSheetProvider>
       </Provider>
     )
