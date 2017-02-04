@@ -17,6 +17,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {BackAndroid} from 'react-native'
+
 
 export default class RandosScene extends Component {
   constructor(props) {
@@ -31,6 +33,22 @@ export default class RandosScene extends Component {
       console.error(err);
     });
   }
+
+  componentWillMount() {
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      this.androidBackButton();
+      return true;
+    });
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.androidBackButton);
+  }
+
+  androidBackButton() {
+    this.props.navigator.navigate('FriendsScene');
+  }
+
 
   render() { return (
     <View style={base.screen}>
