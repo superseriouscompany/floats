@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import Component from '../components/Component';
-import Text from './Text'
+import Text from './Text';
 import base from '../styles/base';
 import {
   Animated,
@@ -10,16 +10,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-} from 'react-native'
-
-
+} from 'react-native';
 
 export default function(props) { return (
   <Image style={styles.skyBackground} source={require('../images/SkyBackground.jpg')}>
-    <StatusBar
-       backgroundColor="blue"
-       barStyle="light-content"
-     />
+    <StatusBar barStyle="light-content"/>
+
     <View style={styles.backgroundSection}>
       <Balloon style={styles.leftFloat} source={require('../images/BlueFloat.png')}/>
       <Balloon style={styles.centerFloat} source={require('../images/PinkFloat.png')}/>
@@ -40,6 +36,7 @@ export default function(props) { return (
         </View>
       </View>
     </View>
+
     <View style={styles.textSection}>
       <Text style={styles.mainText}>
         Floats suggests nearby friends to bring along to your adventures
@@ -67,7 +64,7 @@ class Person extends Component {
    componentDidMount() {
      Animated.timing(
        this.state.fadeAnim,
-       {toValue: 1, duration: 3000, delay: 2500}
+       {toValue: 1, duration: 3000, delay: 2000}
      ).start();
    }
 
@@ -144,16 +141,16 @@ const styles = StyleSheet.create({
   },
   leftFloat: {
     marginLeft: 35,
-    marginBottom: 164,
+    marginBottom: 159,
   },
   centerFloat: {
     marginRight: 35,
     marginLeft: 25,
-    marginTop: 10,
+    marginTop: 15,
   },
   rightFloat: {
     marginRight: 25,
-    marginBottom: 224
+    marginBottom: 219,
   },
   peopleRow: {
     flexDirection: 'row',
