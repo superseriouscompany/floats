@@ -18,6 +18,7 @@ import {
   Alert,
   AsyncStorage,
   Image,
+  RefreshControl,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -44,17 +45,8 @@ class FriendsScene extends Component {
           <Image source={require('../images/Plus.png')} />
         </TouchableOpacity>
       </View>
-      <ScrollView>
-        { this.props.friendRequests.loading ?
-          <View style={{height: 50}}>
-            <ActivityIndicator
-              style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
-              size="small"
-              color={base.colors.mediumgrey}
-            />
-          </View>
-        : null
-        }
+      <ScrollView
+        refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.friendRequests.loading || this.props.friends.loading} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
         { this.props.friendRequests.items && this.props.friendRequests.items.length ?
           <View style={[base.bgBreakingSection, {paddingBottom: 16}]}>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -68,15 +60,6 @@ class FriendsScene extends Component {
           </View>
         : null
         }
-        { this.props.friends.loading ?
-          <View style={{height: 50}}>
-            <ActivityIndicator
-              style={[base.loadingTop, {transform: [{scale: 1.25}]}]}
-              size="small"
-              color={base.colors.mediumgrey}
-            />
-          </View>
-        : null }
         { this.props.friends.items && this.props.friends.items.length ?
           <View style={{paddingBottom: 15}}>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -197,6 +180,7 @@ FriendsScene.propTypes = {
   deny:    React.PropTypes.func.isRequired,
   block:   React.PropTypes.func.isRequired,
   unblock: React.PropTypes.func.isRequired,
+  refresh: React.PropTypes.func.isRequired,
 }
 
 FriendsScene.contextTypes = {
