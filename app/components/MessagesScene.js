@@ -41,9 +41,11 @@ export default class MessagesScene extends Component {
           <View style={base.header}>
             <Heading>{this.props.name}</Heading>
           </View>
-          <TouchableOpacity onPress={() => this.showOptions()} style={[base.rightNav, styles.rightNavButton]}>
-            <Image source={require('../images/Ellipses.png')} />
-          </TouchableOpacity>
+          { this.props.isPrimary ?
+            <TouchableOpacity onPress={() => this.showOptions()} style={[base.rightNav, styles.rightNavButton]}>
+              <Image source={require('../images/Ellipses.png')} />
+            </TouchableOpacity>
+          : null }
         </View>
 
         <GiftedChat
@@ -60,7 +62,7 @@ export default class MessagesScene extends Component {
 
   renderBubble(props) { return(
     <View>
-      { props.position == 'left' ?
+      { props.position == 'left' && this.props.isGroup ?
         <Text style={styles.name}>{props.currentMessage.user.name.split(' ')[0]}</Text>
       : null
       }
@@ -94,6 +96,8 @@ export default class MessagesScene extends Component {
 MessagesScene.propTypes = {
   send:         React.PropTypes.func.isRequired,
   inviteDialog: React.PropTypes.func.isRequired,
+  isGroup:      React.PropTypes.bool.isRequired,
+  isPrimary:    React.PropTypes.bool.isRequired,
 }
 
 const styles = StyleSheet.create({
