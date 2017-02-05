@@ -65,13 +65,17 @@ module.exports = StyleSheet.create({
   },
   leftNav: {
     position: 'absolute',
+    justifyContent: 'center',
     left: 0,
     bottom: 0,
+    top: 0,
   },
   rightNav: {
     position: 'absolute',
+    justifyContent: 'center',
     right: 0,
     bottom: 0,
+    top: 0,
   },
   mainWindow: {
     flex: 1,
