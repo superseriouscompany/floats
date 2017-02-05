@@ -5,9 +5,6 @@ import {connect} from 'react-redux';
 import {joinFloat} from '../actions/floats';
 import {send} from '../actions/friendRequests';
 import branch from 'react-native-branch';
-import {
-  Linking
-} from 'react-native'
 
 const qs  = require('querystring');
 const URL = require('url');
@@ -21,15 +18,6 @@ class DeepLinkCtrl extends Component {
   }
 
   componentWillMount() {
-    console.warn('component mounted');
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        this.handleLink({url: url});
-      }
-    }).catch(err => console.error('An error occurred', err));
-
-    Linking.addEventListener('url', this.handleLink);
-
     this.branchUnsubscribe = branch.subscribe((bundle) => {
       if( !bundle ) { return console.warn(`Got empty deep link`); }
       if( !bundle.error && !bundle.uri && !bundle.params ) { return; }
@@ -41,7 +29,7 @@ class DeepLinkCtrl extends Component {
         return console.warn(`Got empty params in bundle ${JSON.stringify(bundle)}`)
       }
       if( !this.props.user ) {
-        return console.warn('User is not logged in');
+        return console.warn('User is not logged in to process deep link');
       }
       if( bundle.params.inviter_id == this.props.user.id ) {
         return console.warn('Ignoring our own link');
@@ -61,9 +49,7 @@ class DeepLinkCtrl extends Component {
   }
 
   componentWillUnmount() {
-    console.warn('unmounted');
     this.branchUnsubscribe();
-    Linking.removeEventListener('url', this.handleLink);
   }
 
   addFriend(id) {
