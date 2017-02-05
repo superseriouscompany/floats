@@ -13,6 +13,7 @@ import store from './store';
 const api = {
   sessions: {
     create: function(facebookAccessToken) {
+      let isExisting;
       return fetch(`${baseUrl}/users`, {
         method: 'POST',
         body: JSON.stringify({facebook_access_token: facebookAccessToken}),
@@ -21,7 +22,11 @@ const api = {
         },
       }).then(function(response) {
         if( !response.ok ) { throw new Error('' + response.status); }
+        isExisting = response.statusCode == 200;
         return response.json();
+      }).then(function(json) {
+        json.isExisting = isExisting;
+        return json;
       })
     },
 
@@ -251,18 +256,17 @@ const api = {
       })
     },
 
-    join: function(floatId, silent) {
+    join: function(id,token) {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
-        return fetch(`${baseUrl}/floats/${floatId}/join`, {
+        return fetch(`${baseUrl}/floats/${id}/join/${token}`, {
           method: 'POST',
           headers: headers(accessToken),
-          body: JSON.stringify({silent: !!silent}),
         })
       }).then(function(response) {
         if( !response.ok ) { throw new Error('' + response.status); }
 
-        return true;
-      })
+        return response.json();
+      });
     },
 
     leave: function(floatId) {

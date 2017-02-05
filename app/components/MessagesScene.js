@@ -87,12 +87,13 @@ export default class MessagesScene extends Component {
   )}
 
   showOptions() {
-    alert('not implemented');
+    this.props.inviteDialog();
   }
 }
 
 MessagesScene.propTypes = {
-  send: React.PropTypes.func.isRequired,
+  send:         React.PropTypes.func.isRequired,
+  inviteDialog: React.PropTypes.func.isRequired,
 }
 
 const styles = StyleSheet.create({
