@@ -34,12 +34,16 @@ export default function(props) { return (
       <Text style={styles.subText}>
         you can leave a float at any time
       </Text>
-      <TouchableOpacity style={styles.button} onPress={() => props.navigator.navigate('CreateFloatScene')}>
-        <Text style={styles.mainText}>
-          Allow Notifications
-        </Text>
-      </TouchableOpacity>
     </View>
+
+    <TouchableOpacity style={styles.button} onPress={() => props.navigator.navigate('CreateFloatScene')}>
+      <Text style={[styles.mainText, {}]}>
+        Allow Notifications
+      </Text>
+      <View style={styles.rightArrow}>
+        <Image source={require('../images/RightArrowLight.png')}/>
+      </View>
+    </TouchableOpacity>
   </Image>
 )}
 
@@ -56,11 +60,11 @@ class BalloonWithMembers extends Component {
      Animated.parallel([
        Animated.timing(
          this.state.fadeAnim,
-         {toValue: 1, duration: 4000, delay: 100}
+         {toValue: 1, duration: 1000, delay: 100}
        ),
        Animated.timing(
          this.state.offsetX,
-         {toValue: 417, duration: 40000, easing: Easing.inOut(Easing.ease)}
+         {toValue: 417, duration: 40000, easing: Easing.linear}
        )
      ]).start();
    }
@@ -87,7 +91,7 @@ class Person extends Component {
   componentDidMount() {
     Animated.timing(
       this.state.fadeAnim,
-      {toValue: 1, duration: 3000, delay: 10000}
+      {toValue: 1, duration: 3000, delay: 1000}
     ).start();
   }
 
@@ -129,9 +133,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingBottom: 64,
+    paddingLeft: 25,
+    paddingRight: 25,
+    marginBottom: 68,
   },
   mainText: {
     textAlign: 'center',
@@ -144,13 +148,21 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
+    flexDirection: 'row',
+    backgroundColor: 'white',
     left: 0,
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
     bottom: 0,
     height: 65,
-    borderWidth: 1,
-    borderColor: base.colors.lightgrey,
   },
+  rightArrow: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    bottom: 0,
+    paddingRight: 15,
+    justifyContent: 'center'
+  }
 })
