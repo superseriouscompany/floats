@@ -4,6 +4,7 @@
 
 1. React Native https://facebook.github.io/react-native/docs/getting-started.html
 1. Facebook SDK https://developers.facebook.com/docs/ios/getting-started/
+1. Carthage https://github.com/Carthage/Carthage#installing-carthage
 
 ## Installation
 
@@ -12,6 +13,7 @@
 ## Running
 
     # iOS
+    $ (cd ios && carthage bootstrap)
     $ open ios/floats.xcodeproj
 
     # Android
