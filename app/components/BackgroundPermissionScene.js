@@ -38,12 +38,16 @@ export default function(props) { return (
       <Text style={styles.subText}>
         your location is never shared
       </Text>
-      <TouchableOpacity style={styles.button} onPress={() => props.navigator.navigate('NotificationPermissionScene')}a>
-        <Text style={styles.mainText}>
-          Allow Location
-        </Text>
-      </TouchableOpacity>
     </View>
+
+    <TouchableOpacity style={styles.button} onPress={() => props.navigator.navigate('NotificationPermissionScene')}>
+      <Text style={[styles.mainText, {}]}>
+        Allow Location
+      </Text>
+      <View style={styles.rightArrow}>
+        <Image source={require('../images/RightArrowLight.png')}/>
+      </View>
+    </TouchableOpacity>
   </Image>
 )}
 
@@ -166,7 +170,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 25,
     paddingRight: 25,
-    paddingBottom: 64,
+    marginBottom: 68,
   },
   mainText: {
     textAlign: 'center',
@@ -179,13 +183,21 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
+    flexDirection: 'row',
+    backgroundColor: 'white',
     left: 0,
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
     bottom: 0,
     height: 65,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: base.colors.mediumlightgrey,
   },
+  rightArrow: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    bottom: 0,
+    paddingRight: 15,
+    justifyContent: 'center'
+  }
 })
