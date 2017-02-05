@@ -6,20 +6,15 @@ import base from '../styles/base';
 import api from '../services/api';
 import Text from './Text';
 import {
-  Animated,
   Alert,
   ActivityIndicator,
   AsyncStorage,
-  Dimensions,
-  Easing,
   Image,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-
-const screenWidth = Dimensions.get('window').width;
 
 export default class FloatDialog extends Component {
   constructor(props) {
@@ -29,9 +24,8 @@ export default class FloatDialog extends Component {
 
   render() { return (
     <View style={styles.container}>
-      <SkyPan style={{position: 'absolute'}} source={require('../images/DarkSkyBackground.jpg')}/>
       <View style={[styles.inputContainer]}>
-        <TextInput style={[styles.input]} placeholder="doing something fun?" placeholderTextColor={base.colors.offwhite} underlineColorAndroid={'transparent'} onChangeText={(text) => this.setState({text})}/>
+        <TextInput style={[styles.input]} placeholder="what are you doing?" placeholderTextColor={base.colors.mediumgrey} underlineColorAndroid={'transparent'} onChangeText={(text) => this.setState({text})}/>
       </View>
       { this.state.sending ?
         <ActivityIndicator
@@ -40,8 +34,8 @@ export default class FloatDialog extends Component {
           color={base.colors.mediumgrey}
         />
       :
-        <TouchableOpacity style={{backgroundColor: 'rgba(0, 0, 0, 0)'}}onPress={this.create.bind(this)}>
-          <Text style={[styles.input, {fontWeight: '500'}]}>send</Text>
+        <TouchableOpacity onPress={this.create.bind(this)}>
+          <Image source={require('../images/PaperAirplane.png')} />
         </TouchableOpacity>
       }
     </View>
@@ -69,70 +63,34 @@ export default class FloatDialog extends Component {
   }
 }
 
-class SkyPan extends Component {
-  constructor(props) {
-     super(props);
-     this.state = {
-       offsetX: new Animated.Value(0),
-     };
-   }
-
-   componentDidMount() {
-     this.cycleAnimation();
-   }
-
-   cycleAnimation() {
-     Animated.sequence([
-       Animated.timing(
-         this.state.offsetX,
-         {toValue: -1216 + screenWidth, duration: 60000, easing: Easing.inOut(Easing.ease)}
-       ),
-       Animated.timing(
-         this.state.offsetX,
-         {toValue: 0, duration: 60000, easing: Easing.inOut(Easing.ease)}
-       ),
-     ]).start(event => {
-       if (event.finished) { this.cycleAnimation(); }
-     });
-   }
-
-   render() {
-     return (
-       <Animated.Image
-       style={[this.props.style, {opacity: this.state.fadeAnim, transform: [{translateX: this.state.offsetX}]}]}
-       source={this.props.source}>
-         {this.props.children}
-       </Animated.Image>
-     );
-   }
-}
-
 FloatDialog.contextTypes = {
   store: React.PropTypes.object,
 }
 
 const styles = StyleSheet.create({
   inputContainer: {
+    backgroundColor: base.colors.white,
     flex: 1,
     borderBottomWidth: 1,
-    borderColor: base.colors.white,
-    marginRight: 16,
+    borderColor: '#BEBEBE',
+    marginRight: 19,
   },
   input: {
     fontSize: 16,
     fontFamily: 'Poppins',
-    color: base.colors.white,
-    height: 30,
-    paddingTop: 2,
+    color: base.colors.darkgrey,
+    height: 32,
+    paddingTop: 1.25,
     paddingLeft: 4,
   },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 70,
+    paddingTop: 27,
+    paddingBottom: 30,
     paddingLeft: 20,
-    paddingRight: 16,
+    paddingRight: 21,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: base.colors.white,
+    borderBottomColor: base.colors.lightgrey,
   },
 })
