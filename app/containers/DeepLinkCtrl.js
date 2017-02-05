@@ -52,7 +52,7 @@ class DeepLinkCtrl extends Component {
   addFriend(id) {
     if( !id ) { return console.warn('No id set in addFriend'); }
     this.props.dispatch(send(id)).then(() => {
-      alert('Sent friend request')
+      console.warn('Sent friend request.');
     }).catch((err) => {
       console.warn(err);
     })

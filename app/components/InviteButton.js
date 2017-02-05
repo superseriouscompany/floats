@@ -66,11 +66,6 @@ class InviteButton extends Component {
         console.error(error);
         alert(error.message);
       }, (success, method) => {
-        if( success ) {
-          alert(`Shared via ${method}`)
-        } else {
-          alert('Not shared')
-        }
       })
       this.setState({sharing: false})
     }).catch((err) => {
