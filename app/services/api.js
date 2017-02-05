@@ -22,7 +22,7 @@ const api = {
         },
       }).then(function(response) {
         if( !response.ok ) { throw new Error('' + response.status); }
-        isExisting = response.statusCode == 200;
+        isExisting = response.status == 200;
         return response.json();
       }).then(function(json) {
         json.isExisting = isExisting;
