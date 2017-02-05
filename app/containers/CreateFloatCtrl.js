@@ -61,9 +61,6 @@ class CreateFloatCtrl extends Component {
 
     let controlParams = {
       '$ios_deepview': 'floats_deepview_vk8d',
-      '$og_title': 'Cash me ousside',
-      '$og_description': 'How bow dah',
-      '$og_image_url': 'https://pixel.nymag.com/imgs/daily/selectall/2017/02/02/02-catch-me-outside.w710.h473.2x.jpg',
     }
 
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((thing) => {
