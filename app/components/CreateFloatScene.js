@@ -16,7 +16,6 @@ import {
   Image,
   RefreshControl,
   ScrollView,
-  StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -36,7 +35,6 @@ export default class CreateFloatScene extends Component {
 
   render() { return (
     <View style={base.screen}>
-      <StatusBar barStyle="dark-content"/>
       <View style={base.header}>
         <Heading>friends nearby</Heading>
       </View>
@@ -56,7 +54,7 @@ export default class CreateFloatScene extends Component {
         : this.state.friends && this.state.friends.length ?
           <View style={{flex: 1}}>
             <FloatDialog friends={this.state.friends.filter(selected)} />
-            <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row', backgroundColor: 'white'}]}>
+            <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
               <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
                 <Text>
                   Nearby Friends
