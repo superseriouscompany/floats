@@ -14,7 +14,7 @@ import {
   View,
 } from 'react-native';
 
-export default class TabBar extends Component {
+class TabBar extends Component {
   render() { return (
     <View style={[styles.container]}>
       <TouchableOpacity style={styles.tabItem} onPress={() => this.props.navigator.navigate('FloatsScene')}>
@@ -37,10 +37,21 @@ export default class TabBar extends Component {
         :
           <Image source={require('../images/FriendsTabIcon.png')} />
         }
+        { this.props.unreadFriends ?
+          <Text style={{color: 'hotpink', marginBottom: -4}}>*</Text>
+        : null}
       </TouchableOpacity>
     </View>
   )}
 }
+
+function mapStateToProps(state) {
+  return {
+    unreadFriends: state.friendRequests.items && state.friendRequests.items.length,
+  }
+}
+
+export default connect(mapStateToProps)(TabBar)
 
 const styles = StyleSheet.create({
   container: {
