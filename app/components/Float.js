@@ -74,7 +74,7 @@ class Float extends Component {
   showDialog() {
     const isMine  = !!this.props.float.invitees;
     this.props.showActionSheetWithOptions({
-      options: [isMine ? `Delete Float` : 'Leave Float', 'Cancel'],
+      options: [isMine ? `Delete Float` : 'Leave Float Silently', 'Cancel'],
       destructiveButtonIndex: 0,
       cancelButtonIndex: 1,
     }, (index) => {
