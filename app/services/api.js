@@ -256,9 +256,9 @@ const api = {
       })
     },
 
-    join: function(token) {
+    join: function(id,token) {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
-        return fetch(`${baseUrl}/floats/join/${token}`, {
+        return fetch(`${baseUrl}/floats/${id}/join/${token}`, {
           method: 'POST',
           headers: headers(accessToken),
         })

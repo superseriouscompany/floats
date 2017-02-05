@@ -1,18 +1,14 @@
 import api from '../services/api';
 
-export function joinFloat(token) {
+export function joinFloat(id, token) {
 
   return function(dispatch) {
     dispatch({type: 'floats:join:load'});
 
-    return api.floats.join(token).then(function(float) {
+    return api.floats.join(id,token).then(function(float) {
       dispatch({
         type: 'floats:join:load:yes',
         float: float,
-      })
-      dispatch({
-        type: 'navigation:queue',
-        route: 'FloatsScene'
       })
     }).catch(function(err) {
       dispatch({

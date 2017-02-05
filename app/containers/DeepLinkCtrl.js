@@ -31,11 +31,16 @@ class DeepLinkCtrl extends Component {
     branch.subscribe((bundle) => {
       if( !bundle ) { return console.warn(`Got empty deep link`); }
       if( !bundle.error && !bundle.uri && !bundle.params ) { return; }
-      console.warn(`Got deep link ${JSON.stringify(bundle)}`);
-      if( bundle.params && !bundle.error ) {
-        if( bundle.params['~feature'] == 'friend-invitation' ) {
+      if( !bundle.params || bundle.error ) { return console.warn(`Got unknown format for deep link ${JSON.stringify(bundle)}`) }
+
+      switch(bundle.params['~feature']) {
+        case 'friend-invitation':
           return this.addFriend(bundle.params.inviter_id);
-        }
+        case 'float-invitation':
+          this.addFriend(bundle.params.inviter_id);
+          return this.joinFloat(bundle.params.float_id, bundle.params.float_token)
+        default:
+          console.warn(`Got unknown deep link ${JSON.stringify(bundle)}`)
       }
     })
   }
@@ -48,6 +53,21 @@ class DeepLinkCtrl extends Component {
     if( !id ) { return console.warn('No id set in addFriend'); }
     this.props.dispatch(send(id)).then(() => {
       alert('Sent friend request')
+    }).catch((err) => {
+      console.warn(err);
+    })
+  }
+
+  joinFloat(id, token) {
+    if( !id ) { return console.warn('No id set in joinFloat'); }
+    if( !token ) { return console.warn('No token set in joinFloat'); }
+    this.props.dispatch(joinFloat(id, token)).then(() => {
+      this.props.dispatch({type: 'dirty'})
+
+      this.props.dispatch({
+        type: 'navigation:queue',
+        route: 'FloatsScene',
+      })
     })
   }
 
