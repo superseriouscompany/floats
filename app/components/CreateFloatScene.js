@@ -122,19 +122,14 @@ class Ronery extends Component {
         </Text>
       </View>
       <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15, }}>
-        <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center'}]}>
-          floats works best when you’ve got{"\n"}your closest friends.
+        <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center', paddingLeft: 25, paddingRight: 25}]}>
+          Add or invite your nearby friends, so you can send them floats.
         </Text>
       </View>
 
       <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
         <Text style={styles.emptyButtonText}>
           add friends
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color3}]} onPress={this.props.invitationDialog}>
-        <Text style={styles.emptyButtonText}>
-          invite someone
         </Text>
       </TouchableOpacity>
     </View>
