@@ -6,7 +6,9 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.react.ReactApplication;
+
 import io.branch.rnbranch.RNBranchPackage;
+
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.apsl.versionnumber.RNVersionNumberPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -15,6 +17,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import io.branch.rnbranch.*;
+import io.branch.referral.Branch;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,9 +43,9 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
-            new RNBranchPackage(),
-            new RNDeviceInfo(),
-            new RNVersionNumberPackage(),
+                    new RNBranchPackage(),
+                    new RNDeviceInfo(),
+                    new RNVersionNumberPackage(),
                     new FBSDKPackage(mCallbackManager),
                     new FIRMessagingPackage()
             );
@@ -56,6 +60,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Branch.getAutoInstance(this);
         SoLoader.init(this, /* native exopackage */ false);
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
