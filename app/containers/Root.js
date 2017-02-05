@@ -25,7 +25,6 @@ import {
 } from 'react-native';
 
 var defaultScene = 'CreateFloatScene';
-defaultScene = 'BackgroundPermissionScene';
 
 export default class Root extends Component {
   constructor(props) {
