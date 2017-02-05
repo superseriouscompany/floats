@@ -139,18 +139,21 @@ function mapStateToProps(state) {
     }
   }
 
+  const isGroup = convo.users.length > 2;
   const otherName = convo.users[0].id == state.user.id
     ? convo.users[1].name : convo.users[0].name;
-  const name = convo.users.length > 2 ? float && float.title || 'Group Message' : otherName;
+  const name = isGroup ? float && float.title || 'Group Message' : otherName;
 
   return({
-    loading:  messages.loading,
-    error:    messages.error,
-    messages: items.map(decorate),
-    user:     state.user,
-    name:     name,
-    convo:    convo,
-    float:    float,
+    loading:   messages.loading,
+    error:     messages.error,
+    messages:  items.map(decorate),
+    user:      state.user,
+    name:      name,
+    convo:     convo,
+    float:     float,
+    isPrimary: isPrimary(state, convo),
+    isGroup:   isGroup,
   })
 }
 
