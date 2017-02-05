@@ -25,7 +25,7 @@ export default class FloatDialog extends Component {
   render() { return (
     <View style={styles.container}>
       <View style={[styles.inputContainer]}>
-        <TextInput style={[styles.input]} placeholder="start a float" placeholderTextColor={base.colors.mediumgrey} underlineColorAndroid={'transparent'} onChangeText={(text) => this.setState({text})}/>
+        <TextInput style={[styles.input]} placeholder="what are you doing?" placeholderTextColor={base.colors.mediumgrey} underlineColorAndroid={'transparent'} onChangeText={(text) => this.setState({text})}/>
       </View>
       { this.state.sending ?
         <ActivityIndicator
