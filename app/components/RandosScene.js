@@ -62,13 +62,13 @@ export default class RandosScene extends Component {
             color={base.colors.mediumgrey}
           />
         : this.state.randos.length ?
-          <ScrollView>
-            <View style={{paddingBottom: 16, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor:base.colors.lightgrey}}>
+          <ScrollView style={{paddingBottom: 65}}>
+            <View>
               {this.state.randos.map((f, i) => (
                 <Rando key={i} friend={f} />
               ))}
             </View>
-            <InviteButton />
+            <InviteButton/>
           </ScrollView>
         :
           <InviteButton />
