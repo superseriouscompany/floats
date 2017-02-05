@@ -5,9 +5,6 @@ import {connect} from 'react-redux';
 import {joinFloat} from '../actions/floats';
 import {send} from '../actions/friendRequests';
 import branch from 'react-native-branch';
-import {
-  Linking
-} from 'react-native'
 
 const qs  = require('querystring');
 const URL = require('url');
@@ -17,22 +14,28 @@ class DeepLinkCtrl extends Component {
     super(props);
     this.handleLink = this.handleLink.bind(this)
     this.addFriend  = this.addFriend.bind(this)
+    this.processed  = [];
   }
 
   componentWillMount() {
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        this.handleLink({url: url});
-      }
-    }).catch(err => console.error('An error occurred', err));
-
-    Linking.addEventListener('url', this.handleLink);
-
-    branch.subscribe((bundle) => {
+    this.branchUnsubscribe = branch.subscribe((bundle) => {
       if( !bundle ) { return console.warn(`Got empty deep link`); }
       if( !bundle.error && !bundle.uri && !bundle.params ) { return; }
-      if( !bundle.params || bundle.error ) { return console.warn(`Got unknown format for deep link ${JSON.stringify(bundle)}`) }
+      if( bundle.uri && bundle.uri.match(/^fb/) ) { return; }
+      if( bundle.error ) {
+        return console.warn(`Got error for deep link ${JSON.stringify(bundle)}`)
+      }
+      if( !bundle.params ) {
+        return console.warn(`Got empty params in bundle ${JSON.stringify(bundle)}`)
+      }
+      if( !this.props.user ) {
+        return console.warn('User is not logged in to process deep link');
+      }
+      if( bundle.params.inviter_id == this.props.user.id ) {
+        return console.warn('Ignoring our own link');
+      }
 
+      console.warn('Got a bundle', JSON.stringify(bundle));
       switch(bundle.params['~feature']) {
         case 'friend-invitation':
           return this.addFriend(bundle.params.inviter_id);
@@ -46,7 +49,7 @@ class DeepLinkCtrl extends Component {
   }
 
   componentWillUnmount() {
-    Linking.removeEventListener('url', this.handleLink);
+    this.branchUnsubscribe();
   }
 
   addFriend(id) {
@@ -72,6 +75,7 @@ class DeepLinkCtrl extends Component {
   }
 
   handleLink(event) {
+    console.warn('handling link');
     const url    = URL.parse(event.url);
     const query  = qs.parse(url.query);
 
@@ -87,4 +91,10 @@ class DeepLinkCtrl extends Component {
   render() { return this.props.children }
 }
 
-export default connect()(DeepLinkCtrl);
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  }
+}
+
+export default connect(mapStateToProps)(DeepLinkCtrl);
