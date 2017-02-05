@@ -36,6 +36,7 @@
 		3F056CC31E2700C90061D791 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F056CBF1E2700C90061D791 /* FBSDKShareKit.framework */; };
 		3F056CC41E2700EE0061D791 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F69625BB1E26F78300DAC3BC /* libRCTFBSDK.a */; };
 		3F096BA41E203CF300804325 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F096BA31E203CF300804325 /* libsqlite3.tbd */; };
+		3F2FCA2E1E46A91100F140E6 /* Branch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2FCA2D1E46A91100F140E6 /* Branch.framework */; };
 		3FBE01E31E2C46C800679C85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FBE01E21E2C46C800679C85 /* GoogleService-Info.plist */; };
 		3FE672901E22BA73009C4C31 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */; };
 		3FE672911E22BA73009C4C31 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728C1E22BA73009C4C31 /* Poppins-Light.ttf */; };
@@ -44,6 +45,7 @@
 		3FE672941E22BA73009C4C31 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728F1E22BA73009C4C31 /* Poppins-SemiBold.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6ABD53735A1A4B85B3E8ABF4 /* libRNFIRMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 540D1F51344F4F1EA636FB34 /* libRNFIRMessaging.a */; };
+		7BCF47BDD06849D3AB572AFC /* libreact-native-branch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5060C86F864F94A4944A1C /* libreact-native-branch.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		B96B05A0F51B4CE699FC0AF6 /* libRNVersionNumber.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F75BE7A4C24F79B00324D6 /* libRNVersionNumber.a */; };
 		F6116F401E3C09590040E05E /* OleoScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6116F3F1E3C09590040E05E /* OleoScript-Regular.ttf */; };
@@ -213,6 +215,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNFIRMessaging;
 		};
+		3F2FCA281E469CE700F140E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA4A45DD67484A6EA0ECD225 /* RNBranch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B3A3CC361C5B0A070016AC52;
+			remoteInfo = RNBranch;
+		};
 		3F60228E1E46532700AEAEF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C3D56D3385B24512AD30800F /* RNDeviceInfo.xcodeproj */;
@@ -276,7 +285,7 @@
 		00E356F21AD99517003FC87E /* floatsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = floatsTests.m; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* batsignal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = batsignal.app; path = floats.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* floats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = floats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = floats/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = floats/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -299,6 +308,10 @@
 		3F056CBF1E2700C90061D791 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		3F096BA31E203CF300804325 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		3F096BCE1E2044CC00804325 /* floats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = floats.entitlements; path = floats/floats.entitlements; sourceTree = "<group>"; };
+		3F2FCA2D1E46A91100F140E6 /* Branch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Branch.framework; path = Carthage/Build/iOS/Branch.framework; sourceTree = "<group>"; };
+		3F6022D01E469A3600AEAEF4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3F6022D21E469A5700AEAEF4 /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
+		3F6022D41E469A6000AEAEF4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3F6CC4021E26AD220096F05B /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
 		3FBE01E21E2C46C800679C85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
@@ -310,9 +323,11 @@
 		540D1F51344F4F1EA636FB34 /* libRNFIRMessaging.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFIRMessaging.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		7D5060C86F864F94A4944A1C /* libreact-native-branch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libreact-native-branch.a"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		A0F75BE7A4C24F79B00324D6 /* libRNVersionNumber.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVersionNumber.a; sourceTree = "<group>"; };
 		C3D56D3385B24512AD30800F /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
+		DA4A45DD67484A6EA0ECD225 /* RNBranch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBranch.xcodeproj; path = "../node_modules/react-native-branch/ios/RNBranch.xcodeproj"; sourceTree = "<group>"; };
 		F2037CB2C9DD498D8C4A8560 /* RNVersionNumber.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVersionNumber.xcodeproj; path = "../node_modules/react-native-version-number/ios/RNVersionNumber.xcodeproj"; sourceTree = "<group>"; };
 		F6116F3F1E3C09590040E05E /* OleoScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OleoScript-Regular.ttf"; sourceTree = "<group>"; };
 		F6116F411E3C096D0040E05E /* OleoScript-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OleoScript-Bold.ttf"; sourceTree = "<group>"; };
@@ -359,6 +374,8 @@
 				3F056CC41E2700EE0061D791 /* libRCTFBSDK.a in Frameworks */,
 				B96B05A0F51B4CE699FC0AF6 /* libRNVersionNumber.a in Frameworks */,
 				1F8B78CFA8B14E2BA5A8F49B /* libRNDeviceInfo.a in Frameworks */,
+				7BCF47BDD06849D3AB572AFC /* libreact-native-branch.a in Frameworks */,
+				3F2FCA2E1E46A91100F140E6 /* Branch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +499,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3F2FCA0B1E469CE700F140E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F2FCA291E469CE700F140E6 /* libreact-native-branch.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3F6022711E46532700AEAEF4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -493,6 +518,10 @@
 		3F87EDF41E2018D900139C69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F2FCA2D1E46A91100F140E6 /* Branch.framework */,
+				3F6022D41E469A6000AEAEF4 /* MobileCoreServices.framework */,
+				3F6022D21E469A5700AEAEF4 /* CoreSpotlight.framework */,
+				3F6022D01E469A3600AEAEF4 /* CoreTelephony.framework */,
 				3F056CBC1E2700C90061D791 /* Bolts.framework */,
 				3F056CBD1E2700C90061D791 /* FBSDKCoreKit.framework */,
 				3F056CBE1E2700C90061D791 /* FBSDKLoginKit.framework */,
@@ -560,6 +589,7 @@
 				3BAE0C858BA34153AB52FDDD /* RNFIRMessaging.xcodeproj */,
 				F2037CB2C9DD498D8C4A8560 /* RNVersionNumber.xcodeproj */,
 				C3D56D3385B24512AD30800F /* RNDeviceInfo.xcodeproj */,
+				DA4A45DD67484A6EA0ECD225 /* RNBranch.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -590,7 +620,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* batsignal.app */,
+				13B07F961A680F5B00A75B9A /* floats.app */,
 				00E356EE1AD99517003FC87E /* floatsTests.xctest */,
 			);
 			name = Products;
@@ -641,6 +671,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				3F2FCA2F1E46A93100F140E6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -648,7 +679,7 @@
 			);
 			name = floats;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* batsignal.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* floats.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -675,6 +706,9 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
 								enabled = 1;
 							};
 						};
@@ -740,6 +774,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = 3F2FCA0B1E469CE700F140E6 /* Products */;
+					ProjectRef = DA4A45DD67484A6EA0ECD225 /* RNBranch.xcodeproj */;
 				},
 				{
 					ProductGroup = 3F6022711E46532700AEAEF4 /* Products */;
@@ -917,6 +955,13 @@
 			remoteRef = 3F096BCC1E203E5300804325 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		3F2FCA291E469CE700F140E6 /* libreact-native-branch.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libreact-native-branch.a";
+			remoteRef = 3F2FCA281E469CE700F140E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		3F60228F1E46532700AEAEF4 /* libRNDeviceInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1011,6 +1056,20 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		3F2FCA2F1E46A93100F140E6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Branch.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1070,6 +1129,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1090,6 +1150,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1100,6 +1161,7 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = floats/floats.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1108,6 +1170,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = floats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1122,6 +1185,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.superserious.floats;
 				PRODUCT_NAME = floats;
+				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1129,6 +1193,7 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = floats/floats.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1136,6 +1201,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = floats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1150,6 +1216,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.superserious.floats;
 				PRODUCT_NAME = floats;
+				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

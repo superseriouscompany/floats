@@ -37,9 +37,8 @@ class CreateFloatCtrl extends Component {
 
   invitationDialog() {
     ActionSheetIOS.showShareActionSheetWithOptions({
-      url: 'https://superseriouscompany.com',
-      message: 'Go fuck yourself',
-      subject: 'You Can',
+      url: 'https://floats.app.link/floats/join?token=cool',
+      message: 'Download this babbage',
     }, (error) => {
       console.error(error);
       alert(error.message);
