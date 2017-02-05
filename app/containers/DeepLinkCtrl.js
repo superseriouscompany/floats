@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {joinFloat} from '../actions/floats';
+import {send} from '../actions/friendRequests';
 import branch from 'react-native-branch';
 import {
   Linking
@@ -29,6 +30,7 @@ class DeepLinkCtrl extends Component {
 
     branch.subscribe((bundle) => {
       if( !bundle ) { return console.warn(`Got empty deep link`); }
+      if( !bundle.error && !bundle.uri && !bundle.params ) { return; }
       console.warn(`Got deep link ${JSON.stringify(bundle)}`);
       if( bundle.params && !bundle.error ) {
         if( bundle.params['~feature'] == 'friend-invitation' ) {
@@ -44,7 +46,9 @@ class DeepLinkCtrl extends Component {
 
   addFriend(id) {
     if( !id ) { return console.warn('No id set in addFriend'); }
-    alert('Adding ' + id);
+    this.props.dispatch(send(id)).then(() => {
+      alert('Sent friend request')
+    })
   }
 
   handleLink(event) {
