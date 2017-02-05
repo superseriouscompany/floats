@@ -37,8 +37,10 @@ class TabBar extends Component {
         :
           <Image source={require('../images/FriendsTabIcon.png')} />
         }
-        { this.props.unreadFriends ?
-          <Text style={{color: 'hotpink', marginBottom: -4}}>*</Text>
+        { this.props.unreadFriends || true ?
+          <View style={{position: 'absolute', left: 0, right: 0, justifyContent: 'center', alignItems: 'center', paddingLeft: 25}}>
+            <Image source={require('../images/Orb.png')} />
+          </View>
         : null}
       </TouchableOpacity>
     </View>
