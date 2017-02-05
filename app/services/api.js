@@ -13,6 +13,7 @@ import store from './store';
 const api = {
   sessions: {
     create: function(facebookAccessToken) {
+      let isExisting;
       return fetch(`${baseUrl}/users`, {
         method: 'POST',
         body: JSON.stringify({facebook_access_token: facebookAccessToken}),
@@ -21,7 +22,11 @@ const api = {
         },
       }).then(function(response) {
         if( !response.ok ) { throw new Error('' + response.status); }
+        isExisting = response.statusCode == 200;
         return response.json();
+      }).then(function(json) {
+        json.isExisting = isExisting;
+        return json;
       })
     },
 

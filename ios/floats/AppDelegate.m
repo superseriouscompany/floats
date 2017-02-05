@@ -14,6 +14,7 @@
 #import <React/RCTLinkingManager.h>
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <react-native-branch/RNBranch.h>
 
 #import "Firebase.h"
 #import "RNFIRMessaging.h"
@@ -22,11 +23,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  // FCM
   [FIRApp configure];
   [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
+
+  // Branch
+  [RNBranch initSessionWithLaunchOptions:launchOptions isReferrable:YES];
   
-  NSURL *jsCodeLocation;
-  
+  // Fonts
   for (NSString* family in [UIFont familyNames])
   {
     NSLog(@"%@", family);
@@ -35,7 +39,9 @@
       NSLog(@" %@", name);
     }
   }
-
+  
+  // React Native
+  NSURL *jsCodeLocation;
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
@@ -59,7 +65,10 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
+{  
+  if ([RNBranch handleDeepLink:url]) {
+    return YES;
+  }
   if( [url.scheme isEqualToString:@"floats"] ) {
     return [RCTLinkingManager application:application openURL:url
                         sourceApplication:sourceApplication annotation:annotation];
@@ -71,11 +80,11 @@
                                                      annotation:annotation];
 }
 
-// Only if your app is using [Universal Links](https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/AppSearch/UniversalLinks.html).
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity
  restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
 {
-  
+  BOOL handledByBranch = [RNBranch continueUserActivity:userActivity];
+  if( handledByBranch ) { return YES; }
   return [RCTLinkingManager application:application
                    continueUserActivity:userActivity
                      restorationHandler:restorationHandler];
