@@ -14,6 +14,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Share,
 } from 'react-native';
 
 export default class FloatDialog extends Component {
@@ -34,12 +35,40 @@ export default class FloatDialog extends Component {
           color={base.colors.mediumgrey}
         />
       :
-        <TouchableOpacity onPress={this.create.bind(this)}>
+        <TouchableOpacity onPress={this.shareDis.bind(this)}>
           <Image source={require('../images/PaperAirplane.png')} />
         </TouchableOpacity>
       }
     </View>
   )}
+
+  shareDis() {
+    Share.share({
+      message: 'Poop on Biden',
+      url: 'http://facebook.github.io/react-native/',
+      title: 'Who dat title tho'
+    }, {
+      dialogTitle: 'Dis cool',
+      excludedActivityTypes: [
+        'com.apple.UIKit.activity.PostToTwitter'
+      ],
+      tintColor: 'blue'
+    })
+    .then(this.showResult)
+    .catch((error) => this.setState({result: 'error: ' + error.message}));
+  }
+
+  showResult(result) {
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          this.setState({result: 'shared with an activityType: ' + result.activityType});
+        } else {
+          this.setState({result: 'shared'});
+        }
+      } else if (result.action === Share.dismissedAction) {
+        this.setState({result: 'dismissed'});
+      }
+    }
 
   create() {
     if( !this.state.text ) { return; }
