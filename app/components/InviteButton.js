@@ -2,31 +2,31 @@
 
 import React from 'react';
 import Component from './Component';
+import Text from './Text';
 import base from '../styles/base';
 import {
+  Image,
   StyleSheet,
-  Text,
   View
 } from 'react-native';
 
 export default class InviteButton extends Component {
   render() { return (
-    <View style={{padding: 19, justifyContent: 'center', alignItems: 'center'}}>
-      <View style={styles.inviteButton}>
-        <Text style={{fontSize: base.fontSizes.normal, color: 'white'}}>invite more</Text>
-      </View>
+    <View style={[styles.box, base.padFullHorizontal, base.padMainItem]}>
+      <Image style={[base.photoCircle]} source={require('../images/MissingProfileCircle.png')} />
+      <Text style={[styles.main, {marginRight: 10}]}>Missing Someone?</Text>
     </View>
   )}
 }
 
 const styles = StyleSheet.create({
-  inviteButton: {
-    backgroundColor: base.colors.color2,
-    height: 50,
-    width: 200,
+  box: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 100,
-    paddingBottom: 1,
+  },
+  main: {
+    paddingTop: 0,
+    paddingBottom: 0,
+    flex: 1,
   }
 })
