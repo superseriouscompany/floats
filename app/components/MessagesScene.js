@@ -43,7 +43,7 @@ export default class MessagesScene extends Component {
           </View>
           { this.props.isPrimary ?
             <TouchableOpacity onPress={() => this.showOptions()} style={[base.rightNav, styles.rightNavButton]}>
-              <Image source={require('../images/Ellipses.png')} />
+              <Image source={require('../images/AddUsersToFloatIcon.png')} />
             </TouchableOpacity>
           : null }
         </View>
