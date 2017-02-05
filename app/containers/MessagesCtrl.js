@@ -76,9 +76,7 @@ class MessagesCtrl extends Component {
 
     let controlParams = {
       '$ios_deepview': 'floats_deepview_vk8d',
-      '$og_title': "You don't have to write expiration logic",
-      '$og_description': 'If you store everything in memory',
-      '$og_image_url': 'http://i2.kym-cdn.com/entries/icons/original/000/022/138/reece.JPG',
+      '$og_title': this.props.float.title,
     }
 
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {

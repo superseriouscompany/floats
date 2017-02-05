@@ -6,6 +6,7 @@ import base from '../styles/base';
 import api from '../services/api';
 import Text from './Text';
 import {
+  ActivityIndicator,
   Image,
   StyleSheet,
   TouchableOpacity,
@@ -21,9 +22,19 @@ export default class Friend extends Component {
     <View style={[styles.box, base.padFullHorizontal, base.padMainItem]}>
       <Image style={[base.photoCircle]} source={{uri: this.props.friend.avatar_url}}/>
       <Text style={[styles.main, {marginRight: 10}]}>{this.props.friend.name}</Text>
-      <TouchableOpacity onPress={() => this.props.blockDialog(this.props.friend.friend_id, this.props.friend.name)}>
-        <Image source={require('../images/Gear.png')} />
-      </TouchableOpacity>
+
+      { true ?
+        <ActivityIndicator
+          style={base.buttonLoader}
+          size="small"
+          color={base.colors.mediumgrey}
+        />
+      :
+        <TouchableOpacity onPress={() => this.props.blockDialog(this.props.friend.friend_id, this.props.friend.name)}>
+          <Image source={require('../images/Gear.png')} />
+        </TouchableOpacity>
+      }
+
     </View>
   )}
 }

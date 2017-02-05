@@ -22,12 +22,10 @@ class InviteButton extends Component {
   }
 
   render() { return (
-    <View style={[styles.box, base.padFullHorizontal, base.padMainItem]}>
+    <TouchableOpacity style={[styles.box, base.padFullHorizontal, base.padMainItem]} onPress={this.invitationDialog}>
       <Image style={[base.photoCircle]} source={require('../images/MissingProfileCircle.png')} />
-      <TouchableOpacity onPress={this.invitationDialog}>
-        <Text style={[styles.main, {marginRight: 10}]}>Missing Someone?</Text>
-      </TouchableOpacity>
-    </View>
+      <Text style={[styles.main, {marginRight: 10}]}>Missing Someone?</Text>
+    </TouchableOpacity>
   )}
 
   invitationDialog() {
@@ -53,9 +51,6 @@ class InviteButton extends Component {
 
     let controlParams = {
       '$ios_deepview': 'floats_deepview_vk8d',
-      '$og_title': 'Cash me ousside',
-      '$og_description': 'How bow dah',
-      '$og_image_url': 'https://pixel.nymag.com/imgs/daily/selectall/2017/02/02/02-catch-me-outside.w710.h473.2x.jpg',
     }
 
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((thing) => {
@@ -93,5 +88,5 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 0,
     flex: 1,
-  }
+  },
 })
