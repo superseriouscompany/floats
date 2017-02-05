@@ -6,6 +6,7 @@ import CreateFloatScene from '../components/CreateFloatScene';
 import { fetchNearbyFriends } from '../actions/nearbyFriends';
 import FCM, {FCMEvent} from 'react-native-fcm';
 import api from '../services/api';
+import branch from 'react-native-branch';
 import {
   ActionSheetIOS
 } from 'react-native'
@@ -36,19 +37,46 @@ class CreateFloatCtrl extends Component {
   }
 
   invitationDialog() {
-    ActionSheetIOS.showShareActionSheetWithOptions({
-      url: 'https://floats.app.link/floats/join?token=cool',
-      message: 'Download this babbage',
-    }, (error) => {
-      console.error(error);
-      alert(error.message);
-    }, (success, method) => {
-      if( success ) {
-        alert(`Shared via ${method}`)
-      } else {
-        alert('Not shared')
+    let branchUniversalObject = branch.createBranchUniversalObject(
+      'floats/join/cool',
+      {
+        metadata: {
+          token: 'cool',
+          lawng: 'great',
+        }
       }
-    })
+    )
+
+    let linkProperties = {
+      feature: 'friend-invitation',
+      channel: 'app'
+    }
+
+    let controlParams = {
+      '$ios_deepview': 'floats_deepview_vk8d',
+      '$og_title': 'Cash me outside',
+      '$og_description': 'How bow dah',
+    }
+
+    // 'https://floats.app.link/floats/join?token=cool'
+    branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((thing) => {
+      ActionSheetIOS.showShareActionSheetWithOptions({
+        url: thing.url,
+        message: 'Download this babbage',
+      }, (error) => {
+        console.error(error);
+        alert(error.message);
+      }, (success, method) => {
+        if( success ) {
+          alert(`Shared via ${method}`)
+        } else {
+          alert('Not shared')
+        }
+      })
+    }).catch((err) => {
+      console.error(err);
+      alert(err.message);
+    });
   }
 
   render() { return (

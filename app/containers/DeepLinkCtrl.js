@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {joinFloat} from '../actions/floats';
+import branch from 'react-native-branch';
 import {
   Linking
 } from 'react-native'
@@ -24,6 +25,11 @@ class DeepLinkCtrl extends Component {
     }).catch(err => console.error('An error occurred', err));
 
     Linking.addEventListener('url', this.handleLink);
+
+    branch.subscribe((bundle) => {
+      console.warn(`Got deep link ${JSON.stringify(bundle)}`);
+      if (bundle && bundle.params && !bundle.error) {}
+    })
   }
 
   componentWillUnmount() {
