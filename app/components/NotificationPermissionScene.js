@@ -60,11 +60,11 @@ class BalloonWithMembers extends Component {
      Animated.parallel([
        Animated.timing(
          this.state.fadeAnim,
-         {toValue: 1, duration: 4000, delay: 100}
+         {toValue: 1, duration: 1000, delay: 100}
        ),
        Animated.timing(
          this.state.offsetX,
-         {toValue: 417, duration: 40000, easing: Easing.inOut(Easing.ease)}
+         {toValue: 417, duration: 40000, easing: Easing.linear}
        )
      ]).start();
    }
@@ -91,7 +91,7 @@ class Person extends Component {
   componentDidMount() {
     Animated.timing(
       this.state.fadeAnim,
-      {toValue: 1, duration: 3000, delay: 10000}
+      {toValue: 1, duration: 3000, delay: 1000}
     ).start();
   }
 
