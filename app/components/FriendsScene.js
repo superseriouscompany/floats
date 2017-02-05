@@ -36,13 +36,13 @@ class FriendsScene extends Component {
     <View style={base.screen}>
       <View style={base.header}>
         <TouchableOpacity style={[base.leftNav, styles.leftNavButton]} onPress={() => this.showLogoutDialog()}>
-          <Image source={require('../images/Ellipses.png')} />
+          <Image source={require('../images/DarkGear.png')} />
         </TouchableOpacity>
         <View style={base.header}>
           <Heading>friends</Heading>
         </View>
         <TouchableOpacity style={[base.rightNav, styles.rightNavButton]} onPress={() => this.props.navigator.navigate('RandosScene')}>
-          <Image source={require('../images/Plus.png')} />
+          <Image source={require('../images/AddUsersIcon.png')} />
         </TouchableOpacity>
       </View>
       <ScrollView
@@ -191,10 +191,8 @@ export default connectActionSheet(FriendsScene);
 
 const styles = StyleSheet.create({
   leftNavButton: {
-    paddingTop: 22,
-    paddingBottom: 22,
+    padding: 17,
     paddingLeft: 19,
-    paddingRight: 14
   },
   rightNavButton: {
     padding: 17,
