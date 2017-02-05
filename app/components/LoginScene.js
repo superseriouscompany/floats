@@ -66,18 +66,24 @@ export default class LoginScene extends Component {
   }
 
   login(shouldAlert) {
+    let isExisting;
     AccessToken.getCurrentAccessToken().then((data) => {
       if( !data ) { throw new Error('nope'); }
       this.setState({ awaitingLogin: true })
       return api.sessions.create(data.accessToken.toString())
     }).then((user) => {
+      isExisting = user.isExisting;
       return AsyncStorage.setItem('@floats:user', JSON.stringify(user)).then(function() {
         return AsyncStorage.setItem('@floats:accessToken', user.access_token);
       }).then(() => {
         this.context.store.dispatch({type: 'login', user: user})
       })
     }).then(() => {
-      this.props.navigator.navigate('CreateFloatScene');
+      if( isExisting ) {
+        this.props.navigator.navigate('CreateFloatScene');
+      } else {
+        this.props.navigator.navigate('BackgroundPermissionScene');        
+      }
     }).catch(function(err) {
       if( err.message == 'nope' ) {
         if( shouldAlert ) { alert('Not logged in'); }

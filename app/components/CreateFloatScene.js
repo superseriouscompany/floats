@@ -13,7 +13,6 @@ import base               from '../styles/base';
 import {
   ActivityIndicator,
   Alert,
-  Clipboard,
   Image,
   RefreshControl,
   ScrollView,
@@ -51,7 +50,7 @@ export default class CreateFloatScene extends Component {
             </TouchableOpacity>
           </View>
         : this.state.friends && !this.state.friends.length ?
-          <Ronery navigator={this.props.navigator}/>
+          <Ronery navigator={this.props.navigator} invitationDialog={this.props.invitationDialog}/>
         : this.state.friends && this.state.friends.length ?
           <View style={{flex: 1}}>
             <FloatDialog friends={this.state.friends.filter(selected)} />
@@ -113,11 +112,6 @@ function selected(f) {
 }
 
 class Ronery extends Component {
-  copyToClipboard() {
-    Clipboard.setString('https://itunes.apple.com/us/app/floats-find-close-friends/id1195463981?mt=8');
-    Alert.alert('Copied app link to clipboard.');
-  }
-
   render() { return(
     <View style={{alignItems: 'center'}}>
       <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.mediumgrey}]}>
@@ -136,7 +130,7 @@ class Ronery extends Component {
           add friends
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color3}]} onPress={() => this.copyToClipboard()}>
+      <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color3}]} onPress={this.props.invitationDialog}>
         <Text style={styles.emptyButtonText}>
           invite someone
         </Text>
@@ -146,12 +140,13 @@ class Ronery extends Component {
 }
 
 CreateFloatScene.propTypes = {
-  loading: PropTypes.bool,
-  error:   PropTypes.string,
+  invitationDialog: PropTypes.func.isRequired,
+  loading:          PropTypes.bool,
+  error:            PropTypes.string,
   friends: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id:         PropTypes.string,
     avatar_url: PropTypes.string,
-    name: PropTypes.string,
+    name:       PropTypes.string,
   }))
 }
 
