@@ -22,12 +22,10 @@ class InviteButton extends Component {
   }
 
   render() { return (
-    <View style={[styles.box, base.padFullHorizontal, base.padMainItem]}>
+    <TouchableOpacity style={[styles.box, base.padFullHorizontal, base.padMainItem]} onPress={this.invitationDialog}>
       <Image style={[base.photoCircle]} source={require('../images/MissingProfileCircle.png')} />
-      <TouchableOpacity onPress={this.invitationDialog}>
-        <Text style={[styles.main, {marginRight: 10}]}>Missing Someone?</Text>
-      </TouchableOpacity>
-    </View>
+      <Text style={[styles.main, {marginRight: 10}]}>Missing Someone?</Text>
+    </TouchableOpacity>
   )}
 
   invitationDialog() {
@@ -93,5 +91,5 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 0,
     flex: 1,
-  }
+  },
 })
