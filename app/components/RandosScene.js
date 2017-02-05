@@ -86,7 +86,7 @@ export default class RandosScene extends Component {
 
 const styles = StyleSheet.create({
   bottom: {
-    height: 50,
+    height: 65,
     alignItems: 'center',
     justifyContent: 'center',
     borderTopWidth: StyleSheet.hairlineWidth,
