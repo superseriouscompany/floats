@@ -19,23 +19,23 @@ export default class TabBar extends Component {
     <View style={[styles.container]}>
       <TouchableOpacity style={styles.tabItem} onPress={() => this.props.navigator.navigate('FloatsScene')}>
         { this.props.active == 'floats' ?
-          <Image source={require('../images/HeartActive.png')} />
+          <Image source={require('../images/ChatTabIconActive.png')} />
         :
-          <Image source={require('../images/Heart.png')} />
+          <Image source={require('../images/ChatTabIcon.png')} />
         }
       </TouchableOpacity>
       <TouchableOpacity style={styles.tabItem} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
         { this.props.active == 'createFloat' ?
-          <Image source={require('../images/AirplaneActive.png')} />
+          <Image source={require('../images/CreateFloatTabIconActive.png')} />
         :
-          <Image source={require('../images/Airplane.png')} />
+          <Image source={require('../images/CreateFloatTabIcon.png')} />
         }
       </TouchableOpacity>
       <TouchableOpacity style={styles.tabItem} onPress={() => this.props.navigator.navigate('FriendsScene')}>
         { this.props.active == 'friends' ?
-          <Image source={require('../images/ProfileActive.png')} />
+          <Image source={require('../images/FriendsTabIconActive.png')} />
         :
-          <Image source={require('../images/Profile.png')} />
+          <Image source={require('../images/FriendsTabIcon.png')} />
         }
       </TouchableOpacity>
     </View>
@@ -45,6 +45,7 @@ export default class TabBar extends Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-around',
     paddingTop: 12,
     paddingBottom: 12,
