@@ -15,6 +15,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
+
 
 export default class FloatDialog extends Component {
   constructor(props) {
@@ -34,12 +36,22 @@ export default class FloatDialog extends Component {
           color={base.colors.mediumgrey}
         />
       :
-        <TouchableOpacity onPress={this.create.bind(this)}>
+        <TouchableOpacity onPress={this.letMeSeeThatLocalNotification.bind(this)}>
           <Image source={require('../images/PaperAirplane.png')} />
         </TouchableOpacity>
       }
     </View>
   )}
+
+  letMeSeeThatLocalNotification() {
+    FCM.presentLocalNotification({
+      title: "Mmmmmm",
+      body: "Dis is the body",
+      priority: "high",
+      show_in_foreground: true,
+      local: true
+    });
+  }
 
   create() {
     if( !this.state.text ) { return; }
