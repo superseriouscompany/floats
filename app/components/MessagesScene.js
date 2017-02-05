@@ -102,8 +102,9 @@ MessagesScene.propTypes = {
 
 const styles = StyleSheet.create({
   name: {
-    color: 'hotpink',
+    color: base.colors.mediumlightgrey,
     fontSize: base.fontSizes.small,
+    paddingLeft: 8.5
   },
   leftNavButton: {
     paddingTop: 21,
