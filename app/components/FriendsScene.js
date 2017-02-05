@@ -46,7 +46,7 @@ class FriendsScene extends Component {
         </TouchableOpacity>
       </View>
       <ScrollView
-        refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.friendRequests.loading || this.props.friends.loading} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
+        refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.friendRequests.loading || this.props.friends.loading || false} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
         { this.props.friendRequests.items && this.props.friendRequests.items.length ?
           <View style={[base.bgBreakingSection, {paddingBottom: 16}]}>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>

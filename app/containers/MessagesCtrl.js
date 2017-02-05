@@ -5,13 +5,18 @@ import { connect } from 'react-redux';
 import MessagesScene from '../components/MessagesScene';
 import {send} from '../actions/messages'
 import api from '../services/api';
-import {BackAndroid} from 'react-native'
+import branch from 'react-native-branch';
+import {
+  ActionSheetIOS,
+  BackAndroid,
+} from 'react-native'
 
 class MessagesCtrl extends Component {
   constructor(props) {
     super(props)
-    this.back = this.back.bind(this)
-    this.send = this.send.bind(this)
+    this.back         = this.back.bind(this)
+    this.send         = this.send.bind(this)
+    this.inviteDialog = this.inviteDialog.bind(this)
   }
 
   componentWillMount() {
@@ -42,8 +47,63 @@ class MessagesCtrl extends Component {
     this.props.dispatch(send(this.props.convo, message, pendingMessage));
   }
 
+  inviteDialog() {
+    if( !this.props.user || !this.props.user.id ) {
+      console.warn("No user set", JSON.stringify(this.props));
+    }
+    if( !this.props.float || !this.props.float.id ) {
+      console.warn("No float set", JSON.stringify(this.props));
+    }
+
+    let branchUniversalObject = branch.createBranchUniversalObject(
+      `floats/${this.props.float.id}/invite/${this.props.user.id}`,
+      {
+        metadata: {
+          inviter_id:  this.props.user.id,
+          float_id:    this.props.float.id,
+          float_token: this.props.float.token,
+        }
+      }
+    )
+
+    let linkProperties = {
+      feature: 'float-invitation',
+      channel: 'app'
+    }
+
+    let controlParams = {
+      '$ios_deepview': 'floats_deepview_vk8d',
+      '$og_title': "You don't have to write expiration logic",
+      '$og_description': 'If you store everything in memory',
+      '$og_image_url': 'http://i2.kym-cdn.com/entries/icons/original/000/022/138/reece.JPG',
+    }
+
+    branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
+      ActionSheetIOS.showShareActionSheetWithOptions({
+        url: payload.url,
+        message: this.props.float.title,
+      }, (error) => {
+        console.error(error);
+        alert(error.message);
+      }, (success, method) => {
+        if( success ) {
+          alert(`Shared via ${method}`)
+        } else {
+          alert('Not shared')
+        }
+      })
+    }).catch((err) => {
+      console.error(err);
+      alert(err.message);
+    });
+  }
+
   render() { return (
-    <MessagesScene {...this.props} back={this.back} send={this.send}/>
+    <MessagesScene
+      {...this.props}
+      back={this.back}
+      send={this.send}
+      inviteDialog={this.inviteDialog}/>
   )}
 }
 
@@ -54,15 +114,12 @@ function mapStateToProps(state) {
 
   if( !convo ) { console.warn("Couldn't find convo", JSON.stringify(state.convos)); return {} }
 
-  const otherName = convo.users[0].id == state.user.id
-    ? convo.users[1].name : convo.users[0].name;
-  const name = convo.users.length > 2 ? 'Group Message' : otherName;
-
   const messages = state.messages[state.convos.activeConvoId];
   const items = messages && messages.all ? [].concat(messages.all) : [];
 
+  let float;
   if( isPrimary(state, convo) ) {
-    let float = state.myFloats.all.find((f) => {
+    float = state.myFloats.all.find((f) => {
       return f.id === convo.float_id
     })
 
@@ -82,6 +139,10 @@ function mapStateToProps(state) {
     }
   }
 
+  const otherName = convo.users[0].id == state.user.id
+    ? convo.users[1].name : convo.users[0].name;
+  const name = convo.users.length > 2 ? float && float.title || 'Group Message' : otherName;
+
   return({
     loading:  messages.loading,
     error:    messages.error,
@@ -89,6 +150,7 @@ function mapStateToProps(state) {
     user:     state.user,
     name:     name,
     convo:    convo,
+    float:    float,
   })
 }
 
