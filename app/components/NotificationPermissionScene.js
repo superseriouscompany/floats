@@ -34,16 +34,13 @@ export default function(props) { return (
       <Text style={styles.subText}>
         you can leave a float at any time
       </Text>
-    </View>
 
-    <TouchableOpacity style={styles.button} onPress={() => props.navigator.navigate('CreateFloatScene')}>
-      <Text style={[styles.mainText, {}]}>
-        Allow Notifications
-      </Text>
-      <View style={styles.rightArrow}>
-        <Image source={require('../images/RightArrowLight.png')}/>
-      </View>
-    </TouchableOpacity>
+      <TouchableOpacity style={styles.emptyButtons} onPress={() => props.navigator.navigate('CreateFloatScene')}>
+        <Text style={styles.emptyButtonText}>
+          allow location
+        </Text>
+      </TouchableOpacity>
+    </View>
   </Image>
 )}
 
@@ -129,13 +126,13 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   textSection: {
-    flex: 0.333,
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: 25,
     paddingRight: 25,
-    marginBottom: 68,
+    paddingTop: 30,
+    paddingBottom: 30,
   },
   mainText: {
     textAlign: 'center',
@@ -146,23 +143,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 5,
   },
-  button: {
-    position: 'absolute',
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    left: 0,
-    right: 0,
-    justifyContent: 'center',
+  emptyButtons: {
+    width: 200,
+    height: 50,
+    borderRadius: 100,
+    marginTop: 20,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: base.colors.mediumlightgrey,
     alignItems: 'center',
-    bottom: 0,
-    height: 65,
-  },
-  rightArrow: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    bottom: 0,
-    paddingRight: 15,
     justifyContent: 'center'
-  }
+  },
+  emptyButtonText: {
+    color: base.colors.darkgrey,
+    textAlign: 'center'
+  },
 })
