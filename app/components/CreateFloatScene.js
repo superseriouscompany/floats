@@ -50,7 +50,9 @@ export default class CreateFloatScene extends Component {
             </TouchableOpacity>
           </View>
         : this.state.friends && !this.state.friends.length ?
-          <Ronery navigator={this.props.navigator} invitationDialog={this.props.invitationDialog}/>
+          <ScrollView style={{flex: 1}} refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading || false} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
+            <Ronery navigator={this.props.navigator} invitationDialog={this.props.invitationDialog}/>
+          </ScrollView>
         : this.state.friends && this.state.friends.length ?
           <View style={{flex: 1}}>
             <FloatDialog friends={this.state.friends.filter(selected)} />
