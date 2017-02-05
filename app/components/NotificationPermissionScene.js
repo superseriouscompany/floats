@@ -29,14 +29,14 @@ export default function(props) { return (
 
     <View style={styles.textSection}>
       <Text style={styles.mainText}>
-        If they can make it to your plan, they’ll message you through the app
+        If your friends want to tag along, they&#39;ll message you through the app
       </Text>
       <Text style={styles.subText}>
         you can leave a float at any time
       </Text>
       <TouchableOpacity style={styles.button} onPress={() => props.navigator.navigate('CreateFloatScene')}>
         <Text style={styles.mainText}>
-          Allow
+          Allow Notifications
         </Text>
       </TouchableOpacity>
     </View>
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     height: null,
   },
   backgroundSection: {
-    flex: 0.65,
+    flex: 0.666,
   },
   floatWithMembers: {
 
@@ -125,13 +125,13 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   textSection: {
-    flex: 0.35,
+    flex: 0.333,
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: 30,
     paddingRight: 30,
-    paddingBottom: 48,
+    paddingBottom: 64,
   },
   mainText: {
     textAlign: 'center',
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     bottom: 0,
-    height: 50,
+    height: 65,
     borderWidth: 1,
     borderColor: base.colors.lightgrey,
   },

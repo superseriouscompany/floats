@@ -17,16 +17,16 @@ export default function(props) { return (
     <StatusBar barStyle="light-content"/>
 
     <View style={styles.backgroundSection}>
-      <Balloon style={styles.leftFloat} source={require('../images/BlueFloat.png')}/>
-      <Balloon style={styles.centerFloat} source={require('../images/PinkFloat.png')}/>
-      <Balloon style={styles.rightFloat} source={require('../images/GreyFloat.png')}/>
+      <Balloon style={styles.leftFloat} lag={2} source={require('../images/BlueFloat.png')}/>
+      <Balloon style={styles.centerFloat} lag={1} source={require('../images/PinkFloat.png')}/>
+      <Balloon style={styles.rightFloat} lag={3} source={require('../images/GreyFloat.png')}/>
       <View style={styles.peopleRow}>
         <View style={styles.rowLeft}>
-          <Person style={{marginLeft: 26}}/>
+          <Person style={{marginLeft: 26}} gender="female"/>
         </View>
         <View style={styles.rowRight}>
-          <Person style={{marginRight: 48}}/>
-          <Person style={{marginRight: 18}}/>
+          <Person style={{marginRight: 48}} gender="female"/>
+          <Person style={{marginRight: 18}} gender="male"/>
         </View>
       </View>
     </View>
@@ -40,7 +40,7 @@ export default function(props) { return (
       </Text>
       <TouchableOpacity style={styles.button} onPress={() => props.navigator.navigate('NotificationPermissionScene')}a>
         <Text style={styles.mainText}>
-          Allow
+          Allow Location
         </Text>
       </TouchableOpacity>
     </View>
@@ -51,22 +51,15 @@ class Person extends Component {
   constructor(props) {
      super(props);
      this.state = {
-       fadeAnim: new Animated.Value(0),
+       offsetY: new Animated.Value(0),
      };
-   }
-
-   componentDidMount() {
-     Animated.timing(
-       this.state.fadeAnim,
-       {toValue: 1, duration: 3000, delay: 2000}
-     ).start();
    }
 
   render() {
      return (
        <Animated.Image
-       style={[this.props.style, {opacity: this.state.fadeAnim}]}
-       source={require('../images/Person.png')}>
+       style={[this.props.style, {transform: [{translateY: this.state.offsetY}]}]}
+       source={this.props.gender == 'female' ? require('../images/Woman.png') : require('../images/Man.png')}>
          {this.props.children}
        </Animated.Image>
      );
@@ -77,7 +70,7 @@ class Balloon extends Component {
   constructor(props) {
      super(props);
      this.state = {
-       offsetY: new Animated.Value(20),
+       offsetY: new Animated.Value(0),
      };
    }
 
@@ -90,9 +83,9 @@ class Balloon extends Component {
        Animated.timing(
          this.state.offsetY,
          {
-           toValue: -10,
+           toValue: -20 + (this.props.lag * 3),
            easing: Easing.inOut(Easing.ease),
-           duration: 2500
+           duration: 2700 + (this.props.lag * 100)
          }
        ),
        Animated.timing(
@@ -100,7 +93,7 @@ class Balloon extends Component {
          {
            toValue: 0,
            easing: Easing.inOut(Easing.ease),
-           duration: 2000
+           duration: 2500 + (this.props.lag * 100)
          }
        )
      ]).start(event => {
@@ -128,23 +121,23 @@ const styles = StyleSheet.create({
     height: null,
   },
   backgroundSection: {
-    flex: 0.65,
+    flex: 0.666,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   leftFloat: {
     marginLeft: 35,
-    marginBottom: 159,
+    marginBottom: 149,
   },
   centerFloat: {
     marginRight: 35,
     marginLeft: 25,
-    marginTop: 15,
+    marginTop: 35,
   },
   rightFloat: {
     marginRight: 25,
-    marginBottom: 219,
+    marginBottom: 200,
   },
   peopleRow: {
     flexDirection: 'row',
@@ -167,13 +160,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   textSection: {
-    flex: 0.35,
+    flex: 0.333,
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingBottom: 48,
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingBottom: 64,
   },
   mainText: {
     textAlign: 'center',
@@ -191,8 +184,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     bottom: 0,
-    height: 50,
-    borderWidth: 1,
-    borderColor: base.colors.lightgrey,
+    height: 65,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: base.colors.mediumlightgrey,
   },
 })
