@@ -16,6 +16,7 @@ class CreateFloatCtrl extends Component {
     super(props);
     this.refresh          = this.refresh.bind(this);
     this.invitationDialog = this.invitationDialog.bind(this)
+    this.isSharing        = false;
   }
 
   componentDidMount() {
@@ -41,6 +42,8 @@ class CreateFloatCtrl extends Component {
     if( !this.props.user || !this.props.user.id ) {
       console.warn("No user set", JSON.stringify(this.props));
     }
+    if( this.isSharing ) { return }
+    this.isSharing = true;
 
     let branchUniversalObject = branch.createBranchUniversalObject(
       `friends/invite/${this.props.user.id}`,
@@ -64,6 +67,7 @@ class CreateFloatCtrl extends Component {
     }
 
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((thing) => {
+      this.isSharing = false;
       ActionSheetIOS.showShareActionSheetWithOptions({
         url: thing.url,
         message: 'Download Floats',
@@ -71,13 +75,9 @@ class CreateFloatCtrl extends Component {
         console.error(error);
         alert(error.message);
       }, (success, method) => {
-        if( success ) {
-          alert(`Shared via ${method}`)
-        } else {
-          alert('Not shared')
-        }
       })
     }).catch((err) => {
+      this.isSharing = false;
       console.error(err);
       alert(err.message);
     });

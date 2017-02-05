@@ -17,6 +17,7 @@ class MessagesCtrl extends Component {
     this.back         = this.back.bind(this)
     this.send         = this.send.bind(this)
     this.inviteDialog = this.inviteDialog.bind(this)
+    this.isSharing    = false;
   }
 
   componentWillMount() {
@@ -54,6 +55,8 @@ class MessagesCtrl extends Component {
     if( !this.props.float || !this.props.float.id ) {
       console.warn("No float set", JSON.stringify(this.props));
     }
+    if( this.isSharing ) { return; }
+    this.isSharing = true;
 
     let branchUniversalObject = branch.createBranchUniversalObject(
       `floats/${this.props.float.id}/invite/${this.props.user.id}`,
@@ -79,6 +82,7 @@ class MessagesCtrl extends Component {
     }
 
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
+      this.isSharing = false;
       ActionSheetIOS.showShareActionSheetWithOptions({
         url: payload.url,
         message: this.props.float.title,
@@ -86,13 +90,9 @@ class MessagesCtrl extends Component {
         console.error(error);
         alert(error.message);
       }, (success, method) => {
-        if( success ) {
-          alert(`Shared via ${method}`)
-        } else {
-          alert('Not shared')
-        }
       })
     }).catch((err) => {
+      this.isSharing = false;
       console.error(err);
       alert(err.message);
     });
