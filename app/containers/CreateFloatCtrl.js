@@ -71,11 +71,6 @@ class CreateFloatCtrl extends Component {
         console.error(error);
         alert(error.message);
       }, (success, method) => {
-        if( success ) {
-          alert(`Shared via ${method}`)
-        } else {
-          alert('Not shared')
-        }
       })
     }).catch((err) => {
       console.error(err);
