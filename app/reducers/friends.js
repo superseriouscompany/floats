@@ -20,6 +20,48 @@ export default function friends(state = {}, action) {
         loading: false,
         error: action.error,
       }
+    case 'friends:block:load':
+      return {
+        ...state,
+        items: state.items.map((f) => {
+          if( f.friend_id == action.id ) {
+            f.loading = true;
+          }
+          return f;
+        })
+      }
+    case 'friends:block:no':
+      return {
+        ...state,
+        items: state.items.map((f) => {
+          if( f.friend_id == action.id ) {
+            f.loading = false;
+            f.error    = action.error;
+          }
+          return f;
+        })
+      }
+    case 'friends:unblock:load':
+      return {
+        ...state,
+        enemies: state.enemies.map((f) => {
+          if( f.friend_id == action.id ) {
+            f.loading = true;
+          }
+          return f;
+        })
+      }
+    case 'friends:unblock:no':
+      return {
+        ...state,
+        enemies: state.enemies.map((f) => {
+          if( f.friend_id == action.id ) {
+            f.loading = false;
+            f.error    = action.error;
+          }
+          return f;
+        })
+      }
     default:
       return state;
   }

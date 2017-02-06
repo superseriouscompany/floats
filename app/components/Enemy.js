@@ -18,7 +18,7 @@ export default class Enemy extends Component {
       <Image style={[base.photoCircle]} source={{uri: this.props.enemy.avatar_url}}/>
       <Text style={[styles.main, {marginRight: 10}]}>{this.props.enemy.name}</Text>
 
-      { true ?
+      { this.props.enemy.loading ?
         <ActivityIndicator
           style={[base.buttonLoader, {width: 28, height: 28}]}
           size="small"

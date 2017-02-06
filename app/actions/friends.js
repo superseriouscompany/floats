@@ -26,7 +26,7 @@ export function fetchFriends(cacheTime) {
 
 export function block(id) {
   return function(dispatch) {
-    dispatch({type: 'friends:block:load'});
+    dispatch({type: 'friends:block:load', id: id});
 
     api.friends.block(id).then(function() {
       dispatch({
@@ -46,7 +46,7 @@ export function block(id) {
 
 export function unblock(id) {
   return function(dispatch) {
-    dispatch({type: 'friends:unblock:load'});
+    dispatch({type: 'friends:unblock:load', id: id});
 
     api.friends.unblock(id).then(function() {
       dispatch({
