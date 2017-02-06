@@ -16,7 +16,16 @@ import {
 
 
 class AuthedCtrl extends Component {
+  componentWillMount() {
+  }
+
   componentDidMount() {
+    if( !this.props.user ) {
+      this.props.navigator.navigate('LoginScene');
+    }
+    if( this.props.deeplinks.length ) {
+      console.warn('Got deeplinks', this.props.deeplinks);
+    }
     console.warn('mounted');
   }
 
@@ -47,7 +56,8 @@ class AuthedCtrl extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
+    user:      state.user,
+    deeplinks: state.deeplinks,
   };
 }
 
