@@ -334,7 +334,7 @@ const api = {
   },
 
   killSwitch: function(platform, version) {
-    return fetch(`${baseUrl}/kill/${platform}/${version}`).then(function(response) {
+    return fetch(`${baseUrl}/killswitch/${platform}/${version}`).then(function(response) {
       if( response.status === 404 ) {
         return false;
       } else if( response.status === 410 ) {
