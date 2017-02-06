@@ -99,6 +99,13 @@ class PushCtrl extends Component {
             console.warn("Unknown notification", notif);
           }
         }
+      } else if(Platform.OS === 'android') {
+        FCM.presentLocalNotification({
+          body: notif.fcm && notif.fcm.body || notif.body,
+          priority: "high",
+          show_in_foreground: true,
+          local: true
+        });
       }
     });
   }
