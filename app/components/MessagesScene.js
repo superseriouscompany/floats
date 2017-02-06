@@ -107,15 +107,11 @@ const styles = StyleSheet.create({
     paddingLeft: 8.5
   },
   leftNavButton: {
-    paddingTop: 21,
-    paddingBottom: 17,
+    padding: 17,
     paddingLeft: 19,
-    paddingRight: 14
   },
   rightNavButton: {
-    paddingTop: 22,
-    paddingBottom: 22,
-    paddingLeft: 14,
-    paddingRight: 19
-  }
+    padding: 17,
+    paddingRight: 19,
+  },
 });
