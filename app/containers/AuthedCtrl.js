@@ -16,12 +16,10 @@ import {
   View
 } from 'react-native'
 
+var defaultScene = 'CreateFloatScene';
 
 class AuthedCtrl extends Component {
   componentWillMount() {
-  }
-
-  componentDidMount() {    
     if( !this.props.user ) {
       this.props.navigator.navigate('LoginScene');
     }
@@ -34,6 +32,21 @@ class AuthedCtrl extends Component {
         console.warn(err);
       })
     }
+
+    Promise.all([
+      Permissions.getPermissionStatus('location'),
+      Permissions.getPermissionStatus('notification'),
+    ]).then((v) => {
+      const locationStatus = v[0];
+      const notificationStatus = v[1];
+      if( locationStatus == 'undetermined' ) {
+        return this.props.navigator.navigate('BackgroundPermissionScene')
+      } else if( notificationStatus == 'undetermined' ) {
+        return this.props.navigator.navigate('NotificationPermissionScene');
+      }
+
+      this.props.navigator.navigate(defaultScene);
+    })
   }
 
   render() { return (
@@ -55,7 +68,7 @@ class AuthedCtrl extends Component {
       : this.props.scene == 'Scratch' ?
         <Scratch />
       :
-        <Text style={{padding: 200}}>404</Text>
+        null
       }
     </View>
   )}

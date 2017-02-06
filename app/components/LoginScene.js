@@ -79,11 +79,7 @@ export default class LoginScene extends Component {
         this.context.store.dispatch({type: 'login', user: user})
       })
     }).then(() => {
-      if( isExisting ) {
-        this.props.navigator.navigate('CreateFloatScene');
-      } else {
-        this.props.navigator.navigate('BackgroundPermissionScene');
-      }
+      this.props.navigator.navigate('AuthedScene');
     }).catch(function(err) {
       if( err.message == 'nope' ) {
         if( shouldAlert ) { alert('Not logged in'); }
