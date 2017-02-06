@@ -44,7 +44,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>8</string>
+	<string>9</string>
 	<key>FacebookAppID</key>
 	<string>1425876794111744</string>
 	<key>FacebookDisplayName</key>
@@ -69,6 +69,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>We do not use this, but it's linked in a library to check location permission status</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>We do not use this, but it's linked in a library to check location permission status</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Where you at doe</string>
 	<key>UIAppFonts</key>
