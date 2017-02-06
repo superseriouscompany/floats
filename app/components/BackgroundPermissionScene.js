@@ -2,6 +2,7 @@ import React from 'react';
 import Component from '../components/Component';
 import Text from './Text';
 import base from '../styles/base';
+import api from '../services/api';
 import {
   Animated,
   Easing,
@@ -12,7 +13,29 @@ import {
   View,
 } from 'react-native';
 
-export default function(props) { return (
+export default class BackgroundPermissionScene extends Component {
+  constructor(props) {
+    super(props)
+    this.showDialog = this.showDialog.bind(this)
+  }
+
+  showDialog() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        api.pins.create({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
+        this.props.navigator.navigate('NotificationPermissionScene')
+      },
+      (error) => {
+        this.props.navigator.navigate('NotificationPermissionScene')
+      },
+      {enableHighAccuracy: false, timeout: 10000, maximumAge: 10000}
+    )
+  }
+
+  render() { return (
   <Image style={styles.skyBackground} source={require('../images/SkyBackground.jpg')}>
     <StatusBar barStyle="light-content"/>
 
@@ -39,14 +62,15 @@ export default function(props) { return (
         your location is never shared
       </Text>
 
-      <TouchableOpacity style={styles.emptyButtons} onPress={() => props.navigator.navigate('NotificationPermissionScene')}>
+      <TouchableOpacity style={styles.emptyButtons} onPress={this.showDialog}>
         <Text style={styles.emptyButtonText}>
           allow location
         </Text>
       </TouchableOpacity>
     </View>
   </Image>
-)}
+  )}
+}
 
 class Person extends Component {
   constructor(props) {

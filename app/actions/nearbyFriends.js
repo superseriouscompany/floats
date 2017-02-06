@@ -9,7 +9,6 @@ export function fetchNearbyFriends(cacheTime) {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        var initialPosition = JSON.stringify(position);
         api.pins.create({
           lat: position.coords.latitude,
           lng: position.coords.longitude,

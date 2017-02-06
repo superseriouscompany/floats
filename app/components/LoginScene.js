@@ -82,7 +82,7 @@ export default class LoginScene extends Component {
       if( isExisting ) {
         this.props.navigator.navigate('CreateFloatScene');
       } else {
-        this.props.navigator.navigate('BackgroundPermissionScene');        
+        this.props.navigator.navigate('BackgroundPermissionScene');
       }
     }).catch(function(err) {
       if( err.message == 'nope' ) {
