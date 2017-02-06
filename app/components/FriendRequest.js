@@ -5,6 +5,7 @@ import Component from './Component';
 import Text from './Text';
 import base from '../styles/base';
 import {
+  ActivityIndicator,
   Image,
   StyleSheet,
   TouchableOpacity,
@@ -15,17 +16,25 @@ export default class FriendRequest extends Component {
   render() { return (
     <View style={[base.padFullHorizontal, base.padMainItem, styles.box]}>
       <Image style={[styles.image]} source={{uri: this.props.friend.avatar_url}}/>
-      <View style={styles.right}>
-        <Text>{this.props.friend.name}</Text>
-        <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity style={[styles.button, {backgroundColor: base.colors.color2}]} onPress={() => this.props.accept(this.props.friend.id)}>
-            <Text style={styles.confirm}>confirm</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, {backgroundColor: base.colors.lightgrey}]} onPress={() => this.props.deny(this.props.friend.id)}>
-            <Text style={styles.nah}>nah</Text>
-          </TouchableOpacity>
+      { true ?
+        <ActivityIndicator
+          style={[base.buttonLoader, {height: 63, width: 63}]}
+          size="small"
+          color={base.colors.mediumgrey}
+        />
+      :
+        <View style={styles.right}>
+          <Text>{this.props.friend.name}</Text>
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={[styles.button, {backgroundColor: base.colors.color2}]} onPress={() => this.props.accept(this.props.friend.id)}>
+              <Text style={styles.confirm}>confirm</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, {backgroundColor: base.colors.lightgrey}]} onPress={() => this.props.deny(this.props.friend.id)}>
+              <Text style={styles.nah}>nah</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      }
     </View>
   )}
 
