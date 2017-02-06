@@ -16,6 +16,7 @@ import navigation from './navigation';
 import killed from './killSwitch'
 import friends from './friends'
 import friendRequests from './friendRequests'
+import deeplinks from './deeplinks'
 const middleware = [thunk];
 if( __DEV__ ) {
   middleware.push(createLogger());
@@ -32,6 +33,7 @@ const reducers = combineReducers({
   killed,
   friends,
   friendRequests,
+  deeplinks,
 })
 
 const store = createStore(

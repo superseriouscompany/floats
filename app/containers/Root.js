@@ -1,19 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { ActionSheetProvider } from '@exponent/react-native-action-sheet';
-import CreateFloatCtrl from '../containers/CreateFloatCtrl';
-import FloatsCtrl from '../containers/FloatsCtrl';
-import MessagesCtrl from '../containers/MessagesCtrl';
 import KillSwitchCtrl from '../containers/KillSwitchCtrl';
-import FriendsCtrl from '../containers/FriendsCtrl';
 import PushCtrl from '../containers/PushCtrl';
 import DeepLinkCtrl from '../containers/DeepLinkCtrl';
 import LoginScene from '../components/LoginScene';
-import RandosScene from '../components/RandosScene';
-import BackgroundPermissionScene from '../components/BackgroundPermissionScene';
-import NotificationPermissionScene from '../components/NotificationPermissionScene';
+import AuthedCtrl from '../containers/AuthedCtrl';
 import Scratch from '../components/Scratch';
-import Text from '../components/Text';
 import api from '../services/api';
 import store from '../services/store';
 import God from '../services/god';
@@ -24,8 +17,6 @@ import {
   AppRegistry,
   View,
 } from 'react-native';
-
-var defaultScene = 'CreateFloatScene';
 
 export default class Root extends Component {
   constructor(props) {
@@ -42,7 +33,7 @@ export default class Root extends Component {
     AsyncStorage.getItem('@floats:user').then((user) => {
       if( user ) {
         store.dispatch({type: 'login', user: JSON.parse(user)});
-        this.setState({scene: defaultScene});
+        this.setState({scene: 'AuthedScene'});
       } else {
         this.setState({scene: 'LoginScene'});
       }
@@ -69,24 +60,10 @@ export default class Root extends Component {
                 <View style={{flex: 1}}>
                   { this.state.scene == 'LoginScene' ?
                     <LoginScene navigator={this.navigator} />
-                  : this.state.scene == 'CreateFloatScene' ?
-                    <CreateFloatCtrl navigator={this.navigator} />
-                  : this.state.scene == 'FloatsScene' ?
-                    <FloatsCtrl navigator={this.navigator} />
-                  : this.state.scene == 'FriendsScene' ?
-                    <FriendsCtrl navigator={this.navigator} />
-                  : this.state.scene == 'RandosScene' ?
-                    <RandosScene navigator={this.navigator} />
-                  : this.state.scene == 'MessagesScene' ?
-                    <MessagesCtrl navigator={this.navigator} />
-                  : this.state.scene == 'BackgroundPermissionScene' ?
-                    <BackgroundPermissionScene navigator={this.navigator} />
-                  : this.state.scene == 'NotificationPermissionScene' ?
-                    <NotificationPermissionScene navigator={this.navigator} />
                   : this.state.scene == 'Scratch' ?
-                    <Scratch />
+                    <Scratch navigator={this.navigator} />
                   : !!this.state.scene ?
-                    <Text style={{padding: 200}}>404</Text>
+                    <AuthedCtrl scene={this.state.scene} navigator={this.navigator} />
                   :
                     null
                   }
