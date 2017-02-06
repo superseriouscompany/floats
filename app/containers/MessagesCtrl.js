@@ -86,7 +86,7 @@ class MessagesCtrl extends Component {
         message: this.props.float.title,
         url: payload.url,
       }, {
-        dialogTitle: 'Dis cool',
+        dialogTitle: 'Add friends',
         tintColor: 'blue'
       })
     }).then((result) => {

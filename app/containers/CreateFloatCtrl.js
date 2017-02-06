@@ -67,7 +67,7 @@ class CreateFloatCtrl extends Component {
         message: 'Download Floats',
         url: thing.url,
       }, {
-        dialogTitle: 'Dis cool',
+        dialogTitle: 'Invite Friends',
         tintColor: 'blue'
       })
     }).then(() => {
