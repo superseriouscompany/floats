@@ -42,7 +42,7 @@ export default class MessagesScene extends Component {
             <Heading>{this.props.name}</Heading>
           </View>
           { this.props.isPrimary ?
-            <TouchableOpacity onPress={() => this.showOptions()} style={[base.rightNav, styles.rightNavButton]}>
+            <TouchableOpacity onPress={() => this.props.navigator.navigate('MembersScene')} style={[base.rightNav, styles.rightNavButton]}>
               <Image source={require('../images/AddUsersToFloatIcon.png')} />
             </TouchableOpacity>
           : null }
