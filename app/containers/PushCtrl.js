@@ -99,9 +99,9 @@ class PushCtrl extends Component {
             console.warn("Unknown notification", notif);
           }
         }
-      } else if(Platform.OS === 'android') {
+      } else if(Platform.OS === 'android' && notif.fcm && notif.fcm.body) {
         FCM.presentLocalNotification({
-          body: notif.fcm && notif.fcm.body || notif.body,
+          body: notif.fcm.body,
           priority: "high",
           show_in_foreground: true,
           local: true
