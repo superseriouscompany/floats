@@ -12,6 +12,7 @@ import base from '../styles/base';
 import {
   ActivityIndicator,
   AsyncStorage,
+  Image,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -51,6 +52,9 @@ export default class RandosScene extends Component {
   render() { return (
     <View style={base.screen}>
       <View style={base.header}>
+        <TouchableOpacity onPress={() => this.props.navigator.navigate('FriendsScene')} style={[base.leftNav, styles.leftNavButton]}>
+          <Image source={require('../images/SmallLeftArrow.png')} />
+        </TouchableOpacity>
         <Heading>find friends</Heading>
       </View>
 
@@ -91,5 +95,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: base.colors.lightgrey,
-  }
+  },
+  leftNavButton: {
+    padding: 17,
+    paddingLeft: 19,
+  },
 })
