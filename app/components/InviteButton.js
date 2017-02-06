@@ -56,9 +56,8 @@ class InviteButton extends Component {
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
       console.warn('sharing url', payload.url, JSON.stringify(payload))
       Share.share({
-        message: 'Download Floats',
+        message: Platform.OS == 'android' ? `Download Floats ${payload.url}` : 'Download Floats',
         url: payload.url,
-        title: 'Fuck yourself',
       }, {
         dialogTitle: 'Invite Friends',
         tintColor: 'blue'
