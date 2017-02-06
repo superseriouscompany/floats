@@ -2,6 +2,7 @@ import React from 'react';
 import Component from '../components/Component';
 import Text from './Text';
 import base from '../styles/base';
+import FCM from 'react-native-fcm'
 import {
   Animated,
   Dimensions,
@@ -15,34 +16,46 @@ import {
 
 const screenWidth = Dimensions.get('window').width;
 
-export default function(props) { return (
-  <Image style={styles.skyBackground} source={require('../images/SkyBackground.jpg')}>
-    <StatusBar barStyle="light-content"/>
+export default class NotificationPermissionScene extends Component {
+  constructor(props) {
+    super(props);
+    this.getPermissions = this.getPermissions.bind(this)
+  }
 
-    <View style={styles.backgroundSection}>
-      <BalloonWithMembers style={styles.floatWithMembers} source={require('../images/FloatWithMembers.png')}/>
+  getPermissions() {
+    FCM.requestPermissions()
+    this.props.navigator.navigate('CreateFloatScene')
+  }
 
-      <View style={styles.peopleRow}>
-        <Person/>
+  render() { return (
+    <Image style={styles.skyBackground} source={require('../images/SkyBackground.jpg')}>
+      <StatusBar barStyle="light-content"/>
+
+      <View style={styles.backgroundSection}>
+        <BalloonWithMembers style={styles.floatWithMembers} source={require('../images/FloatWithMembers.png')}/>
+
+        <View style={styles.peopleRow}>
+          <Person/>
+        </View>
       </View>
-    </View>
 
-    <View style={styles.textSection}>
-      <Text style={styles.mainText}>
-        If your friends want to tag along, they&#39;ll message you through the app
-      </Text>
-      <Text style={styles.subText}>
-        you can leave a float at any time
-      </Text>
-
-      <TouchableOpacity style={styles.emptyButtons} onPress={() => props.navigator.navigate('CreateFloatScene')}>
-        <Text style={styles.emptyButtonText}>
-          allow location
+      <View style={styles.textSection}>
+        <Text style={styles.mainText}>
+          If your friends want to tag along, they&#39;ll message you through the app
         </Text>
-      </TouchableOpacity>
-    </View>
-  </Image>
-)}
+        <Text style={styles.subText}>
+          you can leave a float at any time
+        </Text>
+
+        <TouchableOpacity style={styles.emptyButtons} onPress={this.getPermissions}>
+          <Text style={styles.emptyButtonText}>
+            allow notifications
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </Image>
+  )}
+}
 
 class BalloonWithMembers extends Component {
   constructor(props) {

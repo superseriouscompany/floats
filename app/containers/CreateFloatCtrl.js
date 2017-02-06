@@ -22,8 +22,6 @@ class CreateFloatCtrl extends Component {
   componentDidMount() {
     this.props.dispatch(fetchNearbyFriends(this.props.cacheTime));
 
-    // FIXME: move this to its own container and retry as long as it's not set
-    FCM.requestPermissions();
     FCM.getFCMToken().then( (token) => {
       if( !token ) { return console.warn("No firebase token available."); }
       api.sessions.updateFirebaseToken(token);
