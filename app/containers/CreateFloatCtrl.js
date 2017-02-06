@@ -8,7 +8,7 @@ import FCM, {FCMEvent} from 'react-native-fcm';
 import api from '../services/api';
 import branch from 'react-native-branch';
 import {
-  ActionSheetIOS
+  Share
 } from 'react-native'
 
 class CreateFloatCtrl extends Component {
@@ -63,14 +63,15 @@ class CreateFloatCtrl extends Component {
 
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((thing) => {
       this.isSharing = false;
-      ActionSheetIOS.showShareActionSheetWithOptions({
-        url: thing.url,
+      return Share.share({
         message: 'Download Floats',
-      }, (error) => {
-        console.error(error);
-        alert(error.message);
-      }, (success, method) => {
+        url: thing.url,
+      }, {
+        dialogTitle: 'Dis cool',
+        tintColor: 'blue'
       })
+    }).then(() => {
+      this.isSharing = false;
     }).catch((err) => {
       this.isSharing = false;
       console.error(err);

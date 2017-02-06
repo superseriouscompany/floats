@@ -7,7 +7,7 @@ import {send} from '../actions/messages'
 import api from '../services/api';
 import branch from 'react-native-branch';
 import {
-  ActionSheetIOS,
+  Share,
   BackAndroid,
 } from 'react-native'
 
@@ -81,19 +81,21 @@ class MessagesCtrl extends Component {
 
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
       this.isSharing = false;
-      ActionSheetIOS.showShareActionSheetWithOptions({
-        url: payload.url,
+
+      return Share.share({
         message: this.props.float.title,
-      }, (error) => {
-        console.error(error);
-        alert(error.message);
-      }, (success, method) => {
+        url: payload.url,
+      }, {
+        dialogTitle: 'Dis cool',
+        tintColor: 'blue'
       })
-    }).catch((err) => {
+    }).then((result) => {
       this.isSharing = false;
-      console.error(err);
-      alert(err.message);
-    });
+    }).catch((error) => {
+      this.isSharing = false;
+      console.error(error);
+      alert(error.message);
+    })
   }
 
   render() { return (
