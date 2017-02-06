@@ -24,9 +24,9 @@ export function processDeeplink(bundle, user) {
       case 'float-invitation':
         dispatch(send(bundle.params.inviter_id))
         return dispatch(joinFloat(bundle.params.float_id, bundle.params.float_token)).then(() => {
-          this.props.dispatch({type: 'dirty'})
+          dispatch({type: 'dirty'})
 
-          this.props.dispatch({
+          dispatch({
             type: 'navigation:queue',
             route: 'FloatsScene',
           })
