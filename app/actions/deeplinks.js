@@ -16,11 +16,6 @@ export function processDeeplink(bundle, user) {
         }).catch((err) => {
           console.warn(err);
         })
-        return dispatch(send(bundle.params.inviter_id)).then(() => {
-          console.warn('Sent friend request.');
-        }).catch((err) => {
-          console.warn(err);
-        })
       case 'float-invitation':
         dispatch(send(bundle.params.inviter_id))
         return dispatch(joinFloat(bundle.params.float_id, bundle.params.float_token)).then(() => {
