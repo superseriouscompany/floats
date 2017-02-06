@@ -53,12 +53,13 @@ class InviteButton extends Component {
       '$ios_deepview': 'floats_deepview_vk8d',
     }
 
-    branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((thing) => {
+    branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
+      console.warn('sharing url', payload.url, JSON.stringify(payload))
       Share.share({
         message: 'Download Floats',
-        url: thing.url,
+        url: payload.url,
       }, {
-        dialogTitle: 'Dis cool',
+        dialogTitle: 'Invite Friends',
         tintColor: 'blue'
       })
     }).then(() => {
