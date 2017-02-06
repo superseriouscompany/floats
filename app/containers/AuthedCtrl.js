@@ -25,7 +25,7 @@ class AuthedCtrl extends Component {
     }
     if( this.props.deeplinks.length ) {
       Promise.all(this.props.deeplinks.map((dl) => {
-        return this.props.dispatch(processDeeplink(dl))
+        return this.props.dispatch(processDeeplink(dl, this.props.user))
       })).then(() => {
         this.props.dispatch({type: 'deeplinks:purge'})
       }).catch((err) => {

@@ -26,7 +26,7 @@ class DeepLinkCtrl extends Component {
       }
 
       console.warn('Got a deeplink bundle', JSON.stringify(bundle));
-      if( !this.props.user ) {
+      if( !this.props.user.id ) {
         return this.props.dispatch({type: 'deeplinks:queue', payload: bundle});
       } else {
         processDeeplink(bundle, this.props.user);
