@@ -9,6 +9,8 @@ import CreateFloatCtrl from '../containers/CreateFloatCtrl';
 import RandosScene from '../components/RandosScene';
 import BackgroundPermissionScene from '../components/BackgroundPermissionScene';
 import NotificationPermissionScene from '../components/NotificationPermissionScene';
+import Permissions from 'react-native-permissions'
+import {processDeeplink} from '../actions/deeplinks';
 import {
   Text,
   View
@@ -19,14 +21,19 @@ class AuthedCtrl extends Component {
   componentWillMount() {
   }
 
-  componentDidMount() {
+  componentDidMount() {    
     if( !this.props.user ) {
       this.props.navigator.navigate('LoginScene');
     }
     if( this.props.deeplinks.length ) {
-      console.warn('Got deeplinks', this.props.deeplinks);
+      Promise.all(this.props.deeplinks.map((dl) => {
+        return this.props.dispatch(processDeeplink(dl))
+      })).then(() => {
+        this.props.dispatch({type: 'deeplinks:purge'})
+      }).catch((err) => {
+        console.warn(err);
+      })
     }
-    console.warn('mounted');
   }
 
   render() { return (

@@ -64,10 +64,10 @@ export default class Root extends Component {
                     <LoginScene navigator={this.navigator} />
                   : this.state.scene == 'Scratch' ?
                     <Scratch navigator={this.navigator} />
-                  : !this.state.scene ?
-                    null
-                  :
+                  : !!this.state.scene ?
                     <AuthedCtrl scene={this.state.scene} navigator={this.navigator} />
+                  :
+                    null
                   }
                 </View>
               </PushCtrl>
