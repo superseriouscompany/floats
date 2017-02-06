@@ -231,7 +231,6 @@ const styles = StyleSheet.create({
     width: 54,
     height: 54,
     borderRadius: 27,
-    borderWidth: 1,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: base.colors.lightgrey,
   },

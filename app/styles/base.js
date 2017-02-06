@@ -135,7 +135,6 @@ module.exports = StyleSheet.create({
     width: 25,
     height: 25,
     borderRadius: 12.5,
-    borderWidth: 1,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.lightgrey,
   },
