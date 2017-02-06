@@ -1,7 +1,7 @@
 package com.superserious.floats;
 
 import android.content.Intent;
-
+import io.branch.rnbranch.*;
 import com.facebook.react.ReactActivity;
 
 public class MainActivity extends ReactActivity {
@@ -19,5 +19,16 @@ public class MainActivity extends ReactActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         MainApplication.getCallbackManager().onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        RNBranchModule.initSession(this.getIntent().getData(), this);
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        this.setIntent(intent);
     }
 }
