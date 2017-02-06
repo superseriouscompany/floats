@@ -26,6 +26,20 @@ export default function friendRequests(state = {}, action) {
         items: state.items.map((fr) => {
           if( fr.user.id == action.id ) {
             fr.loading = true;
+          } else {
+            console.warn(fr.user.id, action.id);
+          }
+          return fr;
+        })
+      }
+    case 'friendRequests:accept:no':
+    case 'friendRequests:deny:no':
+      return {
+        ...state,
+        items: state.items.map((fr) => {
+          if( fr.user.id == action.id ) {
+            fr.loading = true;
+            fr.error = action.error.message
           }
           return fr;
         })

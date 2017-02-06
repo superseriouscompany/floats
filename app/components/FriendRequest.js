@@ -13,11 +13,10 @@ import {
 } from 'react-native';
 
 export default class FriendRequest extends Component {
-  render() { console.log("YO " + this.props.friend.avatar_url);
-  return (
+  render() { return (
     <View style={[base.padFullHorizontal, base.padMainItem, styles.box]}>
       <Image style={[styles.image]} source={{uri: this.props.friend.avatar_url}}/>
-      { true ?
+      { this.props.friend.loading ?
         <ActivityIndicator
           style={[base.buttonLoader, {height: 63, width: 63}]}
           size="small"
@@ -38,14 +37,6 @@ export default class FriendRequest extends Component {
       }
     </View>
   )}
-
-  accept() {
-    alert('accept');
-  }
-
-  deny() {
-    alert('deny');
-  }
 }
 
 FriendRequest.propTypes = {
