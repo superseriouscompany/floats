@@ -19,6 +19,17 @@ export default function friendRequests(state = {}, action) {
         loading: false,
         error: action.error,
       }
+    case 'friendRequests:accept:load':
+    case 'friendRequests:deny:load':
+      return {
+        ...state,
+        items: state.items.map((fr) => {
+          if( fr.user.id == action.id ) {
+            fr.loading = true;
+          }
+          return fr;
+        })
+      }
     default:
       return state;
   }

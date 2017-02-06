@@ -23,7 +23,7 @@ export default class Friend extends Component {
       <Image style={[base.photoCircle]} source={{uri: this.props.friend.avatar_url}}/>
       <Text style={[styles.main, {marginRight: 10}]}>{this.props.friend.name}</Text>
 
-      { true ?
+      { this.props.friend.loading ?
         <ActivityIndicator
           style={[base.buttonLoader, {width: 28, height: 28}]}
           size="small"
