@@ -13,7 +13,8 @@ import {
 } from 'react-native';
 
 export default class FriendRequest extends Component {
-  render() { return (
+  render() { console.log("YO " + this.props.friend.avatar_url);
+  return (
     <View style={[base.padFullHorizontal, base.padMainItem, styles.box]}>
       <Image style={[styles.image]} source={{uri: this.props.friend.avatar_url}}/>
       { true ?
