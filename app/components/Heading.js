@@ -11,7 +11,7 @@ import {
 export default class Heading extends Component {
   render() { return (
     <View style={base.textHeader}>
-      <Text style={{fontSize: 16}}>{this.props.children}</Text>
+      <Text numberOfLines={1} style={{fontSize: 16}}>{this.props.children}</Text>
     </View>
   )}
 }

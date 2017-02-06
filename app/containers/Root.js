@@ -26,6 +26,7 @@ import {
 } from 'react-native';
 
 var defaultScene = 'CreateFloatScene';
+defaultScene = 'MessagesScene';
 
 export default class Root extends Component {
   constructor(props) {
