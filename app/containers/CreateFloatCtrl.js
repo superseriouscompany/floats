@@ -12,7 +12,6 @@ class CreateFloatCtrl extends Component {
   constructor(props) {
     super(props);
     this.refresh          = this.refresh.bind(this);
-    this.invitationDialog = this.invitationDialog.bind(this)
     this.isSharing        = false;
   }
 
