@@ -60,6 +60,8 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingLeft: 35,
+    paddingRight: 35,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.lightgrey,
   },
