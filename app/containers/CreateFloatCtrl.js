@@ -8,7 +8,8 @@ import FCM, {FCMEvent} from 'react-native-fcm';
 import api from '../services/api';
 import branch from 'react-native-branch';
 import {
-  Share
+  Platform,
+  Share,
 } from 'react-native'
 
 class CreateFloatCtrl extends Component {
@@ -61,11 +62,11 @@ class CreateFloatCtrl extends Component {
       '$ios_deepview': 'floats_deepview_vk8d',
     }
 
-    branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((thing) => {
+    branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
       this.isSharing = false;
       return Share.share({
-        message: 'Download Floats',
-        url: thing.url,
+        message: Platform.OS == 'android' ? `Download Floats ${payload.url}` : 'Download Floats',
+        url: payload.url,
       }, {
         dialogTitle: 'Invite Friends',
         tintColor: 'blue'
