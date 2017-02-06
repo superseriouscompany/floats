@@ -55,7 +55,6 @@ class InviteButton extends Component {
     }
 
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
-      console.warn('sharing url', payload.url, JSON.stringify(payload))
       Share.share({
         message: Platform.OS == 'android' ? `Download Floats ${payload.url}` : 'Download Floats',
         url: payload.url,
