@@ -8,6 +8,7 @@ import branch from 'react-native-branch';
 import {connect} from 'react-redux'
 import {
   Image,
+  Platform,
   Share,
   StyleSheet,
   TouchableOpacity,
