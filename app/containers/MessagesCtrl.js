@@ -7,8 +7,9 @@ import {send} from '../actions/messages'
 import api from '../services/api';
 import branch from 'react-native-branch';
 import {
-  Share,
   BackAndroid,
+  Platform,
+  Share,
 } from 'react-native'
 
 class MessagesCtrl extends Component {
@@ -83,7 +84,7 @@ class MessagesCtrl extends Component {
       this.isSharing = false;
 
       return Share.share({
-        message: this.props.float.title,
+        message: Platform.OS == 'android' ? `${this.props.float.title} ${payload.url}` : this.props.float.title,
         url: payload.url,
       }, {
         dialogTitle: 'Add friends',
