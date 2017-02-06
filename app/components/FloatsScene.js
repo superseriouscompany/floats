@@ -48,7 +48,7 @@ export default class FloatsScene extends Component {
             <View>
               { this.props.invitations.error ?
                 <TouchableOpacity style={{alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, backgroundColor: base.colors.darkgrey}} onPress={this.props.refresh}>
-                  <Text style={[base.timestamp, {color: base.colors.white}]}>
+                  <Text style={[base.timestamp, {color: base.colors.white, textAlign: 'center'}]}>
                     Error: {this.props.invitations.error}. Try again?
                   </Text>
                 </TouchableOpacity>
