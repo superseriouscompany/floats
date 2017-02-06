@@ -28,12 +28,13 @@ export default class FloatsScene extends Component {
         <Heading>floats</Heading>
       </View>
 
-      <View style={[base.mainWindow, {backgroundColor: base.colors.lightgrey}]}>
+      <View style={base.mainWindow}>
         { this.props.empty ?
+          <View style={[base.mainWindow, {backgroundColor: base.colors.white}]}>
             <View style={{alignItems: 'center'}}>
               <View style={{alignItems: 'center', paddingTop: 18, paddingBottom: 15}}>
                 <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center'}]}>
-                  be the first of your friends to suggest{"\n"}something to do today
+                  there are no active floats.{"\n"}you should suggest something to do!
                 </Text>
               </View>
               <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('CreateFloatScene')}>
@@ -42,31 +43,34 @@ export default class FloatsScene extends Component {
                 </Text>
               </TouchableOpacity>
             </View>
+          </View>
         :
-          <ScrollView
-            refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading || false} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]} />}>
-            <View>
-              { this.props.invitations.error ?
-                <TouchableOpacity style={{alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, backgroundColor: base.colors.darkgrey}} onPress={this.props.refresh}>
-                  <Text style={[base.timestamp, {color: base.colors.white, textAlign: 'center'}]}>
-                    Error: {this.props.invitations.error}. Try again?
-                  </Text>
-                </TouchableOpacity>
-              : this.props.invitations.loading ?
-                null
-              : this.props.invitations.all.filter((i) => { return !i.attending;}).length ?
-                <View style={{flex: 1, backgroundColor: base.colors.color2, paddingTop: 10}}>
-                  <Invitations invitations={this.props.invitations.all.filter((i) => { return !i.attending;})} />
-                </View>
+          <View style={[base.mainWindow, {backgroundColor: base.colors.lightgrey}]}>
+            <ScrollView
+              refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading || false} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]} />}>
+              <View>
+                { this.props.invitations.error ?
+                  <TouchableOpacity style={{alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, backgroundColor: base.colors.darkgrey}} onPress={this.props.refresh}>
+                    <Text style={[base.timestamp, {color: base.colors.white, textAlign: 'center'}]}>
+                      Error: {this.props.invitations.error}. Try again?
+                    </Text>
+                  </TouchableOpacity>
+                : this.props.invitations.loading ?
+                  null
+                : this.props.invitations.all.filter((i) => { return !i.attending;}).length ?
+                  <View style={{flex: 1, backgroundColor: base.colors.color2, paddingTop: 10}}>
+                    <Invitations invitations={this.props.invitations.all.filter((i) => { return !i.attending;})} />
+                  </View>
+                : null
+                }
+              </View>
+
+              { this.props.inbox ?
+                <Inbox inbox={this.props.inbox} />
               : null
               }
-            </View>
-
-            { this.props.inbox ?
-              <Inbox inbox={this.props.inbox} />
-            : null
-            }
-          </ScrollView>
+            </ScrollView>
+          </View>
         }
       </View>
       <TabBar active="floats" navigator={this.props.navigator}/>
