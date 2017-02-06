@@ -42,10 +42,9 @@ export default class CreateFloatScene extends Component {
       <View style={base.mainWindow}>
         { this.props.error ?
           <View style={{alignItems: 'center'}}>
-            <Text style={{color: 'indianred', textAlign: 'center', marginBottom: 10, marginTop: 10}}>{this.props.error}</Text>
-            <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={this.props.refresh}>
-              <Text style={styles.emptyButtonText}>
-                Try Again
+            <TouchableOpacity style={{alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, backgroundColor: base.colors.darkgrey}} onPress={this.props.refresh}>
+              <Text style={[base.timestamp, {color: base.colors.white}]}>
+                Error: {this.props.error}. Try again?
               </Text>
             </TouchableOpacity>
           </View>
@@ -121,7 +120,7 @@ class Ronery extends Component {
           no nearby friends
         </Text>
       </View>
-      <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15, }}>
+      <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15}}>
         <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center', paddingLeft: 25, paddingRight: 25}]}>
           Add or invite your nearby friends, so you can send them floats.
         </Text>
