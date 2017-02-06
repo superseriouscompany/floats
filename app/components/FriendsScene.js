@@ -54,7 +54,7 @@ class FriendsScene extends Component {
             </View>
             <View style={{marginTop: -10}}>
               {this.props.friendRequests.items.map((f, i) => (
-                <FriendRequest key={i} friend={f.user} accept={this.props.accept} deny={this.props.deny}/>
+                <FriendRequest key={i} friend={Object.assign({loading: f.loading}, f.user)} accept={this.props.accept} deny={this.props.deny}/>
               ))}
             </View>
           </View>
