@@ -7,8 +7,8 @@ import base from '../styles/base';
 import branch from 'react-native-branch';
 import {connect} from 'react-redux'
 import {
-  ActionSheetIOS,
   Image,
+  Share,
   StyleSheet,
   TouchableOpacity,
   View
@@ -54,20 +54,20 @@ class InviteButton extends Component {
     }
 
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((thing) => {
-      ActionSheetIOS.showShareActionSheetWithOptions({
-        url: thing.url,
+      Share.share({
         message: 'Download Floats',
-      }, (error) => {
-        console.error(error);
-        alert(error.message);
-      }, (success, method) => {
+        url: thing.url,
+      }, {
+        dialogTitle: 'Dis cool',
+        tintColor: 'blue'
       })
+    }).then(() => {
       this.setState({sharing: false})
-    }).catch((err) => {
+    }).catch((error) => {
       this.setState({sharing: false})
-      console.error(err);
-      alert(err.message);
-    });
+      console.error(error)
+      alert(error);
+    })
   }
 }
 
