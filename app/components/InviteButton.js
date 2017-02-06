@@ -58,6 +58,7 @@ class InviteButton extends Component {
       Share.share({
         message: 'Download Floats',
         url: payload.url,
+        title: 'Fuck yourself',
       }, {
         dialogTitle: 'Invite Friends',
         tintColor: 'blue'
