@@ -25,7 +25,7 @@ export default class Friend extends Component {
 
       { true ?
         <ActivityIndicator
-          style={base.buttonLoader}
+          style={[base.buttonLoader, {width: 28, height: 28}]}
           size="small"
           color={base.colors.mediumgrey}
         />
