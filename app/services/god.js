@@ -18,7 +18,7 @@ function work(navigator) {
     const state = store.getState();
 
     if( !state.user.access_token ) {
-      console.warn("No user set");
+      console.warn("No user set in god object");
       return;
     }
 

@@ -18,6 +18,7 @@ class DeepLinkCtrl extends Component {
   }
 
   componentWillMount() {
+    this.props.dispatch({type: 'deeplinks:queue', payload: {cool: 'nice'}});
     this.branchUnsubscribe = branch.subscribe((bundle) => {
       if( !bundle ) { return console.warn(`Got empty deep link`); }
       if( !bundle.error && !bundle.uri && !bundle.params ) { return; }

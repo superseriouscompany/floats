@@ -64,6 +64,8 @@ export default class Root extends Component {
                     <LoginScene navigator={this.navigator} />
                   : this.state.scene == 'Scratch' ?
                     <Scratch navigator={this.navigator} />
+                  : !this.state.scene ?
+                    null
                   :
                     <AuthedCtrl scene={this.state.scene} navigator={this.navigator} />
                   }
