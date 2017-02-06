@@ -47,7 +47,11 @@ export default class FloatsScene extends Component {
             refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading || false} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]} />}>
             <View>
               { this.props.invitations.error ?
-                <Text style={{color: 'indianred'}}>{this.props.invitations.error}</Text>
+                <TouchableOpacity style={{alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, backgroundColor: base.colors.darkgrey}} onPress={this.props.refresh}>
+                  <Text style={[base.timestamp, {color: base.colors.white}]}>
+                    Error: {this.props.error}. Try again?
+                  </Text>
+                </TouchableOpacity>
               : this.props.invitations.loading ?
                 null
               : this.props.invitations.all.filter((i) => { return !i.attending;}).length ?
