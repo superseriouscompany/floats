@@ -50,7 +50,7 @@ export default class CreateFloatScene extends Component {
           </View>
         : this.state.friends && !this.state.friends.length ?
           <ScrollView style={{flex: 1}} refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading || false} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
-            <Ronery navigator={this.props.navigator} invitationDialog={this.props.invitationDialog}/>
+            <Ronery navigator={this.props.navigator} />
           </ScrollView>
         : this.state.friends && this.state.friends.length ?
           <View style={{flex: 1}}>
@@ -136,7 +136,6 @@ class Ronery extends Component {
 }
 
 CreateFloatScene.propTypes = {
-  invitationDialog: PropTypes.func.isRequired,
   loading:          PropTypes.bool,
   error:            PropTypes.string,
   friends: PropTypes.arrayOf(PropTypes.shape({

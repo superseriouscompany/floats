@@ -7,10 +7,6 @@ import { fetchNearbyFriends } from '../actions/nearbyFriends';
 import FCM, {FCMEvent} from 'react-native-fcm';
 import api from '../services/api';
 import branch from 'react-native-branch';
-import {
-  Platform,
-  Share,
-} from 'react-native'
 
 class CreateFloatCtrl extends Component {
   constructor(props) {
@@ -37,51 +33,8 @@ class CreateFloatCtrl extends Component {
     this.props.dispatch(fetchNearbyFriends(null));
   }
 
-  invitationDialog() {
-    if( !this.props.user || !this.props.user.id ) {
-      console.warn("No user set", JSON.stringify(this.props));
-    }
-    if( this.isSharing ) { return }
-    this.isSharing = true;
-
-    let branchUniversalObject = branch.createBranchUniversalObject(
-      `friends/invite/${this.props.user.id}`,
-      {
-        metadata: {
-          inviter_id: this.props.user.id,
-        }
-      }
-    )
-
-    let linkProperties = {
-      feature: 'friend-invitation',
-      channel: 'app'
-    }
-
-    let controlParams = {
-      '$ios_deepview': 'floats_deepview_vk8d',
-    }
-
-    branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
-      this.isSharing = false;
-      return Share.share({
-        message: Platform.OS == 'android' ? `Download Floats ${payload.url}` : 'Download Floats',
-        url: payload.url,
-      }, {
-        dialogTitle: 'Invite Friends',
-        tintColor: 'blue'
-      })
-    }).then(() => {
-      this.isSharing = false;
-    }).catch((err) => {
-      this.isSharing = false;
-      console.error(err);
-      alert(err.message);
-    });
-  }
-
   render() { return (
-    <CreateFloatScene {...this.props} refresh={this.refresh} invitationDialog={this.invitationDialog}/>
+    <CreateFloatScene {...this.props} refresh={this.refresh}/>
   )}
 }
 
