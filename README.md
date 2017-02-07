@@ -67,3 +67,15 @@ Images are assets in 1x, 1.5x, 2x and 3x resolutions.
 `app/styles/`
 
 Styles are reusable stylesheets. One-off styles are defined inline in components.
+
+## Shipping
+
+### iOS
+
+1. Product > Archive
+
+### Android
+
+1. bump versionName and versionCode in `build.gradle (Module: app)` in android studio
+1. `npm run build_apk`
+1. `open android/app/build/outputs/apk`
