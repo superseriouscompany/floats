@@ -12,8 +12,9 @@ import NotificationPermissionScene from '../components/NotificationPermissionSce
 import Permissions from 'react-native-permissions'
 import {processDeeplink} from '../actions/deeplinks';
 import {
+  Platform,
   Text,
-  View
+  View,
 } from 'react-native'
 
 var defaultScene = 'CreateFloatScene';
@@ -35,9 +36,9 @@ class AuthedCtrl extends Component {
 
     Promise.all([
       Permissions.getPermissionStatus('location'),
-      Permissions.getPermissionStatus('notification'),
+      Platform.OS == 'android' ? Promise.resolve(true) : Permissions.getPermissionStatus('notification'),
     ]).then((v) => {
-      const locationStatus = v[0];
+      const locationStatus     = v[0];
       const notificationStatus = v[1];
       if( locationStatus == 'undetermined' ) {
         return this.props.navigator.navigate('BackgroundPermissionScene')
@@ -45,6 +46,9 @@ class AuthedCtrl extends Component {
         return this.props.navigator.navigate('NotificationPermissionScene');
       }
 
+      this.props.navigator.navigate(defaultScene);
+    }).catch((err) => {
+      console.error(err);
       this.props.navigator.navigate(defaultScene);
     })
   }
