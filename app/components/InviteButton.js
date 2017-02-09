@@ -36,8 +36,10 @@ class InviteButton extends Component {
     if( this.state.sharing ) { return;}
     this.setState({sharing: true})
 
+    const alias = 'poop0'
+
     let branchUniversalObject = branch.createBranchUniversalObject(
-      `friends/invite/${this.props.user.id}`,
+      `friends/invite/${alias}`,
       {
         metadata: {
           inviter_id: this.props.user.id,
@@ -47,7 +49,8 @@ class InviteButton extends Component {
 
     let linkProperties = {
       feature: 'friend-invitation',
-      channel: 'app'
+      channel: 'app',
+      alias: alias,
     }
 
     let controlParams = {
