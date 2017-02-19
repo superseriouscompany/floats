@@ -56,27 +56,32 @@ class AuthedCtrl extends Component {
 
   render() { return (
     <View style={{flex: 1}}>
-      <BacalhauCtrl>
-        { this.props.scene == 'CreateFloatScene' ?
-          <CreateFloatCtrl navigator={this.props.navigator} />
-        : this.props.scene == 'FloatsScene' ?
-          <FloatsCtrl navigator={this.props.navigator} />
-        : this.props.scene == 'FriendsScene' ?
-          <FriendsCtrl navigator={this.props.navigator} />
-        : this.props.scene == 'RandosScene' ?
-          <RandosScene navigator={this.props.navigator} />
-        : this.props.scene == 'MessagesScene' ?
-          <MessagesCtrl navigator={this.props.navigator} />
-        : this.props.scene == 'BackgroundPermissionScene' ?
-          <BackgroundPermissionScene navigator={this.props.navigator} />
-        : this.props.scene == 'NotificationPermissionScene' ?
-          <NotificationPermissionScene navigator={this.props.navigator} />
-        : this.props.scene == 'Scratch' ?
-          <Scratch />
-        :
-          null
-        }
-      </BacalhauCtrl>
+      { this.props.scene == 'Scratch' ?
+        <Scratch />
+      : this.props.scene == 'BackgroundPermissionScene' ?
+        <BackgroundPermissionScene navigator={this.props.navigator} />
+      : this.props.scene == 'NotificationPermissionScene' ?
+        <NotificationPermissionScene navigator={this.props.navigator} />
+      : this.props.scene == 'AuthedScene' || !this.props.scene ?
+        null
+      :
+        <BacalhauCtrl>
+          { this.props.scene == 'CreateFloatScene' ?
+            <CreateFloatCtrl navigator={this.props.navigator} />
+          : this.props.scene == 'FloatsScene' ?
+            <FloatsCtrl navigator={this.props.navigator} />
+          : this.props.scene == 'FriendsScene' ?
+            <FriendsCtrl navigator={this.props.navigator} />
+          : this.props.scene == 'RandosScene' ?
+            <RandosScene navigator={this.props.navigator} />
+          : this.props.scene == 'MessagesScene' ?
+            <MessagesCtrl navigator={this.props.navigator} />
+          :
+            null
+          }
+        </BacalhauCtrl>
+      }
+
     </View>
   )}
 }
