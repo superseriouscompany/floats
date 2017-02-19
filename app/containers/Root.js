@@ -29,7 +29,13 @@ export default class Root extends Component {
         this.setState(stateChange);
       }
     }
+  }
 
+  componentDidMount() {
+    this.setState({scene: 'Scratch'});
+    God.work(this.navigator);
+
+    return;
     AsyncStorage.getItem('@floats:user').then((user) => {
       if( user ) {
         store.dispatch({type: 'login', user: JSON.parse(user)});
@@ -40,8 +46,6 @@ export default class Root extends Component {
     }).catch(function(err) {
       console.warn(err);
     });
-
-    God.work(this.navigator);
   }
 
   getChildContext() {

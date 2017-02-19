@@ -70,11 +70,15 @@
 		</dict>
 	</dict>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>We do not use this, but it's linked in a library to check location permission status</string>
+	<string>We do not use this, but it&apos;s linked in a library to check location permission status</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>We do not use this, but it's linked in a library to check location permission status</string>
+	<string>We do not use this, but it&apos;s linked in a library to check location permission status</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Where you at doe</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Where you at doe</string>
+	<key>NSMotionUsageDescription</key>
+	<string>We use your accelerometer to save battery life when updating your location</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Italic.ttf</string>
@@ -88,6 +92,8 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
