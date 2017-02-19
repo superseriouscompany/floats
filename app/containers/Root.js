@@ -18,6 +18,8 @@ import {
   View,
 } from 'react-native';
 
+const useScratch = false;
+
 export default class Root extends Component {
   constructor(props) {
     super(props);
@@ -32,10 +34,13 @@ export default class Root extends Component {
   }
 
   componentDidMount() {
-    this.setState({scene: 'Scratch'});
     God.work(this.navigator);
 
-    return;
+    if( useScratch ) {
+      this.setState({scene: 'Scratch'});
+      return;
+    }
+
     AsyncStorage.getItem('@floats:user').then((user) => {
       if( user ) {
         store.dispatch({type: 'login', user: JSON.parse(user)});

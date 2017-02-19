@@ -6,6 +6,7 @@ import FriendsCtrl from '../containers/FriendsCtrl';
 import MessagesCtrl from '../containers/MessagesCtrl';
 import FloatsCtrl from '../containers/FloatsCtrl';
 import CreateFloatCtrl from '../containers/CreateFloatCtrl';
+import BacalhauCtrl from '../containers/BacalhauCtrl';
 import RandosScene from '../components/RandosScene';
 import BackgroundPermissionScene from '../components/BackgroundPermissionScene';
 import NotificationPermissionScene from '../components/NotificationPermissionScene';
@@ -55,25 +56,27 @@ class AuthedCtrl extends Component {
 
   render() { return (
     <View style={{flex: 1}}>
-      { this.props.scene == 'CreateFloatScene' ?
-        <CreateFloatCtrl navigator={this.props.navigator} />
-      : this.props.scene == 'FloatsScene' ?
-        <FloatsCtrl navigator={this.props.navigator} />
-      : this.props.scene == 'FriendsScene' ?
-        <FriendsCtrl navigator={this.props.navigator} />
-      : this.props.scene == 'RandosScene' ?
-        <RandosScene navigator={this.props.navigator} />
-      : this.props.scene == 'MessagesScene' ?
-        <MessagesCtrl navigator={this.props.navigator} />
-      : this.props.scene == 'BackgroundPermissionScene' ?
-        <BackgroundPermissionScene navigator={this.props.navigator} />
-      : this.props.scene == 'NotificationPermissionScene' ?
-        <NotificationPermissionScene navigator={this.props.navigator} />
-      : this.props.scene == 'Scratch' ?
-        <Scratch />
-      :
-        null
-      }
+      <BacalhauCtrl>
+        { this.props.scene == 'CreateFloatScene' ?
+          <CreateFloatCtrl navigator={this.props.navigator} />
+        : this.props.scene == 'FloatsScene' ?
+          <FloatsCtrl navigator={this.props.navigator} />
+        : this.props.scene == 'FriendsScene' ?
+          <FriendsCtrl navigator={this.props.navigator} />
+        : this.props.scene == 'RandosScene' ?
+          <RandosScene navigator={this.props.navigator} />
+        : this.props.scene == 'MessagesScene' ?
+          <MessagesCtrl navigator={this.props.navigator} />
+        : this.props.scene == 'BackgroundPermissionScene' ?
+          <BackgroundPermissionScene navigator={this.props.navigator} />
+        : this.props.scene == 'NotificationPermissionScene' ?
+          <NotificationPermissionScene navigator={this.props.navigator} />
+        : this.props.scene == 'Scratch' ?
+          <Scratch />
+        :
+          null
+        }
+      </BacalhauCtrl>
     </View>
   )}
 }
