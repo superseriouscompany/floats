@@ -11,6 +11,7 @@ import Enemy from './Enemy';
 import TabBar from './TabBar';
 import api from '../services/api';
 import base from '../styles/base';
+import BackgroundGeolocation from "react-native-background-geolocation";
 import {persistStore} from 'redux-persist'
 import { connectActionSheet } from '@exponent/react-native-action-sheet';
 import {
@@ -167,6 +168,9 @@ class FriendsScene extends Component {
       return AsyncStorage.removeItem('@floats:user')
     }).then(() => {
       persistStore(this.context.store, {storage: AsyncStorage}).purge();
+      BackgroundGeolocation.stop((ok) => {
+        console.log('stopped geolocating', JSON.stringify(ok));
+      })
       this.props.navigator.navigate('LoginScene');
     }).catch(function(err) {
       console.error(err);
