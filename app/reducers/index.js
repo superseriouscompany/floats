@@ -18,7 +18,7 @@ import friends from './friends'
 import friendRequests from './friendRequests'
 import deeplinks from './deeplinks'
 const middleware = [thunk];
-if( __DEV__ && false ) {
+if( __DEV__ ) {
   middleware.push(createLogger());
 }
 const reducers = combineReducers({
