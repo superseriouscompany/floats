@@ -20,11 +20,12 @@ class BacalhauCtrl extends Component {
       desiredAccuracy: 1000,
       locationUpdateInterval: 5 * minutes,
       fastestLocationUpdateInterval: 5 * minutes,
-      stationaryRadius: 25,
+      stationaryRadius: 1000,
       // Activity Recognition
-      activityRecognitionInterval: 5 * minutes,
+      disableMotionActivityUpdates: true,
       stopTimeout: 0,
       // Application config
+      maxRecordsToPersist: 0,
       debug: true, // <-- enable for debug sounds & notifications
       stopOnTerminate: false,   // <-- Allow the background-service to continue tracking when user closes the app.
       startOnBoot: true,        // <-- Auto start tracking when device is powered-up.
@@ -50,6 +51,7 @@ class BacalhauCtrl extends Component {
   }
 
   onLocation(location) {
+    console.warn('Got location', JSON.stringify(location));
     api.pins.create({
       lat: location.coords.latitude,
       lng: location.coords.longitude,
