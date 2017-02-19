@@ -11,8 +11,6 @@ import Enemy from './Enemy';
 import TabBar from './TabBar';
 import api from '../services/api';
 import base from '../styles/base';
-import BackgroundGeolocation from "react-native-background-geolocation";
-import {persistStore} from 'redux-persist'
 import { connectActionSheet } from '@exponent/react-native-action-sheet';
 import {
   ActivityIndicator,
@@ -117,7 +115,7 @@ class FriendsScene extends Component {
     }, (index) => {
       if( index == 2 ) { return; }
       if( index == 0 ) {
-        this.logout();
+        this.props.logout();
       }
       if( index == 1 ) {
         Alert.alert(
@@ -156,25 +154,10 @@ class FriendsScene extends Component {
 
   deleteAccount() {
     api.users.deleteAccount().then(() => {
-      this.logout();
+      this.props.logout();
     }).catch(function(err) {
       console.error(err);
       alert("Sorry, something went wrong in deleting your account. Please try again or email support@superserious.co");
-    })
-  }
-
-  logout() {
-    AsyncStorage.removeItem('@floats:accessToken').then(() => {
-      return AsyncStorage.removeItem('@floats:user')
-    }).then(() => {
-      persistStore(this.context.store, {storage: AsyncStorage}).purge();
-      BackgroundGeolocation.stop((ok) => {
-        console.log('stopped geolocating', JSON.stringify(ok));
-      })
-      this.props.navigator.navigate('LoginScene');
-    }).catch(function(err) {
-      console.error(err);
-      alert("Sorry, we couldn't log you out. Please try again.")
     })
   }
 }
@@ -185,6 +168,7 @@ FriendsScene.propTypes = {
   block:   React.PropTypes.func.isRequired,
   unblock: React.PropTypes.func.isRequired,
   refresh: React.PropTypes.func.isRequired,
+  logout:  React.PropTypes.func.isRequired,
 }
 
 FriendsScene.contextTypes = {
