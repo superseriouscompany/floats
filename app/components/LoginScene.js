@@ -39,6 +39,7 @@ export default class LoginScene extends Component {
           />
         :
           <LoginButton
+            readPermissions={["public_profile", "user_friends"]}
             style={styles.loginButton}
             onLoginFinished={this.onLoginFinished.bind(this)}
             />
@@ -70,6 +71,7 @@ export default class LoginScene extends Component {
     AccessToken.getCurrentAccessToken().then((data) => {
       if( !data ) { throw new Error('nope'); }
       this.setState({ awaitingLogin: true })
+      console.log("facebook token", data.accessToken.toString());
       return api.sessions.create(data.accessToken.toString())
     }).then((user) => {
       isExisting = user.isExisting;
