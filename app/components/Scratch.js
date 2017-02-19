@@ -26,19 +26,16 @@ export default class Scratch extends Component {
       // Now configure the plugin.
      BackgroundGeolocation.configure({
        // Geolocation Config
-       desiredAccuracy: 0,
-       stationaryRadius: 25,
-       distanceFilter: 10,
+       desiredAccuracy: 1000,
+       locationUpdateInterval: 15000,
        // Activity Recognition
        stopTimeout: 1,
        // Application config
-       debug: true, // <-- enable for debug sounds & notifications
-       logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
+       debug: false, // <-- enable for debug sounds & notifications
        stopOnTerminate: false,   // <-- Allow the background-service to continue tracking when user closes the app.
        startOnBoot: true,        // <-- Auto start tracking when device is powered-up.
        // HTTP / SQLite config
-       url: 'https://superserious.ngrok.io/pins',
-       autoSync: true,         // <-- POST each location immediately to server
+       autoSync: false,         // <-- POST each location immediately to server
      }, function(state) {
        console.log("- BackgroundGeolocation is configured and ready: ", state.enabled);
 
