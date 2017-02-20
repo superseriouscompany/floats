@@ -8,7 +8,8 @@ import { persistStore } from 'redux-persist'
 import { fetchFriends, block, unblock } from '../actions/friends'
 import { fetchFriendRequests, accept, deny } from '../actions/friendRequests'
 import {
-  AsyncStorage
+  AsyncStorage,
+  Platform,
 } from 'react-native'
 
 class FriendsCtrl extends Component {
@@ -68,9 +69,11 @@ class FriendsCtrl extends Component {
       return AsyncStorage.removeItem('@floats:user')
     }).then(() => {
       persistStore(this.context.store, {storage: AsyncStorage}).purge();
-      BackgroundGeolocation.stop((ok) => {
-        console.log('stopped geolocating', JSON.stringify(ok));
-      })
+      if( Platform.OS != 'android' ) {
+        BackgroundGeolocation.stop((ok) => {
+          console.log('stopped geolocating', JSON.stringify(ok));
+        })
+      }
       this.props.navigator.navigate('LoginScene');
     }).catch(function(err) {
       console.error(err);
