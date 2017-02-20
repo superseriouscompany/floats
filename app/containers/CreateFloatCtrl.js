@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CreateFloatScene from '../components/CreateFloatScene';
 import { fetchNearbyFriends, changeRadius } from '../actions/nearbyFriends';
+import { fetchRandos } from '../actions/randos';
 import FCM, {FCMEvent} from 'react-native-fcm';
 import api from '../services/api';
 import branch from 'react-native-branch';
@@ -18,7 +19,7 @@ class CreateFloatCtrl extends Component {
 
   componentDidMount() {
     this.props.dispatch(fetchNearbyFriends(this.props.cacheTime));
-
+    this.props.dispatch(fetchRandos(this.props.randoCacheTime));
     FCM.getFCMToken().then( (token) => {
       if( !token ) { return console.warn("No firebase token available."); }
       api.sessions.updateFirebaseToken(token);
@@ -31,6 +32,7 @@ class CreateFloatCtrl extends Component {
 
   refresh() {
     this.props.dispatch(fetchNearbyFriends(null));
+    this.props.dispatch(fetchRandos(null));
   }
 
   changeRadius(value) {
@@ -47,16 +49,19 @@ function mapStateToProps(state) {
     return f.distance <= state.nearbyFriends.radius
   })
 
-  const randos = friends;
+  const randos = state.randos.items.filter((r) => {
+    return r.distance <= state.nearbyFriends.radius
+  })
 
   return {
-    user:      state.user,
-    loading:   state.nearbyFriends.loading,
-    error:     state.nearbyFriends.error,
-    friends:   friends,
-    randos:    randos,
-    cacheTime: state.nearbyFriends.cacheTime,
-    radius:    state.nearbyFriends.radius,
+    user:           state.user,
+    loading:        state.nearbyFriends.loading,
+    error:          state.nearbyFriends.error,
+    friends:        friends,
+    randos:         randos,
+    cacheTime:      state.nearbyFriends.cacheTime,
+    randoCachetime: state.randos.cacheTime,
+    radius:         state.nearbyFriends.radius,
   }
 }
 
