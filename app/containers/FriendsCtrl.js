@@ -1,10 +1,16 @@
 'use strict';
 
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
 import FriendsScene from '../components/FriendsScene'
+import BackgroundGeolocation from "react-native-background-geolocation";
+import { connect } from 'react-redux';
+import { persistStore } from 'redux-persist'
 import { fetchFriends, block, unblock } from '../actions/friends'
 import { fetchFriendRequests, accept, deny } from '../actions/friendRequests'
+import {
+  AsyncStorage,
+  Platform,
+} from 'react-native'
 
 class FriendsCtrl extends Component {
   constructor(props) {
@@ -15,6 +21,7 @@ class FriendsCtrl extends Component {
     this.block   = this.block.bind(this);
     this.unblock = this.unblock.bind(this);
     this.refresh = this.refresh.bind(this);
+    this.logout  = this.logout.bind(this);
   }
 
   componentWillMount() {
@@ -28,7 +35,8 @@ class FriendsCtrl extends Component {
       deny={this.deny}
       block={this.block}
       unblock={this.unblock}
-      refresh={this.refresh} />
+      refresh={this.refresh}
+      logout={this.logout} />
   )}
 
   refresh() {
@@ -55,6 +63,23 @@ class FriendsCtrl extends Component {
     if( !id ) { return console.warn('No id provided'); }
     this.props.dispatch(unblock(id));
   }
+
+  logout() {
+    AsyncStorage.removeItem('@floats:accessToken').then(() => {
+      return AsyncStorage.removeItem('@floats:user')
+    }).then(() => {
+      persistStore(this.context.store, {storage: AsyncStorage}).purge();
+      if( Platform.OS != 'android' ) {
+        BackgroundGeolocation.stop((ok) => {
+          console.log('stopped geolocating', JSON.stringify(ok));
+        })
+      }
+      this.props.navigator.navigate('LoginScene');
+    }).catch(function(err) {
+      console.error(err);
+      alert("Sorry, we couldn't log you out. Please try again.")
+    })
+  }
 }
 
 function mapStateToProps(state) {
@@ -62,6 +87,10 @@ function mapStateToProps(state) {
     friends:        state.friends,
     friendRequests: state.friendRequests,
   };
+}
+
+FriendsCtrl.contextTypes = {
+  store: React.PropTypes.object
 }
 
 export default connect(mapStateToProps)(FriendsCtrl);
