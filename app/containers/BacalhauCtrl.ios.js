@@ -34,7 +34,7 @@ class BacalhauCtrl extends Component {
       // Application config
       maxRecordsToPersist: -1,              // this prevents us from saving locations to retry sending to server
       maxDaysToPersist: -1,                 // this prevents us from saving locations to retry sending to server
-      debug: true,                          // debug mode -- sounds and notifications
+      debug: !!__DEV__,                     // debug mode -- sounds and notifications
       stopOnTerminate: false,               // continue tracking when user kills the app
       startOnBoot: true,                    // start tracking when device is powered-up.
       // HTTP / SQLite config
