@@ -39,6 +39,7 @@ export default class LoginScene extends Component {
           />
         :
           <LoginButton
+            readPermissions={["public_profile", "user_friends"]}
             style={styles.loginButton}
             onLoginFinished={this.onLoginFinished.bind(this)}
             />
