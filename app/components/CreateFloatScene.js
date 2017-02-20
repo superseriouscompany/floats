@@ -70,16 +70,18 @@ export default class CreateFloatScene extends Component {
             </View>
             <ScrollView style={{flex: 1}}
              refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
-              {this.state.friends.map((f, i) => (
-                <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
-              ))}
+              <View style={{paddingBottom: 20}}>
+                {this.state.friends.map((f, i) => (
+                  <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
+                ))}
+              </View>
 
-              <View style={styles.randosContainer}>
+              <View>
                 { this.state.showRandos ?
-                  <View>
-                    <TouchableOpacity onPress={() => this.setState({showRandos: false})}>
-                      <Text style={styles.randosText}>
-                        Hide Randos
+                  <View style={{paddingBottom: 20}}>
+                    <TouchableOpacity style={[base.bgBreakingSection, {alignItems: 'center', justifyContent: 'center', borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: base.colors.lightgrey}]} onPress={() => this.setState({showRandos: false})}>
+                      <Text style={[base.timestamp, {paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]}>
+                        hide nearby strangers
                       </Text>
                     </TouchableOpacity>
                     {this.props.randos.map((f, i) => (
@@ -88,9 +90,9 @@ export default class CreateFloatScene extends Component {
                   </View>
                 :
                   <View>
-                    <TouchableOpacity onPress={() => this.setState({showRandos: true})}>
-                      <Text style={styles.randosText}>
-                        Show Randos...
+                    <TouchableOpacity style={[base.bgBreakingSection, {alignItems: 'center', justifyContent: 'center', borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: base.colors.lightgrey}]} onPress={() => this.setState({showRandos: true})}>
+                      <Text style={[base.timestamp, {paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]}>
+                        show nearby strangers
                       </Text>
                     </TouchableOpacity>
                   </View>
@@ -185,12 +187,6 @@ const styles = StyleSheet.create({
   emptyButtonText: {
     color: 'white',
     textAlign: 'center'
-  },
-  randosContainer: {
-    borderTopWidth: 1,
-    borderTopColor: 'slateblue',
-    paddingTop: base.paddings.normal,
-    marginTop: 20,
   },
   randosText: {
     paddingLeft: base.paddings.normal,
