@@ -49,9 +49,9 @@ function mapStateToProps(state) {
     return f.distance <= state.nearbyFriends.radius
   })
 
-  const randos = state.randos.items.filter((r) => {
+  const randos = state.randos.length && state.randos.items.length ? state.randos.items.filter((r) => {
     return r.distance <= state.nearbyFriends.radius
-  })
+  }) : [];
 
   return {
     user:           state.user,
