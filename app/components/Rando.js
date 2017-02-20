@@ -43,7 +43,7 @@ export default class Rando extends Component {
         </TouchableOpacity>
       :
         <TouchableOpacity onPress={this.sendFriendRequest.bind(this)} accessible={true} accessibilityLabel={`Send friend request to ${this.props.friend.name}`}>
-          <Image source={require('../images/AddButton.png')} />
+          <Image source={require('../images/AddFriendButton.png')} />
         </TouchableOpacity>
       }
     </View>
