@@ -5,6 +5,7 @@ import Component          from '../components/Component';
 import FloatDialog        from '../components/FloatDialog';
 import FriendsCount       from '../components/FriendsCount';
 import Heading            from '../components/Heading';
+import InviteButton       from '../components/InviteButton';
 import Logo               from '../components/Logo';
 import NearbyFriend       from '../components/NearbyFriend';
 import RadiusSlider       from '../components/RadiusSlider';
@@ -74,6 +75,7 @@ export default class CreateFloatScene extends Component {
                 {this.state.friends.map((f, i) => (
                   <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
                 ))}
+                <InviteButton/>
               </View>
 
               <View>
