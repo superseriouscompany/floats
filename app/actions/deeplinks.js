@@ -25,6 +25,9 @@ export function processDeeplink(bundle, user) {
             type: 'navigation:queue',
             route: 'FloatsScene',
           })
+        }).catch((err) => {
+          console.error(err)
+          alert(JSON.stringify(err));
         })
       default:
         console.warn(`Got unknown deep link ${JSON.stringify(bundle)}`)
