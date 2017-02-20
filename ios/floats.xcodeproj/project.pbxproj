@@ -38,6 +38,8 @@
 		3F056CC41E2700EE0061D791 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F69625BB1E26F78300DAC3BC /* libRCTFBSDK.a */; };
 		3F096BA41E203CF300804325 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F096BA31E203CF300804325 /* libsqlite3.tbd */; };
 		3F2FCA2E1E46A91100F140E6 /* Branch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2FCA2D1E46A91100F140E6 /* Branch.framework */; };
+		3F63BABE1E5A8E03004E14F4 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F63BABC1E5A8E03004E14F4 /* Fabric.framework */; };
+		3F63BABF1E5A8E03004E14F4 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F63BABD1E5A8E03004E14F4 /* Crashlytics.framework */; };
 		3FBE01E31E2C46C800679C85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FBE01E21E2C46C800679C85 /* GoogleService-Info.plist */; };
 		3FDA701B1E59EBF500421722 /* TSLocationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FDA701A1E59EBF500421722 /* TSLocationManager.framework */; };
 		3FDA701D1E59EC3600421722 /* TSBackgroundFetch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FDA701C1E59EC3600421722 /* TSBackgroundFetch.framework */; };
@@ -412,6 +414,8 @@
 		3F6022D01E469A3600AEAEF4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		3F6022D21E469A5700AEAEF4 /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
 		3F6022D41E469A6000AEAEF4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		3F63BABC1E5A8E03004E14F4 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		3F63BABD1E5A8E03004E14F4 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3F6CC4021E26AD220096F05B /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
 		3FBE01E21E2C46C800679C85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3FDA701A1E59EBF500421722 /* TSLocationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSLocationManager.framework; path = "../node_modules/react-native-background-geolocation/ios/RNBackgroundGeolocation/TSLocationManager.framework"; sourceTree = "<group>"; };
@@ -461,6 +465,7 @@
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
+				3F63BABF1E5A8E03004E14F4 /* Crashlytics.framework in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
@@ -479,6 +484,7 @@
 				3F056CC01E2700C90061D791 /* Bolts.framework in Frameworks */,
 				3F056CC11E2700C90061D791 /* FBSDKCoreKit.framework in Frameworks */,
 				3F056CC21E2700C90061D791 /* FBSDKLoginKit.framework in Frameworks */,
+				3F63BABE1E5A8E03004E14F4 /* Fabric.framework in Frameworks */,
 				3F056CC31E2700C90061D791 /* FBSDKShareKit.framework in Frameworks */,
 				3F056CC41E2700EE0061D791 /* libRCTFBSDK.a in Frameworks */,
 				B96B05A0F51B4CE699FC0AF6 /* libRNVersionNumber.a in Frameworks */,
@@ -642,6 +648,8 @@
 		3F87EDF41E2018D900139C69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F63BABD1E5A8E03004E14F4 /* Crashlytics.framework */,
+				3F63BABC1E5A8E03004E14F4 /* Fabric.framework */,
 				3FDA701C1E59EC3600421722 /* TSBackgroundFetch.framework */,
 				3FDA701A1E59EBF500421722 /* TSLocationManager.framework */,
 				3F2FCA2D1E46A91100F140E6 /* Branch.framework */,
@@ -834,6 +842,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				3F2FCA2F1E46A93100F140E6 /* ShellScript */,
+				3F63BA8E1E5A8DB2004E14F4 /* ShellScript */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 			);
 			buildRules = (
@@ -1339,6 +1348,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		3F63BA8E1E5A8DB2004E14F4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 6421088286a39d1b593400da0ac6819ff6dde0d0 879126e4df20c1addccd76129465972bb34c3beed5e4a6304a4bae12d6dc0195";
 		};
 /* End PBXShellScriptBuildPhase section */
 
