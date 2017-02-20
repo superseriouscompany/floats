@@ -45,13 +45,19 @@ class CreateFloatCtrl extends Component {
 }
 
 function mapStateToProps(state) {
-  const friends = state.nearbyFriends.items.filter((f) => {
-    return f.distance <= state.nearbyFriends.radius
-  })
+  let friends = [];
+  if( state.nearbyFriends && state.nearbyFriends.items ) {
+    friends = state.nearbyFriends.items.filter((f) => {
+      return f.distance <= state.nearbyFriends.radius
+    })
+  }
 
-  const randos = state.randos.items.filter((r) => {
-    return r.distance <= state.nearbyFriends.radius
-  })
+  let randos = [];
+  if( state.randos && state.randos.items ) {
+    randos = state.randos.items.filter((r) => {
+      return r.distance <= state.nearbyFriends.radius
+    })
+  }
 
   return {
     user:           state.user,
