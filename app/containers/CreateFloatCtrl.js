@@ -39,11 +39,12 @@ class CreateFloatCtrl extends Component {
 
 function mapStateToProps(state) {
   return {
-    user:      state.user,
-    loading:   state.nearbyFriends.loading,
-    error:     state.nearbyFriends.error,
-    friends:   state.nearbyFriends.items,
-    cacheTime: state.nearbyFriends.cacheTime,
+    user:        state.user,
+    loading:     state.nearbyFriends.loading,
+    error:       state.nearbyFriends.error,
+    friends:     state.nearbyFriends.items,
+    cacheTime:   state.nearbyFriends.cacheTime,
+    prefillText: !state.activityPrompt.used && state.activityPrompt.text,
   }
 }
 

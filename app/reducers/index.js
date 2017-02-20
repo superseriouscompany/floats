@@ -17,6 +17,8 @@ import killed from './killSwitch'
 import friends from './friends'
 import friendRequests from './friendRequests'
 import deeplinks from './deeplinks'
+import activityPrompt from './activityPrompt'
+
 const middleware = [thunk];
 if( __DEV__ ) {
   middleware.push(createLogger());
@@ -34,6 +36,7 @@ const reducers = combineReducers({
   friends,
   friendRequests,
   deeplinks,
+  activityPrompt,
 })
 
 const store = createStore(

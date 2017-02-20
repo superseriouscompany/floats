@@ -30,7 +30,7 @@ export default class ActivityPromptScene extends Component {
           <View style={styles.inputContainer}>
             <TextInput style={styles.input} placeholder="halp" placeholderTextColor={base.colors.mediumgrey} underlineColorAndroid={'transparent'} onChangeText={(text) => this.setState({text})}/>
           </View>
-          <TouchableOpacity onPress={this.doShit.bind(this)}>
+          <TouchableOpacity onPress={this.setActivity.bind(this)}>
             <Text style={styles.button}>Do it</Text>
           </TouchableOpacity>
         </View>
@@ -40,9 +40,14 @@ export default class ActivityPromptScene extends Component {
     </View>
   )}
 
-  doShit() {
-    alert(this.state.text)
+  setActivity() {
+    if( !this.state.text ) { return; }
+    this.props.setActivity(this.state.text);
   }
+}
+
+ActivityPromptScene.propTypes = {
+  setActivity: React.PropTypes.func.isRequired,
 }
 
 const styles = StyleSheet.create({
