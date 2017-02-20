@@ -1,5 +1,10 @@
-export default function nearbyFriends(state = {}, action) {
+export default function nearbyFriends(state = {radius: 25}, action) {
   switch(action.type) {
+    case 'nearbyFriends:changeRadius':
+      return {
+        ...state,
+        radius: action.radius,
+      }
     case 'nearbyFriends:load':
       return {
         ...state,
