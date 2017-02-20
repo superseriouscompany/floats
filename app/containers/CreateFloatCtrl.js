@@ -47,11 +47,14 @@ function mapStateToProps(state) {
     return f.distance <= state.nearbyFriends.radius
   })
 
+  const randos = friends;
+
   return {
     user:      state.user,
     loading:   state.nearbyFriends.loading,
     error:     state.nearbyFriends.error,
     friends:   friends,
+    randos:    randos,
     cacheTime: state.nearbyFriends.cacheTime,
     radius:    state.nearbyFriends.radius,
   }

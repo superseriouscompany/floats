@@ -25,6 +25,9 @@ const fontSizes = {
   normal: 16,
   small: 12,
 }
+const paddings = {
+  normal: 16,
+}
 module.exports = StyleSheet.create({
   screen: {
     flex: 1,
@@ -145,5 +148,6 @@ module.exports = StyleSheet.create({
   },
 });
 
-module.exports.colors = colors;
+module.exports.colors    = colors;
 module.exports.fontSizes = fontSizes;
+module.exports.paddings  = paddings;
