@@ -8,6 +8,7 @@ import FloatsCtrl from '../containers/FloatsCtrl';
 import CreateFloatCtrl from '../containers/CreateFloatCtrl';
 import BacalhauCtrl from '../containers/BacalhauCtrl';
 import RandosScene from '../components/RandosScene';
+import ActivityPromptScene from '../components/ActivityPromptScene';
 import BackgroundPermissionScene from '../components/BackgroundPermissionScene';
 import NotificationPermissionScene from '../components/NotificationPermissionScene';
 import Permissions from 'react-native-permissions'
@@ -19,6 +20,7 @@ import {
 } from 'react-native'
 
 var defaultScene = 'CreateFloatScene';
+defaultScene = 'ActivityPromptScene';
 
 class AuthedCtrl extends Component {
   componentWillMount() {
@@ -62,6 +64,8 @@ class AuthedCtrl extends Component {
         <BackgroundPermissionScene navigator={this.props.navigator} />
       : this.props.scene == 'NotificationPermissionScene' ?
         <NotificationPermissionScene navigator={this.props.navigator} />
+      : this.props.scene == 'ActivityPromptScene' ?
+        <ActivityPromptScene navigator={this.props.navigator} />
       : this.props.scene == 'AuthedScene' || !this.props.scene ?
         null
       :

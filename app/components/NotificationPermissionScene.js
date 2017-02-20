@@ -24,7 +24,7 @@ export default class NotificationPermissionScene extends Component {
 
   getPermissions() {
     FCM.requestPermissions()
-    this.props.navigator.navigate('CreateFloatScene')
+    this.props.navigator.navigate('ActivityPromptScene')
   }
 
   render() { return (
