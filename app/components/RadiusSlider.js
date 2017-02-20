@@ -23,15 +23,15 @@ export default class RadiusSlider extends Component {
       <Slider
         minimumValue={1}
         value={defaultValue}
-        maximumValue={50}
+        maximumValue={100}
         step={1}
-        minimumTrackTintColor="hotpink"
-        maximumTrackTintColor="cornflowerblue"
+        minimumTrackTintColor={base.colors.color1}
+        maximumTrackTintColor={base.colors.lightgrey}
         onValueChange={(value) => this.setState({value: value})}
         onSlidingComplete={this.props.changeRadius}
         style={styles.slider}
         />
-      <Text style={styles.value}>{this.state.value}</Text>
+      <Text style={styles.value}>{this.state.value == 100 ? '100+' : this.state.value + ' km'}</Text>
     </View>
   )}
 }
@@ -44,13 +44,23 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'white',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderColor: base.colors.lightgrey,
+    backgroundColor: 'white',
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   slider: {
     flex: 1,
+    marginLeft: 3,
   },
   value: {
-    width: 30,
+    fontSize: base.fontSizes.small,
+    width: 60,
     textAlign: 'right',
-    color: 'slateblue',
+    color: base.colors.mediumgrey,
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    marginRight: 1,
   }
 })

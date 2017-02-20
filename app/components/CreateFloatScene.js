@@ -70,7 +70,6 @@ export default class CreateFloatScene extends Component {
             </View>
             <ScrollView style={{flex: 1}}
              refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
-              <RadiusSlider changeRadius={this.props.changeRadius}/>
               {this.state.friends.map((f, i) => (
                 <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
               ))}
@@ -103,6 +102,7 @@ export default class CreateFloatScene extends Component {
           null
         }
       </View>
+      <RadiusSlider changeRadius={this.props.changeRadius}/>
       <TabBar active="createFloat" navigator={this.props.navigator}/>
     </View>
   )}
