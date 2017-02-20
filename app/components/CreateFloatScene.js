@@ -54,7 +54,7 @@ export default class CreateFloatScene extends Component {
           </ScrollView>
         : this.state.friends && this.state.friends.length ?
           <View style={{flex: 1}}>
-            <FloatDialog friends={this.state.friends.filter(selected)} prefillText={this.props.prefillText}/>
+            <FloatDialog friends={this.state.friends.filter(selected)} prefillText={this.props.prefillText} clearPrefill={this.props.clearPrefill}/>
             <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
               <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
                 <Text>
@@ -138,7 +138,11 @@ class Ronery extends Component {
 CreateFloatScene.propTypes = {
   loading:          PropTypes.bool,
   error:            PropTypes.string,
-  prefillText:      PropTypes.string,
+  prefillText:      React.PropTypes.oneOfType([
+                      React.PropTypes.string,
+                      React.PropTypes.bool,
+                    ]),
+  clearPrefill:     PropTypes.func,
   friends: PropTypes.arrayOf(PropTypes.shape({
     id:         PropTypes.string,
     avatar_url: PropTypes.string,

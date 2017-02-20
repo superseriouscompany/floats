@@ -19,13 +19,16 @@ import {
 export default class FloatDialog extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      text: this.props.prefillText
+    }
+    this.changeText = this.changeText.bind(this)
   }
 
   render() { return (
     <View style={styles.container}>
       <View style={[styles.inputContainer]}>
-        <TextInput defaultValue={this.props.prefillText || null} style={[styles.input]} placeholder="doing something fun?" placeholderTextColor={base.colors.mediumgrey} underlineColorAndroid={'transparent'} onChangeText={(text) => this.setState({text})}/>
+        <TextInput value={this.state.text} style={[styles.input]} placeholder="doing something fun?" placeholderTextColor={base.colors.mediumgrey} underlineColorAndroid={'transparent'} onChangeText={this.changeText.bind(this)}/>
       </View>
       { this.state.sending ?
         <ActivityIndicator
@@ -40,6 +43,11 @@ export default class FloatDialog extends Component {
       }
     </View>
   )}
+
+  changeText(text) {
+    this.setState({text: text})
+    this.props.prefillText && this.props.clearPrefill()
+  }
 
   create() {
     if( !this.state.text ) { return; }

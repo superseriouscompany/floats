@@ -11,8 +11,9 @@ import branch from 'react-native-branch';
 class CreateFloatCtrl extends Component {
   constructor(props) {
     super(props);
-    this.refresh          = this.refresh.bind(this);
-    this.isSharing        = false;
+    this.refresh      = this.refresh.bind(this);
+    this.clearPrefill = this.clearPrefill.bind(this)
+    this.isSharing    = false;
   }
 
   componentDidMount() {
@@ -33,8 +34,12 @@ class CreateFloatCtrl extends Component {
   }
 
   render() { return (
-    <CreateFloatScene {...this.props} refresh={this.refresh}/>
+    <CreateFloatScene {...this.props} refresh={this.refresh} clearPrefill={this.clearPrefill}/>
   )}
+
+  clearPrefill() {
+    this.props.dispatch({type: 'activityPrompt:use'})
+  }
 }
 
 function mapStateToProps(state) {
@@ -44,7 +49,7 @@ function mapStateToProps(state) {
     error:       state.nearbyFriends.error,
     friends:     state.nearbyFriends.items,
     cacheTime:   state.nearbyFriends.cacheTime,
-    prefillText: !state.activityPrompt.used && state.activityPrompt.text,
+    prefillText: (!state.activityPrompt.used && state.activityPrompt.text || ''),
   }
 }
 
