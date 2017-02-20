@@ -18,6 +18,8 @@ import {
   View,
 } from 'react-native';
 
+const useScratch = false;
+
 export default class Root extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +30,15 @@ export default class Root extends Component {
         let stateChange = { scene: component, props: props || {} };
         this.setState(stateChange);
       }
+    }
+  }
+
+  componentDidMount() {
+    God.work(this.navigator);
+
+    if( useScratch ) {
+      this.setState({scene: 'Scratch'});
+      return;
     }
 
     AsyncStorage.getItem('@floats:user').then((user) => {
@@ -40,8 +51,6 @@ export default class Root extends Component {
     }).catch(function(err) {
       console.warn(err);
     });
-
-    God.work(this.navigator);
   }
 
   getChildContext() {
