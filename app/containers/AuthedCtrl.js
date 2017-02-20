@@ -7,8 +7,8 @@ import MessagesCtrl from '../containers/MessagesCtrl';
 import FloatsCtrl from '../containers/FloatsCtrl';
 import CreateFloatCtrl from '../containers/CreateFloatCtrl';
 import BacalhauCtrl from '../containers/BacalhauCtrl';
+import ActivityPromptCtrl from '../containers/ActivityPromptCtrl';
 import RandosScene from '../components/RandosScene';
-import ActivityPromptScene from '../components/ActivityPromptScene';
 import BackgroundPermissionScene from '../components/BackgroundPermissionScene';
 import NotificationPermissionScene from '../components/NotificationPermissionScene';
 import Permissions from 'react-native-permissions'
@@ -65,7 +65,7 @@ class AuthedCtrl extends Component {
       : this.props.scene == 'NotificationPermissionScene' ?
         <NotificationPermissionScene navigator={this.props.navigator} />
       : this.props.scene == 'ActivityPromptScene' ?
-        <ActivityPromptScene navigator={this.props.navigator} />
+        <ActivityPromptCtrl navigator={this.props.navigator} />
       : this.props.scene == 'AuthedScene' || !this.props.scene ?
         null
       :

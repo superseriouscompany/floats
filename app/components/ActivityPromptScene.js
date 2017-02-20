@@ -27,9 +27,11 @@ export default class ActivityPromptScene extends Component {
 
       <View style={base.mainWindow}>
         <View style={styles.container}>
-          <TextInput style={styles.input} placeholder="halp" placeholderTextColor={base.colors.mediumgrey} underlineColorAndroid={'transparent'} onChangeText={(text) => this.setState({text})}/>
+          <View style={styles.inputContainer}>
+            <TextInput style={styles.input} placeholder="halp" placeholderTextColor={base.colors.mediumgrey} underlineColorAndroid={'transparent'} onChangeText={(text) => this.setState({text})}/>
+          </View>
           <TouchableOpacity onPress={this.doShit.bind(this)}>
-            <Text>Do it</Text>
+            <Text style={styles.button}>Do it</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -44,7 +46,39 @@ export default class ActivityPromptScene extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  inputContainer: {
+    width: 200,
+    borderWidth: 1,
+    borderColor: 'lawngreen',
+    marginBottom: 20,
+  },
   input: {
-    height: 50,
+    fontSize: 16,
+    fontFamily: 'Poppins',
+    color: base.colors.darkgrey,
+    height: 32,
+    paddingTop: 1.25,
+    paddingLeft: 4,
+    textAlign: 'center',
+  },
+  button: {
+    shadowColor: 'hotpink',
+    shadowRadius: 10,
+    shadowOpacity: 0.89,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    borderRadius: 100,
+    backgroundColor: 'cornflowerblue',
+    color: 'white',
+    width: 50,
+    textAlign: 'center',
   }
 })
