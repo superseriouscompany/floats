@@ -17,6 +17,8 @@ import killed from './killSwitch'
 import friends from './friends'
 import friendRequests from './friendRequests'
 import deeplinks from './deeplinks'
+import randos from './randos'
+
 const middleware = [thunk];
 if( __DEV__ ) {
   middleware.push(createLogger());
@@ -34,6 +36,7 @@ const reducers = combineReducers({
   friends,
   friendRequests,
   deeplinks,
+  randos,
 })
 
 const store = createStore(
@@ -44,87 +47,3 @@ const store = createStore(
 persistStore(store, {storage: AsyncStorage});
 
 module.exports = store;
-
-//
-//
-// Example state:
-//
-//
-// const example = {
-//   navigation: {
-//     pendingRoute: 'MessagesScene',
-//     pendingRoutePayload: {
-//       id: '',
-//       float_id: '',
-//       etc: '',
-//     }
-//   },
-//   user: {
-//     loading: false,
-//     error: null,
-//     id: '',
-//     access_token: '',
-//     avatar_url: '',
-//     name: '',
-//     facebook_id: '',
-//     facebook_access_token: '',
-//   },
-//   invitations: {
-//     loading: false,
-//     error: null,
-//     all: [float, float],
-//   },
-//   convos: {
-//     activeConvoId: '',
-//     loading: false,
-//     error: null,
-//     all: [convo, convo, convo],
-//   },
-//   floats: {
-//     loading: false,
-//     error: null,
-//     all: [float, float]
-//   },
-//   messages: {
-//     oneConvoId: {
-//       loading: false,
-//       error: null,
-//       all: [message, message, message],
-//     },
-//     anotherConvoId: {
-//       loading: false,
-//       error: null,
-//       all: [],
-//     }
-//   }
-// }
-
-// const user = {
-//   id: '',
-//   name: '',
-//   avatar_url: '',
-// }
-//
-// const convo = {
-//   id: 'abc123',
-//   message: {
-//     created_at: +new Date,
-//     text: '',
-//     user: user
-//   },
-//   unread: false,
-// }
-//
-// const float = {
-//   id: '',
-//   title: '',
-//   user: user,
-//   created_at: +new Date,
-// }
-//
-// const message = {
-//   text: '',
-//   created_at: +new Date,
-//   type: '',
-//   user: user,
-// }
