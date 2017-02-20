@@ -31,3 +31,9 @@ export function fetchNearbyFriends(cacheTime) {
     );
   }
 }
+
+export function changeRadius(radius) {
+  return function(dispatch) {
+    dispatch({type: 'nearbyFriends:changeRadius', radius: radius})
+  }
+}

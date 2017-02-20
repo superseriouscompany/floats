@@ -1,12 +1,13 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Heading            from '../components/Heading';
 import Component          from '../components/Component';
-import Logo               from '../components/Logo';
-import FriendsCount       from '../components/FriendsCount';
-import NearbyFriend       from '../components/NearbyFriend';
 import FloatDialog        from '../components/FloatDialog';
+import FriendsCount       from '../components/FriendsCount';
+import Heading            from '../components/Heading';
+import Logo               from '../components/Logo';
+import NearbyFriend       from '../components/NearbyFriend';
+import RadiusSlider       from '../components/RadiusSlider';
 import TabBar             from '../components/TabBar';
 import Text               from '../components/Text';
 import base               from '../styles/base';
@@ -71,6 +72,7 @@ export default class CreateFloatScene extends Component {
             </View>
             <ScrollView style={{flex: 1}}
              refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
+             <RadiusSlider changeRadius={this.props.changeRadius}/>
              {this.state.friends.map((f, i) => (
                <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
              ))}
@@ -136,8 +138,9 @@ class Ronery extends Component {
 }
 
 CreateFloatScene.propTypes = {
-  loading:          PropTypes.bool,
-  error:            PropTypes.string,
+  loading:      PropTypes.bool,
+  error:        PropTypes.string,
+  changeRadius: PropTypes.func.isRequired,
   friends: PropTypes.arrayOf(PropTypes.shape({
     id:         PropTypes.string,
     avatar_url: PropTypes.string,
