@@ -57,7 +57,7 @@ export default class CreateFloatScene extends Component {
             <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
               <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
                 <Text>
-                  Nearby Friends
+                  Invite Nearby Friends
                 </Text>
               </View>
               <TouchableOpacity onPress={this.toggleAll.bind(this)}>
