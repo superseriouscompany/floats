@@ -17,6 +17,10 @@ class CreateFloatCtrl extends Component {
   }
 
   componentDidMount() {
+    if( this.props.emptyPrefillText ) {
+      return this.props.navigator.navigate('ActivityPromptScene');
+    }
+
     this.props.dispatch(fetchNearbyFriends(this.props.cacheTime));
 
     FCM.getFCMToken().then( (token) => {
@@ -50,6 +54,7 @@ function mapStateToProps(state) {
     friends:     state.nearbyFriends.items,
     cacheTime:   state.nearbyFriends.cacheTime,
     prefillText: (!state.activityPrompt.used && state.activityPrompt.text || ''),
+    emptyPrefillText: !state.activityPrompt.text,
   }
 }
 
