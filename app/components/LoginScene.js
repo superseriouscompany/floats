@@ -71,7 +71,6 @@ export default class LoginScene extends Component {
     AccessToken.getCurrentAccessToken().then((data) => {
       if( !data ) { throw new Error('nope'); }
       this.setState({ awaitingLogin: true })
-      console.log("facebook token", data.accessToken.toString());
       return api.sessions.create(data.accessToken.toString())
     }).then((user) => {
       isExisting = user.isExisting;
