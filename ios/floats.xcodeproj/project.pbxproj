@@ -43,7 +43,6 @@
 		3FBE01E31E2C46C800679C85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FBE01E21E2C46C800679C85 /* GoogleService-Info.plist */; };
 		3FDA701B1E59EBF500421722 /* TSLocationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FDA701A1E59EBF500421722 /* TSLocationManager.framework */; };
 		3FDA701D1E59EC3600421722 /* TSBackgroundFetch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FDA701C1E59EC3600421722 /* TSBackgroundFetch.framework */; };
-		3FDA701F1E59EE2800421722 /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA701E1E59EE2800421722 /* RNBackgroundFetch+AppDelegate.m */; };
 		3FE672901E22BA73009C4C31 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */; };
 		3FE672911E22BA73009C4C31 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728C1E22BA73009C4C31 /* Poppins-Light.ttf */; };
 		3FE672921E22BA73009C4C31 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6728D1E22BA73009C4C31 /* Poppins-Medium.ttf */; };
@@ -60,6 +59,7 @@
 		F6116F401E3C09590040E05E /* OleoScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6116F3F1E3C09590040E05E /* OleoScript-Regular.ttf */; };
 		F6116F421E3C096D0040E05E /* OleoScript-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6116F411E3C096D0040E05E /* OleoScript-Bold.ttf */; };
 		F6116F641E3CEDE90040E05E /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6116F631E3CEDE90040E05E /* Roboto-Italic.ttf */; };
+		F645EE9F1E5B9E8300F0C9F3 /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F645EE9E1E5B9E8300F0C9F3 /* RNBackgroundFetch+AppDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -420,7 +420,6 @@
 		3FBE01E21E2C46C800679C85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3FDA701A1E59EBF500421722 /* TSLocationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSLocationManager.framework; path = "../node_modules/react-native-background-geolocation/ios/RNBackgroundGeolocation/TSLocationManager.framework"; sourceTree = "<group>"; };
 		3FDA701C1E59EC3600421722 /* TSBackgroundFetch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSBackgroundFetch.framework; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/TSBackgroundFetch.framework"; sourceTree = "<group>"; };
-		3FDA701E1E59EE2800421722 /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 		3FE6728B1E22BA73009C4C31 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		3FE6728C1E22BA73009C4C31 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		3FE6728D1E22BA73009C4C31 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
@@ -445,6 +444,7 @@
 		F6116F3F1E3C09590040E05E /* OleoScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OleoScript-Regular.ttf"; sourceTree = "<group>"; };
 		F6116F411E3C096D0040E05E /* OleoScript-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OleoScript-Bold.ttf"; sourceTree = "<group>"; };
 		F6116F631E3CEDE90040E05E /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		F645EE9E1E5B9E8300F0C9F3 /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -588,7 +588,7 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				3FDA701E1E59EE2800421722 /* RNBackgroundFetch+AppDelegate.m */,
+				F645EE9E1E5B9E8300F0C9F3 /* RNBackgroundFetch+AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -1377,9 +1377,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FDA701F1E59EE2800421722 /* RNBackgroundFetch+AppDelegate.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				F645EE9F1E5B9E8300F0C9F3 /* RNBackgroundFetch+AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
