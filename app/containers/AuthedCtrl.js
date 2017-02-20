@@ -20,7 +20,6 @@ import {
 } from 'react-native'
 
 var defaultScene = 'CreateFloatScene';
-defaultScene = 'ActivityPromptScene';
 
 class AuthedCtrl extends Component {
   componentWillMount() {
