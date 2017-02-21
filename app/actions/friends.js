@@ -24,6 +24,18 @@ export function fetchFriends(cacheTime) {
   }
 }
 
+export function autofriend(cacheTime) {
+  return function(dispatch) {
+    if( cacheTime && +new Date - cacheTime < 1000 * 60 * 60 * 24 ) { console.log('Using cache'); return; }
+
+    api.friends.autofriend().then(function() {
+      dispatch({type: 'autofriend:cache'})
+    }).catch(function(err) {
+      console.warn(err)
+    })
+  }
+}
+
 export function block(id) {
   return function(dispatch) {
     dispatch({type: 'friends:block:load', id: id});
