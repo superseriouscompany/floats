@@ -40,7 +40,7 @@ export default class CreateFloatScene extends Component {
     <View style={base.screen}>
 
       <View style={base.mainWindow}>
-        <FloatDialog friends={this.state.friends.filter(selected)} />
+        <FloatDialog friends={this.state.friends.filter(selected)} prefillText={this.props.prefillText} clearPrefill={this.props.clearPrefill}/>
 
         { this.props.error ?
           <View style={{alignItems: 'center'}}>
@@ -161,6 +161,11 @@ CreateFloatScene.propTypes = {
   loading:      PropTypes.bool,
   error:        PropTypes.string,
   changeRadius: PropTypes.func.isRequired,
+  prefillText:      React.PropTypes.oneOfType([
+                      React.PropTypes.string,
+                      React.PropTypes.bool,
+                    ]),
+  clearPrefill:     PropTypes.func,
   friends: PropTypes.arrayOf(PropTypes.shape({
     id:         PropTypes.string,
     avatar_url: PropTypes.string,
