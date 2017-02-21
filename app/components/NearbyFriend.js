@@ -21,7 +21,7 @@ export default class NearbyFriend extends Component {
       <TouchableOpacity style={{flex: 1, flexDirection: 'row', alignItems: 'center'}} activeOpacity={1} onPress={this.props.toggle} accessible={true} accessibilityLabel={`Select ${this.props.friend.name}`}>
         <Image style={[base.photoCircle]} source={{uri: this.props.friend.avatar_url}}/>
         <Text style={[styles.main, {marginRight: 10}]}>
-          {this.props.friend.name}
+          {this.props.friend.name}{"\n"}
           { this.props.friend.distance > 100 ?
             <Text style={styles.distance}>
               {this.roundedDistance(this.props.friend.distance)}
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   distance: {
-    color: 'hotpink'
+    color: base.colors.mediumlightgrey,
+    fontSize: base.fontSizes.small,
   },
 });
