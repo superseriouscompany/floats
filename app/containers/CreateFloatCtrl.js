@@ -48,14 +48,14 @@ function mapStateToProps(state) {
   let friends = [];
   if( state.nearbyFriends && state.nearbyFriends.items ) {
     friends = state.nearbyFriends.items.filter((f) => {
-      return f.distance <= state.nearbyFriends.radius
+      return state.nearbyFriends.radius == 100 || f.distance <= state.nearbyFriends.radius;
     })
   }
 
   let randos = [];
   if( state.randos && state.randos.items ) {
     randos = state.randos.items.filter((r) => {
-      return r.distance <= state.nearbyFriends.radius
+      return state.nearbyFriends.radius == 100 || r.distance <= state.nearbyFriends.radius;
     })
   }
 
