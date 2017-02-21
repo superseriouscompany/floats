@@ -1,12 +1,15 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Heading            from '../components/Heading';
 import Component          from '../components/Component';
-import Logo               from '../components/Logo';
-import FriendsCount       from '../components/FriendsCount';
-import NearbyFriend       from '../components/NearbyFriend';
 import FloatDialog        from '../components/FloatDialog';
+import FriendsCount       from '../components/FriendsCount';
+import Heading            from '../components/Heading';
+import InviteButton       from '../components/InviteButton';
+import Logo               from '../components/Logo';
+import NearbyFriend       from '../components/NearbyFriend';
+import RadiusSlider       from '../components/RadiusSlider';
+import Rando              from '../components/Rando';
 import TabBar             from '../components/TabBar';
 import Text               from '../components/Text';
 import base               from '../styles/base';
@@ -35,11 +38,10 @@ export default class CreateFloatScene extends Component {
 
   render() { return (
     <View style={base.screen}>
-      <View style={base.header}>
-        <Heading>friends nearby</Heading>
-      </View>
 
       <View style={base.mainWindow}>
+        <FloatDialog friends={this.state.friends.filter(selected)} prefillText={this.props.prefillText} clearPrefill={this.props.clearPrefill}/>
+
         { this.props.error ?
           <View style={{alignItems: 'center'}}>
             <TouchableOpacity style={{alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, backgroundColor: base.colors.darkgrey}} onPress={this.props.refresh}>
@@ -51,14 +53,18 @@ export default class CreateFloatScene extends Component {
         : this.state.friends && !this.state.friends.length ?
           <ScrollView style={{flex: 1}} refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading || false} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
             <Ronery navigator={this.props.navigator} />
+            <View>
+              {this.props.randos.map((f, i) => (
+                <Rando key={i} friend={f} />
+              ))}
+            </View>
           </ScrollView>
         : this.state.friends && this.state.friends.length ?
           <View style={{flex: 1}}>
-            <FloatDialog friends={this.state.friends.filter(selected)} prefillText={this.props.prefillText} clearPrefill={this.props.clearPrefill}/>
             <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
               <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
                 <Text>
-                  Nearby Friends
+                  Invite Nearby Friends
                 </Text>
               </View>
               <TouchableOpacity onPress={this.toggleAll.bind(this)}>
@@ -71,16 +77,42 @@ export default class CreateFloatScene extends Component {
             </View>
             <ScrollView style={{flex: 1}}
              refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
-             {this.state.friends.map((f, i) => (
-               <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
-             ))}
-            </ScrollView>
+              <View style={{paddingBottom: 20}}>
+                {this.state.friends.map((f, i) => (
+                  <NearbyFriend toggle={() => this.toggleFriend(f.id)} key={i} friend={f} />
+                ))}
+                <InviteButton/>
+              </View>
 
+              <View style={{paddingBottom: 20}}>
+                { this.state.showRandos ?
+                  <View>
+                    <TouchableOpacity style={[base.bgBreakingSection, styles.randoToggle]} onPress={() => this.setState({showRandos: false})}>
+                      <Text style={[base.timestamp, styles.randoText]}>
+                        hide nearby strangers
+                      </Text>
+                    </TouchableOpacity>
+                    {this.props.randos.map((f, i) => (
+                      <Rando key={i} friend={f} />
+                    ))}
+                  </View>
+                :
+                  <View>
+                    <TouchableOpacity style={[base.bgBreakingSection, styles.randoToggle]} onPress={() => this.setState({showRandos: true})}>
+                      <Text style={[base.timestamp, styles.randoText]}>
+                        show nearby strangers
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                }
+              </View>
+            </ScrollView>
           </View>
         :
           null
         }
       </View>
+      <RadiusSlider changeRadius={this.props.changeRadius} radius={this.props.radius}/>
       <TabBar active="createFloat" navigator={this.props.navigator}/>
     </View>
   )}
@@ -115,35 +147,31 @@ function selected(f) {
 class Ronery extends Component {
   render() { return(
     <View style={{alignItems: 'center'}}>
-      <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.mediumgrey}]}>
-        <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
-          no nearby friends
-        </Text>
-      </View>
-      <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15}}>
+      <View style={{alignItems: 'center', paddingTop: 20}}>
         <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center', paddingLeft: 25, paddingRight: 25}]}>
-          Add or invite your nearby friends, so you can send them floats.
+          No close friends were found. Invite your nearby friends to the app in order to see them here. If you spot anyone you know below, you can send them a friend request.
         </Text>
       </View>
-
-      <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
-        <Text style={styles.emptyButtonText}>
-          add friends
-        </Text>
-      </TouchableOpacity>
+      <InviteButton/>
     </View>
   )}
 }
 
 CreateFloatScene.propTypes = {
-  loading:          PropTypes.bool,
-  error:            PropTypes.string,
+  loading:      PropTypes.bool,
+  error:        PropTypes.string,
+  changeRadius: PropTypes.func.isRequired,
   prefillText:      React.PropTypes.oneOfType([
                       React.PropTypes.string,
                       React.PropTypes.bool,
                     ]),
   clearPrefill:     PropTypes.func,
   friends: PropTypes.arrayOf(PropTypes.shape({
+    id:         PropTypes.string,
+    avatar_url: PropTypes.string,
+    name:       PropTypes.string,
+  })),
+  randos: PropTypes.arrayOf(PropTypes.shape({
     id:         PropTypes.string,
     avatar_url: PropTypes.string,
     name:       PropTypes.string,
@@ -162,5 +190,16 @@ const styles = StyleSheet.create({
   emptyButtonText: {
     color: 'white',
     textAlign: 'center'
+  },
+  randoToggle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: base.colors.lightgrey,
+  },
+  randoText: {
+    paddingTop: 9,
+    paddingBottom: 10,
+    color: base.colors.mediumgrey
   },
 });

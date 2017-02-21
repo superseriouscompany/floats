@@ -1,24 +1,19 @@
-export default function nearbyFriends(state = {radius: 25}, action) {
+export default function randos(state = {}, action) {
   switch(action.type) {
-    case 'nearbyFriends:changeRadius':
-      return {
-        ...state,
-        radius: action.radius,
-      }
-    case 'nearbyFriends:load':
+    case 'randos:load':
       return {
         ...state,
         loading: true,
         error: null,
       }
-    case 'nearbyFriends:load:yes':
+    case 'randos:load:yes':
       return {
         ...state,
         loading: false,
-        items: action.friends,
+        items: action.randos.slice(0,100),
         cacheTime: +new Date,
       }
-    case 'nearbyFriends:load:no':
+    case 'randos:load:no':
       return {
         ...state,
         loading: false,

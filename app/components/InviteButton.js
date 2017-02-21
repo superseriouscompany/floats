@@ -25,7 +25,7 @@ class InviteButton extends Component {
   render() { return (
     <TouchableOpacity style={[styles.box, base.padFullHorizontal, base.padMainItem]} onPress={this.invitationDialog}>
       <Image style={[base.photoCircle]} source={require('../images/MissingProfileCircle.png')} />
-      <Text style={[styles.main, {marginRight: 10}]}>Missing Someone?</Text>
+      <Text style={[styles.main, {marginRight: 10}]}>Invite Friends to App</Text>
     </TouchableOpacity>
   )}
 

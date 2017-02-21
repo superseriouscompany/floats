@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 27,
-    paddingBottom: 30,
+    paddingTop: 24,
+    paddingBottom: 27,
     paddingLeft: 20,
     paddingRight: 21,
     borderBottomWidth: StyleSheet.hairlineWidth,

@@ -25,7 +25,18 @@ export default class Rando extends Component {
   render() { return (
     <View style={[styles.box, base.padFullHorizontal, base.padMainItem]}>
       <Image style={[base.photoCircle]} source={{uri: this.props.friend.avatar_url}}/>
-      <Text style={[styles.main, {marginRight: 10}]}>{this.props.friend.name}</Text>
+
+      <Text style={[styles.main, {marginRight: 10}]}>{this.props.friend.name}
+        { this.state.sent ?
+          <Text style={styles.desc}>
+            {"\n"}{"friend request sent"}
+          </Text>
+        :
+          <Text style={styles.desc}>
+            {"\n"}{"send friend request?"}
+          </Text>
+        }
+      </Text>
 
       { this.state.sending ?
         <ActivityIndicator
@@ -43,7 +54,7 @@ export default class Rando extends Component {
         </TouchableOpacity>
       :
         <TouchableOpacity onPress={this.sendFriendRequest.bind(this)} accessible={true} accessibilityLabel={`Send friend request to ${this.props.friend.name}`}>
-          <Image source={require('../images/AddButton.png')} />
+          <Image source={require('../images/AddFriendButton.png')} />
         </TouchableOpacity>
       }
     </View>
@@ -81,5 +92,9 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 0,
     flex: 1,
+  },
+  desc: {
+    color: base.colors.mediumlightgrey,
+    fontSize: base.fontSizes.small,
   },
 });

@@ -13,9 +13,11 @@ export function fetchNearbyFriends(cacheTime) {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         }).then(function() {
-          return api.friends.nearby();
+          return api.friends.all();
         }).then((friends) => {
-          friends = friends.map(function(f) {
+          friends = friends.filter((f) => {
+            return !f.blocked
+          }).map((f) => {
             f.selected = true;
             return f;
           })
@@ -29,5 +31,11 @@ export function fetchNearbyFriends(cacheTime) {
       },
       {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
     );
+  }
+}
+
+export function changeRadius(radius) {
+  return function(dispatch) {
+    dispatch({type: 'nearbyFriends:changeRadius', radius: radius})
   }
 }
