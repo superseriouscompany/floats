@@ -13,6 +13,7 @@ import BackgroundPermissionScene from '../components/BackgroundPermissionScene';
 import NotificationPermissionScene from '../components/NotificationPermissionScene';
 import Permissions from 'react-native-permissions'
 import {processDeeplink} from '../actions/deeplinks';
+import {autofriend} from '../actions/friends';
 import {
   Platform,
   Text,
@@ -33,6 +34,7 @@ class AuthedCtrl extends Component {
       })).then(() => {
         this.props.dispatch({type: 'deeplinks:purge'})
       }).catch((err) => {
+        alert(JSON.stringify(err));
         console.warn(err);
       })
     }
@@ -54,6 +56,10 @@ class AuthedCtrl extends Component {
       console.error(err);
       this.props.navigator.navigate(defaultScene);
     })
+  }
+
+  componentDidMount() {
+    this.props.dispatch(autofriend(this.props.autofriendCacheTime))
   }
 
   render() { return (
@@ -92,8 +98,9 @@ class AuthedCtrl extends Component {
 
 function mapStateToProps(state) {
   return {
-    user:      state.user,
-    deeplinks: state.deeplinks,
+    user:            state.user,
+    deeplinks:       state.deeplinks,
+    autofriendCacheTime: state.friends.autofriendCacheTime,
   };
 }
 

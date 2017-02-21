@@ -62,6 +62,11 @@ export default function friends(state = {}, action) {
           return f;
         })
       }
+    case 'autofriend:cache':
+      return {
+        ...state,
+        autofriendCacheTime: +new Date,
+      }
     default:
       return state;
   }
