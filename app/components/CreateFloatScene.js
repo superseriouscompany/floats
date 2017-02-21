@@ -81,8 +81,8 @@ export default class CreateFloatScene extends Component {
               <View>
                 { this.state.showRandos ?
                   <View style={{paddingBottom: 20}}>
-                    <TouchableOpacity style={[base.bgBreakingSection, {alignItems: 'center', justifyContent: 'center', borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: base.colors.lightgrey}]} onPress={() => this.setState({showRandos: false})}>
-                      <Text style={[base.timestamp, {paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]}>
+                    <TouchableOpacity style={[base.bgBreakingSection, styles.randoToggle]} onPress={() => this.setState({showRandos: false})}>
+                      <Text style={[base.timestamp, styles.randoText]}>
                         hide nearby strangers
                       </Text>
                     </TouchableOpacity>
@@ -92,8 +92,8 @@ export default class CreateFloatScene extends Component {
                   </View>
                 :
                   <View>
-                    <TouchableOpacity style={[base.bgBreakingSection, {alignItems: 'center', justifyContent: 'center', borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: base.colors.lightgrey}]} onPress={() => this.setState({showRandos: true})}>
-                      <Text style={[base.timestamp, {paddingTop: 9, paddingBottom: 10, color: base.colors.mediumgrey}]}>
+                    <TouchableOpacity style={[base.bgBreakingSection, styles.randoToggle]} onPress={() => this.setState({showRandos: true})}>
+                      <Text style={[base.timestamp, styles.randoText]}>
                         show nearby strangers
                       </Text>
                     </TouchableOpacity>
@@ -190,8 +190,16 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center'
   },
-  randosText: {
-    paddingLeft: base.paddings.normal,
-    color: 'salmon'
+  randoToggle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: base.colors.lightgrey,
+
+  },
+  randoText: {
+    paddingTop: 9,
+    paddingBottom: 10,
+    color: base.colors.mediumgrey
   },
 });
