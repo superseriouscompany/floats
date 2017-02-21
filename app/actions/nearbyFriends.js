@@ -13,9 +13,11 @@ export function fetchNearbyFriends(cacheTime) {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         }).then(function() {
-          return api.friends.nearby();
+          return api.friends.all();
         }).then((friends) => {
-          friends = friends.map(function(f) {
+          friends = friends.filter((f) => {
+            return !f.blocked
+          }).map((f) => {
             f.selected = true;
             return f;
           })
