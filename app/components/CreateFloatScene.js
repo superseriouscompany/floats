@@ -84,28 +84,30 @@ export default class CreateFloatScene extends Component {
                 <InviteButton/>
               </View>
 
-              <View style={{paddingBottom: 20}}>
-                { this.state.showRandos ?
-                  <View>
-                    <TouchableOpacity style={[base.bgBreakingSection, styles.randoToggle]} onPress={() => this.setState({showRandos: false})}>
-                      <Text style={[base.timestamp, styles.randoText]}>
-                        hide nearby strangers
-                      </Text>
-                    </TouchableOpacity>
-                    {this.props.randos.map((f, i) => (
-                      <Rando key={i} friend={f} />
-                    ))}
-                  </View>
-                :
-                  <View>
-                    <TouchableOpacity style={[base.bgBreakingSection, styles.randoToggle]} onPress={() => this.setState({showRandos: true})}>
-                      <Text style={[base.timestamp, styles.randoText]}>
-                        show nearby strangers
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                }
-              </View>
+              { this.props.randos && this.props.randos.length ?
+                <View style={{paddingBottom: 20}}>
+                  { this.state.showRandos ?
+                    <View>
+                      <TouchableOpacity style={[base.bgBreakingSection, styles.randoToggle]} onPress={() => this.setState({showRandos: false})}>
+                        <Text style={[base.timestamp, styles.randoText]}>
+                          hide nearby strangers
+                        </Text>
+                      </TouchableOpacity>
+                      {this.props.randos.map((f, i) => (
+                        <Rando key={i} friend={f} />
+                      ))}
+                    </View>
+                  :
+                    <View>
+                      <TouchableOpacity style={[base.bgBreakingSection, styles.randoToggle]} onPress={() => this.setState({showRandos: true})}>
+                        <Text style={[base.timestamp, styles.randoText]}>
+                          show nearby strangers
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  }
+                </View>
+              : null }
             </ScrollView>
           </View>
         :
