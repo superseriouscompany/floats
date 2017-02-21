@@ -7,17 +7,25 @@ import Text from './Text';
 import ConvoPreview from './ConvoPreview';
 import base from '../styles/base';
 import api  from '../services/api';
+import branch from 'react-native-branch'
 import { connectActionSheet } from '@exponent/react-native-action-sheet';
 
 import {
   Alert,
   Image,
+  Platform,
+  Share,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 
 class Float extends Component {
+  constructor(props) {
+    super(props)
+    this.inviteDialog = this.inviteDialog.bind(this)
+  }
+
   showConvo(convo) {
     if( !convo ) { return; }
     this.context.store.dispatch({
@@ -59,7 +67,7 @@ class Float extends Component {
               floated: "{f.title}"
             </Text>
             { mainChat ?
-              <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator}/>
+              <ConvoPreview {...this.props} isMain={true} convo={mainChat} user={user} isCreator={isCreator} inviteDialog={this.inviteDialog}/>
             :
               null
             }
@@ -70,6 +78,57 @@ class Float extends Component {
       </View>
     </View>
   )}
+
+  inviteDialog() {
+    const user = this.context.store.getState().user;
+    if( !user || !user.id ) {
+      console.warn("No user set", JSON.stringify(this.props));
+    }
+    if( !this.props.float || !this.props.float.id ) {
+      console.warn("No float set", JSON.stringify(this.props));
+    }
+    if( this.isSharing ) { return; }
+    this.isSharing = true;
+
+    let branchUniversalObject = branch.createBranchUniversalObject(
+      `floats/${this.props.float.id}/invite/${user.id}`,
+      {
+        metadata: {
+          inviter_id:  user.id,
+          float_id:    this.props.float.id,
+          float_token: this.props.float.token,
+        }
+      }
+    )
+
+    let linkProperties = {
+      feature: 'float-invitation',
+      channel: 'app'
+    }
+
+    let controlParams = {
+      '$ios_deepview': 'floats_deepview_vk8d',
+      '$og_title': this.props.float.title,
+    }
+
+    branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
+      this.isSharing = false;
+
+      return Share.share({
+        message: Platform.OS == 'android' ? `${this.props.float.title} ${payload.url}` : this.props.float.title,
+        url: payload.url,
+      }, {
+        dialogTitle: 'Add friends',
+        tintColor: 'blue'
+      })
+    }).then((result) => {
+      this.isSharing = false;
+    }).catch((error) => {
+      this.isSharing = false;
+      console.error(error);
+      alert(error.message);
+    })
+  }
 
   showDialog() {
     const isMine  = !!this.props.float.invitees;

@@ -76,6 +76,18 @@ const api = {
   },
 
   friends: {
+    autofriend: function() {
+      return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
+        return fetch(`${baseUrl}/autofriend`, {
+          method: 'POST',
+          headers: headers(accessToken),
+        })
+      }).then(function(response) {
+        if( !response.ok ) { throw new Error('' + response.status); }
+        return true;
+      })
+    },
+
     nearby: function() {
       return AsyncStorage.getItem('@floats:accessToken').then(function(accessToken) {
         return fetch(`${baseUrl}/friends/nearby`, {
