@@ -40,6 +40,8 @@ export default class CreateFloatScene extends Component {
     <View style={base.screen}>
 
       <View style={base.mainWindow}>
+        <FloatDialog friends={this.state.friends.filter(selected)} />
+
         { this.props.error ?
           <View style={{alignItems: 'center'}}>
             <TouchableOpacity style={{alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, backgroundColor: base.colors.darkgrey}} onPress={this.props.refresh}>
@@ -51,10 +53,14 @@ export default class CreateFloatScene extends Component {
         : this.state.friends && !this.state.friends.length ?
           <ScrollView style={{flex: 1}} refreshControl={<RefreshControl tintColor={base.colors.mediumlightgrey} refreshing={this.props.loading || false} onRefresh={this.props.refresh} colors={[base.colors.mediumlightgrey]}/>}>
             <Ronery navigator={this.props.navigator} />
+            <View>
+              {this.props.randos.map((f, i) => (
+                <Rando key={i} friend={f} />
+              ))}
+            </View>
           </ScrollView>
         : this.state.friends && this.state.friends.length ?
           <View style={{flex: 1}}>
-            <FloatDialog friends={this.state.friends.filter(selected)} />
             <View style={[base.padTall, base.padFullHorizontal, base.bgBreakingSection, {flexDirection: 'row'}]}>
               <View style={{flex: 1, justifyContent: 'center', paddingLeft: 9}}>
                 <Text>
@@ -141,22 +147,12 @@ function selected(f) {
 class Ronery extends Component {
   render() { return(
     <View style={{alignItems: 'center'}}>
-      <View style={[base.bgBreakingSection, {alignSelf: 'stretch', alignItems: 'center', paddingTop: 6, paddingBottom: 7, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: base.colors.mediumgrey}]}>
-        <Text style={[base.timestamp, {color: base.colors.mediumgrey}]}>
-          no nearby friends
-        </Text>
-      </View>
-      <View style={{alignItems: 'center', paddingTop: 13, paddingBottom: 15}}>
+      <View style={{alignItems: 'center', paddingTop: 20}}>
         <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center', paddingLeft: 25, paddingRight: 25}]}>
-          Add or invite your nearby friends, so you can send them floats.
+          No close friends were found. Invite your nearby friends to the app in order to see them here. If you spot anyone you know below, you can send them a friend request.
         </Text>
       </View>
-
-      <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={() => this.props.navigator.navigate('RandosScene')}>
-        <Text style={styles.emptyButtonText}>
-          add friends
-        </Text>
-      </TouchableOpacity>
+      <InviteButton/>
     </View>
   )}
 }
