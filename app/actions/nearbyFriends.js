@@ -13,7 +13,7 @@ export function fetchNearbyFriends(cacheTime) {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         }).then(function() {
-          return api.friends.all();
+          return api.friends.nearby();
         }).then((friends) => {
           friends = friends.filter((f) => {
             return !f.blocked
