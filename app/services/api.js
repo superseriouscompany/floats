@@ -234,6 +234,7 @@ const api = {
             if( json.message ) {
               throw new Error(json.message)
             } else {
+              console.warn('Create float error', JSON.stringify(json))
               throw new Error('Sorry, something went wrong.');
             }
           })

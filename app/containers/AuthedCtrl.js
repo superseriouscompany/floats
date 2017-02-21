@@ -21,7 +21,6 @@ import {
 } from 'react-native'
 
 var defaultScene = 'CreateFloatScene';
-defaultScene = 'FloatsScene';
 
 class AuthedCtrl extends Component {
   componentWillMount() {
