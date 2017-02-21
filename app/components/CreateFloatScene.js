@@ -84,9 +84,9 @@ export default class CreateFloatScene extends Component {
                 <InviteButton/>
               </View>
 
-              <View>
+              <View style={{paddingBottom: 20}}>
                 { this.state.showRandos ?
-                  <View style={{paddingBottom: 20}}>
+                  <View>
                     <TouchableOpacity style={[base.bgBreakingSection, styles.randoToggle]} onPress={() => this.setState({showRandos: false})}>
                       <Text style={[base.timestamp, styles.randoText]}>
                         hide nearby strangers
