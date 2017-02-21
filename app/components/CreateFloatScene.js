@@ -149,7 +149,7 @@ class Ronery extends Component {
     <View style={{alignItems: 'center'}}>
       <View style={{alignItems: 'center', paddingTop: 20}}>
         <Text style={[base.timestamp, {color: base.colors.mediumgrey, textAlign: 'center', paddingLeft: 25, paddingRight: 25}]}>
-          No close friends were found. Invite your nearby friends to the app in order to see them here. If you spot anyone you know below, you can send them a friend request.
+          No close friends were found. Invite your nearby friends to the app in order to see them here.
         </Text>
       </View>
       <InviteButton/>
