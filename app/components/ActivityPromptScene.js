@@ -21,17 +21,19 @@ export default class ActivityPromptScene extends Component {
 
   render() { return (
     <View style={base.screen}>
-      <View style={base.header}>
-        <Heading>what's up wit it</Heading>
-      </View>
 
       <View style={base.mainWindow}>
         <View style={styles.container}>
+          <Text style={{textAlign: 'center', paddingBottom: 20}}>
+            What&#39;s an activity you enjoy doing with friends?
+          </Text>
           <View style={styles.inputContainer}>
-            <TextInput style={styles.input} placeholder="halp" placeholderTextColor={base.colors.mediumgrey} underlineColorAndroid={'transparent'} onChangeText={(text) => this.setState({text})}/>
+            <TextInput style={styles.input} placeholder="" placeholderTextColor={base.colors.mediumgrey} underlineColorAndroid={'transparent'} onChangeText={(text) => this.setState({text})}/>
           </View>
-          <TouchableOpacity onPress={this.setActivity.bind(this)}>
-            <Text style={styles.button}>Do it</Text>
+          <TouchableOpacity style={[styles.emptyButtons, {backgroundColor: base.colors.color2}]} onPress={this.setActivity.bind(this)}>
+            <Text style={styles.emptyButtonText}>
+              find friends
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -56,11 +58,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   inputContainer: {
+    backgroundColor: base.colors.white,
+    borderBottomWidth: 1,
+    borderColor: '#BEBEBE',
     width: 200,
-    borderWidth: 1,
-    borderColor: 'lawngreen',
     marginBottom: 20,
   },
   input: {
@@ -70,20 +75,18 @@ const styles = StyleSheet.create({
     height: 32,
     paddingTop: 1.25,
     paddingLeft: 4,
-    textAlign: 'center',
+    textAlign: 'center'
   },
-  button: {
-    shadowColor: 'hotpink',
-    shadowRadius: 10,
-    shadowOpacity: 0.89,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
+  emptyButtons: {
+    width: 200,
+    height: 50,
     borderRadius: 100,
-    backgroundColor: 'cornflowerblue',
+    marginBottom: 15,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  emptyButtonText: {
     color: 'white',
-    width: 50,
-    textAlign: 'center',
-  }
+    textAlign: 'center'
+  },
 })

@@ -46,8 +46,7 @@ export default class RandosScene extends Component {
   androidBackButton() {
     this.props.navigator.navigate('FriendsScene');
     return true;
-}
-
+  }
 
   render() { return (
     <View style={base.screen}>
@@ -75,7 +74,7 @@ export default class RandosScene extends Component {
             <InviteButton/>
           </ScrollView>
         :
-          <InviteButton />
+          <InviteButton/>
         }
       </View>
 
