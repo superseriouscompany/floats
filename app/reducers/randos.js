@@ -10,7 +10,7 @@ export default function randos(state = {}, action) {
       return {
         ...state,
         loading: false,
-        items: action.randos,
+        items: action.randos.slice(0,100),
         cacheTime: +new Date,
       }
     case 'randos:load:no':
