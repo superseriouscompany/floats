@@ -7,6 +7,7 @@ import Text from './Text';
 import base from '../styles/base';
 import {
   Image,
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -23,12 +24,15 @@ export default class ConvoPreview extends Component {
     return (
     <View>
       { this.props.isMain ?
-        <View style={styles.faces}>
+        <View style={[styles.faces, {overflow: 'hidden'}]}>
           { c.users.length == 2 ?
-            <Image source={{uri: this.convoAvatar(c)}} style={base.miniPhotoCircle} />
+            <Image source={{uri: this.convoAvatar(c)}} style={[base.miniPhotoCircle, styles.face]} />
           : c.users.map((u, key) => (
             <Image source={{uri: u.avatar_url}} style={[base.miniPhotoCircle, styles.face]} key={key}/>
           ))}
+          <TouchableOpacity onPress={() => this.showOptions()}>
+            <Image style={{width:25, height: 25, marginRight: 5}} source={require('../images/AddButton.png')} />
+          </TouchableOpacity>
         </View>
       : null
       }
@@ -86,10 +90,15 @@ export default class ConvoPreview extends Component {
       ? convo.users[1].avatar_url
       : convo.users[0].avatar_url;
   }
+
+  showOptions() {
+    this.props.inviteDialog();
+  }
 }
 
 ConvoPreview.propTypes = {
   isCreator: React.PropTypes.bool.isRequired,
+  inviteDialog: React.PropTypes.func.isRequired,
   user: React.PropTypes.shape({
     id: React.PropTypes.string,
     name: React.PropTypes.string,
