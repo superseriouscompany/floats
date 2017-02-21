@@ -10,19 +10,17 @@ import {
   View,
 } from 'react-native';
 
-const defaultValue = 25;
-
 export default class RadiusSlider extends Component {
   constructor(props) {
     super(props)
-    this.state = {value: defaultValue}
+    this.state = {value: props.radius}
   }
 
   render() { return (
     <View style={[styles.container, base.padFullHorizontal]}>
       <Slider
         minimumValue={1}
-        value={defaultValue}
+        value={this.state.value}
         maximumValue={100}
         step={1}
         minimumTrackTintColor={base.colors.color1}
@@ -38,6 +36,7 @@ export default class RadiusSlider extends Component {
 
 RadiusSlider.propTypes = {
   changeRadius: React.PropTypes.func.isRequired,
+  radius:       React.PropTypes.number,
 }
 
 const styles = StyleSheet.create({

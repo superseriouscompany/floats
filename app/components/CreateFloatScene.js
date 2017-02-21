@@ -106,7 +106,7 @@ export default class CreateFloatScene extends Component {
           null
         }
       </View>
-      <RadiusSlider changeRadius={this.props.changeRadius}/>
+      <RadiusSlider changeRadius={this.props.changeRadius} radius={this.props.radius}/>
       <TabBar active="createFloat" navigator={this.props.navigator}/>
     </View>
   )}
@@ -195,7 +195,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: base.colors.lightgrey,
-
   },
   randoText: {
     paddingTop: 9,
