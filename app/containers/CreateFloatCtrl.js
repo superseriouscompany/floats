@@ -14,10 +14,15 @@ class CreateFloatCtrl extends Component {
     super(props);
     this.refresh      = this.refresh.bind(this);
     this.changeRadius = this.changeRadius.bind(this)
+    this.clearPrefill = this.clearPrefill.bind(this)
     this.isSharing    = false;
   }
 
   componentDidMount() {
+    if( this.props.emptyPrefillText ) {
+      return this.props.navigator.navigate('ActivityPromptScene');
+    }
+
     this.props.dispatch(fetchNearbyFriends(this.props.cacheTime));
     this.props.dispatch(fetchRandos(this.props.randoCacheTime));
     FCM.getFCMToken().then( (token) => {
@@ -40,8 +45,12 @@ class CreateFloatCtrl extends Component {
   }
 
   render() { return (
-    <CreateFloatScene {...this.props} refresh={this.refresh} changeRadius={this.changeRadius}/>
+    <CreateFloatScene {...this.props} refresh={this.refresh} changeRadius={this.changeRadius} clearPrefill={this.clearPrefill}/>
   )}
+
+  clearPrefill() {
+    this.props.dispatch({type: 'activityPrompt:use'})
+  }
 }
 
 function mapStateToProps(state) {
@@ -68,6 +77,8 @@ function mapStateToProps(state) {
     cacheTime:      state.nearbyFriends.cacheTime,
     randoCachetime: state.randos.cacheTime,
     radius:         state.nearbyFriends.radius,
+    prefillText: (!state.activityPrompt.used && state.activityPrompt.text || ''),
+    emptyPrefillText: !state.activityPrompt.text,
   }
 }
 

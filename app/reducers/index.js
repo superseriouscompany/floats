@@ -18,6 +18,7 @@ import friends from './friends'
 import friendRequests from './friendRequests'
 import deeplinks from './deeplinks'
 import randos from './randos'
+import activityPrompt from './activityPrompt'
 
 const middleware = [thunk];
 if( __DEV__ ) {
@@ -37,6 +38,7 @@ const reducers = combineReducers({
   friendRequests,
   deeplinks,
   randos,
+  activityPrompt,
 })
 
 const store = createStore(

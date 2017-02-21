@@ -7,11 +7,13 @@ import MessagesCtrl from '../containers/MessagesCtrl';
 import FloatsCtrl from '../containers/FloatsCtrl';
 import CreateFloatCtrl from '../containers/CreateFloatCtrl';
 import BacalhauCtrl from '../containers/BacalhauCtrl';
+import ActivityPromptCtrl from '../containers/ActivityPromptCtrl';
 import RandosScene from '../components/RandosScene';
 import BackgroundPermissionScene from '../components/BackgroundPermissionScene';
 import NotificationPermissionScene from '../components/NotificationPermissionScene';
 import Permissions from 'react-native-permissions'
 import {processDeeplink} from '../actions/deeplinks';
+import {autofriend} from '../actions/friends';
 import {
   Platform,
   Text,
@@ -19,6 +21,7 @@ import {
 } from 'react-native'
 
 var defaultScene = 'CreateFloatScene';
+defaultScene = 'FloatsScene';
 
 class AuthedCtrl extends Component {
   componentWillMount() {
@@ -31,6 +34,7 @@ class AuthedCtrl extends Component {
       })).then(() => {
         this.props.dispatch({type: 'deeplinks:purge'})
       }).catch((err) => {
+        alert(JSON.stringify(err));
         console.warn(err);
       })
     }
@@ -54,6 +58,10 @@ class AuthedCtrl extends Component {
     })
   }
 
+  componentDidMount() {
+    this.props.dispatch(autofriend(this.props.autofriendCacheTime))
+  }
+
   render() { return (
     <View style={{flex: 1}}>
       { this.props.scene == 'Scratch' ?
@@ -62,6 +70,8 @@ class AuthedCtrl extends Component {
         <BackgroundPermissionScene navigator={this.props.navigator} />
       : this.props.scene == 'NotificationPermissionScene' ?
         <NotificationPermissionScene navigator={this.props.navigator} />
+      : this.props.scene == 'ActivityPromptScene' ?
+        <ActivityPromptCtrl navigator={this.props.navigator} />
       : this.props.scene == 'AuthedScene' || !this.props.scene ?
         null
       :
@@ -88,8 +98,9 @@ class AuthedCtrl extends Component {
 
 function mapStateToProps(state) {
   return {
-    user:      state.user,
-    deeplinks: state.deeplinks,
+    user:            state.user,
+    deeplinks:       state.deeplinks,
+    autofriendCacheTime: state.friends.autofriendCacheTime,
   };
 }
 

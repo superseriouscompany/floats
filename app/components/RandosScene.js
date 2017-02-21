@@ -74,7 +74,7 @@ export default class RandosScene extends Component {
             <InviteButton/>
           </ScrollView>
         :
-          <InviteButton />
+          <InviteButton/>
         }
       </View>
 
