@@ -23,22 +23,23 @@ class BacalhauCtrl extends Component {
     //
     BackgroundGeolocation.configure({
       // Geolocation Config
-      desiredAccuracy: -1,                  // presumably kCLThreeKilometers, uses wifi signals and cell towers instead of satellites
-      locationUpdateInterval: interval,     // maximum time to wait if no other services request location
-      fastestLocationUpdateInterval: 1000,  // minimum time to wait if other services request location
-      distanceFilter: radius,               // this determines how far the user must travel to trigger a location update
-      disableElasticity: true,              // this prevents the parameter above from being multiplied if they are traveling in a car
+      useSignificantChangesOnly:     true,      // use ios significant change api, hopefully allowing the app to get approved
+      desiredAccuracy:               -1,        // presumably kCLThreeKilometers, uses wifi signals and cell towers instead of satellites
+      locationUpdateInterval:        interval,  // maximum time to wait if no other services request location
+      fastestLocationUpdateInterval: 1000,      // minimum time to wait if other services request location
+      distanceFilter:                radius,    // this determines how far the user must travel to trigger a location update
+      disableElasticity:             true,      // this prevents the parameter above from being multiplied if they are traveling in a car
       // Activity Recognition
-      disableMotionActivityUpdates: true,   // this disables using the accelerometer, which gives better battery performance but requires a weird permission (Health Center)
-      stopTimeout: 0,                       // ¯\_(ツ)_/¯
+      disableMotionActivityUpdates:  true,      // this disables using the accelerometer, which gives better battery performance but requires a weird permission (Health Center)
+      stopTimeout:                   0,         // ¯\_(ツ)_/¯
       // Application config
-      maxRecordsToPersist: -1,              // this prevents us from saving locations to retry sending to server
-      maxDaysToPersist: -1,                 // this prevents us from saving locations to retry sending to server
-      debug: !!__DEV__,                     // debug mode -- sounds and notifications
-      stopOnTerminate: false,               // continue tracking when user kills the app
-      startOnBoot: true,                    // start tracking when device is powered-up.
+      maxRecordsToPersist:           -1,        // this prevents us from saving locations to retry sending to server
+      maxDaysToPersist:              -1,        // this prevents us from saving locations to retry sending to server
+      debug:                         !!__DEV__, // debug mode -- sounds and notifications
+      stopOnTerminate:               false,               // continue tracking when user kills the app
+      startOnBoot:                   true,                    // start tracking when device is powered-up.
       // HTTP / SQLite config
-      autoSync: false,                      // don't use built in http client to post to server
+      autoSync:                      false,                      // don't use built in http client to post to server
     }, function(state) {
       console.log("- BackgroundGeolocation is configured and ready: ", state.enabled);
 
